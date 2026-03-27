@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8">
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hughes Tank Company | UL-Certified Steel Fuel Storage Tanks | Venus, TX</title>
-<meta name="description" content="Hughes Tank Company manufactures UL 142, UL 2085 Fireguard, Flameshield®, Permatank®, and ACT-100-U steel fuel storage tanks in Venus, TX. Custom sizes, fast lead times, available through our rep network since 1985.">
+<meta name="description" content="Hughes Tank Company manufactures UL 142, UL 2085 Fireguard, Flameshield®, Permatank®, and ACT-100-U steel fuel storage tanks in Venus, TX. Custom sizes, available through our rep network since 1985.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ════════════════════════════════
-   TOKENS
-════════════════════════════════ */
+/* ── TOKENS ── */
 :root {
-  --navy:      #0D1B3E;
-  --blue:      #1A3A8C;
-  --steel:     #8A9BB5;
-  --muted:     #5A6A88;
-  --light-bg:  #F2F4F8;
-  --white:     #FFFFFF;
-  --border:    #DDE2EE;
-  --ink:       #07101F;
-  --mid-gray:  #E8ECF2;
-  --fh:'Barlow Condensed',sans-serif;
-  --fb:'Barlow',sans-serif;
+  --navy:#0D1B3E; --blue:#1A3A8C; --steel:#8A9BB5; --muted:#5A6A88;
+  --light-bg:#F2F4F8; --white:#FFFFFF; --border:#DDE2EE; --ink:#07101F;
+  --mid-gray:#E8ECF2; --fh:'Barlow Condensed',sans-serif; --fb:'Barlow',sans-serif;
   --ease:cubic-bezier(0.22,0.61,0.36,1);
-  --shadow:0 4px 24px rgba(13,27,62,0.09);
-  --shadow-lg:0 12px 48px rgba(13,27,62,0.15);
+  --shadow:0 4px 24px rgba(13,27,62,0.09); --shadow-lg:0 12px 48px rgba(13,27,62,0.15);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -34,37 +24,26 @@ img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;border:none;background:none;font-family:var(--fb)}
 
-/* ════════════════════════════════
-   LAYOUT UTILITY
-════════════════════════════════ */
-.section      { padding:88px 80px; }
-.section-alt  { background:var(--light-bg); }
-.section-gray { background:var(--mid-gray); }
-.section-dark { background:var(--navy); }
-.section-ink  { background:var(--ink); }
-.section-white{ background:var(--white); }
+/* ── LAYOUT ── */
+.section{padding:88px 80px}
+.section-alt{background:var(--light-bg)}
+.section-gray{background:var(--mid-gray)}
+.section-dark{background:var(--navy)}
+.section-ink{background:var(--ink)}
+.section-white{background:var(--white)}
 
-.eyebrow{
-  font-family:var(--fh);font-weight:600;font-size:11px;
-  letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);
-  display:flex;align-items:center;gap:10px;margin-bottom:12px;
-}
+.eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .eyebrow::before{content:'';width:22px;height:2px;background:var(--blue);flex-shrink:0}
 .on-dark .eyebrow,.section-dark .eyebrow,.section-ink .eyebrow{color:var(--steel)}
 .on-dark .eyebrow::before,.section-dark .eyebrow::before,.section-ink .eyebrow::before{background:var(--steel)}
-
-h2.display{
-  font-family:var(--fh);font-weight:800;
-  font-size:clamp(30px,4vw,46px);line-height:1.0;
-  text-transform:uppercase;letter-spacing:0.01em;color:var(--navy);
-}
+h2.display{font-family:var(--fh);font-weight:800;font-size:clamp(30px,4vw,46px);line-height:1.0;text-transform:uppercase;letter-spacing:0.01em;color:var(--navy)}
 .section-dark h2.display,.section-ink h2.display,.on-dark h2.display{color:var(--white)}
 .section-intro{font-size:15px;color:var(--muted);max-width:580px;margin-top:14px;line-height:1.75}
 .section-dark .section-intro,.section-ink .section-intro,.on-dark .section-intro{color:var(--steel)}
 .section-header{margin-bottom:48px}
 .tag{display:inline-block;font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);background:rgba(26,58,140,0.08);padding:4px 10px;border-radius:2px}
 
-/* BUTTONS */
+/* ── BUTTONS ── */
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--white);font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;border-radius:4px;transition:background .2s,transform .15s}
 .btn-primary:hover{background:#1e48b0;transform:translateY(-1px)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(138,155,181,0.4);color:var(--steel);font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;border-radius:4px;transition:border-color .2s,color .2s}
@@ -76,9 +55,7 @@ h2.display{
 .btn-navy{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;border-radius:4px;transition:background .2s}
 .btn-navy:hover{background:#0a1530}
 
-/* ════════════════════════════════
-   TOPBAR
-════════════════════════════════ */
+/* ── TOPBAR ── */
 .topbar{background:var(--ink);padding:8px 80px;display:flex;justify-content:space-between;align-items:center}
 .topbar a{font-family:var(--fh);font-weight:500;font-size:12px;letter-spacing:0.08em;color:var(--steel);transition:color .2s;display:flex;align-items:center;gap:6px}
 .topbar a:hover{color:var(--white)}
@@ -87,12 +64,9 @@ h2.display{
 .soc{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--steel);font-family:var(--fh);font-weight:700;font-size:10px;transition:background .2s,color .2s}
 .soc:hover{background:var(--blue);color:var(--white)}
 
-/* ════════════════════════════════
-   NAV
-════════════════════════════════ */
+/* ── NAV ── */
 nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;display:flex;align-items:center;justify-content:space-between;height:66px;box-shadow:0 2px 20px rgba(0,0,0,0.28)}
 .nav-logo{font-family:var(--fh);font-weight:800;font-size:20px;letter-spacing:0.04em;color:var(--white);display:flex;align-items:center;gap:11px}
-.hex-mark{width:36px;height:36px;flex-shrink:0;background:var(--blue);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--white)}
 .nav-links{display:flex;gap:2px;list-style:none;align-items:center}
 .nav-links>li{position:relative}
 .nav-links>li>a{font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--steel);padding:8px 12px;border-radius:4px;display:block;transition:color .2s,background .2s;white-space:nowrap}
@@ -107,10 +81,8 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .nav-cta{background:var(--blue)!important;color:var(--white)!important;padding:9px 18px!important;border-radius:4px!important;transition:background .2s!important}
 .nav-cta:hover{background:#1e48b0!important}
 
-/* ════════════════════════════════
-   HERO
-════════════════════════════════ */
-.hero{background:var(--navy);min-height:560px;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
+/* ── HERO ── */
+.hero{background:var(--navy);min-height:600px;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(26,58,140,0.05) 38px,rgba(26,58,140,0.05) 39px);pointer-events:none}
 .hero-content{padding:72px 48px 72px 80px;position:relative;z-index:2}
 .hero-eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);margin-bottom:16px;display:flex;align-items:center;gap:10px}
@@ -119,39 +91,43 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .hero h1 span{color:var(--steel)}
 .hero-sub{font-size:15px;color:var(--steel);max-width:420px;margin-bottom:36px;line-height:1.75}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-right{padding:72px 80px 72px 40px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(26,58,140,0.2);border:1px solid rgba(138,155,181,0.1);border-radius:6px;overflow:hidden;width:100%;max-width:360px}
-.stat-box{background:rgba(13,27,62,0.6);padding:28px 24px;backdrop-filter:blur(4px)}
-.stat-box:nth-child(-n+2){border-bottom:2px solid var(--blue)}
-.stat-num{font-family:var(--fh);font-weight:800;font-size:40px;color:var(--white);line-height:1;margin-bottom:5px}
-.stat-num em{color:var(--blue);font-style:normal;font-size:26px}
-.stat-label{font-family:var(--fh);font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--steel)}
+.hero-right{padding:0;position:relative;overflow:hidden;align-self:stretch;display:flex;align-items:center;justify-content:center;background:var(--navy)}
+.hero-stats-row{position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;background:rgba(7,16,31,0.7);backdrop-filter:blur(4px)}
+.stat-box{flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px}
+.stat-box:last-child{border-right:none}
+.stat-num{font-family:var(--fh);font-weight:800;font-size:28px;color:var(--white);line-height:1}
+.stat-num em{color:var(--steel);font-style:normal;font-size:16px;margin-left:2px}
+.stat-label{font-family:var(--fh);font-weight:500;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--steel);margin-top:3px}
 
-/* CERT BAR */
+/* ── CERT BAR ── */
 .cert-bar{background:var(--blue);padding:14px 80px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .cert-label{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-right:6px;white-space:nowrap}
 .cert-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:3px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.08em;color:var(--white);padding:4px 11px;white-space:nowrap}
 
-/* ════════════════════════════════
-   TANK FINDER — full 5-question
-════════════════════════════════ */
+/* ── PRODUCTS ── */
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column}
+.product-card:hover{box-shadow:0 8px 32px rgba(13,27,62,0.12);transform:translateY(-2px);z-index:1}
+.product-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s var(--ease)}
+.product-card:hover::after{width:100%}
+.product-card-img{height:200px;background:#fff;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:20px;border-bottom:1px solid var(--border)}
+.product-card-img img{width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center;transition:transform .4s var(--ease);mix-blend-mode:multiply}
+.product-card:hover .product-card-img img{transform:scale(1.05)}
+.product-card-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.product-card-body h3{font-family:var(--fh);font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:0.02em;color:var(--navy);line-height:1.2;margin:10px 0 8px}
+.product-card-body p{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
+.product-card-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-top:16px;transition:gap .2s}
+.product-card:hover .product-card-link{gap:10px}
+
+/* ── TANK FINDER ── */
 .finder-section{background:var(--navy);padding:0}
-.finder-intro{
-  display:grid;grid-template-columns:1fr 1fr;
-  padding:72px 80px;gap:60px;align-items:center;
-}
+.finder-intro{display:grid;grid-template-columns:1fr 1fr;padding:72px 80px;gap:60px;align-items:center}
 .finder-use-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.finder-use-card{
-  background:rgba(255,255,255,0.04);border:1px solid rgba(138,155,181,0.15);
-  border-radius:5px;padding:18px 16px;cursor:pointer;
-  transition:border-color .2s,background .2s;
-}
+.finder-use-card{background:rgba(255,255,255,0.04);border:1px solid rgba(138,155,181,0.15);border-radius:5px;padding:18px 16px;cursor:pointer;transition:border-color .2s,background .2s}
 .finder-use-card:hover{border-color:rgba(26,58,140,0.5);background:rgba(26,58,140,0.1)}
 .finder-use-card-title{font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:3px}
 .finder-use-card-sub{font-size:12px;color:var(--steel)}
 .finder-use-icon{width:32px;height:32px;background:rgba(26,58,140,0.3);border-radius:4px;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
-
-/* FINDER MODAL / EXPANDED */
 .finder-modal{display:none;background:var(--white);border-top:3px solid var(--blue)}
 .finder-modal.open{display:block}
 .finder-modal-inner{max-width:860px;margin:0 auto;padding:56px 48px}
@@ -165,20 +141,12 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .finder-q-eyebrow::before{content:'';width:18px;height:2px;background:var(--steel)}
 .finder-q-title{font-family:var(--fh);font-weight:800;font-size:clamp(22px,3vw,32px);text-transform:uppercase;letter-spacing:0.01em;color:var(--navy);margin-bottom:28px}
 .finder-options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:32px}
-.finder-opt{
-  border:1.5px solid var(--border);border-radius:5px;padding:18px 16px;
-  cursor:pointer;background:var(--white);transition:all .2s;
-  display:flex;flex-direction:column;gap:6px;
-}
+.finder-opt{border:1.5px solid var(--border);border-radius:5px;padding:18px 16px;cursor:pointer;background:var(--white);transition:all .2s;display:flex;flex-direction:column;gap:6px}
 .finder-opt:hover{border-color:var(--blue);background:rgba(26,58,140,0.04)}
 .finder-opt.selected{border-color:var(--blue);background:rgba(26,58,140,0.07)}
-.finder-opt-icon{width:34px;height:34px;background:var(--light-bg);border-radius:4px;margin-bottom:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.finder-opt-icon svg{width:18px;height:18px}
 .finder-opt-label{font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy)}
 .finder-opt-sub{font-size:12px;color:var(--muted);line-height:1.5}
 .finder-nav-row{display:flex;gap:10px;align-items:center}
-
-/* RESULT CARD */
 .finder-result-wrap{display:none}
 .finder-result-wrap.show{display:block}
 .finder-result-eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -197,32 +165,14 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .finder-restart-footer{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .finder-restart-footer span{font-size:13px;color:var(--muted)}
 
-/* ════════════════════════════════
-   BUILD YOUR TANK CONFIGURATOR
-════════════════════════════════ */
+/* ── CONFIGURATOR ── */
 .configurator-wrap{display:grid;grid-template-columns:1fr 360px;gap:44px;align-items:start}
 .config-steps{display:flex;flex-direction:column;gap:4px}
-
-/* Steps on light background now */
-.config-step-header{
-  background:var(--white);
-  border:1.5px solid var(--border);
-  border-radius:6px;padding:18px 22px;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:border-color .2s,background .2s;
-}
+.config-step-header{background:var(--white);border:1.5px solid var(--border);border-radius:6px;padding:18px 22px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s,background .2s}
 .config-step-header:hover{border-color:var(--blue);background:rgba(26,58,140,0.02)}
-.config-step-header.open{
-  background:var(--navy);
-  border-color:var(--navy);
-  border-bottom-left-radius:0;border-bottom-right-radius:0;
-}
+.config-step-header.open{background:var(--navy);border-color:var(--navy);border-bottom-left-radius:0;border-bottom-right-radius:0}
 .config-step-title{display:flex;align-items:center;gap:14px}
-.config-num{
-  width:28px;height:28px;background:var(--light-bg);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-weight:800;font-size:12px;color:var(--muted);flex-shrink:0;
-}
+.config-num{width:28px;height:28px;background:var(--light-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:800;font-size:12px;color:var(--muted);flex-shrink:0}
 .config-step-header.open .config-num{background:var(--blue);color:var(--white)}
 .config-step-label{font-family:var(--fh);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;color:var(--navy)}
 .config-step-header.open .config-step-label{color:var(--white)}
@@ -230,22 +180,10 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .config-step-header.open .config-step-value{color:var(--steel)}
 .config-chevron{color:var(--muted);font-size:11px;transition:transform .2s}
 .config-step-header.open .config-chevron{transform:rotate(180deg);color:var(--steel)}
-
-.config-step-body{
-  background:var(--light-bg);
-  border:1.5px solid var(--border);border-top:none;
-  border-bottom-left-radius:6px;border-bottom-right-radius:6px;
-  padding:20px 22px;display:none;
-}
+.config-step-body{background:var(--light-bg);border:1.5px solid var(--border);border-top:none;border-bottom-left-radius:6px;border-bottom-right-radius:6px;padding:20px 22px;display:none}
 .config-step-body.open{display:block}
 .config-options{display:flex;flex-wrap:wrap;gap:8px}
-.config-opt{
-  border:1.5px solid var(--border);border-radius:4px;
-  padding:9px 15px;cursor:pointer;
-  font-family:var(--fh);font-weight:600;font-size:12px;
-  text-transform:uppercase;letter-spacing:0.06em;
-  color:var(--muted);transition:all .2s;background:var(--white);
-}
+.config-opt{border:1.5px solid var(--border);border-radius:4px;padding:9px 15px;cursor:pointer;font-family:var(--fh);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);transition:all .2s;background:var(--white)}
 .config-opt:hover{border-color:var(--blue);color:var(--navy)}
 .config-opt.selected{border-color:var(--blue);background:var(--blue);color:var(--white)}
 .config-range-wrap{display:flex;flex-direction:column;gap:8px}
@@ -260,7 +198,6 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .spec-body{padding:22px}
 .spec-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
 .spec-row:last-child{border-bottom:none}
-.spec-row:nth-child(even){background:rgba(242,244,248,0.6);margin:0 -22px;padding:9px 22px}
 .spec-row-key{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#3A4A66}
 .spec-row-val{font-family:var(--fh);font-weight:700;font-size:13px;color:var(--navy);text-align:right;max-width:55%}
 .spec-price{padding:18px 22px;background:#E4E9F2;border-top:2px solid var(--border)}
@@ -270,9 +207,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .spec-actions{padding:14px 22px 22px;display:flex;flex-direction:column;gap:8px}
 .spec-placeholder{color:var(--steel)!important;font-style:italic;font-weight:500!important}
 
-/* ════════════════════════════════
-   SHOP
-════════════════════════════════ */
+/* ── SHOP ── */
 .shop-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
 .shop-filter{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:3px;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:var(--white);transition:all .2s}
 .shop-filter.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
@@ -285,7 +220,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .shop-arrow:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .shop-arrow-left{left:-18px}
 .shop-arrow-right{right:-18px}
-.shop-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.shop-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}
 .shop-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .shop-card-img{background:var(--light-bg);height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .shop-card-img-icon{width:64px;height:64px;display:flex;align-items:center;justify-content:center}
@@ -294,18 +229,18 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .badge-new{background:var(--blue);color:var(--white)}
 .badge-popular{background:var(--navy);color:var(--white)}
 .badge-sale{background:#B91C1C;color:var(--white)}
-.shop-card-body{padding:18px 18px 0}
+.shop-card-body{padding:18px 18px 0;flex:1}
 .shop-card-body .tag{margin-bottom:8px}
 .shop-card-body h3{font-family:var(--fh);font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:0.02em;color:var(--navy);line-height:1.2;margin-bottom:7px}
 .shop-card-body p{font-size:12px;color:var(--muted);line-height:1.6}
 .shop-card-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 18px}
 .shop-price{font-family:var(--fh);font-weight:800;font-size:19px;color:var(--navy)}
 .shop-price span{font-size:12px;color:var(--muted);font-weight:400}
-.add-to-cart{background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 15px;border-radius:4px;border:none;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:5px}
+.add-to-cart{background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 15px;border-radius:4px;border:none;cursor:pointer;transition:background .2s,transform .15s}
 .add-to-cart:hover{background:var(--blue);transform:translateY(-1px)}
 .add-to-cart.added{background:#2A7A4B}
 
-/* CART DRAWER */
+/* ── CART ── */
 .cart-overlay{position:fixed;inset:0;background:rgba(7,16,31,0.55);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
 .cart-drawer{position:fixed;top:0;right:0;bottom:0;width:380px;background:var(--white);z-index:401;box-shadow:-8px 0 40px rgba(0,0,0,0.15);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s var(--ease)}
@@ -316,8 +251,6 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .cart-close:hover{color:var(--navy)}
 .cart-items{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .cart-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted)}
-.cart-empty-icon{width:48px;height:48px;opacity:0.25}
-.cart-empty-icon svg{width:100%;height:100%}
 .cart-empty p{font-family:var(--fh);font-weight:600;font-size:14px;letter-spacing:0.08em;text-transform:uppercase}
 .cart-item{display:flex;gap:12px;background:var(--light-bg);border-radius:5px;padding:12px}
 .cart-item-icon{width:48px;height:48px;background:var(--white);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -326,7 +259,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .cart-item-info h4{font-family:var(--fh);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.03em;color:var(--navy)}
 .cart-item-info p{font-size:12px;color:var(--muted)}
 .cart-item-price{font-family:var(--fh);font-weight:800;font-size:14px;color:var(--navy)}
-.cart-item-remove{font-size:14px;color:var(--steel);cursor:pointer;align-self:flex-start;transition:color .2s;line-height:1;padding:2px}
+.cart-item-remove{font-size:14px;color:var(--steel);cursor:pointer;transition:color .2s;line-height:1;padding:2px}
 .cart-item-remove:hover{color:#B91C1C}
 .cart-footer{padding:18px;border-top:1px solid var(--border)}
 .cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -334,9 +267,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .cart-subtotal span:last-child{font-family:var(--fh);font-weight:800;font-size:22px;color:var(--navy)}
 .cart-note{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.5}
 
-/* ════════════════════════════════
-   WHY HUGHES
-════════════════════════════════ */
+/* ── WHY ── */
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .why-list{list-style:none}
 .why-item{display:flex;gap:18px;padding:24px 0;border-bottom:1px solid var(--border)}
@@ -354,7 +285,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .aside-stat-label{font-family:var(--fh);font-weight:500;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px}
 .aside-divider{height:1px;background:rgba(255,255,255,0.07);margin:22px 0}
 
-/* INDUSTRIES */
+/* ── INDUSTRIES ── */
 .industries-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
 .industry-card{background:var(--white);padding:26px 22px;transition:background .2s;cursor:pointer}
 .industry-card:hover{background:var(--mid-gray)}
@@ -363,7 +294,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .industry-card h4{font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:var(--navy);margin-bottom:5px}
 .industry-card p{font-size:12px;color:var(--muted);line-height:1.6}
 
-/* RESOURCES */
+/* ── RESOURCES / CHART ── */
 .resources-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .resource-col-title{font-family:var(--fh);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:0.03em;color:var(--navy);margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--border)}
 .chart-tool{background:var(--white);border:1px solid var(--border);border-radius:5px;padding:24px}
@@ -377,7 +308,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .chart-input:focus{border-color:var(--blue)}
 .chart-gen-btn{background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:11px;border-radius:4px;border:none;cursor:pointer;width:100%;transition:background .2s}
 .chart-gen-btn:hover{background:var(--blue)}
-.chart-results{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;display:none}
+.chart-results{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:12px;display:none}
 .chart-results-header{background:var(--navy);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
 .chart-results-header span{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel)}
 .chart-table{width:100%}
@@ -396,6 +327,8 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .resource-info h4{font-family:var(--fh);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy)}
 .resource-info p{font-size:11px;color:var(--muted)}
 .resource-dl{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);white-space:nowrap}
+
+/* ── FAQ ── */
 .faq-list{display:flex;flex-direction:column;gap:2px;margin-top:4px}
 .faq-item{border:1px solid var(--border);border-radius:4px;overflow:hidden}
 .faq-q{padding:13px 15px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--fh);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy);background:var(--white);transition:background .2s;user-select:none}
@@ -406,7 +339,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .faq-a{display:none;padding:13px 15px;font-size:13px;color:var(--muted);line-height:1.7;background:var(--light-bg);border-top:1px solid var(--border)}
 .faq-a.open{display:block}
 
-/* PROCESS */
+/* ── PROCESS ── */
 .process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
 .process-steps::before{content:'';position:absolute;top:27px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--border) 0%,var(--blue) 50%,var(--border) 100%)}
 .process-step{padding:0 14px;text-align:center}
@@ -415,12 +348,10 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .process-step h4{font-family:var(--fh);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--navy);margin-bottom:6px}
 .process-step p{font-size:12px;color:var(--muted);line-height:1.6}
 
-/* CTA BANNER */
+/* ── CTA / FOOTER ── */
 .cta-banner{background:var(--blue);padding:64px 80px;display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .cta-banner h2{color:var(--white);font-family:var(--fh);font-weight:800;font-size:clamp(24px,3vw,36px);text-transform:uppercase;letter-spacing:0.01em;max-width:580px;line-height:1.1}
 .cta-banner h2 span{color:rgba(255,255,255,0.5)}
-
-/* FOOTER */
 footer{background:var(--ink);padding:56px 80px 36px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:44px;margin-bottom:44px}
 .footer-brand-text{font-size:13px;color:var(--steel);line-height:1.75;margin-top:14px;max-width:260px}
@@ -434,7 +365,11 @@ footer{background:var(--ink);padding:56px 80px 36px}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.05);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer-bottom p{font-size:11px;color:var(--muted)}
 
-/* ANIMATIONS */
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;right:28px;z-index:500;background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:13px 22px;border-radius:4px;border-left:4px solid var(--blue);box-shadow:var(--shadow-lg);transform:translateY(16px);opacity:0;transition:all .3s var(--ease);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .hero-content>*{opacity:0;animation:fadeUp .6s var(--ease) forwards}
 .hero-eyebrow{animation-delay:.10s}
@@ -442,25 +377,20 @@ footer{background:var(--ink);padding:56px 80px 36px}
 .hero-sub{animation-delay:.30s}
 .hero-actions{animation-delay:.40s}
 .hero-right{opacity:0;animation:fadeUp .7s var(--ease) .35s forwards}
-
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s var(--ease)}
 
-/* TOAST */
-.toast{position:fixed;bottom:28px;right:28px;z-index:500;background:var(--navy);color:var(--white);font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:13px 22px;border-radius:4px;border-left:4px solid var(--blue);box-shadow:var(--shadow-lg);transform:translateY(16px);opacity:0;transition:all .3s var(--ease);pointer-events:none}
-.toast.show{transform:translateY(0);opacity:1}
-
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
   .hero-content{padding:64px 48px}
   .finder-intro{grid-template-columns:1fr}
   .why-grid,.configurator-wrap,.resources-grid{grid-template-columns:1fr}
   .why-aside,.spec-sheet{position:static}
-  .process-steps{grid-template-columns:1fr 1fr;gap:28px}
-  .process-steps::before{display:none}
+  .process-steps{grid-template-columns:1fr 1fr;gap:28px}.process-steps::before{display:none}
   .footer-grid{grid-template-columns:1fr 1fr}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .industries-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
   .topbar{display:none}
@@ -471,54 +401,56 @@ footer{background:var(--ink);padding:56px 80px 36px}
   .finder-use-cards{grid-template-columns:1fr 1fr}
   .finder-modal-inner{padding:36px 24px}
   .finder-options-grid{grid-template-columns:1fr 1fr}
+  .products-grid{grid-template-columns:1fr 1fr}
+  .industries-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ TOPBAR ══ -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-left">
     <a href="tel:9723668684">972-366-8684</a>
     <a href="mailto:sales@hughestank.com">sales@hughestank.com</a>
-    <a href="/#">Mon–Fri · 8am–4:30pm CST</a>
+    <a href="#">Mon–Fri &middot; 8am–4:30pm CST</a>
   </div>
   <div class="topbar-right">
     <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
     <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
     <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
-    <a href="https://x.com/HughesTankCo" class="soc" title="X / Twitter">X</a>
+    <a href="https://x.com/HughesTankCo" class="soc" title="X">X</a>
     <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
   </div>
 </div>
 
-<!-- ══ NAV ══ -->
+<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo" style="gap:0">
     <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:42px;width:auto;display:block">
   </a>
   <ul class="nav-links">
     <li>
-      <a href="/#products">Products ▾</a>
+      <a href="#products">Products &#9662;</a>
       <div class="nav-dd">
         <a href="/products/ul-142/">UL 142</a>
-        <a href="/products/fireguard/">UL 2085 Fireguard®</a>
-        <a href="/products/flameshield/">Flameshield®</a>
-        <a href="/products/permatank/">Permatank®</a>
+        <a href="/products/fireguard/">UL 2085 Fireguard&reg;</a>
+        <a href="/products/flameshield/">Flameshield&reg;</a>
+        <a href="/products/permatank/">Permatank&reg;</a>
         <a href="/products/act-100-u/">ACT-100-U</a>
         <a href="/products/farm-tanks/">Farm Tanks</a>
         <a href="/products/containment-pans/">Containment Pans</a>
         <a href="/products/accessories/">Accessories</a>
       </div>
     </li>
-    <li><a href="/#tank-finder">Tank Finder</a></li>
-    <li><a href="/#resources" onclick="setTimeout(()=&gt;{document.querySelector(&#39;.chart-tool&#39;).scrollIntoView({behavior:&#39;smooth&#39;})},300)">Tank Chart</a></li>
+    <li><a href="#tank-finder">Tank Finder</a></li>
+    <li><a href="#resources">Tank Chart</a></li>
     <li><a href="/build-a-tank/">Build Your Tank</a></li>
-    <li><a href="/#shop">Shop</a></li>
-    <li><a href="/#resources">Resources</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#resources">Resources</a></li>
     <li><a href="/projects/">Projects</a></li>
     <li>
-      <a href="/about/">Company ▾</a>
+      <a href="/about/">Company &#9662;</a>
       <div class="nav-dd">
         <a href="/about/">About Us</a>
         <a href="/about/#team">Leadership</a>
@@ -528,345 +460,183 @@ footer{background:var(--ink);padding:56px 80px 36px}
     </li>
     <li>
       <button class="nav-cart" onclick="toggleCart()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        Cart
-        <span class="cart-badge" id="cartBadge">0</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Cart <span class="cart-badge" id="cartBadge">0</span>
       </button>
     </li>
     <li><a href="/contact/" class="nav-cta">Request a Quote</a></li>
   </ul>
 </nav>
 
-<!-- ══ HERO  (dark) ══ -->
+<!-- HERO -->
 <section class="hero" style="min-height:600px">
   <div class="hero-content">
-    <div class="hero-eyebrow">UL-Certified Manufacturer · Venus, Texas · Est. 1985</div>
+    <div class="hero-eyebrow">UL-Certified Manufacturer &middot; Venus, Texas &middot; Est. 1985</div>
     <h1>Steel Fuel<br>Storage Tanks<br><span>Built to Last.</span></h1>
     <p class="hero-sub">We build custom aboveground and underground fuel storage tanks — safety-rated, made in Venus, TX, and shipped direct to your site. Every order includes free CAD drawings and a 1-year warranty.</p>
     <div class="hero-actions">
       <a href="/contact/" class="btn-primary">Request a Quote</a>
-      <a href="/#tank-finder" class="btn-ghost">Find My Tank</a>
+      <a href="#tank-finder" class="btn-ghost">Find My Tank</a>
     </div>
   </div>
-  <div class="hero-right" style="padding:0;position:relative;overflow:hidden;align-self:stretch;display:flex;align-items:center;justify-content:center;background:var(--navy)">
-    <!-- Tank image — centered, prominent -->
-    <img src="/images/tank-horizontal-single.png" alt="Hughes Tank Company UL 142 horizontal steel fuel storage tank" style="position:relative;z-index:2;width:88%;max-width:520px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 8px 40px rgba(26,58,140,0.4));padding:24px 0">
-    <!-- Subtle left fade to blend with navy content -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to right, var(--navy) 0%, transparent 30%, transparent 100%);z-index:3;pointer-events:none"></div>
-    <!-- Stats row at bottom -->
-    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;background:rgba(7,16,31,0.7);backdrop-filter:blur(4px)">
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
-        <div class="stat-num" style="font-size:28px">40<em style="font-size:18px">+</em></div>
-        <div class="stat-label">Years Mfg.</div>
-      </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
-        <div class="stat-num" style="font-size:22px">UL<em style="font-size:14px">®</em></div>
-        <div class="stat-label">Certified</div>
-      </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
-        <div class="stat-num" style="font-size:22px">1<em style="font-size:14px">yr</em></div>
-        <div class="stat-label">Warranty</div>
-      </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;padding:18px 16px">
-        <div class="stat-num" style="font-size:18px;line-height:1.2">Free</div>
-        <div class="stat-label">CAD w/ Order</div>
-      </div>
+  <div class="hero-right">
+    <img src="/images/tank-horizontal-single.png" alt="Hughes Tank UL 142 steel fuel storage tank" style="position:relative;z-index:2;width:88%;max-width:520px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 8px 40px rgba(26,58,140,0.4));padding:24px 0">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,var(--navy) 0%,transparent 30%,transparent 100%);z-index:3;pointer-events:none"></div>
+    <div class="hero-stats-row">
+      <div class="stat-box"><div class="stat-num">40<em>+</em></div><div class="stat-label">Years Mfg.</div></div>
+      <div class="stat-box"><div class="stat-num">UL<em>&reg;</em></div><div class="stat-label">Certified</div></div>
+      <div class="stat-box"><div class="stat-num">1<em>yr</em></div><div class="stat-label">Warranty</div></div>
+      <div class="stat-box"><div class="stat-num" style="font-size:18px;line-height:1.2">Free</div><div class="stat-label">CAD w/ Order</div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ CERT BAR (blue) ══ -->
+<!-- CERT BAR -->
 <div class="cert-bar">
   <span class="cert-label">Certified &amp; Listed</span>
   <span class="cert-pill">UL 142</span>
-  <span class="cert-pill">UL 2085 Fireguard®</span>
-  <span class="cert-pill">Flameshield®</span>
-  <span class="cert-pill">Permatank®</span>
+  <span class="cert-pill">UL 2085 Fireguard&reg;</span>
+  <span class="cert-pill">Flameshield&reg;</span>
+  <span class="cert-pill">Permatank&reg;</span>
   <span class="cert-pill">ACT-100-U</span>
   <span class="cert-pill">STI-SPFA</span>
   <span class="cert-pill">AWS</span>
   <span class="cert-pill">PEI</span>
 </div>
 
-<!-- ══ PRODUCTS  (white) ══ -->
+<!-- PRODUCTS -->
 <section class="section section-white" id="products">
   <div class="section-header">
     <div class="eyebrow">Product Lines</div>
     <h2 class="display">Steel Tanks for<br>Every Application</h2>
     <p class="section-intro">Every tank is built to spec in Venus, TX — air-tested on our yard and shipped ready to install. Available through our authorized rep network across the U.S.</p>
   </div>
-  <style>
-  /* ── Product Cards ── */
-  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-  .product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column}
-  .product-card:hover{box-shadow:0 8px 32px rgba(13,27,62,0.12);transform:translateY(-2px);z-index:1}
-  .product-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s var(--ease)}
-  .product-card:hover::after{width:100%}
-
-  /* Image area: white bg so tank renders show cleanly */
-  .product-card-img{
-    height:200px;
-    background:#fff;
-    overflow:hidden;position:relative;
-    display:flex;align-items:center;justify-content:center;
-    padding:20px;
-    border-bottom:1px solid var(--border);
-  }
-  /* Subtle gradient overlay on hover */
-  .product-card-img::after{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(ellipse at center,rgba(26,58,140,0.06) 0%,transparent 70%);
-    opacity:0;transition:opacity .3s;pointer-events:none;
-  }
-  .product-card:hover .product-card-img::after{opacity:1}
-  .product-card-img img{
-    width:auto;height:100%;max-width:100%;
-    object-fit:contain;object-position:center;
-    transition:transform .4s var(--ease);
-    mix-blend-mode:multiply;
-    background:#fff;
-  }
-  .product-card:hover .product-card-img img{transform:scale(1.05)}
-
-  .product-card-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--border)}
-  .product-card-body h3{font-family:var(--fh);font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:0.02em;color:var(--navy);line-height:1.2;margin:10px 0 8px}
-  .product-card-body p{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
-  .product-card-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-top:16px;transition:gap .2s}
-  .product-card:hover .product-card-link{gap:10px}
-  </style>
   <div class="products-grid">
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-horizontal-single.png" alt="UL 142 Horizontal Single Wall Tank">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Aboveground · UL 142</span>
-        <h3>UL 142</h3>
-        <p>NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.</p>
-        <a href="/products/ul-142/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-horizontal-skid.png" alt="UL 2085 Fireguard Tank with Skids">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Fire-Rated · UL 2085</span>
-        <h3>UL 2085 Fireguard®</h3>
-        <p>Two-hour fire-rated aboveground tanks. Required by code for high fire-risk locations. Meets EPA secondary containment requirements.</p>
-        <a href="/products/fireguard/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-horizontal-skid.png" alt="Flameshield Fire-Protected Tank">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Fire-Protected · STI Listed</span>
-        <h3>Flameshield®</h3>
-        <p>STI-listed fire-protected aboveground tank with intumescent material between the primary and secondary steel walls. Two-hour fire rating.</p>
-        <a href="/products/flameshield/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-vertical.png" alt="Permatank Fiberglass Underground Tank">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Underground · Fiberglass</span>
-        <h3>Permatank®</h3>
-        <p>STI-P3 fiberglass underground storage tanks. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100.</p>
-        <a href="/products/permatank/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-vertical.png" alt="ACT-100-U Steel Underground Tank">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Underground · Steel</span>
-        <h3>ACT-100-U</h3>
-        <p>Cathodically-protected steel underground storage tanks. STI-listed with factory-applied external coating and interior lining system.</p>
-        <a href="/products/act-100-u/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-horizontal-single.png" alt="Farm Tank Aboveground Fuel Storage">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Agriculture</span>
-        <h3>Farm Tanks</h3>
-        <p>Purpose-built aboveground fuel storage for agricultural operations. Skid-mounted, portable, and stationary configurations available.</p>
-        <a href="/products/farm-tanks/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-rectangular.png" alt="Steel Containment Pan">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Secondary Containment</span>
-        <h3>Containment Pans</h3>
-        <p>Steel secondary containment pans custom-sized to any tank footprint. Meets EPA 40 CFR 112 spill prevention requirements.</p>
-        <a href="/products/containment-pans/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">
-        
-        <img src="/images/tank-rectangular.png" alt="Tank Accessories and Pump Packages">
-      </div>
-      <div class="product-card-body">
-        <span class="tag">Pump Packages</span>
-        <h3>Accessories</h3>
-        <p>Pump and metering packages 15–100 GPM, plus gauges, vents, fittings, and safety equipment. Plumbed and tested before shipment.</p>
-        <a href="/products/accessories/" class="product-card-link">Learn More →</a>
-      </div>
-    </div>
-
+    <a href="/products/ul-142/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-horizontal-single.png" alt="UL 142 Tank"></div>
+      <div class="product-card-body"><span class="tag">Aboveground &middot; UL 142</span><h3>UL 142</h3><p>NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/fireguard/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-horizontal-skid.png" alt="Fireguard Tank"></div>
+      <div class="product-card-body"><span class="tag">Fire-Rated &middot; UL 2085</span><h3>UL 2085 Fireguard&reg;</h3><p>Two-hour fire-rated aboveground tanks. Required by code for high fire-risk locations. Meets EPA secondary containment requirements.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/flameshield/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-horizontal-skid.png" alt="Flameshield Tank"></div>
+      <div class="product-card-body"><span class="tag">Fire-Protected &middot; STI Listed</span><h3>Flameshield&reg;</h3><p>STI-listed fire-protected aboveground tank with intumescent material between the primary and secondary steel walls. Two-hour fire rating.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/permatank/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-vertical.png" alt="Permatank"></div>
+      <div class="product-card-body"><span class="tag">Underground &middot; Fiberglass</span><h3>Permatank&reg;</h3><p>STI-P3 fiberglass underground storage tanks. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/act-100-u/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-vertical.png" alt="ACT-100-U Tank"></div>
+      <div class="product-card-body"><span class="tag">Underground &middot; Steel</span><h3>ACT-100-U</h3><p>Cathodically-protected steel underground storage tanks. STI-listed with factory-applied external coating and interior lining system.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/farm-tanks/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-horizontal-single.png" alt="Farm Tank"></div>
+      <div class="product-card-body"><span class="tag">Agriculture</span><h3>Farm Tanks</h3><p>Purpose-built aboveground fuel storage for agricultural operations. Skid-mounted, portable, and stationary configurations available.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/containment-pans/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-rectangular.png" alt="Containment Pan"></div>
+      <div class="product-card-body"><span class="tag">Secondary Containment</span><h3>Containment Pans</h3><p>Steel secondary containment pans custom-sized to any tank footprint. Meets EPA 40 CFR 112 spill prevention requirements.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
+    <a href="/products/accessories/" class="product-card" style="text-decoration:none">
+      <div class="product-card-img"><img src="/images/tank-rectangular.png" alt="Accessories"></div>
+      <div class="product-card-body"><span class="tag">Pump Packages</span><h3>Accessories</h3><p>Pump and metering packages 15–100 GPM, plus gauges, vents, fittings, and safety equipment. Plumbed and tested before shipment.</p><span class="product-card-link">Learn More &rarr;</span></div>
+    </a>
   </div>
 </section>
 
-<!-- ══ TANK FINDER  (dark + white modal) ══ -->
+<!-- TANK FINDER -->
 <section class="finder-section" id="tank-finder">
-  <!-- Intro panel (dark) -->
   <div class="finder-intro on-dark">
     <div>
       <div class="eyebrow">Interactive Tool</div>
       <h2 class="display">Not Sure<br>Which Tank?</h2>
       <p class="section-intro" style="margin-bottom:28px">Answer 5 quick questions about your application, location, and requirements — then we recommend the right tank with specs and pricing guidance.</p>
-      <button class="btn-white" onclick="launchFinder()">Launch Tank Finder →</button>
+      <button class="btn-white" onclick="launchFinder()">Launch Tank Finder &rarr;</button>
     </div>
     <div class="finder-use-cards">
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;fleet&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="1" y="3" width="15" height="13"></rect><path d="M16 8h4l3 5v3h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-        </div>
-        <div class="finder-use-card-title">Fleet Fueling</div>
-        <div class="finder-use-card-sub">UL 142 or Fireguard®</div>
+      <div class="finder-use-card" onclick="launchFinderWith('fleet')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="finder-use-card-title">Fleet Fueling</div><div class="finder-use-card-sub">UL 142 or Fireguard&reg;</div>
       </div>
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;construction&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline></svg>
-        </div>
-        <div class="finder-use-card-title">Construction Sites</div>
-        <div class="finder-use-card-sub">UL 142 Double-Wall</div>
+      <div class="finder-use-card" onclick="launchFinderWith('construction')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg></div>
+        <div class="finder-use-card-title">Construction Sites</div><div class="finder-use-card-sub">UL 142 Double-Wall</div>
       </div>
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;farm&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        </div>
-        <div class="finder-use-card-title">Farm &amp; Ranch</div>
-        <div class="finder-use-card-sub">Farm Tank UL 142</div>
+      <div class="finder-use-card" onclick="launchFinderWith('farm')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="finder-use-card-title">Farm &amp; Ranch</div><div class="finder-use-card-sub">Farm Tank UL 142</div>
       </div>
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;fire&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 3z"></path></svg>
-        </div>
-        <div class="finder-use-card-title">High Fire-Risk Areas</div>
-        <div class="finder-use-card-sub">Fireguard® UL-2085</div>
+      <div class="finder-use-card" onclick="launchFinderWith('fire')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 3z"/></svg></div>
+        <div class="finder-use-card-title">High Fire-Risk Areas</div><div class="finder-use-card-sub">Fireguard&reg; UL-2085</div>
       </div>
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;commercial&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><line x1="10" y1="6" x2="10" y2="6"></line><line x1="14" y1="6" x2="14" y2="6"></line><line x1="10" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="14" y2="10"></line><line x1="10" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="14" y2="14"></line></svg>
-        </div>
-        <div class="finder-use-card-title">Commercial Facilities</div>
-        <div class="finder-use-card-sub">Flameshield® / UL 2085</div>
+      <div class="finder-use-card" onclick="launchFinderWith('commercial')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg></div>
+        <div class="finder-use-card-title">Commercial Facilities</div><div class="finder-use-card-sub">Flameshield&reg; / UL 2085</div>
       </div>
-      <div class="finder-use-card" onclick="launchFinderWith(&#39;industrial&#39;)">
-        <div class="finder-use-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-        </div>
-        <div class="finder-use-card-title">Industrial / Bulk</div>
-        <div class="finder-use-card-sub">Custom UL 142 or ASME</div>
+      <div class="finder-use-card" onclick="launchFinderWith('industrial')">
+        <div class="finder-use-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="finder-use-card-title">Industrial / Bulk</div><div class="finder-use-card-sub">Custom UL 142 or ASME</div>
       </div>
     </div>
   </div>
-
-  <!-- Modal: Q&A flow (white background) -->
   <div class="finder-modal" id="finderModal">
     <div class="finder-modal-inner">
-      <!-- Q panels -->
       <div id="finderQWrap"></div>
-      <!-- Result -->
       <div class="finder-result-wrap" id="finderResult"></div>
     </div>
   </div>
 </section>
 
-<!-- ══ BUILD YOUR TANK  (white) ══ -->
+<!-- BUILD YOUR TANK -->
 <section class="section section-white" id="configurator">
   <div style="background:var(--navy);border-radius:6px;padding:48px 56px;text-align:center;position:relative;overflow:hidden">
     <div style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(26,58,140,0.06) 38px,rgba(26,58,140,0.06) 39px);pointer-events:none"></div>
     <div style="position:relative;z-index:1">
       <div class="eyebrow" style="justify-content:center;color:var(--steel)"><span style="width:22px;height:2px;background:var(--steel);display:inline-block;margin-right:10px;vertical-align:middle"></span>Interactive Configurator</div>
       <h2 class="display" style="color:var(--white);font-size:clamp(28px,4vw,52px);margin-bottom:12px">Build Your Tank.<br><span style="color:var(--steel)">Get Real Specs.</span></h2>
-      <p style="font-size:15px;color:var(--steel);max-width:560px;margin:0 auto 28px;line-height:1.7">Use our step-by-step Tank Builder to choose your tank type, size, pump package, and finish — then download a branded spec sheet or send it straight to our team for a fast quote.</p>
+      <p style="font-size:15px;color:var(--steel);max-width:560px;margin:0 auto 28px;line-height:1.7">Use our step-by-step Tank Builder to choose your tank type, size, pump package, and finish — then download a branded spec sheet or send it straight to our team.</p>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
-        <a href="/build-a-tank/" class="btn-white">Start Building →</a>
+        <a href="/build-a-tank/" class="btn-white">Start Building &rarr;</a>
         <a href="/contact/" class="btn-ghost">Request a Quote Instead</a>
       </div>
       <div style="display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:8px">
-        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Free CAD drawing with every order
-        </span>
-        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          1-year manufacturer warranty
-        </span>
-        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Print or save your spec sheet
-        </span>
+        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Free CAD drawing with every order</span>
+        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>1-year manufacturer warranty</span>
+        <span style="font-family:var(--fh);font-size:12px;color:var(--steel);display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Print or save your spec sheet</span>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ══ SHOP  (white) ══ -->
-<section class="section section-white" id="shop" style="padding-top:88px">
+<!-- SHOP -->
+<section class="section section-white" id="shop" style="padding-top:0">
   <div class="section-header">
     <div class="eyebrow">Shop Accessories &amp; Parts</div>
     <h2 class="display">Parts, Pumps &amp;<br>Accessories</h2>
     <p class="section-intro">In-stock accessories, pump packages, and tank components. Order online or call us — most items ship same or next business day from Venus, TX.</p>
   </div>
   <div class="shop-filters">
-    <button class="shop-filter active" onclick="filterShop(&#39;all&#39;,this)">All Products</button>
-    <button class="shop-filter" onclick="filterShop(&#39;pumps&#39;,this)">Pump Packages</button>
-    <button class="shop-filter" onclick="filterShop(&#39;gauges&#39;,this)">Gauges &amp; Monitors</button>
-    <button class="shop-filter" onclick="filterShop(&#39;containment&#39;,this)">Containment</button>
-    <button class="shop-filter" onclick="filterShop(&#39;fittings&#39;,this)">Fittings &amp; Vents</button>
-    <button class="shop-filter" onclick="filterShop(&#39;safety&#39;,this)">Safety Equipment</button>
+    <button class="shop-filter active" onclick="filterShop('all',this)">All Products</button>
+    <button class="shop-filter" onclick="filterShop('pumps',this)">Pump Packages</button>
+    <button class="shop-filter" onclick="filterShop('gauges',this)">Gauges &amp; Monitors</button>
+    <button class="shop-filter" onclick="filterShop('containment',this)">Containment</button>
+    <button class="shop-filter" onclick="filterShop('fittings',this)">Fittings &amp; Vents</button>
+    <button class="shop-filter" onclick="filterShop('safety',this)">Safety Equipment</button>
   </div>
   <div class="shop-carousel-wrap">
     <button class="shop-arrow shop-arrow-left" onclick="scrollShop(-1)" aria-label="Scroll left">&#8592;</button>
     <div class="shop-carousel" id="shopCarousel">
-      <div class="shop-grid" id="shopGrid">
-      </div>
+      <div class="shop-grid" id="shopGrid"></div>
     </div>
     <button class="shop-arrow shop-arrow-right" onclick="scrollShop(1)" aria-label="Scroll right">&#8594;</button>
   </div>
 </section>
 
-<!-- ══ WHY HUGHES  (light gray) ══ -->
+<!-- WHY HUGHES -->
 <section class="section section-alt" id="why">
   <div class="why-grid">
     <div>
@@ -877,23 +647,23 @@ footer{background:var(--ink);padding:56px 80px 36px}
       </div>
       <ul class="why-list">
         <li class="why-item">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg></div>
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
           <div><h4>UL-Certified Facility</h4><p>Active UL certification covers every tank we build. Labeled, documented, and built to the applicable UL standard — no exceptions, every time.</p></div>
         </li>
         <li class="why-item">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <div><h4>Fastest Lead Times in the U.S.</h4><p>Our production capacity and raw steel inventory keep lead times consistently shorter than the competition.</p></div>
         </li>
         <li class="why-item">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
           <div><h4>Air-Tested Before Every Shipment</h4><p>Every tank is plumbed on our yard and pressure air-tested before it leaves. You receive a tank that is ready to put into service immediately on delivery.</p></div>
         </li>
         <li class="why-item">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
-          <div><h4>Robotic &amp; AWS-Certified Welding</h4><p>We combine AWS-certified manual welders with cutting-edge robotic welding technology — delivering consistent welds on every tank, regardless of size or complexity.</p></div>
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div><h4>Robotic &amp; AWS-Certified Welding</h4><p>We combine AWS-certified manual welders with cutting-edge robotic welding technology — delivering consistent welds on every tank.</p></div>
         </li>
         <li class="why-item">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <div><h4>One-Year Manufacturer's Warranty</h4><p>Every tank ships with a one-year manufacturer's warranty covering defects in materials and workmanship. We stand behind what we build.</p></div>
         </li>
       </ul>
@@ -901,56 +671,40 @@ footer{background:var(--ink);padding:56px 80px 36px}
     <div>
       <div class="why-aside">
         <h3>Built in Venus, TX.<br>Backed by Our Rep Network.</h3>
-        <p>When you order from Hughes Tank Company, you get manufacturer quality backed by experienced regional reps who know your market and your local code requirements.</p>
+        <p>When you order from Hughes Tank Company, you get manufacturer quality backed by experienced regional reps who know your market and local code requirements.</p>
         <div class="aside-divider"></div>
-        <div class="aside-stat"><div class="aside-stat-num">1985<em></em></div><div class="aside-stat-label">Year Established · Venus, TX</div></div>
+        <div class="aside-stat"><div class="aside-stat-num">1985<em></em></div><div class="aside-stat-label">Year Established &middot; Venus, TX</div></div>
         <div class="aside-stat"><div class="aside-stat-num">USA<em></em></div><div class="aside-stat-label">Nationwide Delivery</div></div>
         <div class="aside-stat"><div class="aside-stat-num">5<em>+</em></div><div class="aside-stat-label">Active UL / STI Certifications</div></div>
         <div class="aside-divider"></div>
-        <a href="/contact/" class="btn-primary" style="display:block;text-align:center;justify-content:center">Get a Quote Today →</a>
+        <a href="/contact/" class="btn-primary" style="display:block;text-align:center;justify-content:center">Get a Quote Today &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ OUR FACILITY  (split layout) ══ -->
+<!-- FACILITY -->
 <section style="background:var(--navy);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:400px">
-  <!-- Left: content -->
   <div style="padding:72px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2">
-    <div style="font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <span style="width:22px;height:2px;background:var(--steel);display:inline-block"></span>Our Facility · Venus, Texas
-    </div>
+    <div style="font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="width:22px;height:2px;background:var(--steel);display:inline-block"></span>Our Facility &middot; Venus, Texas</div>
     <h2 style="font-family:var(--fh);font-weight:800;font-size:clamp(26px,3vw,38px);text-transform:uppercase;letter-spacing:0.01em;color:var(--white);line-height:1.05;margin-bottom:16px">State-of-the-Art<br>Manufacturing Since 1985</h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:28px;max-width:440px">Our Venus, TX facility has multiple production bays with robotic and manual welding lines, a full paint and sandblast shop, and a test yard where every tank is plumbed and air-tested before it ships.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:28px;max-width:440px">Our Venus, TX facility has multiple production bays with robotic and manual welding lines, a full paint and sandblast shop, and a test yard where every tank is air-tested before it ships.</p>
     <div style="display:flex;gap:32px;flex-wrap:wrap;margin-bottom:32px">
-      <div>
-        <div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">2900 N FM 157</div>
-        <div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">Venus, TX 76084</div>
-      </div>
+      <div><div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">2900 N FM 157</div><div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">Venus, TX 76084</div></div>
       <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
-      <div>
-        <div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">Mon–Fri</div>
-        <div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">8am – 4:30pm · Office Hours</div>
-      </div>
+      <div><div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">Mon–Fri</div><div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">8am – 4:30pm &middot; Office Hours</div></div>
       <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
-      <div>
-        <div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">100%</div>
-        <div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">U.S. Manufactured</div>
-      </div>
+      <div><div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">100%</div><div style="font-family:var(--fh);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);margin-top:3px">U.S. Manufactured</div></div>
     </div>
-    <a href="/about/" style="display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--blue);font-family:var(--fh);font-weight:800;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:13px 26px;border-radius:4px;transition:background .2s;align-self:flex-start">Learn About Our Facility →</a>
+    <a href="/about/" style="display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--blue);font-family:var(--fh);font-weight:800;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:13px 26px;border-radius:4px;transition:background .2s;align-self:flex-start">Learn About Our Facility &rarr;</a>
   </div>
-  <!-- Right: photo with gradient fade on left edge -->
   <div style="position:relative;overflow:hidden">
-    <img src="/images/htc-facility-aerial.png" alt="Hughes Tank Company facility aerial view" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:brightness(0.9) contrast(1.05)">
-    <!-- Gradient: navy on left fading to transparent so it blends with left panel -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to right, var(--navy) 0%, rgba(13,27,62,0.5) 35%, transparent 70%)"></div>
+    <img src="/images/htc-facility-aerial.png" alt="Hughes Tank Company facility" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:brightness(0.9) contrast(1.05)">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,var(--navy) 0%,rgba(13,27,62,0.5) 35%,transparent 70%)"></div>
   </div>
 </section>
-  <!-- Content -->
 
-
-<!-- ══ INDUSTRIES  (gray) ══ -->
+<!-- INDUSTRIES -->
 <section class="section section-alt">
   <div class="section-header">
     <div class="eyebrow">Industries Served</div>
@@ -958,93 +712,92 @@ footer{background:var(--ink);padding:56px 80px 36px}
     <p class="section-intro">Our tanks are in the field across agriculture, petroleum, construction, mining, and government applications throughout the U.S.</p>
   </div>
   <div class="industries-grid">
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="11"></line><path d="M5 2L5 22"></path><path d="M19 2L19 11"></path><path d="M5 11C5 11 7 9 12 9C17 9 19 11 19 11"></path></svg></div><h4>Petroleum &amp; Fueling</h4><p>Retail stations, fleet fueling, and bulk petroleum storage.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div><h4>Agriculture</h4><p>On-farm fuel storage for diesel, gasoline, and ag chemicals.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon></svg></div><h4>Construction</h4><p>Portable and permanent fuel storage for heavy equipment fleets.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div><h4>Industrial</h4><p>Large-volume fuel and chemical storage for industrial facilities.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div><h4>Emergency Power</h4><p>Generator fuel storage for hospitals, data centers, and critical infrastructure.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><path d="M16 8h4l3 5v3h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div><h4>Transportation &amp; Fleet</h4><p>Private fleet depots and cardlock fueling infrastructure.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg></div><h4>Mining &amp; Energy</h4><p>Remote-site fuel storage for oil, gas, and mining operations.</p></div>
-    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h4>Government &amp; Military</h4><p>Tank systems built to federal spec for government and military installations.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M5 2L5 22"/><path d="M19 2L19 11"/><path d="M5 11C5 11 7 9 12 9C17 9 19 11 19 11"/></svg></div><h4>Petroleum &amp; Fueling</h4><p>Retail stations, fleet fueling, and bulk petroleum storage.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h4>Agriculture</h4><p>On-farm fuel storage for diesel, gasoline, and ag chemicals.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg></div><h4>Construction</h4><p>Portable and permanent fuel storage for heavy equipment fleets.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Industrial</h4><p>Large-volume fuel and chemical storage for industrial facilities.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h4>Emergency Power</h4><p>Generator fuel storage for hospitals, data centers, and critical infrastructure.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h4>Transportation &amp; Fleet</h4><p>Private fleet depots and cardlock fueling infrastructure.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><h4>Mining &amp; Energy</h4><p>Remote-site fuel storage for oil, gas, and mining operations.</p></div>
+    <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Government &amp; Military</h4><p>Tank systems built to federal spec for government and military installations.</p></div>
   </div>
 </section>
 
-<!-- ══ RESOURCES  (white) ══ -->
+<!-- RESOURCES -->
 <section class="section section-white" id="resources">
   <div class="section-header">
     <div class="eyebrow">Tools &amp; Resources</div>
     <h2 class="display">Everything You Need<br>to Spec Your Project</h2>
-    <p class="section-intro">Tank chart generators, spec sheets, compliance guides, and answers to the questions we hear most from contractors and project managers.</p>
+    <p class="section-intro">Tank chart generators, spec sheets, compliance guides, and answers to the questions we hear most.</p>
   </div>
   <div class="resources-grid">
     <div>
       <div class="resource-col-title">Tank Chart Generator</div>
       <div class="chart-tool">
         <div class="chart-tool-tabs">
-          <button class="chart-tab active" onclick="setChartType(&#39;horizontal&#39;,this)">Horizontal</button>
-          <button class="chart-tab" onclick="setChartType(&#39;vertical&#39;,this)">Vertical</button>
-          <button class="chart-tab" onclick="setChartType(&#39;rectangular&#39;,this)">Rectangular</button>
+          <button class="chart-tab active" onclick="setChartType('horizontal',this)">Horizontal</button>
+          <button class="chart-tab" onclick="setChartType('vertical',this)">Vertical</button>
+          <button class="chart-tab" onclick="setChartType('rectangular',this)">Rectangular</button>
         </div>
         <div class="chart-inputs">
           <div class="chart-input-group"><label id="dim1-label">Diameter (in)</label><input type="number" class="chart-input" id="dim1" placeholder="72" min="1" max="240"></div>
           <div class="chart-input-group"><label id="dim2-label">Length (in)</label><input type="number" class="chart-input" id="dim2" placeholder="120" min="1" max="600"></div>
-          <div class="chart-input-group"><label>Increment (in)</label><select class="chart-input" id="increment"><option value="1">Every 1"</option><option value="0.5">Every 0.5"</option><option value="0.25">Every 0.25"</option><option value="0.125">Every 0.125"</option></select></div>
+          <div class="chart-input-group"><label>Increment (in)</label><select class="chart-input" id="increment"><option value="1">Every 1"</option><option value="0.5">Every 0.5"</option><option value="0.25">Every 0.25"</option></select></div>
           <div class="chart-input-group" style="align-self:end"><button class="chart-gen-btn" onclick="generateChart()">Generate Chart</button></div>
         </div>
-        <div id="chartResults" class="chart-results" style="display:none">
+        <div id="chartResults" class="chart-results">
           <div class="chart-results-header"><span id="chartTitle">Tank Chart</span><button class="chart-print-btn" onclick="printChart()">Print to PDF</button></div>
           <div style="max-height:220px;overflow-y:auto"><table class="chart-table"><thead><tr><th>Depth (in)</th><th>Gallons</th><th>% Full</th></tr></thead><tbody id="chartBody"></tbody></table></div>
         </div>
       </div>
-
       <div class="resource-col-title" style="margin-top:28px">Spec Sheet Downloads</div>
       <div class="resource-list">
-        <div class="resource-item" onclick="downloadSpecPDF(&#39;UL 142&#39;,&#39;Aboveground · Single &amp; Double Wall&#39;,&#39;NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.&#39;,&#39;UL 142&#39;,&#39;Aboveground&#39;,&#39;Custom&#39;,&#39;Diesel, Gasoline, Ethanol Blends&#39;)">
-          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+        <div class="resource-item" onclick="downloadSpecPDF('UL 142','Aboveground &middot; Single &amp; Double Wall','NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.','UL 142','Aboveground','Custom','Diesel, Gasoline, Ethanol Blends')">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
           <div class="resource-info"><h4>UL 142 Spec Sheet</h4><p>Single &amp; double wall aboveground tanks</p></div>
-          <span class="resource-dl">PDF ↓</span>
+          <span class="resource-dl">PDF &darr;</span>
         </div>
-        <div class="resource-item" onclick="downloadSpecPDF(&#39;UL 2085 Fireguard®&#39;,&#39;Fire-Rated Aboveground · UL Listed&#39;,&#39;Two-hour fire-rated aboveground tank. Required by code for high fire-risk locations. Meets EPA secondary containment requirements with integrated interstitial space.&#39;,&#39;UL 2085&#39;,&#39;Aboveground&#39;,&#39;Custom&#39;,&#39;Diesel, Gasoline&#39;)">
-          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
-          <div class="resource-info"><h4>UL 2085 Fireguard® Spec Sheet</h4><p>2-hour fire-rated aboveground tanks</p></div>
-          <span class="resource-dl">PDF ↓</span>
+        <div class="resource-item" onclick="downloadSpecPDF('UL 2085 Fireguard&reg;','Fire-Rated Aboveground &middot; UL Listed','Two-hour fire-rated aboveground tank. Required by code for high fire-risk locations. Meets EPA secondary containment requirements with integrated interstitial space.','UL 2085','Aboveground','Custom','Diesel, Gasoline')">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>UL 2085 Fireguard&reg; Spec Sheet</h4><p>2-hour fire-rated aboveground tanks</p></div>
+          <span class="resource-dl">PDF &darr;</span>
         </div>
-        <div class="resource-item" onclick="downloadSpecPDF(&#39;Permatank®&#39;,&#39;Underground · STI-P3 Fiberglass&#39;,&#39;STI-P3 fiberglass underground storage tank. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100. Factory-installed fittings.&#39;,&#39;STI-P3&#39;,&#39;Underground&#39;,&#39;Custom&#39;,&#39;Diesel, Gasoline, E100, B100&#39;)">
-          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
-          <div class="resource-info"><h4>Permatank® UST Spec Sheet</h4><p>Fiberglass underground storage tanks</p></div>
-          <span class="resource-dl">PDF ↓</span>
+        <div class="resource-item" onclick="downloadSpecPDF('Permatank&reg;','Underground &middot; STI-P3 Fiberglass','STI-P3 fiberglass underground storage tank. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100. Factory-installed fittings.','STI-P3','Underground','Custom','Diesel, Gasoline, E100, B100')">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>Permatank&reg; UST Spec Sheet</h4><p>Fiberglass underground storage tanks</p></div>
+          <span class="resource-dl">PDF &darr;</span>
         </div>
-        <div class="resource-item" onclick="downloadSpecPDF(&#39;ACT-100-U&#39;,&#39;Underground · STI Listed Steel&#39;,&#39;Cathodically-protected steel underground storage tank. STI-listed with factory-applied external coating and interior lining system for corrosion protection.&#39;,&#39;STI ACT-100-U&#39;,&#39;Underground&#39;,&#39;Custom&#39;,&#39;Diesel, Gasoline&#39;)">
-          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+        <div class="resource-item" onclick="downloadSpecPDF('ACT-100-U','Underground &middot; STI Listed Steel','Cathodically-protected steel underground storage tank. STI-listed with factory-applied external coating and interior lining system for corrosion protection.','STI ACT-100-U','Underground','Custom','Diesel, Gasoline')">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
           <div class="resource-info"><h4>ACT-100-U Spec Sheet</h4><p>Steel underground storage tanks</p></div>
-          <span class="resource-dl">PDF ↓</span>
+          <span class="resource-dl">PDF &darr;</span>
         </div>
       </div>
     </div>
     <div>
       <div class="resource-col-title">Frequently Asked Questions</div>
       <div class="faq-list">
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is UL 142 and do I need it?</span><span class="faq-chevron">▼</span></div><div class="faq-a">UL 142 is the Underwriters Laboratories standard for aboveground steel tanks storing flammable and combustible liquids. NFPA 30 and the International Fire Code require tanks to be designed and constructed per an approved engineering standard — UL 142 is the most widely accepted. If your tank will store fuel above ground, you almost certainly need a UL 142-listed tank.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between UL 2085 and Flameshield®?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Both are fire-protected aboveground tank systems with a two-hour fire rating, but they are listed under different standards. UL 2085 (Fireguard®) is listed by Underwriters Laboratories. Flameshield® is listed by STI (Steel Tank Institute). Which is required depends on your local Authority Having Jurisdiction.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to get a tank?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Lead times vary by tank size and configuration, but we consistently offer some of the shortest lead times in the industry. Contact us for current production availability on your specific configuration.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you build custom sizes?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Yes. Custom sizes are a core part of what we do. We can build tanks to virtually any dimension within the applicable UL standard's design parameters. Submit a quote request with your required dimensions and we will confirm feasibility and pricing.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do tanks ship with inspector documentation?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Yes. Every UL-listed tank ships with the appropriate UL label and supporting documentation. We can also provide test records and manufacturer's declarations as required by your local inspector or permitting authority.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What pump packages are available?</span><span class="faq-chevron">▼</span></div><div class="faq-a">We offer fully customizable pumping and metering packages from 15 to 100 GPM. Options include 12-volt DC, electric, and gas-powered pumps with a variety of meter and nozzle configurations. All packages are plumbed on our yard and tested before shipment.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What warranty is included?</span><span class="faq-chevron">▼</span></div><div class="faq-a">All tanks come with a one-year manufacturer's warranty covering defects in materials and workmanship. Contact our sales team for specific warranty terms applicable to your configuration.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What areas do you serve?</span><span class="faq-chevron">▼</span></div><div class="faq-a">We ship throughout the continental United States. We work with regional rep firms — including Wilson-Rogers &amp; Associates (West), Walsh-Long (Midwest), and Mike Long (Southeast) — to provide local support and help you navigate local code requirements.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is UL 142 and do I need it?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">UL 142 is the Underwriters Laboratories standard for aboveground steel tanks storing flammable and combustible liquids. NFPA 30 and the International Fire Code require tanks to be designed and constructed per an approved engineering standard — UL 142 is the most widely accepted. If your tank will store fuel above ground, you almost certainly need a UL 142-listed tank.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between UL 2085 and Flameshield&reg;?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Both are fire-protected aboveground tank systems with a two-hour fire rating, but they are listed under different standards. UL 2085 (Fireguard&reg;) is listed by Underwriters Laboratories. Flameshield&reg; is listed by STI (Steel Tank Institute). Which is required depends on your local Authority Having Jurisdiction.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to get a tank?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Lead times vary by tank size and configuration, but we consistently offer some of the shortest lead times in the industry. Contact us for current production availability on your specific configuration.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you build custom sizes?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Yes. Custom sizes are a core part of what we do. We can build tanks to virtually any dimension within the applicable UL standard's design parameters. Submit a quote request with your required dimensions and we will confirm feasibility and pricing.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do tanks ship with inspector documentation?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Yes. Every UL-listed tank ships with the appropriate UL label and supporting documentation. We can also provide test records and manufacturer's declarations as required by your local inspector or permitting authority.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What pump packages are available?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We offer fully customizable pumping and metering packages from 15 to 100 GPM. Options include 12-volt DC, electric, and gas-powered pumps with a variety of meter and nozzle configurations. All packages are plumbed on our yard and tested before shipment.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What warranty is included?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">All tanks come with a one-year manufacturer's warranty covering defects in materials and workmanship. Contact our sales team for specific warranty terms applicable to your configuration.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What areas do you serve?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We ship throughout the continental United States. We work with regional rep firms — including Wilson-Rogers &amp; Associates (West), Walsh-Long (Midwest), and Mike Long (Southeast) — to provide local support and help you navigate local code requirements.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ PROCESS  (light gray) ══ -->
+<!-- PROCESS -->
 <section class="section section-alt">
   <div class="section-header" style="text-align:center;max-width:540px;margin:0 auto 56px">
     <div class="eyebrow" style="justify-content:center">How It Works</div>
     <h2 class="display">From Quote to<br>Delivery in Five Steps</h2>
   </div>
   <div class="process-steps">
-    <div class="process-step"><div class="step-num">01</div><h4>Request a Quote</h4><p>Submit specs online or call — our team will follow up promptly.</p></div>
+    <div class="process-step"><div class="step-num">01</div><h4>Request a Quote</h4><p>Submit specs online or call. Our team will follow up promptly.</p></div>
     <div class="process-step"><div class="step-num">02</div><h4>Engineering Review</h4><p>Our team confirms the right certification standard for your project and location.</p></div>
     <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Built in Venus, TX by AWS-certified welders using robotic and manual welding processes.</p></div>
     <div class="process-step"><div class="step-num">04</div><h4>Air Test &amp; Inspection</h4><p>Every tank is plumbed, pressure tested, and inspected before leaving our yard.</p></div>
@@ -1052,13 +805,13 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </div>
 </section>
 
-<!-- ══ CTA BANNER (blue) ══ -->
+<!-- CTA BANNER -->
 <div class="cta-banner">
   <h2>Ready to spec your next tank? <span>Our team will get back to you with pricing.</span></h2>
-  <a href="/contact/" class="btn-white">Request a Quote →</a>
+  <a href="/contact/" class="btn-white">Request a Quote &rarr;</a>
 </div>
 
-<!-- ══ FOOTER (ink) ══ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -1076,9 +829,9 @@ footer{background:var(--ink);padding:56px 80px 36px}
       <h5>Products</h5>
       <ul>
         <li><a href="/products/ul-142/">UL 142</a></li>
-        <li><a href="/products/fireguard/">UL 2085 Fireguard®</a></li>
-        <li><a href="/products/flameshield/">Flameshield®</a></li>
-        <li><a href="/products/permatank/">Permatank®</a></li>
+        <li><a href="/products/fireguard/">UL 2085 Fireguard&reg;</a></li>
+        <li><a href="/products/flameshield/">Flameshield&reg;</a></li>
+        <li><a href="/products/permatank/">Permatank&reg;</a></li>
         <li><a href="/products/act-100-u/">ACT-100-U</a></li>
         <li><a href="/products/farm-tanks/">Farm Tanks</a></li>
         <li><a href="/products/containment-pans/">Containment Pans</a></li>
@@ -1093,48 +846,45 @@ footer{background:var(--ink);padding:56px 80px 36px}
         <li><a href="/about/#associations">Associations</a></li>
         <li><a href="/projects/">Projects</a></li>
         <li><a href="/careers/">Careers</a></li>
-        <li><a href="/#resources">Resources</a></li>
-        <li><a href="/#shop">Shop</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#shop">Shop</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h5>Contact</h5>
       <p class="footer-contact-text">
-        <strong>2900 N FM 157</strong><br>
-        Venus, TX 76084<br><br>
+        <strong>2900 N FM 157</strong><br>Venus, TX 76084<br><br>
         <strong>Phone:</strong> <a href="tel:9723668684" style="color:var(--steel)">972-366-8684</a><br>
         <strong>Fax:</strong> 972-366-3130<br>
         <strong>Email:</strong> <a href="mailto:sales@hughestank.com" style="color:var(--steel)">sales@hughestank.com</a><br><br>
-        <strong>Office Hours</strong><br>
-        Mon–Fri · 8am–4:30pm<br><br>
-        <strong>Loading Hours</strong><br>
-        Mon–Fri · 7am–2:30pm
+        <strong>Office Hours</strong><br>Mon–Fri &middot; 8am–4:30pm<br><br>
+        <strong>Loading Hours</strong><br>Mon–Fri &middot; 7am–2:30pm
       </p>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Hughes Tank Company · All Rights Reserved · Venus, TX · <a href="/privacy-policy/" style="color:var(--muted)">Privacy Policy</a> · <a href="/terms/" style="color:var(--muted)">Terms &amp; Conditions</a></p>
-    <p>UL 142 · UL 2085 Fireguard® · Flameshield® · Permatank® · ACT-100-U Certified Manufacturer</p>
+    <p>&copy; 2025 Hughes Tank Company &middot; All Rights Reserved &middot; Venus, TX &middot; <a href="/privacy-policy/" style="color:var(--muted)">Privacy Policy</a> &middot; <a href="/terms/" style="color:var(--muted)">Terms &amp; Conditions</a></p>
+    <p>UL 142 &middot; UL 2085 Fireguard&reg; &middot; Flameshield&reg; &middot; Permatank&reg; &middot; ACT-100-U Certified Manufacturer</p>
   </div>
 </footer>
 
-<!-- ══ CART DRAWER ══ -->
+<!-- CART DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart(event)">
   <div class="cart-drawer">
     <div class="cart-drawer-header">
       <h3>Your Cart</h3>
-      <span class="cart-close" onclick="toggleCart()">✕</span>
+      <span class="cart-close" onclick="toggleCart()">&#10005;</span>
     </div>
     <div class="cart-items" id="cartItems">
       <div class="cart-empty" id="cartEmpty">
-        <div class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+        <svg class="cart-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <p>Your cart is empty</p>
       </div>
     </div>
     <div class="cart-footer">
       <div class="cart-subtotal"><span>Subtotal</span><span id="cartTotal">$0.00</span></div>
-      <p class="cart-note">Custom tanks are quoted separately. This cart is for accessories and parts only. Shipping calculated at checkout.</p>
-      <a href="/contact/" class="btn-navy" style="display:block;text-align:center;justify-content:center;width:100%">Proceed to Checkout →</a>
+      <p class="cart-note">Custom tanks are quoted separately. This cart is for accessories and parts only.</p>
+      <a href="/contact/" class="btn-navy" style="display:block;text-align:center;width:100%">Proceed to Checkout &rarr;</a>
     </div>
   </div>
 </div>
@@ -1144,86 +894,65 @@ footer{background:var(--ink);padding:56px 80px 36px}
 <script>
 /* ══ TANK FINDER ══ */
 const finderQuestions = [
-  {
-    q: 'What is your primary use case?',
-    key: 'use',
-    opts: [
-      { label:'Fleet Fueling', sub:'Truck stops, fleet yards' },
-      { label:'Construction Site', sub:'Temporary or permanent jobsite fuel' },
-      { label:'Farm / Ranch', sub:'Agricultural fuel and chemical storage' },
-      { label:'Commercial Facility', sub:'Retail, office, or mixed-use sites' },
-      { label:'Industrial / Bulk', sub:'Large-scale manufacturing or processing' },
-      { label:'Emergency Generator', sub:'Hospital, data center, backup power' }
-    ]
-  },
-  {
-    q: 'Where will the tank be installed?',
-    key: 'location',
-    opts: [
-      { label:'Aboveground', sub:'Above the ground surface, outdoors or indoors' },
-      { label:'Underground', sub:'Buried below grade — requires UST certification' },
-      { label:'Inside Building', sub:'In a protected enclosure or vault' },
-      { label:"I'm Not Sure", sub:'We can help you determine the right placement' }
-    ]
-  },
-  {
-    q: 'Is the installation in a high fire-risk or sensitive area?',
-    key: 'fire',
-    opts: [
-      { label:'Yes — Fire Risk Area', sub:'Requires 2-hour fire-rated tank' },
-      { label:'Yes — Near Water / Sensitive', sub:'Waterway, wellhead, or environmentally sensitive site' },
-      { label:'No — Standard Location', sub:'No special fire or environmental requirements' },
-      { label:"I'm Not Sure", sub:'Our team will help assess your site' }
-    ]
-  },
-  {
-    q: 'What capacity are you looking for?',
-    key: 'size',
-    opts: [
-      { label:'Small — 500–2,000 gal', sub:'Farm, generator, or small fleet' },
-      { label:'Medium — 2,000–10,000 gal', sub:'Fleet fueling, construction, retail' },
-      { label:'Large — 10,000–20,000 gal', sub:'Industrial, bulk petroleum' },
-      { label:'Custom / Not Sure', sub:'We build to any spec — let us know your requirements' }
-    ]
-  },
-  {
-    q: 'Do you need secondary containment or leak monitoring?',
-    key: 'containment',
-    opts: [
-      { label:'Yes — Required by Code', sub:'Local code or EPA mandates secondary containment' },
-      { label:'Yes — Preferred', sub:'Not required but desired for spill protection' },
-      { label:'No', sub:'Single-wall with separate berm or pan is acceptable' },
-      { label:'Not Sure', sub:"We'll help you determine what's required for your site" }
-    ]
-  }
+  { q:'What is your primary use case?', key:'use', opts:[
+    {label:'Fleet Fueling',sub:'Truck stops, fleet yards'},
+    {label:'Construction Site',sub:'Temporary or permanent jobsite fuel'},
+    {label:'Farm / Ranch',sub:'Agricultural fuel and chemical storage'},
+    {label:'Commercial Facility',sub:'Retail, office, or mixed-use sites'},
+    {label:'Industrial / Bulk',sub:'Large-scale manufacturing or processing'},
+    {label:'Emergency Generator',sub:'Hospital, data center, backup power'}
+  ]},
+  { q:'Where will the tank be installed?', key:'location', opts:[
+    {label:'Aboveground',sub:'Above the ground surface, outdoors or indoors'},
+    {label:'Underground',sub:'Buried below grade — requires UST certification'},
+    {label:'Inside Building',sub:'In a protected enclosure or vault'},
+    {label:"I'm Not Sure",sub:'We can help you determine the right placement'}
+  ]},
+  { q:'Is the installation in a high fire-risk or sensitive area?', key:'fire', opts:[
+    {label:'Yes — Fire Risk Area',sub:'Requires 2-hour fire-rated tank'},
+    {label:'Yes — Near Water / Sensitive',sub:'Waterway, wellhead, or environmentally sensitive site'},
+    {label:'No — Standard Location',sub:'No special fire or environmental requirements'},
+    {label:"I'm Not Sure",sub:'Our team will help assess your site'}
+  ]},
+  { q:'What capacity are you looking for?', key:'size', opts:[
+    {label:'Small — 500–2,000 gal',sub:'Farm, generator, or small fleet'},
+    {label:'Medium — 2,000–10,000 gal',sub:'Fleet fueling, construction, retail'},
+    {label:'Large — 10,000–20,000 gal',sub:'Industrial, bulk petroleum'},
+    {label:'Custom / Not Sure',sub:'We build to any spec — let us know your requirements'}
+  ]},
+  { q:'Do you need secondary containment or leak monitoring?', key:'containment', opts:[
+    {label:'Yes — Required by Code',sub:'Local code or EPA mandates secondary containment'},
+    {label:'Yes — Preferred',sub:'Not required but desired for spill protection'},
+    {label:'No',sub:'Single-wall with separate berm or pan is acceptable'},
+    {label:'Not Sure',sub:"We'll help you determine what's required for your site"}
+  ]}
 ];
 
-let finderAnswers = {};
-let currentQ = 0;
-let preloadUse = null;
+let finderAnswers = {}, currentQ = 0;
 
 function launchFinder() {
-  currentQ = 0;
-  finderAnswers = {};
+  currentQ = 0; finderAnswers = {};
   renderFinderQ();
   document.getElementById('finderModal').classList.add('open');
-  document.getElementById('finderModal').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('finderModal').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function launchFinderWith(use) {
-  const map = { fleet:'Fleet Fueling', construction:'Construction Site', farm:'Farm / Ranch', fire:'Commercial Facility', commercial:'Commercial Facility', industrial:'Industrial / Bulk' };
+  const map = {fleet:'Fleet Fueling',construction:'Construction Site',farm:'Farm / Ranch',fire:'Commercial Facility',commercial:'Commercial Facility',industrial:'Industrial / Bulk'};
   finderAnswers = {};
   if (map[use]) { finderAnswers['use'] = map[use]; currentQ = 1; }
   else currentQ = 0;
   renderFinderQ();
   document.getElementById('finderModal').classList.add('open');
-  document.getElementById('finderModal').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('finderModal').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function renderFinderQ() {
   const wrap = document.getElementById('finderQWrap');
   document.getElementById('finderResult').innerHTML = '';
   document.getElementById('finderResult').className = 'finder-result-wrap';
   const q = finderQuestions[currentQ];
-  const pct = Math.round(((currentQ) / finderQuestions.length) * 100);
+  const pct = Math.round((currentQ / finderQuestions.length) * 100);
   wrap.innerHTML = `
     <div class="fade-in">
       <div class="finder-progress-row">
@@ -1234,116 +963,65 @@ function renderFinderQ() {
       <div class="finder-q-eyebrow">Your Recommendation</div>
       <div class="finder-q-title">${q.q}</div>
       <div class="finder-options-grid">
-        ${q.opts.map(o => `
+        ${q.opts.map(o=>`
           <div class="finder-opt${finderAnswers[q.key]===o.label?' selected':''}" onclick="selectFinderOpt(this,'${q.key}','${o.label.replace(/'/g,"\\'")}')">
             <div class="finder-opt-label">${o.label}</div>
             <div class="finder-opt-sub">${o.sub}</div>
-          </div>
-        `).join('')}
+          </div>`).join('')}
       </div>
       <div class="finder-nav-row">
-        ${currentQ > 0 ? `<button class="btn-outline" onclick="prevFinderQ()">&larr; Back to Previous Question</button>` : ''}
-        <button class="btn-navy" id="finderNextBtn" onclick="nextFinderQ()" ${finderAnswers[q.key]?'':'disabled style="opacity:.4;cursor:not-allowed"'}>${currentQ < finderQuestions.length-1 ? 'Next Question \u2192' : 'See My Recommendation \u2192'}</button>
+        ${currentQ>0?`<button class="btn-outline" onclick="prevFinderQ()">&larr; Back</button>`:''}
+        <button class="btn-navy" id="finderNextBtn" onclick="nextFinderQ()" ${finderAnswers[q.key]?'':'disabled style="opacity:.4;cursor:not-allowed"'}>${currentQ<finderQuestions.length-1?'Next Question &rarr;':'See My Recommendation &rarr;'}</button>
       </div>
-    </div>
-  `;
+    </div>`;
 }
+
 function selectFinderOpt(el, key, val) {
   el.closest('.finder-options-grid').querySelectorAll('.finder-opt').forEach(o=>o.classList.remove('selected'));
   el.classList.add('selected');
   finderAnswers[key] = val;
   const btn = document.getElementById('finderNextBtn');
-  if (btn) { btn.disabled = false; btn.style.opacity='1'; btn.style.cursor='pointer'; }
+  if (btn) { btn.disabled=false; btn.style.opacity='1'; btn.style.cursor='pointer'; }
 }
 function nextFinderQ() {
-  const q = finderQuestions[currentQ];
-  if (!finderAnswers[q.key]) return;
-  if (currentQ < finderQuestions.length - 1) { currentQ++; renderFinderQ(); }
+  if (!finderAnswers[finderQuestions[currentQ].key]) return;
+  if (currentQ < finderQuestions.length-1) { currentQ++; renderFinderQ(); }
   else showFinderResult();
 }
-function prevFinderQ() { if (currentQ > 0) { currentQ--; renderFinderQ(); } }
+function prevFinderQ() { if (currentQ>0) { currentQ--; renderFinderQ(); } }
 function resetFinder() {
-  finderAnswers = {}; currentQ = 0;
-  document.getElementById('finderResult').innerHTML = '';
-  document.getElementById('finderResult').className = 'finder-result-wrap';
+  finderAnswers={}; currentQ=0;
+  document.getElementById('finderResult').innerHTML='';
+  document.getElementById('finderResult').className='finder-result-wrap';
   renderFinderQ();
 }
 
 function showFinderResult() {
   const a = finderAnswers;
   let recs = [];
-
-  const underground = a.location === 'Underground';
+  const underground = a.location==='Underground';
   const fire = a.fire && a.fire.startsWith('Yes — Fire Risk');
-  const farm = a.use === 'Farm / Ranch';
-  const containment = a.containment && (a.containment.includes('Required') || a.containment.includes('Preferred'));
+  const farm = a.use==='Farm / Ranch';
+  const containment = a.containment && (a.containment.includes('Required')||a.containment.includes('Preferred'));
 
   if (underground) {
-    recs.push({
-      name:'Permatank&reg;', tag:'STI-P3 Fiberglass UST',
-      desc:'Corrosion-resistant fiberglass underground storage tank. Fully compatible with ethanol and biodiesel blends. The standard choice for most underground fuel storage applications.',
-      why:['Underground installation requires corrosion protection','STI-P3 certified for your application','Compatible with all common fuel blends including E100/B100','Meets EPA underground storage tank requirements'],
-      url:'/products/permatank/'
-    });
-    recs.push({
-      name:'ACT-100-U', tag:'STI Listed Steel UST',
-      desc:'Cathodically-protected steel underground storage tank with factory-applied exterior coating and interior lining. A strong alternative where fiberglass is not preferred.',
-      why:['STI-listed for underground installation','Factory-applied cathodic protection','Interior lining prevents product contamination'],
-      url:'/products/act-100-u/'
-    });
+    recs.push({name:'Permatank&reg;',tag:'STI-P3 Fiberglass UST',desc:'Corrosion-resistant fiberglass underground storage tank. Compatible with ethanol and biodiesel blends. The standard choice for most underground fuel storage applications.',why:['Underground installation requires corrosion protection','STI-P3 certified for your application','Compatible with all common fuel blends including E100/B100','Meets EPA underground storage tank requirements'],url:'/products/permatank/'});
+    recs.push({name:'ACT-100-U',tag:'STI Listed Steel UST',desc:'Cathodically-protected steel underground storage tank with factory-applied exterior coating and interior lining.',why:['STI-listed for underground installation','Factory-applied cathodic protection','Interior lining prevents product contamination'],url:'/products/act-100-u/'});
   } else if (fire) {
-    recs.push({
-      name:'UL 2085 Fireguard&reg;', tag:'2-Hour Fire-Rated &middot; UL Listed',
-      desc:'Two-hour fire-rated aboveground tank. Required where local codes mandate fire protection for aboveground fuel storage. Meets EPA secondary containment requirements.',
-      why:['2-hour UL fire rating satisfies code requirements for fire-risk locations','Integrated secondary containment meets EPA 40 CFR 112','UL listing accepted by virtually all AHJs nationwide'],
-      url:'/products/fireguard/'
-    });
-    recs.push({
-      name:'Flameshield&reg;', tag:'2-Hour Fire-Protected &middot; STI Listed',
-      desc:'STI-listed fire-protected aboveground tank system. Provides the same two-hour fire rating as Fireguard via intumescent material. Check with your AHJ for acceptance.',
-      why:['STI listing provides equivalent fire protection to UL 2085','Secondary containment built in','Accepted by most fire marshals and building departments'],
-      url:'/products/flameshield/'
-    });
+    recs.push({name:'UL 2085 Fireguard&reg;',tag:'2-Hour Fire-Rated &middot; UL Listed',desc:'Two-hour fire-rated aboveground tank. Required where local codes mandate fire protection for aboveground fuel storage.',why:['2-hour UL fire rating satisfies code requirements','Integrated secondary containment meets EPA 40 CFR 112','UL listing accepted by virtually all AHJs nationwide'],url:'/products/fireguard/'});
+    recs.push({name:'Flameshield&reg;',tag:'2-Hour Fire-Protected &middot; STI Listed',desc:'STI-listed fire-protected aboveground tank system. Provides the same two-hour fire rating via intumescent material.',why:['STI listing provides equivalent fire protection to UL 2085','Secondary containment built in','Accepted by most fire marshals and building departments'],url:'/products/flameshield/'});
   } else if (farm) {
-    recs.push({
-      name:'Farm Tank', tag:'Agricultural &middot; UL 142',
-      desc:'Purpose-built aboveground fuel storage for agricultural operations. Available skid-mounted, portable, or stationary in a range of capacities.',
-      why:['Built specifically for farm and ranch fuel storage applications','Available with integrated pump packages for easy dispensing','Custom sizes and configurations available'],
-      url:'/products/farm-tanks/'
-    });
-    if (containment) {
-      recs.push({
-        name:'Containment Pans', tag:'Secondary Containment',
-        desc:'Custom steel secondary containment pans sized to fit any tank footprint. Meets EPA 40 CFR 112 spill prevention requirements.',
-        why:['Custom-fit to your tank footprint','Meets EPA spill prevention code requirements','Available for single and multiple tank installations'],
-        url:'/products/containment-pans/'
-      });
-    }
-  } else if (containment || (a.location === 'Inside Building')) {
-    recs.push({
-      name:'UL 142 Double Wall', tag:'Aboveground &middot; UL 142',
-      desc:'Secondary containment built into the tank itself. The most popular configuration for fleet fueling, construction, and petroleum storage where secondary containment is required or preferred.',
-      why:['Integrated secondary containment — no separate pan required','Satisfies EPA secondary containment requirements in most applications','Available in a wide range of sizes and configurations'],
-      url:'/products/ul-142/'
-    });
+    recs.push({name:'Farm Tank',tag:'Agricultural &middot; UL 142',desc:'Purpose-built aboveground fuel storage for agricultural operations. Available skid-mounted, portable, or stationary.',why:['Built specifically for farm and ranch fuel storage','Available with integrated pump packages','Custom sizes and configurations available'],url:'/products/farm-tanks/'});
+  } else if (containment) {
+    recs.push({name:'UL 142 Double Wall',tag:'Aboveground &middot; UL 142',desc:'Secondary containment built into the tank itself. The most popular configuration where secondary containment is required.',why:['Integrated secondary containment — no separate pan required','Satisfies EPA secondary containment requirements','Available in a wide range of sizes and configurations'],url:'/products/ul-142/'});
   } else {
-    recs.push({
-      name:'UL 142 Single Wall', tag:'Aboveground &middot; UL 142',
-      desc:'Standard aboveground steel tank for flammable and combustible liquids. The most common and cost-effective configuration for fleet, construction, and petroleum storage.',
-      why:['NFPA 30 and IFC compliant for standard aboveground fuel storage','Single-wall construction offers the most cost-effective solution','Custom sizes, compartments, and pump packages available'],
-      url:'/products/ul-142/'
-    });
-    recs.push({
-      name:'UL 142 Double Wall', tag:'Aboveground &middot; UL 142',
-      desc:'Double-wall version with integrated secondary containment. Ideal where a containment pan is preferred or required by site conditions.',
-      why:['Integrated secondary containment for additional spill protection','Same UL 142 certification as single-wall','No need for a separate containment pan or berm'],
-      url:'/products/ul-142/'
-    });
+    recs.push({name:'UL 142 Single Wall',tag:'Aboveground &middot; UL 142',desc:'Standard aboveground steel tank for flammable and combustible liquids. The most common and cost-effective configuration.',why:['NFPA 30 and IFC compliant for standard aboveground fuel storage','Single-wall construction offers the most cost-effective solution','Custom sizes, compartments, and pump packages available'],url:'/products/ul-142/'});
+    recs.push({name:'UL 142 Double Wall',tag:'Aboveground &middot; UL 142',desc:'Double-wall version with integrated secondary containment. Ideal where a containment pan is preferred.',why:['Integrated secondary containment for additional spill protection','Same UL 142 certification as single-wall','No need for a separate containment pan or berm'],url:'/products/ul-142/'});
   }
 
-  document.getElementById('finderQWrap').innerHTML = '';
+  document.getElementById('finderQWrap').innerHTML='';
   const resEl = document.getElementById('finderResult');
-  resEl.innerHTML = `
+  resEl.innerHTML=`
     <div class="fade-in">
       <div class="finder-progress-row">
         <span class="finder-progress-label">Question 5 of 5</span>
@@ -1352,139 +1030,80 @@ function showFinderResult() {
       <div class="finder-progress-bar"><div class="finder-progress-fill" style="width:100%"></div></div>
       <div class="finder-result-eyebrow">Your Recommendation</div>
       <div class="finder-result-title">We Recommend:</div>
-      ${recs.map((r,i) => `
+      ${recs.map((r,i)=>`
         <div class="result-card-main" style="${i===1?'border-top-color:var(--steel);opacity:.85':''}">
           <span class="result-tag">${r.tag}</span>
           <h3>${r.name}</h3>
           <div class="result-desc">${r.desc}</div>
           <div class="result-why">
             <div class="result-why-title">Why This Tank?</div>
-            <ul class="result-why-list">
-              ${r.why.map(w=>`<li>${w}</li>`).join('')}
-            </ul>
+            <ul class="result-why-list">${r.why.map(w=>`<li>${w}</li>`).join('')}</ul>
           </div>
           <div class="result-actions">
             <a href="${r.url}" class="btn-primary" style="font-size:12px;padding:11px 22px">View Tank Specs &rarr;</a>
-            <a href="#configurator" onclick="document.getElementById('finderModal').classList.remove('open')" class="btn-outline" style="font-size:12px;padding:11px 22px">Configure &amp; Price</a>
-            <a href="/contact/" class="btn-outline" style="font-size:12px;padding:11px 22px">Get a Quote</a>
+            <a href="/contact/?tank=${encodeURIComponent(r.name)}" class="btn-outline" style="font-size:12px;padding:11px 22px">Get a Quote</a>
           </div>
-        </div>
-      `).join('')}
+        </div>`).join('')}
       <div class="finder-restart-footer">
         <span>Want to compare options or start over?</span>
         <button class="finder-restart-btn" onclick="resetFinder()">&#8635; Restart</button>
       </div>
-    </div>
-  `;
+    </div>`;
   resEl.classList.add('show');
-}
-
-/* ══ CONFIGURATOR ══ */
-const configState = { type:null, shape:null, capacity:500, pump:null, color:null, accessories:[] };
-function toggleConfig(header) {
-  const body = header.nextElementSibling;
-  const isOpen = header.classList.contains('open');
-  document.querySelectorAll('.config-step-header').forEach(h=>h.classList.remove('open'));
-  document.querySelectorAll('.config-step-body').forEach(b=>b.classList.remove('open'));
-  if (!isOpen) { header.classList.add('open'); body.classList.add('open'); }
-}
-function setConfig(key, val, displayId, el) {
-  configState[key] = val;
-  const dispEl = document.getElementById(displayId);
-  dispEl.textContent = val;
-  dispEl.classList.remove('spec-placeholder');
-  const specEl = document.getElementById('spec-'+key);
-  if (specEl) { specEl.textContent = val; specEl.classList.remove('spec-placeholder'); }
-  el.closest('.config-options').querySelectorAll('.config-opt').forEach(o=>o.classList.remove('selected'));
-  el.classList.add('selected');
-  updatePrice();
-}
-function updateCapacity(val) {
-  const gal = parseInt(val);
-  document.getElementById('capacity-display').textContent = gal.toLocaleString() + ' gallons';
-  const cvEl = document.getElementById('cv-capacity');
-  cvEl.textContent = gal.toLocaleString() + ' gal';
-  cvEl.classList.remove('spec-placeholder');
-  const specEl = document.getElementById('spec-capacity');
-  specEl.textContent = gal.toLocaleString() + ' gallons';
-  specEl.classList.remove('spec-placeholder');
-  configState.capacity = gal; updatePrice();
-}
-function toggleAccessory(el, name) {
-  el.classList.toggle('selected');
-  if (el.classList.contains('selected')) configState.accessories.push(name);
-  else configState.accessories = configState.accessories.filter(a=>a!==name);
-  const d = configState.accessories.length ? configState.accessories.join(', ') : 'None';
-  document.getElementById('cv-accessories').textContent = d;
-  document.getElementById('spec-accessories').textContent = d;
-  updatePrice();
-}
-function updatePrice() {
-  const { type, capacity, pump, accessories } = configState;
-  const el = document.getElementById('spec-price');
-  if (!type) {
-    el.textContent = 'Select options to estimate';
-    el.style.cssText = 'color:var(--steel);font-size:16px;font-style:italic;font-weight:500';
-    return;
-  }
-  const perGal = {'UL 142 Single Wall':0.65,'UL 142 Double Wall':0.85,'UL 2085 Fireguard®':1.4,'Flameshield®':1.3,'Permatank® UST':1.6,'ACT-100-U UST':1.5,'Farm Tank':0.75};
-  let base = Math.max((perGal[type]||1.0)*capacity, 2200);
-  const pumpAdder = {'None':0,'15 GPM 12V DC':380,'20 GPM Electric':520,'30 GPM Electric':750,'50 GPM Electric':1100,'100 GPM Electric':1850,'Gas-Powered':680};
-  base += (pumpAdder[pump]||0) + accessories.length*220;
-  const lo = Math.round(base*.9/100)*100, hi = Math.round(base*1.15/100)*100;
-  el.textContent = '$'+lo.toLocaleString()+' – $'+hi.toLocaleString();
-  el.style.cssText = 'color:var(--navy);font-size:28px;font-style:normal;font-weight:800';
 }
 
 /* ══ SHOP ══ */
 let cart = [];
 const shopProducts = [
-  { id:0,  name:'Fill-Rite FR1210G 12V Fuel Transfer Pump', category:'pumps', price:249, badge:'popular', desc:'Fill-Rite 12V DC pump, 15 GPM. Includes suction pipe, discharge hose, and manual nozzle. Ideal for farm and fleet applications.', icon:'pumps' },
-  { id:1,  name:'15 GPM 12V DC Pump Kit', category:'pumps', price:380, badge:'', desc:'Complete 12V pump and hose kit. Includes pump, digital meter, automatic nozzle, and 18ft hose.', icon:'pumps' },
-  { id:2,  name:'20 GPM Electric Pump Package', category:'pumps', price:520, badge:'', desc:'115V AC electric pump with digital meter, filter, and auto shutoff nozzle. Ready to mount.', icon:'pumps' },
-  { id:3,  name:'30 GPM Electric Pump Package', category:'pumps', price:750, badge:'', desc:'Heavy-duty 30 GPM electric pump for fleet fueling. Includes digital meter and auto nozzle.', icon:'pumps' },
-  { id:4,  name:'50 GPM High-Flow Pump Package', category:'pumps', price:1100, badge:'new', desc:'High-volume 50 GPM pump for commercial fueling. 115/230V AC, stainless internals, digital meter.', icon:'pumps' },
-  { id:5,  name:'Digital Liquid Level Gauge', category:'gauges', price:185, badge:'new', desc:'Electronic liquid level sensor with remote display. Compatible with all Hughes Tank aboveground models.', icon:'gauge' },
-  { id:6,  name:'Mechanical Float Gauge', category:'gauges', price:65, badge:'', desc:'Durable mechanical float gauge. Standard 2" fitting. Easy ground-level reading.', icon:'gauge' },
-  { id:7,  name:'Sight Glass Level Gauge', category:'gauges', price:95, badge:'', desc:'Heavy-duty sight glass gauge with protective cover. 1.5" NPT fittings, compatible with diesel and gasoline.', icon:'gauge' },
-  { id:8,  name:'Overfill Prevention Valve', category:'safety', price:145, badge:'', desc:'EPA-compliant overfill prevention valve. Required on most UST installations.', icon:'safety' },
-  { id:9,  name:'Grounding & Bonding Kit', category:'safety', price:48, badge:'', desc:'Complete grounding cable and clamp kit for bonding during fuel transfer operations.', icon:'safety' },
-  { id:10, name:'Spill Containment Bucket — 5 Gal', category:'safety', price:72, badge:'', desc:'UL-listed 5-gallon spill bucket for fill ports. Fits standard 4" fill adapters. Steel construction.', icon:'safety' },
-  { id:11, name:'Emergency Pressure/Vacuum Vent', category:'fittings', price:95, badge:'popular', desc:'2" emergency vent for aboveground tanks. Meets NFPA 30 requirements. Stainless steel.', icon:'fitting' },
-  { id:12, name:'2" Fill Cap & Adapter', category:'fittings', price:38, badge:'', desc:'Dust-tight locking fill cap. Standard 2" NPT thread. Compatible with all Hughes Tank products.', icon:'fitting' },
-  { id:13, name:'Fuel Sample Port Kit', category:'fittings', price:72, badge:'new', desc:'In-line sample port for fuel quality testing. Allows sampling without removing filler cap.', icon:'fitting' },
-  { id:14, name:'3" Emergency Vent — Spring-Loaded', category:'fittings', price:115, badge:'', desc:'Spring-loaded 3" emergency pressure/vacuum vent. Stainless steel, rated for diesel, gasoline, ethanol blends.', icon:'fitting' },
-  { id:15, name:'Containment Pan — 500 gal', category:'containment', price:420, badge:'', desc:'Custom steel containment pan for 500-gal tanks. Meets EPA 40 CFR 112. Powder-coated finish.', icon:'pan' },
-  { id:16, name:'Containment Pan — 1,000 gal', category:'containment', price:580, badge:'', desc:'Custom steel containment pan for 1,000-gal tanks. Fits Hughes Tank standard saddle dimensions.', icon:'pan' },
-  { id:17, name:'Containment Pan — 2,000 gal', category:'containment', price:780, badge:'popular', desc:'Heavy-duty steel containment pan for 2,000-gal tanks. Drain plug included. EPA-compliant.', icon:'pan' },
+  {id:0,name:'Fill-Rite FR1210G 12V Fuel Transfer Pump',category:'pumps',price:249,badge:'popular',desc:'Fill-Rite 12V DC pump, 15 GPM. Includes suction pipe, discharge hose, and manual nozzle.',icon:'pumps'},
+  {id:1,name:'15 GPM 12V DC Pump Kit',category:'pumps',price:380,badge:'',desc:'Complete 12V pump and hose kit. Includes pump, digital meter, automatic nozzle, and 18ft hose.',icon:'pumps'},
+  {id:2,name:'20 GPM Electric Pump Package',category:'pumps',price:520,badge:'',desc:'115V AC electric pump with digital meter, filter, and auto shutoff nozzle. Ready to mount.',icon:'pumps'},
+  {id:3,name:'30 GPM Electric Pump Package',category:'pumps',price:750,badge:'',desc:'Heavy-duty 30 GPM electric pump for fleet fueling. Includes digital meter and auto nozzle.',icon:'pumps'},
+  {id:4,name:'50 GPM High-Flow Pump Package',category:'pumps',price:1100,badge:'new',desc:'High-volume 50 GPM pump for commercial fueling. 115/230V AC, stainless internals, digital meter.',icon:'pumps'},
+  {id:5,name:'Digital Liquid Level Gauge',category:'gauges',price:185,badge:'new',desc:'Electronic liquid level sensor with remote display. Compatible with all Hughes Tank aboveground models.',icon:'gauge'},
+  {id:6,name:'Mechanical Float Gauge',category:'gauges',price:65,badge:'',desc:'Durable mechanical float gauge. Standard 2" fitting. Easy ground-level reading.',icon:'gauge'},
+  {id:7,name:'Sight Glass Level Gauge',category:'gauges',price:95,badge:'',desc:'Heavy-duty sight glass gauge with protective cover. 1.5" NPT fittings.',icon:'gauge'},
+  {id:8,name:'Overfill Prevention Valve',category:'safety',price:145,badge:'',desc:'EPA-compliant overfill prevention valve. Required on most UST installations.',icon:'safety'},
+  {id:9,name:'Grounding & Bonding Kit',category:'safety',price:48,badge:'',desc:'Complete grounding cable and clamp kit for bonding during fuel transfer operations.',icon:'safety'},
+  {id:10,name:'Spill Containment Bucket — 5 Gal',category:'safety',price:72,badge:'',desc:'UL-listed 5-gallon spill bucket for fill ports. Fits standard 4" fill adapters. Steel construction.',icon:'safety'},
+  {id:11,name:'Emergency Pressure/Vacuum Vent 2"',category:'fittings',price:95,badge:'popular',desc:'2" emergency vent for aboveground tanks. Meets NFPA 30 requirements. Stainless steel.',icon:'fitting'},
+  {id:12,name:'2" Fill Cap & Adapter',category:'fittings',price:38,badge:'',desc:'Dust-tight locking fill cap. Standard 2" NPT thread. Compatible with all Hughes Tank products.',icon:'fitting'},
+  {id:13,name:'Fuel Sample Port Kit',category:'fittings',price:72,badge:'new',desc:'In-line sample port for fuel quality testing. Allows sampling without removing filler cap.',icon:'fitting'},
+  {id:14,name:'3" Emergency Vent — Spring-Loaded',category:'fittings',price:115,badge:'',desc:'Spring-loaded 3" emergency pressure/vacuum vent. Stainless steel, rated for diesel and gasoline.',icon:'fitting'},
+  {id:15,name:'Containment Pan — 500 gal',category:'containment',price:420,badge:'',desc:'Custom steel containment pan for 500-gal tanks. Meets EPA 40 CFR 112. Powder-coated finish.',icon:'pan'},
+  {id:16,name:'Containment Pan — 1,000 gal',category:'containment',price:580,badge:'',desc:'Custom steel containment pan for 1,000-gal tanks. Fits Hughes Tank standard saddle dimensions.',icon:'pan'},
+  {id:17,name:'Containment Pan — 2,000 gal',category:'containment',price:780,badge:'popular',desc:'Heavy-duty steel containment pan for 2,000-gal tanks. Drain plug included. EPA-compliant.',icon:'pan'},
 ];
 
 const shopIcons = {
-  pumps: `<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
-  gauge: `<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><circle cx="12" cy="7" r="3"/><path d="M4.93 19.07A10 10 0 1 1 19.07 19.07"/></svg>`,
-  safety: `<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-  fitting: `<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
-  pan: `<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
+  pumps:`<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  gauge:`<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><circle cx="12" cy="7" r="3"/><path d="M4.93 19.07A10 10 0 1 1 19.07 19.07"/></svg>`,
+  safety:`<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  fitting:`<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
+  pan:`<svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
 };
 
+let activeFilter = 'all';
+
 function scrollShop(dir) {
-  var el = document.getElementById('shopCarousel');
+  const el = document.getElementById('shopCarousel');
   if (el) el.scrollLeft += dir * 580;
 }
-let activeFilter = 'all';
+
 function filterShop(cat, btn) {
   activeFilter = cat;
   document.querySelectorAll('.shop-filter').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderShop();
 }
+
 function renderShop() {
   const filtered = activeFilter==='all' ? shopProducts : shopProducts.filter(p=>p.category===activeFilter);
-  const catLabels = { pumps:'Pump Packages', gauges:'Gauges', containment:'Containment', fittings:'Fittings', safety:'Safety' };
+  const catLabels = {pumps:'Pump Packages',gauges:'Gauges',containment:'Containment',fittings:'Fittings',safety:'Safety'};
   document.getElementById('shopGrid').innerHTML = filtered.map(p=>`
     <div class="shop-card">
       <div class="shop-card-img">
-        ${p.badge ? `<span class="shop-badge badge-${p.badge}">${p.badge}</span>` : ''}
+        ${p.badge?`<span class="shop-badge badge-${p.badge}">${p.badge}</span>`:''}
         <div class="shop-card-img-icon">${shopIcons[p.icon]||shopIcons.fitting}</div>
       </div>
       <div class="shop-card-body">
@@ -1494,10 +1113,9 @@ function renderShop() {
       </div>
       <div class="shop-card-footer">
         <div class="shop-price">$${p.price.toLocaleString()} <span>/ ea</span></div>
-        <button class="add-to-cart" id="atc-${p.id}" onclick="handleAddToCart(${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price},'${p.icon}',this)">+ Add to Cart</button>
+        <button class="add-to-cart" onclick="handleAddToCart(${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price},'${p.icon}',this)">+ Add to Cart</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function handleAddToCart(id, name, price, icon, btn) {
@@ -1509,13 +1127,12 @@ function handleAddToCart(id, name, price, icon, btn) {
 }
 function addToCart(name, price, icon) {
   const ex = cart.find(i=>i.name===name);
-  if (ex) ex.qty++;
-  else cart.push({ name, price, icon, qty:1 });
+  if (ex) ex.qty++; else cart.push({name,price,icon,qty:1});
   renderCart();
-  showToast('"'+name.substring(0,28)+(name.length>28?'…':'') + '" added to cart');
+  showToast('"'+name.substring(0,28)+(name.length>28?'…':'')+'" added to cart');
   const total = cart.reduce((s,i)=>s+i.qty,0);
   const badge = document.getElementById('cartBadge');
-  badge.style.display = total>0 ? 'flex' : 'none';
+  badge.style.display = total>0?'flex':'none';
   badge.textContent = total;
 }
 function removeFromCart(name) {
@@ -1523,7 +1140,7 @@ function removeFromCart(name) {
   renderCart();
   const total = cart.reduce((s,i)=>s+i.qty,0);
   const badge = document.getElementById('cartBadge');
-  badge.style.display = total>0 ? 'flex' : 'none';
+  badge.style.display = total>0?'flex':'none';
   badge.textContent = total;
 }
 function renderCart() {
@@ -1539,127 +1156,123 @@ function renderCart() {
         <span class="cart-item-price">$${(i.price*i.qty).toLocaleString()}</span>
         <span class="cart-item-remove" onclick="removeFromCart('${i.name.replace(/'/g,"\\'")}')">&#10005;</span>
       </div>
-    </div>
-  `).join('');
-  document.getElementById('cartTotal').textContent = '$'+cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString();
+    </div>`).join('');
+  document.getElementById('cartTotal').textContent='$'+cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString();
 }
-
 let cartOpen = false;
 function toggleCart() { cartOpen=!cartOpen; document.getElementById('cartOverlay').classList.toggle('open',cartOpen); }
 function closeCart(e) { if(e.target===document.getElementById('cartOverlay')) toggleCart(); }
 function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
 
-/* ══ TANK CHART GENERATOR ══ */
-let chartType = 'horizontal';
-function setChartType(type, btn) {
-  chartType = type;
+/* ══ TANK CHART ══ */
+let chartType='horizontal';
+function setChartType(type,btn) {
+  chartType=type;
   document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  const d1=document.getElementById('dim1-label'), d2=document.getElementById('dim2-label');
+  const d1=document.getElementById('dim1-label'),d2=document.getElementById('dim2-label');
   if(type==='rectangular'){d1.textContent='Width (in)';d2.textContent='Length (in)';}
   else if(type==='vertical'){d1.textContent='Diameter (in)';d2.textContent='Height (in)';}
   else{d1.textContent='Diameter (in)';d2.textContent='Length (in)';}
   document.getElementById('chartResults').style.display='none';
 }
 function generateChart() {
-  const d1 = parseFloat(document.getElementById('dim1').value);
-  const d2 = parseFloat(document.getElementById('dim2').value);
-  const inc = parseFloat(document.getElementById('increment').value);
-  if (!d1 || !d2 || d1 <= 0 || d2 <= 0 || isNaN(d1) || isNaN(d2)) {
-    alert('Please enter valid dimensions. Example: Diameter = 72, Length = 120');
-    return;
-  }
-  const rows = [];
-  const gpi = 1 / 231;
-  const maxH = chartType === 'vertical' ? d2 : d1;
-  for (let h = 0; h <= maxH + 0.001; h += inc) {
-    const hc = Math.min(h, maxH);
-    let vol = 0, totalVol = 0;
-    if (chartType === 'horizontal') {
-      const r = d1 / 2, L = d2;
-      const ratio = Math.max(-1, Math.min(1, (r - hc) / r));
-      const theta = Math.acos(ratio);
-      const a = r * r * theta - (r - hc) * Math.sqrt(Math.max(0, 2 * r * hc - hc * hc));
-      vol = a * L * gpi;
-      totalVol = Math.PI * r * r * L * gpi;
-    } else if (chartType === 'vertical') {
-      const r = d1 / 2;
-      vol = Math.PI * r * r * hc * gpi;
-      totalVol = Math.PI * r * r * d2 * gpi;
+  const d1=parseFloat(document.getElementById('dim1').value);
+  const d2=parseFloat(document.getElementById('dim2').value);
+  const inc=parseFloat(document.getElementById('increment').value);
+  if(!d1||!d2||d1<=0||d2<=0){alert('Please enter valid dimensions. Example: Diameter = 72, Length = 120');return;}
+  const rows=[];
+  const gpi=1/231;
+  const maxH=chartType==='vertical'?d2:d1;
+  for(let h=0;h<=maxH+0.001;h+=inc){
+    const hc=Math.min(h,maxH);
+    let vol=0,totalVol=0;
+    if(chartType==='horizontal'){
+      const r=d1/2,L=d2;
+      const ratio=Math.max(-1,Math.min(1,(r-hc)/r));
+      const theta=Math.acos(ratio);
+      const a=r*r*theta-(r-hc)*Math.sqrt(Math.max(0,2*r*hc-hc*hc));
+      vol=a*L*gpi; totalVol=Math.PI*r*r*L*gpi;
+    } else if(chartType==='vertical'){
+      const r=d1/2;
+      vol=Math.PI*r*r*hc*gpi; totalVol=Math.PI*r*r*d2*gpi;
     } else {
-      vol = d1 * d2 * hc * gpi;
-      totalVol = d1 * d1 * d2 * gpi;
+      vol=d1*d2*hc*gpi; totalVol=d1*d1*d2*gpi;
     }
-    const pct = totalVol > 0 ? Math.min(100, (vol / totalVol * 100)) : 0;
-    rows.push({ d: hc.toFixed(2), g: Math.max(0, vol).toFixed(1), p: pct.toFixed(1) });
-    if (rows.length > 501) break;
+    const pct=totalVol>0?Math.min(100,(vol/totalVol*100)):0;
+    rows.push({d:hc.toFixed(2),g:Math.max(0,vol).toFixed(1),p:pct.toFixed(1)});
+    if(rows.length>501)break;
   }
-  const resultsEl = document.getElementById('chartResults');
-  const titleText = chartType.charAt(0).toUpperCase() + chartType.slice(1) + ' Tank \u00b7 ' + d1 + '" \u00d7 ' + d2 + '"';
-  document.getElementById('chartTitle').textContent = titleText;
-  document.getElementById('chartBody').innerHTML = rows.map(r =>
-    `<tr><td>${r.d}"</td><td>${parseFloat(r.g).toLocaleString()}</td><td>${r.p}%</td></tr>`
-  ).join('');
-  resultsEl.style.display = 'block';
-  resultsEl.style.border = '1px solid var(--border)';
-  resultsEl.style.borderRadius = '4px';
-  resultsEl.style.overflow = 'hidden';
-  resultsEl.style.marginTop = '12px';
-  resultsEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+  const titleText=chartType.charAt(0).toUpperCase()+chartType.slice(1)+' Tank \u00b7 '+d1+'" \u00d7 '+d2+'"';
+  document.getElementById('chartTitle').textContent=titleText;
+  document.getElementById('chartBody').innerHTML=rows.map(r=>`<tr><td>${r.d}"</td><td>${parseFloat(r.g).toLocaleString()}</td><td>${r.p}%</td></tr>`).join('');
+  const res=document.getElementById('chartResults');
+  res.style.display='block';
+}
+function printChart() {
+  const title=document.getElementById('chartTitle').textContent;
+  const rows=document.getElementById('chartBody').innerHTML;
+  const win=window.open('','_blank','width=700,height=900');
+  win.document.write(`<!DOCTYPE html><html><head><title>${title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+  <style>body{font-family:'Barlow',sans-serif;color:#0D1B3E;padding:40px;max-width:600px;margin:0 auto}
+  table{width:100%;border-collapse:collapse;margin-top:16px}
+  th{background:#0D1B3E;color:#8A9BB5;padding:9px 14px;text-align:left;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase}
+  td{padding:7px 14px;border-bottom:1px solid #DDE2EE;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:#0D1B3E}
+  tr:nth-child(even) td{background:#F2F4F8}
+  h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;color:#0D1B3E;margin-bottom:4px}
+  p{font-size:12px;color:#8A9BB5;margin-bottom:20px}
+  @media print{@page{size:letter;margin:.6in .75in}}</style></head><body>
+  <h2>Hughes Tank Company</h2><p>Tank Strapping Chart &bull; ${title}</p>
+  <table><thead><tr><th>Depth (in)</th><th>Gallons</th><th>% Full</th></tr></thead><tbody>${rows}</tbody></table>
+  <script>setTimeout(function(){window.print()},400)<\/script></body></html>`);
+  win.document.close();
 }
 
 /* ══ FAQ ══ */
 function toggleFaq(el) {
-  const a = el.nextElementSibling;
-  const isOpen = el.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.faq-q').forEach(function(q) {
-    q.classList.remove('open');
-    if(q.nextElementSibling) q.nextElementSibling.classList.remove('open');
-  });
-  // Open clicked if it was closed
-  if(!isOpen) {
-    el.classList.add('open');
-    if(a) a.classList.add('open');
-  }
+  const a=el.nextElementSibling;
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(q=>{q.classList.remove('open');if(q.nextElementSibling)q.nextElementSibling.classList.remove('open');});
+  if(!isOpen){el.classList.add('open');if(a)a.classList.add('open');}
 }
 
-/* ══ SPEC SHEET PDF DOWNLOAD ══ */
-function downloadSpecPDF(product, subtitle, description, certification, installation, capacity, fluids) {
-  const date = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  const win = window.open('','_blank','width=780,height:1000');
+/* ══ SPEC PDF ══ */
+function downloadSpecPDF(product,subtitle,description,certification,installation,capacity,fluids) {
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const win=window.open('','_blank','width=780,height=1000');
   win.document.write(`<!DOCTYPE html><html><head>
   <title>${product} Spec Sheet — Hughes Tank Company</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Barlow',sans-serif;color:#0D1B3E;background:white;padding:48px 56px;max-width:760px;margin:0 auto}
-    .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1A3A8C;padding-bottom:20px;margin-bottom:28px}
-    .co-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:0.04em;color:#0D1B3E}
-    .co-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5;margin-top:4px}
-    .doc-right{text-align:right}
-    .doc-type{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5}
-    .doc-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:0.03em;color:#1A3A8C;margin-top:4px}
-    .doc-sub{font-size:11px;color:#8A9BB5;margin-top:4px}
-    .product-block{background:#0D1B3E;color:white;border-radius:5px;padding:24px 28px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end}
-    .product-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;letter-spacing:0.02em}
-    .product-sub{font-size:12px;color:#8A9BB5;margin-top:6px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;text-transform:uppercase}
-    .cert-badge{background:#1A3A8C;border-radius:4px;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:white;white-space:nowrap}
-    .desc{font-size:13px;color:#3A4A66;line-height:1.8;margin-bottom:24px;padding:16px 20px;background:#F2F4F8;border-left:3px solid #1A3A8C;border-radius:0 4px 4px 0}
-    .section-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#8A9BB5;margin-bottom:10px;margin-top:20px}
-    .spec-grid{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #DDE2EE;border-radius:4px;overflow:hidden;margin-bottom:20px}
-    .spec-cell{padding:12px 16px;border-bottom:1px solid #DDE2EE;border-right:1px solid #DDE2EE}
-    .spec-cell:nth-child(even){border-right:none}
-    .spec-cell:nth-last-child(-n+2){border-bottom:none}
-    .spec-key{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5;margin-bottom:3px}
-    .spec-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:#0D1B3E}
-    .incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
-    .incl-item{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;color:#0D1B3E}
-    .incl-dot{width:8px;height:8px;border-radius:50%;background:#1A3A8C;flex-shrink:0}
-    .note{background:#FFF8E6;border:1px solid #E8D48A;border-radius:4px;padding:12px 16px;font-size:11px;color:#5A4A00;line-height:1.6;margin-bottom:20px}
-    .footer{border-top:1px solid #DDE2EE;padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:#8A9BB5;margin-top:auto}
-    .print-btn{position:fixed;bottom:24px;right:24px;background:#1A3A8C;color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 24px;border-radius:4px;border:none;cursor:pointer}
-    @media print{.print-btn{display:none}@page{size:letter;margin:.6in .7in}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Barlow',sans-serif;color:#0D1B3E;background:white;padding:48px 56px;max-width:760px;margin:0 auto}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1A3A8C;padding-bottom:20px;margin-bottom:28px}
+  .co-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:0.04em;color:#0D1B3E}
+  .co-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5;margin-top:4px}
+  .doc-right{text-align:right}
+  .doc-type{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5}
+  .doc-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:0.03em;color:#1A3A8C;margin-top:4px}
+  .doc-sub{font-size:11px;color:#8A9BB5;margin-top:4px}
+  .product-block{background:#0D1B3E;color:white;border-radius:5px;padding:24px 28px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end}
+  .product-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;letter-spacing:0.02em}
+  .product-sub{font-size:12px;color:#8A9BB5;margin-top:6px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;text-transform:uppercase}
+  .cert-badge{background:#1A3A8C;border-radius:4px;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:white;white-space:nowrap}
+  .desc{font-size:13px;color:#3A4A66;line-height:1.8;margin-bottom:24px;padding:16px 20px;background:#F2F4F8;border-left:3px solid #1A3A8C;border-radius:0 4px 4px 0}
+  .section-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#8A9BB5;margin-bottom:10px;margin-top:20px}
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #DDE2EE;border-radius:4px;overflow:hidden;margin-bottom:20px}
+  .spec-cell{padding:12px 16px;border-bottom:1px solid #DDE2EE;border-right:1px solid #DDE2EE}
+  .spec-cell:nth-child(even){border-right:none}
+  .spec-cell:nth-last-child(-n+2){border-bottom:none}
+  .spec-key{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#8A9BB5;margin-bottom:3px}
+  .spec-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:#0D1B3E}
+  .incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+  .incl-item{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;color:#0D1B3E}
+  .incl-dot{width:8px;height:8px;border-radius:50%;background:#1A3A8C;flex-shrink:0}
+  .note{background:#FFF8E6;border:1px solid #E8D48A;border-radius:4px;padding:12px 16px;font-size:11px;color:#5A4A00;line-height:1.6;margin-bottom:20px}
+  .footer-bar{border-top:1px solid #DDE2EE;padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:#8A9BB5}
+  .print-btn{position:fixed;bottom:24px;right:24px;background:#1A3A8C;color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 24px;border-radius:4px;border:none;cursor:pointer}
+  @media print{.print-btn{display:none}@page{size:letter;margin:.6in .7in}}
   </style></head><body>
   <div class="header">
     <div><div class="co-name">Hughes Tank Company</div><div class="co-sub">UL-Certified Manufacturer &bull; Venus, TX &bull; Est. 1985</div></div>
@@ -1691,7 +1304,7 @@ function downloadSpecPDF(product, subtitle, description, certification, installa
     <div class="incl-item"><div class="incl-dot"></div>Rep Network Support</div>
   </div>
   <div class="note">&#9432; This specification sheet is for reference purposes. Final specifications, sizing, and pricing are confirmed at time of order. Contact your regional rep or Hughes Tank Company directly for a formal quote.</div>
-  <div class="footer">
+  <div class="footer-bar">
     <span>Hughes Tank Company &bull; 2900 N FM 157, Venus, TX 76084 &bull; 972-366-8684 &bull; sales@hughestank.com</span>
     <span>Mon–Fri 8am–4:30pm CST</span>
   </div>
@@ -1701,32 +1314,10 @@ function downloadSpecPDF(product, subtitle, description, certification, installa
   win.document.close();
 }
 
-// Init
-renderShop();
-
-/* ══ PRINT CHART ══ */
-function printChart() {
-  const title = document.getElementById('chartTitle').textContent;
-  const rows = document.getElementById('chartBody').innerHTML;
-  const win = window.open('','_blank','width=700,height=900');
-  win.document.write(`<!DOCTYPE html><html><head><title>${title}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body{font-family:'Barlow',sans-serif;color:#0D1B3E;padding:40px;max-width:600px;margin:0 auto}
-    .ph{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1A3A8C;padding-bottom:16px;margin-bottom:24px}
-    .co{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:0.04em}
-    .co span{display:block;font-size:10px;font-weight:600;letter-spacing:0.16em;color:#8A9BB5;margin-top:3px}
-    .doc-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:#1A3A8C;text-align:right}
-    .doc-date{font-size:10px;color:#8A9BB5;text-align:right;margin-top:3px}
-    table{width:100%;border-collapse:collapse;margin-top:8px}
-    th{background:#0D1B3E;color:#8A9BB5;padding:9px 14px;text-align:left;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase}
-    td{padding:7px 14px;border-bottom:1px solid #DDE2EE;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:#0D1B3E}
-    tr:nth-child(even) td{background:#F2F4F8}
-    .footer{margin-top:24px;padding-top:14px;border-top:1px solid #DDE2EE;display:flex;justify-content:space-between;font-size:10px;color:#8A9BB5}
-    @media print{@page{size:letter;margin:.6in .75in}}
-  </style></head><body>
-  <div class="ph">
-    <div class="co">Hughes Tank Company<span>UL-Certified Manufacturer · Venus, TX · Est. 1985</span></div>
-    <div><div class="doc-title">Tank Chart</div><div class="doc-date">${title}<br>Generated: ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div></div>
-  </div>
-  <table><thead><tr>
+// Init on page load
+document.addEventListener('DOMContentLoaded', function() {
+  renderShop();
+});
+</script>
+</body>
+</html>
