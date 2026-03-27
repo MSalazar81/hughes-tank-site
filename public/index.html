@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!-- saved from url=(0075)/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head><meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hughes Tank Company | UL-Certified Steel Fuel Storage Tanks | Venus, TX</title>
 <meta name="description" content="Hughes Tank Company manufactures UL 142, UL 2085 Fireguard, Flameshield®, Permatank®, and ACT-100-U steel fuel storage tanks in Venus, TX. Custom sizes, fast lead times, available through our rep network since 1985.">
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="/images/css2" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ════════════════════════════════
    TOKENS
@@ -355,7 +355,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .aside-divider{height:1px;background:rgba(255,255,255,0.07);margin:22px 0}
 
 /* INDUSTRIES */
-.industries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:2px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.industries-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
 .industry-card{background:var(--white);padding:26px 22px;transition:background .2s;cursor:pointer}
 .industry-card:hover{background:var(--mid-gray)}
 .ind-icon{width:36px;height:36px;background:rgba(26,58,140,0.1);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
@@ -597,7 +597,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </div>
   <style>
   /* ── Product Cards ── */
-  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
   .product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column}
   .product-card:hover{box-shadow:0 8px 32px rgba(13,27,62,0.12);transform:translateY(-2px);z-index:1}
   .product-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s var(--ease)}
@@ -1278,7 +1278,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
           <div class="chart-input-group"><label>Increment (in)</label><select class="chart-input" id="increment"><option value="1">Every 1"</option><option value="0.5">Every 0.5"</option><option value="0.25">Every 0.25"</option><option value="0.125">Every 0.125"</option></select></div>
           <div class="chart-input-group" style="align-self:end"><button class="chart-gen-btn" onclick="generateChart()">Generate Chart</button></div>
         </div>
-        <div id="chartResults" style="display:none">
+        <div id="chartResults" class="chart-results" style="display:none">
           <div class="chart-results-header"><span id="chartTitle">Tank Chart</span><button class="chart-print-btn" onclick="printChart()">Print to PDF</button></div>
           <div style="max-height:220px;overflow-y:auto"><table class="chart-table"><thead><tr><th>Depth (in)</th><th>Gallons</th><th>% Full</th></tr></thead><tbody id="chartBody"></tbody></table></div>
         </div>
@@ -1313,7 +1313,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
       <div class="faq-list">
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is UL 142 and do I need it?</span><span class="faq-chevron">▼</span></div><div class="faq-a">UL 142 is the Underwriters Laboratories standard for aboveground steel tanks storing flammable and combustible liquids. NFPA 30 and the International Fire Code require tanks to be designed and constructed per an approved engineering standard — UL 142 is the most widely accepted. If your tank will store fuel above ground, you almost certainly need a UL 142-listed tank.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between UL 2085 and Flameshield®?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Both are fire-protected aboveground tank systems with a two-hour fire rating, but they are listed under different standards. UL 2085 (Fireguard®) is listed by Underwriters Laboratories. Flameshield® is listed by STI (Steel Tank Institute). Which is required depends on your local Authority Having Jurisdiction.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to get a tank?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Lead times vary by tank size and configuration — contact us for current production availability on your specific configuration.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to get a tank?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Lead times vary by tank size and configuration, but we consistently offer some of the shortest lead times in the industry. Contact us for current production availability on your specific configuration.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you build custom sizes?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Yes. Custom sizes are a core part of what we do. We can build tanks to virtually any dimension within the applicable UL standard's design parameters. Submit a quote request with your required dimensions and we will confirm feasibility and pricing.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do tanks ship with inspector documentation?</span><span class="faq-chevron">▼</span></div><div class="faq-a">Yes. Every UL-listed tank ships with the appropriate UL label and supporting documentation. We can also provide test records and manufacturer's declarations as required by your local inspector or permitting authority.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What pump packages are available?</span><span class="faq-chevron">▼</span></div><div class="faq-a">We offer fully customizable pumping and metering packages from 15 to 100 GPM. Options include 12-volt DC, electric, and gas-powered pumps with a variety of meter and nozzle configurations. All packages are plumbed on our yard and tested before shipment.</div></div>
@@ -1892,6 +1892,7 @@ function generateChart() {
   resultsEl.style.borderRadius = '4px';
   resultsEl.style.overflow = 'hidden';
   resultsEl.style.marginTop = '12px';
+  resultsEl.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 /* ══ FAQ ══ */
