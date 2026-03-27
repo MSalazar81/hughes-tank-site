@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Tank | Hughes Tank Company</title>
+<meta name="description" content="Configure your custom steel fuel storage tank — choose type, size, pump package, and finish. Get a branded spec sheet or submit for a factory-direct quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B3E; --blue:#1A3A8C; --steel:#8A9BB5; --muted:#5A6A88;
+  --light-bg:#F2F4F8; --white:#FFFFFF; --border:#DDE2EE; --ink:#07101F;
+  --mid-gray:#E8ECF2; --fh:'Barlow Condensed',sans-serif; --fb:'Barlow',sans-serif;
+  --ease:cubic-bezier(0.22,0.61,0.36,1); --shadow:0 4px 24px rgba(13,27,62,0.09);
+  --shadow-lg:0 12px 48px rgba(13,27,62,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--light-bg);color:var(--navy);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:var(--fb)}
+
+/* NAV */
+nav{background:var(--navy);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 20px rgba(0,0,0,0.28);position:sticky;top:0;z-index:200}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:38px;width:auto}
+.nav-back{font-family:var(--fh);font-weight:600;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:7px;transition:color .2s}
+.nav-back:hover{color:var(--white)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.btn-sm{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 18px;border-radius:4px}
+.btn-sm-ghost{border:1.5px solid rgba(138,155,181,0.35);color:var(--steel);transition:all .2s}
+.btn-sm-ghost:hover{border-color:var(--steel);color:var(--white)}
+.btn-sm-blue{background:var(--blue);color:var(--white);transition:background .2s}
+.btn-sm-blue:hover{background:#1e48b0}
+
+/* PAGE LAYOUT */
+.page-wrap{display:grid;grid-template-columns:1fr 400px;gap:0;min-height:calc(100vh - 64px);align-items:start}
+.config-main{padding:40px 48px;max-width:760px}
+.config-sidebar{background:var(--white);border-left:1px solid var(--border);position:sticky;top:64px;height:calc(100vh - 64px);display:flex;flex-direction:column;overflow:hidden}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:36px}
+.page-eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.page-eyebrow::before{content:'';width:20px;height:2px;background:var(--blue)}
+.page-title{font-family:var(--fh);font-weight:800;font-size:clamp(28px,3.5vw,42px);text-transform:uppercase;letter-spacing:0.01em;color:var(--navy);line-height:1}
+.page-sub{font-size:14px;color:var(--muted);margin-top:10px;max-width:520px;line-height:1.7}
+
+/* PROGRESS BAR */
+.progress-wrap{margin-bottom:32px}
+.progress-steps{display:flex;gap:6px;margin-bottom:10px}
+.progress-dot{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+.progress-dot.done{background:var(--blue)}
+.progress-dot.active{background:var(--blue);opacity:0.5}
+.progress-label{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.progress-label span{color:var(--blue)}
+
+/* STEP CARDS */
+.steps-list{display:flex;flex-direction:column;gap:6px}
+.step-card{border-radius:6px;overflow:hidden;transition:box-shadow .2s}
+.step-card.active{box-shadow:var(--shadow)}
+.step-header{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--white);border:1.5px solid var(--border);border-radius:6px;cursor:default;transition:all .2s}
+.step-card.active .step-header{background:var(--navy);border-color:var(--navy);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.step-card.done .step-header{border-color:rgba(26,58,140,0.25);background:rgba(26,58,140,0.03);cursor:pointer}
+.step-card.done .step-header:hover{border-color:var(--blue)}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:800;font-size:12px;flex-shrink:0;background:var(--mid-gray);color:var(--muted);transition:all .2s}
+.step-card.active .step-num{background:var(--blue);color:var(--white)}
+.step-card.done .step-num{background:rgba(26,58,140,0.12);color:var(--blue)}
+.step-check{width:28px;height:28px;border-radius:50%;display:none;align-items:center;justify-content:center;background:rgba(26,58,140,0.1);color:var(--blue);flex-shrink:0;font-size:14px}
+.step-card.done .step-num{display:none}
+.step-card.done .step-check{display:flex}
+.step-meta{flex:1}
+.step-title{font-family:var(--fh);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:0.04em;color:var(--navy)}
+.step-card.active .step-title{color:var(--white)}
+.step-value{font-family:var(--fh);font-weight:600;font-size:12px;color:var(--blue);margin-top:2px}
+.step-card.active .step-value{color:var(--steel)}
+.step-card.done .step-value{color:var(--blue)}
+
+/* STEP BODY */
+.step-body{background:var(--white);border:1.5px solid var(--border);border-top:none;border-bottom-left-radius:6px;border-bottom-right-radius:6px;padding:22px 20px;display:none}
+.step-card.active .step-body{display:block}
+.opts-grid{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1.5px solid var(--border);border-radius:5px;padding:10px 16px;cursor:pointer;font-family:var(--fh);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);transition:all .2s;background:var(--white)}
+.opt:hover{border-color:var(--blue);color:var(--navy)}
+.opt.sel{border-color:var(--blue);background:var(--blue);color:var(--white)}
+.opt-desc{font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.75);display:block;margin-top:3px}
+.opt:not(.sel) .opt-desc{color:var(--muted)}
+.range-wrap{display:flex;flex-direction:column;gap:10px}
+.range-val{font-family:var(--fh);font-weight:800;font-size:32px;color:var(--navy)}
+.range-sub{font-family:var(--fh);font-size:12px;color:var(--muted);margin-top:-4px}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:var(--border);border-radius:3px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--blue);cursor:pointer;border:3px solid var(--white);box-shadow:0 0 0 2px var(--blue)}
+.range-ticks{display:flex;justify-content:space-between;font-family:var(--fh);font-size:11px;color:var(--muted);letter-spacing:0.06em}
+.multi-note{font-size:12px;color:var(--muted);margin-bottom:10px}
+
+/* STEP NAV */
+.step-nav{display:flex;gap:8px;margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}
+.btn-next{background:var(--blue);color:var(--white);font-family:var(--fh);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 24px;border-radius:4px;transition:background .2s;display:flex;align-items:center;gap:7px}
+.btn-next:hover{background:#1e48b0}
+.btn-next:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
+.btn-back{background:var(--mid-gray);color:var(--muted);font-family:var(--fh);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 20px;border-radius:4px;transition:all .2s}
+.btn-back:hover{background:var(--border);color:var(--navy)}
+
+/* SIDEBAR — TANK MOCKUP */
+.sidebar-mockup{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;border-bottom:1px solid var(--border);background:var(--light-bg);min-height:300px}
+.mockup-label{font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+#tankMockup{width:100%;max-width:300px;min-height:180px;display:flex;align-items:center;justify-content:center}
+
+/* SIDEBAR — SPEC SHEET */
+.sidebar-spec{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.spec-head{background:var(--navy);padding:18px 22px;flex-shrink:0}
+.spec-head-title{font-family:var(--fh);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:0.06em;color:var(--white)}
+.spec-head-sub{font-size:11px;color:var(--steel);margin-top:2px}
+.spec-rows{padding:16px 22px;flex:1}
+.spec-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--border)}
+.spec-row:last-child{border:none}
+.spec-k{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A78}
+.spec-v{font-family:var(--fh);font-weight:700;font-size:13px;color:var(--navy);text-align:right;max-width:55%}
+.spec-v.empty{color:var(--steel);font-weight:500;font-style:italic;font-size:11px}
+.spec-price-wrap{padding:14px 22px;background:#E8EDF5;border-top:2px solid var(--border);flex-shrink:0}
+.spec-price-label{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#4A5A78;margin-bottom:4px}
+.spec-price-val{font-family:var(--fh);font-weight:800;font-size:26px;color:var(--navy)}
+.spec-price-val.empty{font-size:13px;font-weight:500;font-style:italic;color:var(--steel)}
+.spec-price-note{font-size:10px;color:#6A7A98;margin-top:4px;line-height:1.5}
+.spec-actions{padding:14px 22px 20px;display:flex;flex-direction:column;gap:8px;flex-shrink:0;border-top:1px solid var(--border)}
+.btn-full{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:12px;border-radius:4px;font-family:var(--fh);font-weight:700;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;transition:all .2s}
+.btn-full-navy{background:var(--navy);color:var(--white)}
+.btn-full-navy:hover{background:#0a1530}
+.btn-full-outline{border:1.5px solid var(--border);color:var(--muted);background:var(--white)}
+.btn-full-outline:hover{border-color:var(--blue);color:var(--blue)}
+
+/* BADGES */
+.includes-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px;padding:16px 20px;background:rgba(26,58,140,0.05);border:1px solid rgba(26,58,140,0.12);border-radius:5px}
+.include-item{display:flex;align-items:center;gap:7px;font-family:var(--fh);font-size:12px;color:var(--navy)}
+.include-item svg{flex-shrink:0}
+
+/* ══ PRINT SPEC SHEET ══ */
+@media print {
+  nav,.config-main,.config-sidebar,.includes-bar,.page-eyebrow{display:none!important}
+  body{background:white;color:#000}
+  #printSheet{display:block!important}
+}
+#printSheet{display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .page-wrap{grid-template-columns:1fr}
+  .config-sidebar{position:static;height:auto;border-left:none;border-top:1px solid var(--border)}
+  .config-main{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><img src="/images/htc-logo-white.png" alt="Hughes Tank Company"></a>
+  <a href="/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Home
+  </a>
+  <div class="nav-right">
+    <a href="/contact/" class="btn-sm btn-sm-ghost">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="page-wrap">
+
+  <!-- LEFT: CONFIGURATOR -->
+  <div class="config-main">
+    <div class="page-header">
+      <div class="page-eyebrow">Interactive Configurator</div>
+      <h1 class="page-title">Build Your Tank</h1>
+      <p class="page-sub">Answer each question below and your spec sheet updates instantly. When you're done, download a branded spec sheet or send it straight to our team for a quote.</p>
+    </div>
+
+    <div class="includes-bar">
+      <span class="include-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Free CAD drawing with every order</span>
+      <span class="include-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>1-year manufacturer warranty</span>
+      <span class="include-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Air-tested before shipment</span>
+      <span class="include-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Made in Venus, TX</span>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-steps" id="progressDots"></div>
+      <div class="progress-label">Step <span id="progressCurrent">1</span> of <span id="progressTotal">6</span></div>
+    </div>
+
+    <div class="steps-list" id="stepsList"></div>
+  </div>
+
+  <!-- RIGHT: SIDEBAR -->
+  <div class="config-sidebar">
+    <!-- Tank Mockup -->
+    <div class="sidebar-mockup">
+      <div class="mockup-label">Live Tank Preview</div>
+      <div id="tankMockup">
+        <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" id="mockupSvg" width="300" height="180">
+          <text x="150" y="95" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="13" fill="#8A9BB5" font-weight="600" letter-spacing="1">Select options to preview</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Spec Sheet -->
+    <div class="sidebar-spec">
+      <div class="spec-head">
+        <div class="spec-head-title">Your Tank Spec</div>
+        <div class="spec-head-sub">Updates as you configure</div>
+      </div>
+      <div class="spec-rows" id="specRows">
+        <div class="spec-row"><span class="spec-k">Tank Type</span><span class="spec-v empty" id="sv-type">Not selected</span></div>
+        <div class="spec-row"><span class="spec-k">Shape</span><span class="spec-v empty" id="sv-shape">Not selected</span></div>
+        <div class="spec-row"><span class="spec-k">Capacity</span><span class="spec-v empty" id="sv-capacity">Not selected</span></div>
+        <div class="spec-row"><span class="spec-k">Pump Package</span><span class="spec-v empty" id="sv-pump">Not selected</span></div>
+        <div class="spec-row"><span class="spec-k">Color / Finish</span><span class="spec-v empty" id="sv-color">Not selected</span></div>
+        <div class="spec-row"><span class="spec-k">Accessories</span><span class="spec-v" id="sv-accessories">None</span></div>
+        <div class="spec-row"><span class="spec-k">Manufactured In</span><span class="spec-v">Venus, TX</span></div>
+        <div class="spec-row"><span class="spec-k">Warranty</span><span class="spec-v">1 Year Manufacturer</span></div>
+        <div class="spec-row"><span class="spec-k">CAD Drawings</span><span class="spec-v">Included Free</span></div>
+      </div>
+      <div class="spec-price-wrap">
+        <div class="spec-price-label">Starting Estimate</div>
+        <div class="spec-price-val empty" id="sv-price">Select options above</div>
+        <div class="spec-price-note">Factory-direct pricing — no distributor markup.</div>
+      </div>
+      <div class="spec-actions">
+        <a href="/contact/" class="btn-full btn-full-navy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.27 6.27l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          Submit for Quote
+        </a>
+        <button onclick="printSpecSheet()" class="btn-full btn-full-outline">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / Save Spec Sheet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT-ONLY SPEC SHEET -->
+<div id="printSheet">
+  <style>
+    @media print {
+      @page { size: letter; margin: 0.65in 0.75in; }
+      #printSheet { display: block; font-family: 'Barlow Condensed', sans-serif; color: #0D1B3E; }
+      .ps-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; padding-bottom: 18px; border-bottom: 3px solid #1A3A8C; }
+      .ps-logo-wrap { display: flex; flex-direction: column; gap: 6px; }
+      .ps-company { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #0D1B3E; }
+      .ps-tagline { font-size: 11px; color: #5A6A88; letter-spacing: 0.1em; text-transform: uppercase; }
+      .ps-doc-info { text-align: right; }
+      .ps-doc-title { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1A3A8C; }
+      .ps-doc-date { font-size: 10px; color: #8A9BB5; margin-top: 4px; }
+      .ps-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #8A9BB5; margin-bottom: 10px; margin-top: 20px; }
+      .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1.5px solid #DDE2EE; border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+      .ps-cell { padding: 10px 14px; border-bottom: 1px solid #DDE2EE; border-right: 1px solid #DDE2EE; }
+      .ps-cell:nth-child(even) { border-right: none; }
+      .ps-cell:nth-last-child(-n+2) { border-bottom: none; }
+      .ps-cell-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A9BB5; margin-bottom: 3px; }
+      .ps-cell-val { font-size: 14px; font-weight: 700; color: #0D1B3E; }
+      .ps-price-box { background: #0D1B3E; color: white; padding: 18px 22px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+      .ps-price-left { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A9BB5; }
+      .ps-price-right { font-size: 28px; font-weight: 800; color: white; }
+      .ps-incl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+      .ps-incl-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #0D1B3E; font-weight: 600; }
+      .ps-incl-dot { width: 8px; height: 8px; border-radius: 50%; background: #1A3A8C; flex-shrink: 0; }
+      .ps-footer { border-top: 1px solid #DDE2EE; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; }
+      .ps-footer-left { font-size: 10px; color: #8A9BB5; }
+      .ps-footer-right { font-size: 10px; color: #8A9BB5; text-align: right; }
+      .ps-note { background: #F2F4F8; border-left: 3px solid #1A3A8C; padding: 10px 14px; font-size: 11px; color: #5A6A88; line-height: 1.6; margin-bottom: 16px; font-family: 'Barlow', sans-serif; }
+    }
+  </style>
+  <div class="ps-header">
+    <div class="ps-logo-wrap">
+      <div class="ps-company">Hughes Tank Company</div>
+      <div class="ps-tagline">UL-Certified Manufacturer &bull; Venus, TX &bull; Est. 1985</div>
+    </div>
+    <div class="ps-doc-info">
+      <div class="ps-doc-title">Tank Specification Sheet</div>
+      <div class="ps-doc-date" id="ps-date"></div>
+    </div>
+  </div>
+  <div class="ps-section-title">Tank Configuration</div>
+  <div class="ps-grid" id="ps-grid"></div>
+  <div class="ps-price-box">
+    <div class="ps-price-left">Starting Estimate<br><span style="font-size:9px;color:#5A6A88">Factory-direct · No distributor markup</span></div>
+    <div class="ps-price-right" id="ps-price">—</div>
+  </div>
+  <div class="ps-section-title">Standard Inclusions</div>
+  <div class="ps-incl-grid">
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>Free CAD Drawings</div>
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>1-Year Manufacturer Warranty</div>
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>Air-Tested Before Shipment</div>
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>UL Certification Label</div>
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>Test Documentation</div>
+    <div class="ps-incl-item"><div class="ps-incl-dot"></div>Factory-Direct Pricing</div>
+  </div>
+  <div class="ps-note">This specification sheet is based on your configuration selections and is provided for quoting purposes only. Final pricing and specifications will be confirmed by Hughes Tank Company engineering upon receipt of your quote request. Prices shown are estimates only and subject to change without notice.</div>
+  <div class="ps-footer">
+    <div class="ps-footer-left">Hughes Tank Company · 2900 N FM 157, Venus, TX 76084<br>972-366-8684 · sales@hughestank.com</div>
+    <div class="ps-footer-right">hughes-tank-website.vercel.app<br>Mon–Fri 8am–4:30pm CST</div>
+  </div>
+</div>
+
+<script>
+const STEPS = [
+  {
+    id: 'type',
+    label: 'Tank Type',
+    question: 'What type of tank do you need?',
+    type: 'opts',
+    opts: [
+      { val: 'UL 142 Single Wall', sub: 'Standard aboveground — most common' },
+      { val: 'UL 142 Double Wall', sub: 'Built-in secondary containment' },
+      { val: 'UL 2085 Fireguard®', sub: '2-hour fire-rated aboveground' },
+      { val: 'Flameshield®', sub: 'STI fire-protected aboveground' },
+      { val: 'Permatank® UST', sub: 'Fiberglass underground tank' },
+      { val: 'ACT-100-U UST', sub: 'Steel underground tank' },
+      { val: 'Farm Tank', sub: 'Agricultural aboveground storage' },
+    ]
+  },
+  {
+    id: 'shape',
+    label: 'Shape & Orientation',
+    question: 'What shape and orientation?',
+    type: 'opts',
+    opts: [
+      { val: 'Horizontal Cylindrical', sub: 'Most common for fuel storage' },
+      { val: 'Vertical Cylindrical', sub: 'Good for tight footprint' },
+      { val: 'Rectangular', sub: 'Maximizes space in enclosures' },
+    ]
+  },
+  {
+    id: 'capacity',
+    label: 'Capacity',
+    question: 'How many gallons do you need?',
+    type: 'range',
+    min: 100, max: 50000, step: 100, default: 1000,
+    format: v => parseInt(v).toLocaleString() + ' gallons'
+  },
+  {
+    id: 'pump',
+    label: 'Pump Package',
+    question: 'Do you need a pump package?',
+    type: 'opts',
+    opts: [
+      { val: 'No Pump', sub: 'Tank only — gravity or separate pump' },
+      { val: '15 GPM 12V DC', sub: 'Battery-powered, great for farm/fleet' },
+      { val: '20 GPM Electric', sub: '115V AC, digital meter included' },
+      { val: '30 GPM Electric', sub: 'Heavy-duty fleet fueling' },
+      { val: '50 GPM Electric', sub: 'High-volume dispensing' },
+      { val: '100 GPM Electric', sub: 'Commercial/bulk transfer' },
+      { val: 'Gas-Powered', sub: 'No electrical source needed' },
+    ]
+  },
+  {
+    id: 'color',
+    label: 'Color / Finish',
+    question: 'What color or finish?',
+    type: 'opts',
+    opts: [
+      { val: 'Sand Beige', sub: 'Standard, blends with environment' },
+      { val: 'Safety Red', sub: 'High visibility, code-required in some areas' },
+      { val: 'Safety Yellow', sub: 'Maximum visibility' },
+      { val: 'Gray', sub: 'Industrial standard' },
+      { val: 'White', sub: 'Clean, reflects heat' },
+      { val: 'Black', sub: 'Industrial / agricultural' },
+      { val: 'Custom Color', sub: 'We match to your spec' },
+    ]
+  },
+  {
+    id: 'accessories',
+    label: 'Accessories',
+    question: 'Any add-ons? (Select all that apply)',
+    type: 'multi',
+    opts: [
+      { val: 'Ladder', sub: '' },
+      { val: 'Stairs', sub: '' },
+      { val: 'Containment Pan', sub: '' },
+      { val: 'Level Gauge', sub: '' },
+      { val: 'Manway', sub: '' },
+      { val: 'Overfill Prevention', sub: '' },
+      { val: 'Saddle Skids', sub: '' },
+      { val: 'Emergency Vent', sub: '' },
+    ]
+  },
+];
+
+const state = { type:null, shape:null, capacity:1000, pump:null, color:null, accessories:[] };
+let currentStep = 0;
+
+function buildSteps() {
+  const list = document.getElementById('stepsList');
+  const dots = document.getElementById('progressDots');
+  document.getElementById('progressTotal').textContent = STEPS.length;
+  dots.innerHTML = STEPS.map((_,i) => `<div class="progress-dot" id="dot-${i}"></div>`).join('');
+  list.innerHTML = STEPS.map((s, i) => buildStepHTML(s, i)).join('');
+  updateProgress();
+}
+
+function buildStepHTML(s, i) {
+  const val = getStateVal(s);
+  const isDone = val !== null;
+  const isActive = i === currentStep;
+  const stateClass = isActive ? 'active' : (isDone ? 'done' : '');
+
+  let bodyHTML = '';
+  if (s.type === 'opts') {
+    bodyHTML = `<div class="opts-grid">${s.opts.map(o => {
+      const sel = (s.id === 'accessories')
+        ? state.accessories.includes(o.val)
+        : state[s.id] === o.val;
+      return `<button class="opt${sel?' sel':''}" onclick="selectOpt('${s.id}',${i},'${o.val.replace(/'/g,"\\'")}',this)">${o.val}${o.sub?`<span class="opt-desc">${o.sub}</span>`:''}
+      </button>`;
+    }).join('')}</div>`;
+    if (s.type === 'multi') {
+      bodyHTML = `<div class="multi-note">Select all that apply — click again to deselect</div>` + bodyHTML;
+    }
+  } else if (s.type === 'range') {
+    const cur = state[s.id] || s.default;
+    bodyHTML = `<div class="range-wrap">
+      <div class="range-val" id="rangeVal-${i}">${s.format(cur)}</div>
+      <div class="range-sub">Drag to adjust</div>
+      <input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${cur}" oninput="updateRange('${s.id}',${i},this.value)">
+      <div class="range-ticks"><span>${s.min.toLocaleString()} gal</span><span>${Math.round(s.max/2).toLocaleString()} gal</span><span>${s.max.toLocaleString()} gal</span></div>
+    </div>`;
+  }
+  if (s.type === 'multi') {
+    bodyHTML = `<div class="multi-note">Select all that apply — click again to deselect</div>
+    <div class="opts-grid">${s.opts.map(o => {
+      const sel = state.accessories.includes(o.val);
+      return `<button class="opt${sel?' sel':''}" onclick="toggleAcc('${o.val.replace(/'/g,"\\'")}',this)">${o.val}</button>`;
+    }).join('')}</div>`;
+  }
+
+  const isLast = i === STEPS.length - 1;
+  const navHTML = `<div class="step-nav">
+    ${i > 0 ? `<button class="btn-back" onclick="goToStep(${i-1})">← Back</button>` : ''}
+    ${!isLast
+      ? `<button class="btn-next" id="nextBtn-${i}" onclick="goToStep(${i+1})" ${getStateVal(s)===null && s.type!=='multi'?'disabled':''}>Next →</button>`
+      : `<button class="btn-next" onclick="finishConfig()" style="background:#1e7e4a">✓ Finish & View Spec</button>`
+    }
+  </div>`;
+
+  return `<div class="step-card ${stateClass}" id="step-${i}" onclick="if(this.classList.contains('done')&&!this.classList.contains('active'))goToStep(${i})">
+    <div class="step-header">
+      <div class="step-num">${i+1}</div>
+      <div class="step-check">✓</div>
+      <div class="step-meta">
+        <div class="step-title">${s.label}</div>
+        <div class="step-value" id="stepval-${i}">${isDone ? formatStepVal(s) : 'Select an option'}</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div style="font-family:var(--fh);font-weight:700;font-size:13px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px">${s.question}</div>
+      ${bodyHTML}
+      ${navHTML}
+    </div>
+  </div>`;
+}
+
+function getStateVal(s) {
+  if (s.id === 'accessories') return state.accessories.length > 0 ? state.accessories : null;
+  if (s.id === 'capacity') return state.capacity;
+  return state[s.id];
+}
+
+function formatStepVal(s) {
+  if (s.id === 'accessories') return state.accessories.length ? state.accessories.join(', ') : 'None selected';
+  if (s.id === 'capacity') return s.format(state.capacity);
+  return state[s.id] || '—';
+}
+
+function selectOpt(key, stepIdx, val, btn) {
+  state[key] = val;
+  // Update button UI within this step
+  btn.closest('.opts-grid').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  // Update step value label
+  document.getElementById('stepval-'+stepIdx).textContent = val;
+  // Enable next button
+  const nb = document.getElementById('nextBtn-'+stepIdx);
+  if (nb) nb.disabled = false;
+  // Update sidebar
+  updateSpec();
+  updateMockup();
+  // Auto-advance after short delay
+  setTimeout(() => {
+    if (stepIdx < STEPS.length - 1) goToStep(stepIdx + 1);
+  }, 380);
+}
+
+function toggleAcc(val, btn) {
+  const idx = state.accessories.indexOf(val);
+  if (idx >= 0) { state.accessories.splice(idx,1); btn.classList.remove('sel'); }
+  else { state.accessories.push(val); btn.classList.add('sel'); }
+  const si = STEPS.findIndex(s => s.id === 'accessories');
+  document.getElementById('stepval-'+si).textContent = state.accessories.length ? state.accessories.join(', ') : 'None selected';
+  updateSpec();
+}
+
+function updateRange(key, stepIdx, val) {
+  state[key] = parseInt(val);
+  const s = STEPS[stepIdx];
+  document.getElementById('rangeVal-'+stepIdx).textContent = s.format(val);
+  document.getElementById('stepval-'+stepIdx).textContent = s.format(val);
+  updateSpec();
+  updateMockup();
+}
+
+function goToStep(idx) {
+  currentStep = idx;
+  rebuildSteps();
+  // Scroll step into view
+  setTimeout(() => {
+    const el = document.getElementById('step-'+idx);
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }, 50);
+}
+
+function rebuildSteps() {
+  document.getElementById('stepsList').innerHTML = STEPS.map((s,i) => buildStepHTML(s,i)).join('');
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = STEPS.filter((s,i) => {
+    if (s.id === 'accessories') return true; // always considered done (optional)
+    return state[s.id] !== null;
+  }).length;
+  document.getElementById('progressCurrent').textContent = currentStep + 1;
+  STEPS.forEach((_,i) => {
+    const dot = document.getElementById('dot-'+i);
+    if (!dot) return;
+    dot.className = 'progress-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+  });
+}
+
+function finishConfig() {
+  goToStep(STEPS.length - 1);
+  setTimeout(() => {
+    document.getElementById('config-sidebar') && document.getElementById('config-sidebar').scrollIntoView({ behavior:'smooth' });
+  }, 200);
+}
+
+/* ══ SPEC SIDEBAR ══ */
+function setSpecVal(id, val, empty) {
+  const el = document.getElementById('sv-'+id);
+  if (!el) return;
+  el.textContent = val;
+  el.className = 'spec-v' + (empty ? ' empty' : '');
+}
+
+function updateSpec() {
+  setSpecVal('type', state.type || 'Not selected', !state.type);
+  setSpecVal('shape', state.shape || 'Not selected', !state.shape);
+  setSpecVal('capacity', state.capacity ? state.capacity.toLocaleString()+' gallons' : 'Not selected', !state.capacity);
+  setSpecVal('pump', state.pump || 'Not selected', !state.pump);
+  setSpecVal('color', state.color || 'Not selected', !state.color);
+  setSpecVal('accessories', state.accessories.length ? state.accessories.join(', ') : 'None', false);
+  updatePrice();
+}
+
+function updatePrice() {
+  const { type, capacity, pump, accessories } = state;
+  const el = document.getElementById('sv-price');
+  if (!type) { el.textContent = 'Select options above'; el.className='spec-price-val empty'; return; }
+  const perGal = {'UL 142 Single Wall':0.65,'UL 142 Double Wall':0.85,'UL 2085 Fireguard®':1.4,'Flameshield®':1.3,'Permatank® UST':1.6,'ACT-100-U UST':1.5,'Farm Tank':0.75};
+  let base = Math.max((perGal[type]||1.0)*capacity, 2200);
+  const pumpAdder = {'No Pump':0,'15 GPM 12V DC':380,'20 GPM Electric':520,'30 GPM Electric':750,'50 GPM Electric':1100,'100 GPM Electric':1850,'Gas-Powered':680};
+  base += (pumpAdder[pump]||0) + accessories.length*220;
+  const lo = Math.round(base*.9/100)*100, hi = Math.round(base*1.15/100)*100;
+  el.textContent = '$'+lo.toLocaleString()+' – $'+hi.toLocaleString();
+  el.className = 'spec-price-val';
+}
+
+/* ══ TANK MOCKUP RENDERER ══ */
+const COLORS = {
+  'Sand Beige':'#D4C5A0','Safety Red':'#C0392B','Safety Yellow':'#F1C40F',
+  'Gray':'#8A9BB5','White':'#F0F0F0','Black':'#2C3E50','Custom Color':'#6C5B9E',
+  null:'#C8D4E0'
+};
+
+function updateMockup() {
+  const svg = document.getElementById('mockupSvg');
+  const shape = state.shape;
+  const type = state.type;
+  const capacity = state.capacity;
+  const color = COLORS[state.color] || COLORS[null];
+  const darkColor = darken(color, 30);
+  const lightColor = lighten(color, 40);
+  const isUnderground = type && (type.includes('UST') || type.includes('Permatank') || type.includes('ACT-100'));
+  const isRect = shape === 'Rectangular';
+  const isVert = shape === 'Vertical Cylindrical';
+  const isHoriz = !isVert && !isRect;
+
+  // Size the tank relative to capacity
+  const scale = Math.min(1, Math.max(0.4, Math.log10(capacity||1000)/4.7));
+
+  let tankSVG = '';
+
+  if (!shape && !type) {
+    svg.innerHTML = `<text x="150" y="95" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="13" fill="#8A9BB5" font-weight="600" letter-spacing="1">Select options to preview</text>`;
+    return;
+  }
+
+  if (isHoriz) {
+    const W = Math.round(200 * scale + 40), H = Math.round(70 * scale + 20);
+    const cx = 150, cy = 95;
+    const rx = W/2, ry = H/2;
+    const rend = H * 0.45; // end cap radius
+
+    tankSVG = `
+      <defs>
+        <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${lightColor}"/>
+          <stop offset="40%" stop-color="${color}"/>
+          <stop offset="100%" stop-color="${darkColor}"/>
+        </linearGradient>
+        <linearGradient id="endg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="${darkColor}"/>
+          <stop offset="100%" stop-color="${color}"/>
+        </linearGradient>
+        <clipPath id="tankClip"><ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/></clipPath>
+      </defs>
+      <!-- Main body -->
+      <rect x="${cx-rx+rend*0.5}" y="${cy-ry}" width="${W-rend}" height="${H}" fill="url(#tg)"/>
+      <!-- Left end cap -->
+      <ellipse cx="${cx-rx+rend*0.5}" cy="${cy}" rx="${rend*0.5}" ry="${ry}" fill="url(#endg)"/>
+      <!-- Right end cap -->
+      <ellipse cx="${cx+rx-rend*0.5}" cy="${cy}" rx="${rend*0.5}" ry="${ry}" fill="${darkColor}" opacity="0.85"/>
+      <!-- Highlight shine -->
+      <ellipse cx="${cx}" cy="${cy-ry*0.35}" rx="${rx*0.55}" ry="${ry*0.2}" fill="white" opacity="0.18"/>
+      <!-- Skid legs -->
+      <rect x="${cx-rx*0.6}" y="${cy+ry-2}" width="10" height="18" rx="2" fill="${darkColor}" opacity="0.7"/>
+      <rect x="${cx+rx*0.6-10}" y="${cy+ry-2}" width="10" height="18" rx="2" fill="${darkColor}" opacity="0.7"/>
+      <!-- Fill port on top -->
+      <rect x="${cx-8}" y="${cy-ry-10}" width="16" height="12" rx="3" fill="${darkColor}"/>
+      <!-- HTC badge -->
+      <text x="${cx}" y="${cy+5}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="11" fill="white" font-weight="700" opacity="0.7">HUGHES TANK</text>
+      <!-- Capacity label -->
+      <text x="${cx}" y="${cy+150}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="12" fill="#5A6A88" font-weight="600">${(capacity||1000).toLocaleString()} gal · Horizontal</text>
+    `;
+  } else if (isVert) {
+    const W = Math.round(60 * scale + 20), H = Math.round(130 * scale + 20);
+    const cx = 150, cy = 90;
+    const rx = W/2, ry = H/2;
+
+    tankSVG = `
+      <defs>
+        <linearGradient id="tvg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="${darkColor}"/>
+          <stop offset="30%" stop-color="${lightColor}"/>
+          <stop offset="100%" stop-color="${darkColor}"/>
+        </linearGradient>
+        <linearGradient id="tvg2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${lightColor}"/>
+          <stop offset="100%" stop-color="${color}"/>
+        </linearGradient>
+      </defs>
+      <!-- Main body -->
+      <rect x="${cx-rx}" y="${cy-ry+rx*0.4}" width="${W}" height="${H-rx*0.8}" fill="url(#tvg)"/>
+      <!-- Top dome -->
+      <ellipse cx="${cx}" cy="${cy-ry+rx*0.4}" rx="${rx}" ry="${rx*0.4}" fill="${lightColor}"/>
+      <!-- Bottom dome -->
+      <ellipse cx="${cx}" cy="${cy+ry-rx*0.4}" rx="${rx}" ry="${rx*0.4}" fill="${darkColor}"/>
+      <!-- Shine -->
+      <rect x="${cx-rx*0.35}" y="${cy-ry+rx*0.6}" width="${rx*0.25}" height="${H*0.6}" rx="3" fill="white" opacity="0.15"/>
+      <!-- Label -->
+      <text x="${cx}" y="${cy+4}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="white" font-weight="700" opacity="0.7">HUGHES</text>
+      <text x="${cx}" y="${cy+160}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="12" fill="#5A6A88" font-weight="600">${(capacity||1000).toLocaleString()} gal · Vertical</text>
+    `;
+  } else if (isRect) {
+    const W = Math.round(170 * scale + 30), H = Math.round(90 * scale + 20);
+    const cx = 150, cy = 90;
+
+    tankSVG = `
+      <defs>
+        <linearGradient id="trg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${lightColor}"/>
+          <stop offset="100%" stop-color="${color}"/>
+        </linearGradient>
+      </defs>
+      <!-- Shadow -->
+      <rect x="${cx-W/2+8}" y="${cy-H/2+8+H}" width="${W}" height="8" rx="4" fill="rgba(0,0,0,0.15)"/>
+      <!-- Main body -->
+      <rect x="${cx-W/2}" y="${cy-H/2}" width="${W}" height="${H}" rx="4" fill="url(#trg)"/>
+      <!-- Right face -->
+      <path d="M${cx+W/2} ${cy-H/2} l14 -10 l0 ${H} l-14 10 z" fill="${darkColor}" opacity="0.8"/>
+      <!-- Top face -->
+      <path d="M${cx-W/2} ${cy-H/2} l14 -10 l${W} 0 l-14 10 z" fill="${lightColor}" opacity="0.9"/>
+      <!-- Shine -->
+      <rect x="${cx-W/2+10}" y="${cy-H/2+8}" width="${W*0.15}" height="${H-16}" rx="3" fill="white" opacity="0.12"/>
+      <!-- Logo -->
+      <text x="${cx-5}" y="${cy+6}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="white" font-weight="700" opacity="0.6">HUGHES TANK</text>
+      <text x="${cx-5}" y="${cy+170}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="12" fill="#5A6A88" font-weight="600">${(capacity||1000).toLocaleString()} gal · Rectangular</text>
+    `;
+  } else {
+    // Default — show placeholder with type name
+    tankSVG = `
+      <text x="150" y="85" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="13" fill="#8A9BB5" font-weight="600" letter-spacing="1">${type||''}</text>
+      <text x="150" y="105" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="11" fill="#8A9BB5">Select shape to preview</text>
+    `;
+  }
+
+  // Underground indicator
+  if (isUnderground) {
+    tankSVG += `<text x="150" y="165" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#5A6A88" letter-spacing="1">UNDERGROUND INSTALLATION</text>`;
+  }
+
+  svg.innerHTML = tankSVG;
+}
+
+function darken(hex, amt) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.max(0, (n>>16)-amt), g = Math.max(0, ((n>>8)&0xff)-amt), b = Math.max(0, (n&0xff)-amt);
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+function lighten(hex, amt) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.min(255, (n>>16)+amt), g = Math.min(255, ((n>>8)&0xff)+amt), b = Math.min(255, (n&0xff)+amt);
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+/* ══ PRINT SPEC SHEET ══ */
+function printSpecSheet() {
+  // Populate print sheet
+  document.getElementById('ps-date').textContent = 'Generated: '+new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+  const rows = [
+    ['Tank Type', state.type || '—'],
+    ['Shape / Orientation', state.shape || '—'],
+    ['Capacity', state.capacity ? state.capacity.toLocaleString()+' gallons' : '—'],
+    ['Pump Package', state.pump || '—'],
+    ['Color / Finish', state.color || '—'],
+    ['Accessories', state.accessories.length ? state.accessories.join(', ') : 'None'],
+    ['Manufactured In', 'Venus, TX'],
+    ['Warranty', '1-Year Manufacturer'],
+  ];
+  document.getElementById('ps-grid').innerHTML = rows.map(([k,v]) => `
+    <div class="ps-cell"><div class="ps-cell-label">${k}</div><div class="ps-cell-val">${v}</div></div>
+  `).join('');
+
+  // Price
+  const { type, capacity, pump, accessories } = state;
+  if (type) {
+    const perGal = {'UL 142 Single Wall':0.65,'UL 142 Double Wall':0.85,'UL 2085 Fireguard®':1.4,'Flameshield®':1.3,'Permatank® UST':1.6,'ACT-100-U UST':1.5,'Farm Tank':0.75};
+    let base = Math.max((perGal[type]||1.0)*capacity, 2200);
+    const pumpAdder = {'No Pump':0,'15 GPM 12V DC':380,'20 GPM Electric':520,'30 GPM Electric':750,'50 GPM Electric':1100,'100 GPM Electric':1850,'Gas-Powered':680};
+    base += (pumpAdder[pump]||0) + accessories.length*220;
+    const lo = Math.round(base*.9/100)*100, hi = Math.round(base*1.15/100)*100;
+    document.getElementById('ps-price').textContent = '$'+lo.toLocaleString()+' – $'+hi.toLocaleString();
+  } else {
+    document.getElementById('ps-price').textContent = 'Contact for quote';
+  }
+
+  document.getElementById('printSheet').style.display = 'block';
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { document.getElementById('printSheet').style.display = 'none'; }, 500);
+  }, 150);
+}
+
+// Init
+buildSteps();
+updateSpec();
+updateMockup();
+</script>
+</body>
+</html>
