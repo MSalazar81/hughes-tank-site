@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Tank – 3D Configurator | Hughes Tank Company</title>
+<meta name="description" content="Configure your custom fuel storage tank in real-time 3D. Choose type, capacity, wall, pump, color, and accessories. Get live pricing and send your build sheet instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ── LIGHTER PALETTE OVERRIDES ─────────────────────────────── */
+:root{
+  --cfg-bg:#F0F2F5;
+  --cfg-panel:#FFFFFF;
+  --cfg-panel-border:#DDE2EE;
+  --cfg-step-hover:#F5F7FA;
+  --cfg-step-open:#EEF2FF;
+  --cfg-canvas:#1C2333;
+  --cfg-specbar:#FFFFFF;
+  --cfg-muted:#5A6A88;
+  --cfg-dark:#0D1B3E;
+  --cfg-accent:#1A3A8C;
+  --cfg-accent-lt:rgba(26,58,140,0.08);
+}
+body{background:var(--cfg-bg)}
+
+/* HERO — lighter */
+.cfg-hero{background:#1C2740;padding:44px 80px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--cfg-accent)}
+.cfg-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(255,255,255,0.02) 38px,rgba(255,255,255,0.02) 39px);pointer-events:none}
+.cfg-hero-inner{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cfg-hero h1{font-family:var(--fh);font-weight:800;font-size:clamp(26px,4vw,52px);text-transform:uppercase;letter-spacing:.02em;color:#fff;line-height:1}
+.cfg-hero p{font-size:14px;color:#A8B8D0;margin-top:8px;max-width:520px;line-height:1.65}
+.cfg-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.cfg-badge{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:3px;color:#A8B8D0}
+
+/* MAIN GRID */
+.cfg-main{display:grid;grid-template-columns:320px 1fr;min-height:680px;background:var(--cfg-bg);gap:0}
+
+/* LEFT PANEL — white card */
+.cfg-panel{background:var(--cfg-panel);border-right:1px solid var(--cfg-panel-border);overflow-y:auto;max-height:780px;position:sticky;top:66px;box-shadow:2px 0 12px rgba(13,27,62,0.06)}
+.cfg-panel-hdr{background:var(--cfg-dark);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.cfg-panel-hdr h2{font-family:var(--fh);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.cfg-panel-hdr span{font-size:10px;color:rgba(255,255,255,0.45)}
+
+.step{border-bottom:1px solid var(--cfg-panel-border)}
+.step-hdr{padding:12px 18px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .15s;user-select:none}
+.step-hdr:hover{background:var(--cfg-step-hover)}
+.step-hdr.open{background:var(--cfg-step-open)}
+.step-n{width:22px;height:22px;background:var(--cfg-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
+.step-title{font-family:var(--fh);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cfg-dark);flex:1}
+.step-val{font-size:10px;color:var(--cfg-accent);font-family:var(--fh);font-weight:700;letter-spacing:.04em;text-align:right}
+.chev{font-size:9px;color:#A8B8D0;transition:transform .2s;flex-shrink:0}
+.step-hdr.open .chev{transform:rotate(180deg)}
+.step-body{display:none;padding:12px 16px 16px;background:#FAFBFD}
+.step-body.open{display:block}
+
+.opts2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{border:1.5px solid var(--cfg-panel-border);border-radius:5px;padding:9px 10px;cursor:pointer;transition:all .15s;background:#fff}
+.opt:hover{border-color:var(--cfg-accent);background:var(--cfg-accent-lt)}
+.opt.sel{border-color:var(--cfg-accent);background:var(--cfg-accent-lt)}
+.opt-lbl{font-family:var(--fh);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--cfg-dark)}
+.opt-sub{font-size:10px;color:var(--cfg-muted);margin-top:1px}
+.opt-tag{display:inline-block;font-family:var(--fh);font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;background:var(--cfg-dark);border-radius:2px;color:rgba(255,255,255,0.7);margin-top:3px}
+
+.color-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.sw{width:30px;height:30px;border-radius:5px;cursor:pointer;border:2px solid transparent;transition:all .15s;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+.sw:hover,.sw.sel{transform:scale(1.14);border-color:var(--cfg-accent);box-shadow:0 2px 8px rgba(26,58,140,0.3)}
+.sw.sel::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.8)}
+
+.acc-list{display:flex;flex-direction:column;gap:4px}
+.acc-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--cfg-panel-border);border-radius:4px;cursor:pointer;transition:all .15s;background:#fff}
+.acc-row:hover{border-color:var(--cfg-accent);background:var(--cfg-accent-lt)}
+.acc-row.sel{border-color:var(--cfg-accent);background:var(--cfg-accent-lt)}
+.acc-chk{width:16px;height:16px;border-radius:3px;border:1.5px solid #C8D0E0;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff}
+.acc-row.sel .acc-chk{background:var(--cfg-accent);border-color:var(--cfg-accent)}
+.acc-row.sel .acc-chk::after{content:'✓';font-size:10px;color:#fff;font-weight:800}
+.acc-name{font-family:var(--fh);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--cfg-dark)}
+.acc-price{font-size:10px;color:var(--cfg-accent);font-weight:600}
+
+/* VIEWER — medium gray bg, not pitch black */
+.cfg-viewer{background:#2A3245;display:flex;flex-direction:column}
+.canvas-wrap{flex:1;position:relative;min-height:440px}
+#tc{width:100%;height:100%;display:block}
+
+.view-btns{position:absolute;top:12px;right:12px;display:flex;gap:4px;z-index:10}
+.vb{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:4px;color:rgba(255,255,255,0.7);font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;cursor:pointer;transition:all .18s;backdrop-filter:blur(8px)}
+.vb:hover,.vb.on{background:var(--cfg-accent);color:#fff;border-color:var(--cfg-accent)}
+
+.live-tags{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:4px;z-index:10}
+.ltag{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.16);border-radius:4px;color:rgba(255,255,255,0.85);backdrop-filter:blur(8px)}
+
+.drag-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:var(--fh);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);white-space:nowrap}
+
+/* SPEC BAR — white, clean */
+.spec-bar{background:var(--cfg-specbar);border-top:2px solid var(--cfg-panel-border);padding:14px 22px;display:grid;grid-template-columns:repeat(5,1fr) 210px;gap:14px;align-items:center;box-shadow:0 -2px 12px rgba(13,27,62,0.06)}
+.si .sl{font-family:var(--fh);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#A8B8D0;margin-bottom:3px}
+.si .sv{font-family:var(--fh);font-weight:800;font-size:14px;color:var(--cfg-dark)}
+.si .sv.b{color:var(--cfg-accent)}
+.si .sc{font-family:var(--fh);font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--cfg-accent);background:var(--cfg-accent-lt);border:1px solid rgba(26,58,140,0.2);padding:2px 7px;border-radius:2px;display:inline-block;margin-top:3px}
+
+.price-box{text-align:right}
+.pl{font-family:var(--fh);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#A8B8D0;margin-bottom:2px}
+.pv{font-family:var(--fh);font-weight:800;font-size:26px;color:var(--cfg-dark);line-height:1}
+.pn{font-size:10px;color:#A8B8D0;margin-top:2px}
+.pb-row{display:flex;gap:5px;margin-top:8px}
+.pb-main{flex:2;background:var(--cfg-accent);color:#fff;border:none;border-radius:4px;padding:9px;font-family:var(--fh);font-weight:800;font-size:11px;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:background .18s}
+.pb-main:hover{background:#2248b0}
+.pb-pdf{flex:1;background:#F0F2F5;color:var(--cfg-muted);border:1px solid var(--cfg-panel-border);border-radius:4px;padding:9px;font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.pb-pdf:hover{background:var(--cfg-accent-lt);color:var(--cfg-accent);border-color:var(--cfg-accent)}
+
+/* DELIVERY BAR */
+.del-bar{background:#F8F9FC;border-top:1px solid var(--cfg-panel-border);padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.del-inner{display:flex;align-items:center;gap:14px}
+.del-icon{width:30px;height:30px;background:var(--cfg-accent-lt);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.del-lbl{font-family:var(--fh);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#A8B8D0}
+.del-val{font-family:var(--fh);font-weight:800;font-size:13px;color:var(--cfg-dark);margin-top:1px}
+.del-steps{display:flex;align-items:center;gap:3px}
+.ds{font-family:var(--fh);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A8B8D0;padding:3px 7px;border:1px solid var(--cfg-panel-border);border-radius:2px;background:#fff}
+.ds.on{color:var(--cfg-accent);border-color:rgba(26,58,140,0.3);background:var(--cfg-accent-lt)}
+.da{color:#C8D0E0;font-size:10px}
+
+/* COMPARISON — light cards */
+.cmp-bar{background:#fff;border-top:2px solid var(--cfg-panel-border);padding:20px 24px}
+.cmp-bar h3{font-family:var(--fh);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cfg-dark);margin-bottom:14px}
+.cmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+.cc{background:#F8F9FC;border:1px solid var(--cfg-panel-border);border-radius:6px;padding:14px}
+.cc.hl{border-color:var(--cfg-accent);background:#EEF2FF}
+.cc-lbl{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cfg-muted);margin-bottom:8px}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid var(--cfg-panel-border)}
+.cr:last-child{border-bottom:none}
+.ck{font-size:10px;color:#A8B8D0}
+.cv{font-family:var(--fh);font-weight:700;font-size:11px;color:var(--cfg-dark)}
+.cv.b{color:var(--cfg-accent)}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(13,27,62,0.55);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal.on{display:flex}
+.mbox{background:#fff;border:1px solid var(--cfg-panel-border);border-radius:8px;padding:36px;width:460px;max-width:95vw;box-shadow:0 24px 64px rgba(13,27,62,0.18)}
+.mbox h3{font-family:var(--fh);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.06em;color:var(--cfg-dark);margin-bottom:4px}
+.mbox p{font-size:13px;color:var(--cfg-muted);margin-bottom:18px;line-height:1.6}
+.msum{background:#F0F2F5;border:1px solid var(--cfg-panel-border);border-radius:5px;padding:14px 16px;margin-bottom:18px;font-size:12px;color:var(--cfg-muted);line-height:1.75}
+.mi{width:100%;background:#F8F9FC;border:1px solid var(--cfg-panel-border);border-radius:4px;padding:10px 14px;color:var(--cfg-dark);font-size:13px;font-family:var(--fb);margin-bottom:8px;outline:none;transition:border-color .18s}
+.mi:focus{border-color:var(--cfg-accent);background:#fff}
+.mi::placeholder{color:#A8B8D0}
+.mbtns{display:flex;gap:8px;margin-top:4px}
+.mc{flex:1;background:#F0F2F5;border:1px solid var(--cfg-panel-border);border-radius:4px;color:var(--cfg-muted);padding:11px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.mc:hover{border-color:var(--cfg-muted);color:var(--cfg-dark)}
+.ms{flex:2;background:var(--cfg-accent);border:none;border-radius:4px;color:#fff;padding:11px;font-family:var(--fh);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .18s}
+.ms:hover{background:#2248b0}
+
+@media(max-width:900px){.cfg-main{grid-template-columns:1fr}.cfg-panel{max-height:none;position:static}.spec-bar{grid-template-columns:repeat(2,1fr)}.cfg-hero{padding:28px 20px}.del-bar{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="tel:9723668684">972-366-8684</a>
+    <a href="mailto:sales@hughestank.com">sales@hughestank.com</a>
+    <a href="#">Mon&ndash;Fri &middot; 8am&ndash;4:30pm CST</a>
+  </div>
+  <div class="topbar-right">
+    <a href="https://www.facebook.com/hughestankcompany/" class="soc">f</a>
+    <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc">in</a>
+    <a href="https://www.instagram.com/hughestankcompany/" class="soc">ig</a>
+    <a href="https://x.com/HughesTankCo" class="soc">X</a>
+    <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc">yt</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo" style="gap:0"><img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:42px;width:auto;display:block"></a>
+  <ul class="nav-links">
+    <li><a href="/#products">Products &#9662;</a>
+      <div class="nav-dd">
+        <a href="/products/ul-142/">UL 142</a><a href="/products/fireguard/">UL 2085 Fireguard&reg;</a>
+        <a href="/products/flameshield/">Flameshield&reg;</a><a href="/products/permatank/">Permatank&reg;</a>
+        <a href="/products/act-100-u/">ACT-100-U</a><a href="/products/farm-tanks/">Farm Tanks</a>
+        <a href="/products/containment-pans/">Containment Pans</a><a href="/products/accessories/">Accessories</a>
+      </div>
+    </li>
+    <li><a href="/tank-finder/">Tank Finder</a></li>
+    <li><a href="/build-a-tank/" style="color:#fff">Build Your Tank</a></li>
+    <li><a href="/#shop">Shop</a></li>
+    <li><a href="/resources/specs/">Resources</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/about/">Company &#9662;</a>
+      <div class="nav-dd">
+        <a href="/about/">About Us</a><a href="/about/#team">Leadership</a>
+        <a href="/about/#associations">Associations</a><a href="/careers/">Careers</a>
+      </div>
+    </li>
+    <li><a href="/contact/" class="nav-cta">Request a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="cfg-hero">
+  <div class="cfg-hero-inner">
+    <div>
+      <div style="font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#A8B8D0;display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <span style="width:18px;height:2px;background:var(--blue);display:inline-block"></span>Interactive 3D Configurator
+      </div>
+      <h1>Build Your Tank.<br><span style="color:#A8B8D0">Get Real Specs.</span></h1>
+      <p>Configure your exact tank in real-time 3D. Select type, capacity, wall construction, pump package, color, and accessories. Then send us your build sheet for a 24-hour quote.</p>
+      <div class="cfg-badges">
+        <span class="cfg-badge">Real-Time 3D Preview</span>
+        <span class="cfg-badge">Live Price Estimate</span>
+        <span class="cfg-badge">PDF Spec Sheet Export</span>
+        <span class="cfg-badge">24-Hour Quote Guarantee</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-self:center">
+      <a href="#cfg" class="btn-primary">Start Configuring &darr;</a>
+      <a href="/tank-finder/" class="btn-ghost">Need Help Choosing?</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIGURATOR -->
+<div id="cfg" class="cfg-main">
+
+  <!-- LEFT PANEL -->
+  <div class="cfg-panel">
+    <div class="cfg-panel-hdr"><h2>Configure Your Tank</h2><span>6 steps</span></div>
+
+    <!-- 1: Type -->
+    <div class="step" id="s1">
+      <div class="step-hdr open" onclick="tog('s1')">
+        <div class="step-n">1</div><div class="step-title">Tank Type</div>
+        <div class="step-val" id="v1">UL 142</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body open">
+        <div class="opts2">
+          <div class="opt sel" onclick="pick('type','ul142','UL 142',this)">
+            <div class="opt-lbl">UL 142</div><div class="opt-sub">Aboveground steel</div><span class="opt-tag">Most Popular</span>
+          </div>
+          <div class="opt" onclick="pick('type','fireguard','Fireguard&reg;',this)">
+            <div class="opt-lbl">Fireguard&reg;</div><div class="opt-sub">2-hr fire rated</div><span class="opt-tag">UL 2085</span>
+          </div>
+          <div class="opt" onclick="pick('type','flameshield','Flameshield&reg;',this)">
+            <div class="opt-lbl">Flameshield&reg;</div><div class="opt-sub">STI-P3 fire protected</div><span class="opt-tag">STI-P3</span>
+          </div>
+          <div class="opt" onclick="pick('type','farm','Farm Tank',this)">
+            <div class="opt-lbl">Farm Tank</div><div class="opt-sub">Agricultural fuel</div><span class="opt-tag">UL 142</span>
+          </div>
+          <div class="opt" onclick="pick('type','permatank','Permatank&reg;',this)">
+            <div class="opt-lbl">Permatank&reg;</div><div class="opt-sub">Underground ACT-100</div><span class="opt-tag">Underground</span>
+          </div>
+          <div class="opt" onclick="pick('type','act100u','ACT-100-U',this)">
+            <div class="opt-lbl">ACT-100-U</div><div class="opt-sub">Underground ethanol</div><span class="opt-tag">Underground</span>
+          </div>
+        </div>
+        <div style="margin-top:10px;padding:8px 10px;background:var(--cfg-accent-lt);border-radius:4px;border-left:2px solid var(--cfg-accent)">
+          <div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cfg-muted);margin-bottom:2px">Not sure?</div>
+          <a href="/tank-finder/" style="font-family:var(--fh);font-size:11px;color:var(--cfg-accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase">Use Our Tank Finder &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: Capacity -->
+    <div class="step" id="s2">
+      <div class="step-hdr" onclick="tog('s2')">
+        <div class="step-n">2</div><div class="step-title">Capacity</div>
+        <div class="step-val" id="v2">5,000 gal</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body">
+        <div class="opts2">
+          <div class="opt" onclick="pick('cap','500','500 gal',this)"><div class="opt-lbl">500 gal</div></div>
+          <div class="opt" onclick="pick('cap','1000','1,000 gal',this)"><div class="opt-lbl">1,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','2000','2,000 gal',this)"><div class="opt-lbl">2,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','4000','4,000 gal',this)"><div class="opt-lbl">4,000 gal</div></div>
+          <div class="opt sel" onclick="pick('cap','5000','5,000 gal',this)"><div class="opt-lbl">5,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','8000','8,000 gal',this)"><div class="opt-lbl">8,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','10000','10,000 gal',this)"><div class="opt-lbl">10,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','15000','15,000 gal',this)"><div class="opt-lbl">15,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','20000','20,000 gal',this)"><div class="opt-lbl">20,000 gal</div></div>
+          <div class="opt" onclick="pick('cap','custom','Custom',this)"><div class="opt-lbl">Custom</div><div class="opt-sub">Any size</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: Wall -->
+    <div class="step" id="s3">
+      <div class="step-hdr" onclick="tog('s3')">
+        <div class="step-n">3</div><div class="step-title">Wall Construction</div>
+        <div class="step-val" id="v3">Single Wall</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body">
+        <div class="opts2">
+          <div class="opt sel" onclick="pick('wall','single','Single Wall',this)"><div class="opt-lbl">Single Wall</div><div class="opt-sub">Most economical</div></div>
+          <div class="opt" onclick="pick('wall','double','Double Wall',this)"><div class="opt-lbl">Double Wall</div><div class="opt-sub">Secondary containment</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--cfg-muted);line-height:1.5">Double-wall satisfies EPA SPCC requirements. Required in many environmentally sensitive locations.</div>
+      </div>
+    </div>
+
+    <!-- 4: Pump -->
+    <div class="step" id="s4">
+      <div class="step-hdr" onclick="tog('s4')">
+        <div class="step-n">4</div><div class="step-title">Pump Package</div>
+        <div class="step-val" id="v4">No Pump</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body">
+        <div class="opts2">
+          <div class="opt sel" onclick="pick('pump','none','No Pump',this)"><div class="opt-lbl">No Pump</div><div class="opt-sub">Tank only</div></div>
+          <div class="opt" onclick="pick('pump','15dc','15 GPM DC',this)"><div class="opt-lbl">15 GPM DC</div><div class="opt-sub">12V battery</div></div>
+          <div class="opt" onclick="pick('pump','15ac','15 GPM AC',this)"><div class="opt-lbl">15 GPM AC</div><div class="opt-sub">120V electric</div></div>
+          <div class="opt" onclick="pick('pump','30ac','30 GPM AC',this)"><div class="opt-lbl">30 GPM AC</div><div class="opt-sub">High flow</div></div>
+          <div class="opt" onclick="pick('pump','50ac','50 GPM AC',this)"><div class="opt-lbl">50 GPM AC</div><div class="opt-sub">Commercial</div></div>
+          <div class="opt" onclick="pick('pump','gas','Gas Powered',this)"><div class="opt-lbl">Gas Powered</div><div class="opt-sub">Off-grid</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--cfg-muted)">All pumps plumbed &amp; tested before shipment.</div>
+      </div>
+    </div>
+
+    <!-- 5: Color -->
+    <div class="step" id="s5">
+      <div class="step-hdr" onclick="tog('s5')">
+        <div class="step-n">5</div><div class="step-title">Color / Finish</div>
+        <div class="step-val" id="v5">White</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body">
+        <div class="color-row">
+          <div class="sw sel" style="background:#E8EAED;border-color:#ccc" onclick="pc('White','#E0E2E8',this)" title="White"></div>
+          <div class="sw" style="background:#C4B49A" onclick="pc('Sand Beige','#C4B49A',this)" title="Sand Beige"></div>
+          <div class="sw" style="background:#CC2222" onclick="pc('Safety Red','#CC2222',this)" title="Safety Red"></div>
+          <div class="sw" style="background:#DDAA00" onclick="pc('Safety Yellow','#DDAA00',this)" title="Safety Yellow"></div>
+          <div class="sw" style="background:#7A8A9C" onclick="pc('Gray','#7A8A9C',this)" title="Gray"></div>
+          <div class="sw" style="background:#282828" onclick="pc('Black','#282828',this)" title="Black"></div>
+          <div class="sw" style="background:#2D5A1B" onclick="pc('Forest Green','#2D5A1B',this)" title="Forest Green"></div>
+          <div class="sw" style="background:#1A3A8C" onclick="pc('Navy Blue','#1A3A8C',this)" title="Navy Blue"></div>
+          <div class="sw" style="background:#8B4513" onclick="pc('Rust Brown','#8B4513',this)" title="Rust Brown"></div>
+        </div>
+        <div id="cname" style="font-family:var(--fh);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--cfg-muted);margin-bottom:6px">White &mdash; Polyurethane Top Coat</div>
+        <div style="font-size:11px;color:#A8B8D0">Custom colors available. All tanks sandblasted and finish coated.</div>
+      </div>
+    </div>
+
+    <!-- 6: Accessories -->
+    <div class="step" id="s6">
+      <div class="step-hdr" onclick="tog('s6')">
+        <div class="step-n">6</div><div class="step-title">Accessories</div>
+        <div class="step-val" id="v6">None</div><div class="chev">&#9660;</div>
+      </div>
+      <div class="step-body">
+        <div class="acc-list">
+          <div class="acc-row" onclick="ta(this,'Flow Meter',280)"><div class="acc-chk"></div><div><div class="acc-name">Flow Meter</div><div class="acc-price">+$280</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Spill Container',185)"><div class="acc-chk"></div><div><div class="acc-name">Spill Container</div><div class="acc-price">+$185</div></div></div>
+          <div class="acc-row" onclick="ta(this,'High-Level Alarm',320)"><div class="acc-chk"></div><div><div class="acc-name">High-Level Alarm</div><div class="acc-price">+$320</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Containment Pan',550)"><div class="acc-chk"></div><div><div class="acc-name">Containment Pan</div><div class="acc-price">+$550</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Level Gauge',145)"><div class="acc-chk"></div><div><div class="acc-name">Mechanical Level Gauge</div><div class="acc-price">+$145</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Ladder & Platform',680)"><div class="acc-chk"></div><div><div class="acc-name">Ladder &amp; Platform</div><div class="acc-price">+$680</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Forklift Pockets',220)"><div class="acc-chk"></div><div><div class="acc-name">Forklift Pockets</div><div class="acc-price">+$220</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Hose Reel',390)"><div class="acc-chk"></div><div><div class="acc-name">Hose Reel</div><div class="acc-price">+$390</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Overfill Prevention',265)"><div class="acc-chk"></div><div><div class="acc-name">Overfill Prevention Valve</div><div class="acc-price">+$265</div></div></div>
+          <div class="acc-row" onclick="ta(this,'Interstitial Sensor',245)"><div class="acc-chk"></div><div><div class="acc-name">Interstitial Sensor</div><div class="acc-price">+$245</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: 3D VIEWER -->
+  <div class="cfg-viewer">
+    <div class="canvas-wrap">
+      <canvas id="tc"></canvas>
+      <div class="live-tags">
+        <div class="ltag" id="lt1">UL 142 &middot; Aboveground</div>
+        <div class="ltag" id="lt2">Single Wall</div>
+        <div class="ltag" id="lt3">UL Listed</div>
+      </div>
+      <div class="view-btns">
+        <button class="vb on" onclick="sv('iso',this)">3D</button>
+        <button class="vb" onclick="sv('front',this)">Front</button>
+        <button class="vb" onclick="sv('side',this)">Side</button>
+        <button class="vb" onclick="sv('top',this)">Top</button>
+      </div>
+      <div class="drag-hint">Drag to rotate &middot; Scroll to zoom</div>
+    </div>
+
+    <div class="spec-bar">
+      <div class="si"><div class="sl">Tank Type</div><div class="sv b" id="sT">UL 142</div></div>
+      <div class="si"><div class="sl">Capacity</div><div class="sv" id="sC">5,000 gal</div></div>
+      <div class="si"><div class="sl">Dimensions</div><div class="sv" id="sD">96&Prime;&times;119&Prime;</div></div>
+      <div class="si"><div class="sl">Est. Weight</div><div class="sv" id="sW">3,900 lbs</div></div>
+      <div class="si"><div class="sl">Certification</div><div class="sv" id="sCv">UL 142</div><div class="sc" id="sCb">UL Listed</div></div>
+      <div class="price-box">
+        <div class="pl">Est. Starting Price</div>
+        <div class="pv" id="sP">$7,200</div>
+        <div class="pn">Factory direct &middot; Exact quote in 24hrs</div>
+        <div class="pb-row">
+          <button class="pb-main" onclick="openM()">Submit Build Sheet &rarr;</button>
+          <button class="pb-pdf" onclick="xPDF()">&#8595; PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="del-bar">
+      <div class="del-inner">
+        <div class="del-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div><div class="del-lbl">Est. Lead Time from Order</div><div class="del-val" id="dv">2&ndash;4 weeks</div></div>
+      </div>
+      <div class="del-steps">
+        <div class="ds on">Quote</div><div class="da">&rsaquo;</div>
+        <div class="ds on">Engineering</div><div class="da">&rsaquo;</div>
+        <div class="ds">Fabrication</div><div class="da">&rsaquo;</div>
+        <div class="ds">Air Test</div><div class="da">&rsaquo;</div>
+        <div class="ds">Delivery</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<div class="cmp-bar">
+  <h3>How Your Selection Compares to Alternatives</h3>
+  <div class="cmp-grid" id="cmpGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="qModal">
+  <div class="mbox">
+    <h3>Send Your Build Sheet</h3>
+    <p>We'll respond with exact pricing and lead time within 24 hours &mdash; guaranteed.</p>
+    <div class="msum" id="msum"></div>
+    <input class="mi" type="text" id="qn" placeholder="Your name *">
+    <input class="mi" type="email" id="qe" placeholder="Email address *">
+    <input class="mi" type="tel" id="qp" placeholder="Phone number">
+    <input class="mi" type="text" id="qc" placeholder="Company name">
+    <textarea class="mi" id="qnotes" rows="2" placeholder="Additional notes..." style="resize:none"></textarea>
+    <div class="mbtns">
+      <button class="mc" onclick="closeM()">Cancel</button>
+      <button class="ms" onclick="sendQ()">Send Build Sheet &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:44px;width:auto;margin-bottom:14px">
+      <p class="footer-brand-text">UL-certified manufacturer of steel fuel storage tanks. Serving agriculture, petroleum, industrial, and government customers throughout the U.S. since 1985.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/hughestankcompany/" class="soc">f</a>
+        <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc">in</a>
+        <a href="https://www.instagram.com/hughestankcompany/" class="soc">ig</a>
+        <a href="https://x.com/HughesTankCo" class="soc">X</a>
+        <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc">yt</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Products</h5><ul>
+      <li><a href="/products/ul-142/">UL 142</a></li>
+      <li><a href="/products/fireguard/">UL 2085 Fireguard&reg;</a></li>
+      <li><a href="/products/flameshield/">Flameshield&reg;</a></li>
+      <li><a href="/products/permatank/">Permatank&reg;</a></li>
+      <li><a href="/products/act-100-u/">ACT-100-U</a></li>
+      <li><a href="/products/farm-tanks/">Farm Tanks</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Tools</h5><ul>
+      <li><a href="/build-a-tank/">Build-A-Tank 3D</a></li>
+      <li><a href="/tank-finder/">Tank Finder</a></li>
+      <li><a href="/resources/tank-charts/">Tank Chart Generator</a></li>
+      <li><a href="/resources/compliance/">Compliance Guide</a></li>
+      <li><a href="/resources/specs/">Spec Sheets</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5>
+      <p class="footer-contact-text"><strong>2900 N FM 157</strong><br>Venus, TX 76084<br><br>
+      <strong>Phone:</strong> <a href="tel:9723668684" style="color:var(--steel)">972-366-8684</a><br>
+      <strong>Email:</strong> <a href="mailto:sales@hughestank.com" style="color:var(--steel)">sales@hughestank.com</a><br><br>
+      <strong>Office Hours</strong><br>Mon&ndash;Fri &middot; 8am&ndash;4:30pm</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hughes Tank Company &middot; All Rights Reserved &middot; <a href="/privacy-policy/" style="color:var(--muted)">Privacy Policy</a> &middot; <a href="/terms/" style="color:var(--muted)">Terms &amp; Conditions</a></p>
+    <p>UL 142 &middot; UL 2085 Fireguard&reg; &middot; Flameshield&reg; &middot; Permatank&reg; &middot; ACT-100-U Certified Manufacturer</p>
+  </div>
+</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────
+const TD={
+  ul142:     {label:'UL 142',       sl:'UL 142 · Aboveground',   cert:'UL 142',    cb:'UL Listed',     base:1.0,lead:'2–4 weeks',shape:'h'},
+  fireguard: {label:'Fireguard®',   sl:'Fireguard® · Fire Rated', cert:'UL 2085',   cb:'UL 2085',       base:2.6,lead:'4–6 weeks',shape:'h'},
+  flameshield:{label:'Flameshield®',sl:'Flameshield® · STI-P3',  cert:'STI-P3',    cb:'STI-P3 Listed', base:2.2,lead:'4–6 weeks',shape:'h'},
+  farm:      {label:'Farm Tank',    sl:'Farm Tank · UL 142',     cert:'UL 142',    cb:'UL Listed',     base:0.8,lead:'2–3 weeks',shape:'farm'},
+  permatank: {label:'Permatank®',   sl:'Permatank® · Underground',cert:'ACT-100',   cb:'STI ACT-100',   base:1.4,lead:'6–8 weeks',shape:'h'},
+  act100u:   {label:'ACT-100-U',    sl:'ACT-100-U · Underground', cert:'ACT-100-U', cb:'STI ACT-100-U', base:1.5,lead:'6–8 weeks',shape:'h'},
+};
+const CD={
+  '500':  {dims:'48″×63″', weight:'680 lbs',   price:2800, r:0.5, l:0.65},
+  '1000': {dims:'48″×119″',weight:'1,050 lbs', price:3600, r:0.5, l:1.2},
+  '2000': {dims:'64″×119″',weight:'1,820 lbs', price:4800, r:0.67,l:1.2},
+  '4000': {dims:'64″×228″',weight:'3,100 lbs', price:6200, r:0.67,l:2.3},
+  '5000': {dims:'96″×119″',weight:'3,900 lbs', price:7200, r:1.0, l:1.2},
+  '8000': {dims:'96″×183″',weight:'5,600 lbs', price:9800, r:1.0, l:1.85},
+  '10000':{dims:'120″×143″',weight:'7,200 lbs',price:13500,r:1.25,l:1.45},
+  '15000':{dims:'120″×210″',weight:'10,200 lbs',price:18200,r:1.25,l:2.1},
+  '20000':{dims:'120″×284″',weight:'12,800 lbs',price:23500,r:1.25,l:2.85},
+  'custom':{dims:'Custom', weight:'Contact us', price:0,  r:1.0, l:1.5},
+};
+const PC={none:0,'15dc':620,'15ac':720,'30ac':950,'50ac':1350,gas:890};
+const C={type:'ul142',cap:'5000',wall:'single',pump:'none',colorName:'White',colorHex:'#E0E2E8',acc:[],accCost:0};
+let rx=0.22,ry=0.55,dist=5.5,drag=false,px=0,py=0;
+let scene,camera,renderer,meshes=[];
+
+// ── THREE.JS — realistic light painted steel tank ────────────────────
+function initThree(){
+  const cv=document.getElementById('tc'),wp=cv.parentElement;
+  const W=wp.clientWidth||800,H=wp.clientHeight||440;
+  scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x2A3245);
+
+  // Subtle gradient background via a large sphere
+  camera=new THREE.PerspectiveCamera(36,W/H,0.1,100);
+  renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:false});
+  renderer.setSize(W,H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.25;
+
+  // Studio lighting — matches your white-tank render style
+  // Key light — warm, top-left (mimics your renders)
+  const key=new THREE.DirectionalLight(0xFFF5EE,2.2);
+  key.position.set(-6,10,8);key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048);key.shadow.bias=-0.0005;
+  scene.add(key);
+  // Fill light — cool, opposite side
+  const fill=new THREE.DirectionalLight(0xDDEEFF,0.9);
+  fill.position.set(8,4,-6);scene.add(fill);
+  // Top rim — brightens top face like your renders
+  const top=new THREE.DirectionalLight(0xFFFFFF,1.1);
+  top.position.set(0,14,2);scene.add(top);
+  // Subtle ambient
+  scene.add(new THREE.AmbientLight(0xEEF0F8,0.7));
+  // Ground bounce — warm undersides
+  const bounce=new THREE.DirectionalLight(0xFFF0D0,0.25);
+  bounce.position.set(0,-8,0);scene.add(bounce);
+
+  // Ground plane — gray concrete look
+  const fl=new THREE.Mesh(
+    new THREE.PlaneGeometry(40,40),
+    new THREE.MeshStandardMaterial({color:0x6A7080,roughness:0.95,metalness:0.0})
+  );
+  fl.rotation.x=-Math.PI/2;fl.position.y=-1.62;fl.receiveShadow=true;scene.add(fl);
+
+  // Grid
+  const grid=new THREE.GridHelper(30,30,0x5A6275,0x5A6275);
+  grid.position.y=-1.61;grid.material.opacity=0.4;grid.material.transparent=true;scene.add(grid);
+
+  buildTank();
+
+  const canvas=document.getElementById('tc');
+  canvas.addEventListener('mousedown',e=>{drag=true;px=e.clientX;py=e.clientY;});
+  window.addEventListener('mouseup',()=>drag=false);
+  canvas.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    ry+=(e.clientX-px)*0.012;rx+=(e.clientY-py)*0.006;
+    rx=Math.max(-0.75,Math.min(0.75,rx));px=e.clientX;py=e.clientY;
+  });
+  canvas.addEventListener('wheel',e=>{dist=Math.max(2.5,Math.min(12,dist+e.deltaY*0.013));e.preventDefault();},{passive:false});
+  let tl=null;
+  canvas.addEventListener('touchstart',e=>{tl=e.touches[0];});
+  canvas.addEventListener('touchmove',e=>{
+    if(!tl)return;const t=e.touches[0];
+    ry+=(t.clientX-tl.clientX)*0.015;rx+=(t.clientY-tl.clientY)*0.008;
+    rx=Math.max(-0.75,Math.min(0.75,rx));tl=t;e.preventDefault();
+  },{passive:false});
+  animate();
+  window.addEventListener('resize',()=>{
+    const W2=wp.clientWidth,H2=wp.clientHeight||440;
+    camera.aspect=W2/H2;camera.updateProjectionMatrix();renderer.setSize(W2,H2);
+  });
+}
+
+function clr(){meshes.forEach(m=>scene.remove(m));meshes=[];}
+function addM(geo,mat,pos,rot){
+  const m=new THREE.Mesh(geo,mat);
+  if(pos)m.position.set(...pos);if(rot)m.rotation.set(...rot);
+  m.castShadow=true;m.receiveShadow=true;scene.add(m);meshes.push(m);return m;
+}
+
+function buildTank(){
+  clr();
+  const cd=CD[C.cap]||CD['5000'];
+  const r=cd.r*0.72,L=cd.l*1.72;
+  const col=new THREE.Color(C.colorHex);
+  const isFarm=C.type==='farm';
+  const isUnder=C.type==='permatank'||C.type==='act100u';
+
+  // ── Main tank material — painted steel matching your renders ──────
+  const tankMat=new THREE.MeshStandardMaterial({
+    color:col,
+    roughness:0.18,   // slightly glossy like painted steel
+    metalness:0.08,   // very low metalness — painted not chrome
+    envMapIntensity:0.4,
+  });
+
+  // Highlight material for fittings — unpainted steel (darker, more metallic)
+  const steelMat=new THREE.MeshStandardMaterial({color:0x9AABB8,roughness:0.35,metalness:0.75});
+  const darkSteelMat=new THREE.MeshStandardMaterial({color:0x6A7A88,roughness:0.4,metalness:0.7});
+
+  if(isFarm){
+    // ── FARM TANK — cylindrical on skid ──────────────────────────────
+    addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,0,0],[0,0,Math.PI/2]);
+    // Elliptical end caps
+    const cg=new THREE.SphereGeometry(r,48,24,0,Math.PI*2,0,Math.PI/2);
+    const c1=addM(cg,tankMat);c1.rotation.set(-Math.PI/2,0,-Math.PI/2);c1.position.x=L/2;
+    const c2=addM(cg,tankMat);c2.rotation.set(Math.PI/2,0,Math.PI/2);c2.position.x=-L/2;
+    // Skid frame — like your farm tank image
+    const skidMat=new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.25,metalness:0.1});
+    addM(new THREE.BoxGeometry(L+0.3,0.08,r*1.6),skidMat,[0,-(r+0.04),0]);
+    addM(new THREE.BoxGeometry(L+0.3,0.08,0.1),skidMat,[0,-(r+0.04),r*0.8]);
+    addM(new THREE.BoxGeometry(L+0.3,0.08,0.1),skidMat,[0,-(r+0.04),-r*0.8]);
+    // Skid end braces
+    addM(new THREE.BoxGeometry(0.1,r*0.9,r*1.6),skidMat,[L/2+0.15,-(r*0.55),0]);
+    addM(new THREE.BoxGeometry(0.1,r*0.9,r*1.6),skidMat,[-(L/2+0.15),-(r*0.55),0]);
+    // Farm tank — stair ladder on side like your image
+    const ladMat=new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.25,metalness:0.1});
+    addM(new THREE.BoxGeometry(0.04,r*1.8,0.04),ladMat,[L/2+0.25,-(r*0.1),0.18]);
+    addM(new THREE.BoxGeometry(0.04,r*1.8,0.04),ladMat,[L/2+0.25,-(r*0.1),-0.18]);
+    for(let i=0;i<8;i++)addM(new THREE.CylinderGeometry(0.018,0.018,0.38,8),ladMat,[L/2+0.25,-r+i*0.24,0],[0,0,Math.PI/2]);
+  } else {
+    // ── CYLINDRICAL TANK (UL 142, Fireguard, etc.) ───────────────────
+    addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,0,0],[0,0,Math.PI/2]);
+    const cg=new THREE.SphereGeometry(r,48,24,0,Math.PI*2,0,Math.PI/2);
+    const c1=addM(cg,tankMat);c1.rotation.set(-Math.PI/2,0,-Math.PI/2);c1.position.x=L/2;
+    const c2=addM(cg,tankMat);c2.rotation.set(Math.PI/2,0,Math.PI/2);c2.position.x=-L/2;
+
+    // Fireguard — add outer shell (slightly larger, more subtle than double-wall)
+    if(C.type==='fireguard'||C.type==='flameshield'){
+      const outerCol=new THREE.Color(C.colorHex);
+      addM(new THREE.CylinderGeometry(r*1.085,r*1.085,L*1.01,64),
+        new THREE.MeshStandardMaterial({color:outerCol,roughness:0.2,metalness:0.06,transparent:true,opacity:0.55,side:THREE.DoubleSide}),
+        [0,0,0],[0,0,Math.PI/2]);
+    }
+
+    // Double-wall overlay
+    if(C.wall==='double'&&C.type!=='fireguard'&&C.type!=='flameshield'){
+      addM(new THREE.CylinderGeometry(r*1.09,r*1.09,L*1.005,64),
+        new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.22,metalness:0.06,transparent:true,opacity:0.45,side:THREE.DoubleSide}),
+        [0,0,0],[0,0,Math.PI/2]);
+    }
+
+    // ── SADDLE SUPPORTS — matching your render style ──────────────────
+    const saddleMat=new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.22,metalness:0.08});
+    const sH=r*1.05;
+    // Saddle sides (curved profile approximated as tapered box)
+    [-L*0.27,L*0.27].forEach(xp=>{
+      addM(new THREE.BoxGeometry(0.12,sH,r*1.7),saddleMat,[xp,-(r-sH/2+0.06),0]);
+      // Saddle foot
+      addM(new THREE.BoxGeometry(0.22,0.06,r*1.85),saddleMat,[xp,-(r+sH/2-0.03),0]);
+    });
+
+    // Underground tanks — show soil suggestion
+    if(isUnder){
+      addM(new THREE.BoxGeometry(L+0.9,r*2+0.5,r*2+0.5),
+        new THREE.MeshStandardMaterial({color:0x7A5E3A,roughness:0.97,transparent:true,opacity:0.25}),
+        [0,0,0]);
+    }
+  }
+
+  // ── FITTINGS on top — matching your renders ───────────────────────
+  // Manhole (large round on top — key feature visible in your renders)
+  const manholeRing=new THREE.Mesh(new THREE.CylinderGeometry(r*0.22,r*0.22,0.07,32),steelMat);
+  manholeRing.position.set(0,r+0.035,0);manholeRing.castShadow=true;scene.add(manholeRing);meshes.push(manholeRing);
+  const manholeLid=new THREE.Mesh(new THREE.CylinderGeometry(r*0.20,r*0.20,0.045,32),darkSteelMat);
+  manholeLid.position.set(0,r+0.085,0);manholeLid.castShadow=true;scene.add(manholeLid);meshes.push(manholeLid);
+
+  // Vents (visible in your renders as small cylinders on top)
+  [[L*0.18,0],[L*0.06,r*0.3],[-L*0.06,r*0.3]].forEach(([xp,zp])=>{
+    const vt=addM(new THREE.CylinderGeometry(0.035,0.035,0.22,12),steelMat,[xp,r+0.11,zp]);
+    // Vent cap
+    addM(new THREE.SphereGeometry(0.038,12,8),steelMat,[xp,r+0.24,zp]);
+  });
+
+  // Fill cap
+  addM(new THREE.CylinderGeometry(0.07,0.07,0.09,16),steelMat,[-L*0.25,r+0.045,0]);
+  addM(new THREE.CylinderGeometry(0.078,0.078,0.03,16),steelMat,[-L*0.25,r+0.11,0]);
+
+  // Lifting eyes (triangular loops visible in your renders)
+  [L*0.3,-L*0.3].forEach(xp=>{
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(0.045,0.012,8,16),steelMat);
+    ring.position.set(xp,r+0.04,0);ring.rotation.x=Math.PI/2;
+    ring.castShadow=true;scene.add(ring);meshes.push(ring);
+  });
+
+  // UL label plate (visible on side in your renders)
+  addM(new THREE.BoxGeometry(0.18,0.12,0.015),
+    new THREE.MeshStandardMaterial({color:0xDDE2EE,roughness:0.3,metalness:0.3}),
+    [L/2-0.01,0,r]);
+
+  // ── PUMP PACKAGE ──────────────────────────────────────────────────
+  if(C.pump!=='none'){
+    const pumpCol=new THREE.Color(C.colorHex);
+    const pumpMat=new THREE.MeshStandardMaterial({color:pumpCol,roughness:0.2,metalness:0.1});
+    addM(new THREE.BoxGeometry(0.24,0.36,0.2),pumpMat,[L*0.44,-(r-0.18),0.18]);
+    addM(new THREE.CylinderGeometry(0.09,0.09,0.3,16),new THREE.MeshStandardMaterial({color:0x5A7090,roughness:0.3,metalness:0.7}),[L*0.44,-(r-0.18),0.18],[0,0,Math.PI/2]);
+    addM(new THREE.CylinderGeometry(0.028,0.028,0.6,8),new THREE.MeshStandardMaterial({color:0x222222,roughness:0.8}),[L*0.44,-(r+0.48),0.18]);
+    addM(new THREE.BoxGeometry(0.065,0.065,0.22),steelMat,[L*0.44,-(r+0.8),0.18]);
+  }
+
+  // ── ACCESSORIES ───────────────────────────────────────────────────
+  if(C.acc.includes('Containment Pan')){
+    const panMat=new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.25,metalness:0.08,transparent:true,opacity:0.7});
+    const pW=L+0.55,pD=r*2.3+0.7;
+    addM(new THREE.BoxGeometry(pW,0.07,pD),panMat,[0,-(r*1.6),0]);
+    [[0,-(r*1.25),pD/2],[0,-(r*1.25),-pD/2]].forEach(p=>addM(new THREE.BoxGeometry(pW,0.28,0.05),panMat,p));
+    [[pW/2,-(r*1.25),0],[-pW/2,-(r*1.25),0]].forEach(p=>addM(new THREE.BoxGeometry(0.05,0.28,pD),panMat,p));
+  }
+  if(C.acc.includes('Ladder & Platform')){
+    const ladMat=new THREE.MeshStandardMaterial({color:0xB8C5D0,roughness:0.4,metalness:0.65});
+    addM(new THREE.BoxGeometry(0.04,r*2+0.2,0.04),ladMat,[L/2+0.28,-r*0.1+0.1,0.18]);
+    addM(new THREE.BoxGeometry(0.04,r*2+0.2,0.04),ladMat,[L/2+0.28,-r*0.1+0.1,-0.18]);
+    for(let i=0;i<8;i++)addM(new THREE.CylinderGeometry(0.015,0.015,0.38,8),ladMat,[L/2+0.28,-r+i*0.26,0],[0,0,Math.PI/2]);
+  }
+  if(C.acc.includes('Forklift Pockets')){
+    const pkMat=new THREE.MeshStandardMaterial({color:new THREE.Color(C.colorHex),roughness:0.22,metalness:0.08});
+    [-r*0.65,r*0.65].forEach(z=>addM(new THREE.BoxGeometry(L+0.08,0.11,0.22),pkMat,[0,-(r+0.55),z]));
+  }
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  camera.position.x=dist*Math.sin(ry)*Math.cos(rx);
+  camera.position.y=dist*Math.sin(rx)+0.5;
+  camera.position.z=dist*Math.cos(ry)*Math.cos(rx);
+  camera.lookAt(0,0,0);
+  renderer.render(scene,camera);
+}
+
+function sv(v,btn){
+  document.querySelectorAll('.vb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const views={iso:[0.22,0.55],front:[0.12,0.02],side:[0.12,Math.PI/2],top:[Math.PI/2-0.05,0.01]};
+  [rx,ry]=views[v];dist=5.5;
+}
+
+// ── CONFIG ────────────────────────────────────────────────────────────
+function pick(f,v,label,el){
+  C[f]=v;
+  el.closest('.opts2,.opts3').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  const m={type:'v1',cap:'v2',wall:'v3',pump:'v4'};
+  if(m[f])document.getElementById(m[f]).innerHTML=label;
+  upAll();
+}
+function pc(name,hex,el){
+  C.colorName=name;C.colorHex=hex;
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('v5').textContent=name;
+  document.getElementById('cname').textContent=name+' — Polyurethane Top Coat';
+  buildTank();
+}
+function ta(el,name,cost){
+  el.classList.toggle('sel');
+  if(el.classList.contains('sel')){C.acc.push(name);C.accCost+=cost;}
+  else{C.acc=C.acc.filter(a=>a!==name);C.accCost-=cost;}
+  const n=C.acc.length;
+  document.getElementById('v6').textContent=n===0?'None':n+' item'+(n>1?'s':'');
+  upAll();
+}
+function tog(id){
+  document.querySelector('#'+id+' .step-hdr').classList.toggle('open');
+  document.querySelector('#'+id+' .step-body').classList.toggle('open');
+}
+function calcP(){
+  const td=TD[C.type],cd=CD[C.cap]||CD['5000'];
+  if(C.cap==='custom')return 0;
+  let p=cd.price*td.base;
+  if(C.wall==='double')p*=1.35;
+  p+=PC[C.pump]||0;p+=C.accCost;
+  return Math.round(p);
+}
+function upAll(){
+  const td=TD[C.type],cd=CD[C.cap]||CD['5000'],p=calcP();
+  document.getElementById('sT').textContent=td.label;
+  document.getElementById('sC').textContent=C.cap==='custom'?'Custom':parseInt(C.cap).toLocaleString()+' gal';
+  document.getElementById('sD').textContent=cd.dims;
+  document.getElementById('sW').textContent=cd.weight;
+  document.getElementById('sCv').textContent=td.cert;
+  document.getElementById('sCb').textContent=td.cb;
+  document.getElementById('sP').textContent=p>0?'$'+p.toLocaleString():'Call for Quote';
+  document.getElementById('lt1').innerHTML=td.sl;
+  document.getElementById('lt2').textContent=C.wall==='double'?'Double Wall':'Single Wall';
+  document.getElementById('lt3').textContent=td.cb;
+  document.getElementById('dv').textContent=td.lead+' from order';
+  buildTank();upCmp();
+}
+function upCmp(){
+  const types=['ul142','fireguard','flameshield','farm'];
+  const cd=CD[C.cap]||CD['5000'];
+  document.getElementById('cmpGrid').innerHTML=types.map(t=>{
+    const td=TD[t],p=Math.round(cd.price*td.base*(C.wall==='double'?1.35:1));
+    const isc=t===C.type;
+    return`<div class="cc${isc?' hl':''}">${isc?'<div style="font-family:var(--fh);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--cfg-accent);margin-bottom:6px;font-weight:700">← Your Selection</div>':''}
+    <div class="cc-lbl">${td.label}</div>
+    <div class="cr"><span class="ck">Cert</span><span class="cv b">${td.cert}</span></div>
+    <div class="cr"><span class="ck">Lead Time</span><span class="cv">${td.lead}</span></div>
+    <div class="cr"><span class="ck">Fire Rated</span><span class="cv">${t==='fireguard'||t==='flameshield'?'Yes — 2hr':'No'}</span></div>
+    <div class="cr"><span class="ck">2nd Contain.</span><span class="cv">${t==='fireguard'||t==='flameshield'?'Built-in':'Optional'}</span></div>
+    <div class="cr"><span class="ck">Est. Price</span><span class="cv b">${C.cap==='custom'?'Custom':'$'+p.toLocaleString()}</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────
+function openM(){
+  const td=TD[C.type],cd=CD[C.cap]||CD['5000'],p=calcP();
+  document.getElementById('msum').innerHTML=
+    `<strong>Your Configuration</strong><br>
+    Type: ${td.label} &nbsp;·&nbsp; Capacity: ${C.cap==='custom'?'Custom':parseInt(C.cap).toLocaleString()+' gal'}<br>
+    Wall: ${C.wall==='double'?'Double Wall':'Single Wall'} &nbsp;·&nbsp; Pump: ${C.pump==='none'?'None':C.pump}<br>
+    Color: ${C.colorName}${C.acc.length?' &nbsp;·&nbsp; Accessories: '+C.acc.join(', '):''}<br>
+    Dimensions: ${cd.dims} &nbsp;·&nbsp; Weight: ${cd.weight}<br>
+    <strong>Est. Price: ${p>0?'$'+p.toLocaleString():'Custom — Contact Us'}</strong>`;
+  document.getElementById('qModal').classList.add('on');
+}
+function closeM(){document.getElementById('qModal').classList.remove('on');}
+function sendQ(){
+  const n=document.getElementById('qn').value.trim(),e=document.getElementById('qe').value.trim();
+  if(!n||!e){alert('Please enter your name and email.');return;}
+  document.querySelector('.mbox').innerHTML=`<div style="text-align:center;padding:20px 0">
+    <div style="font-size:48px;margin-bottom:12px;color:var(--cfg-accent)">&#10003;</div>
+    <h3 style="font-family:var(--fh);font-size:20px;font-weight:800;text-transform:uppercase;color:var(--cfg-dark);margin-bottom:10px">Build Sheet Sent!</h3>
+    <p style="font-size:14px;color:var(--cfg-muted);line-height:1.6;max-width:300px;margin:0 auto 20px">We'll respond within 24 hours with exact pricing and lead time.</p>
+    <div style="font-family:var(--fh);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid var(--cfg-panel-border);padding-top:14px">Hughes Tank Company &middot; 972-366-8684</div>
+    <button onclick="closeM()" style="margin-top:16px;background:var(--cfg-accent);border:none;border-radius:4px;color:#fff;padding:9px 22px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Close</button>
+  </div>`;
+}
+
+// ── PDF ───────────────────────────────────────────────────────────────
+function xPDF(){
+  if(typeof window.jspdf==='undefined'){alert('PDF loading... try again in a moment.');return;}
+  const{jsPDF}=window.jspdf,doc=new jsPDF({orientation:'portrait',unit:'mm',format:'letter'});
+  const td=TD[C.type],cd=CD[C.cap]||CD['5000'],p=calcP(),now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  doc.setFillColor(13,27,62);doc.rect(0,0,216,42,'F');
+  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('HUGHES TANK COMPANY',14,15);
+  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(168,184,208);
+  doc.text('2900 N FM 157 · Venus, TX 76084 · 972-366-8684 · sales@hughestank.com',14,23);
+  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text('TANK CONFIGURATION SPEC SHEET',14,33);
+  doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Generated: '+now,152,33);
+  doc.setFillColor(26,58,140);doc.rect(0,42,216,2.5,'F');
+  doc.setFillColor(242,244,248);doc.rect(0,44.5,216,20,'F');
+  doc.setTextColor(13,27,62);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(td.label,14,57);
+  doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(90,106,136);
+  doc.text(td.cb+' · '+(C.wall==='double'?'Double-Wall':'Single-Wall')+' · Venus, TX',14,63);
+  const specs=[['Tank Type',td.label],['Certification',td.cb],['Capacity',C.cap==='custom'?'Custom':parseInt(C.cap).toLocaleString()+' gallons'],['Dimensions',cd.dims],['Wall Construction',C.wall==='double'?'Double-Wall (Secondary Containment)':'Single-Wall'],['Estimated Weight',cd.weight],['Pump Package',C.pump==='none'?'None':C.pump.toUpperCase()],['Color / Finish',C.colorName+' — Polyurethane Top Coat'],['Estimated Lead Time',td.lead+' from confirmed order']];
+  let y=75;
+  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(13,27,62);doc.text('TANK SPECIFICATIONS',14,y);y+=5;
+  doc.setFillColor(26,58,140);doc.rect(14,y,188,0.5,'F');y+=5;
+  specs.forEach((row,i)=>{if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4,188,8,'F');}doc.setFont('helvetica','bold');doc.setTextColor(90,106,136);doc.setFontSize(9);doc.text(row[0].toUpperCase(),16,y);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(10);doc.text(row[1],85,y);y+=8;});
+  if(C.acc.length>0){y+=4;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(13,27,62);doc.text('ACCESSORIES',14,y);y+=5;doc.setFillColor(26,58,140);doc.rect(14,y,188,0.5,'F');y+=5;C.acc.forEach((a,i)=>{if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4,188,8,'F');}doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('• '+a,16,y);y+=8;});}
+  y+=6;doc.setFillColor(230,240,255);doc.rect(14,y-3,188,26,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(26,58,140);doc.text('STANDARD EQUIPMENT ON ALL TANKS:',16,y+3);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(9);doc.text('Fill connection w/ dust cap · Normal vent (UL listed) · Emergency vent (UL listed) · Suction & return connections',16,y+10);doc.text('Manhole cover · Red oxide primer standard · Steel saddle supports · Air tested at 5 PSI before shipment',16,y+16);doc.text('One-year manufacturer\'s warranty · UL label and full documentation included',16,y+22);y+=32;
+  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(18);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom — Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Factory-direct · Exact quote within 24 hours · No distributor markup',100,y+13);
+  doc.setFillColor(242,244,248);doc.rect(0,260,216,30,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('HUGHES TANK COMPANY',14,270);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(90,106,136);doc.text('2900 N FM 157 · Venus, TX 76084 · Phone: 972-366-8684 · sales@hughestank.com',14,277);doc.text('Office Hours: Mon–Fri 8am–4:30pm · Loading: Mon–Fri 7am–2:30pm',14,283);doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(168,184,208);doc.text('Estimates for reference only. Pricing and specifications subject to change. Contact Hughes Tank for exact quote.',14,294);
+  doc.save('Hughes-Tank-'+C.type+'-'+C.cap+'gal.pdf');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{initThree();upAll();});
+</script>
+</body>
+</html>

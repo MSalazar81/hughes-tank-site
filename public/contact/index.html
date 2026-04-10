@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us & Request a Quote | Hughes Tank Company</title>
+<meta name="description" content="Request a quote from Hughes Tank Company. We respond within 24 hours. Call 972-366-8684 or email sales@hughestank.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<!-- ══ TOPBAR ══ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="tel:9723668684">972-366-8684</a>
+    <a href="mailto:sales@hughestank.com">sales@hughestank.com</a>
+    <a href="#">Mon–Fri &middot; 8am–4:30pm CST</a>
+  </div>
+  <div class="topbar-right">
+    <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
+    <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
+    <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
+    <a href="https://x.com/HughesTankCo" class="soc" title="X / Twitter">X</a>
+    <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="/" class="nav-logo" style="gap:0">
+    <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:42px;width:auto;display:block">
+  </a>
+  <ul class="nav-links">
+    <li>
+      <a href="#products">Products &#9662;</a>
+      <div class="nav-dd">
+        <a href="/products/ul-142/">UL 142</a>
+        <a href="/products/fireguard/">UL 2085 Fireguard&reg;</a>
+        <a href="/products/flameshield/">Flameshield&reg;</a>
+        <a href="/products/permatank/">Permatank&reg;</a>
+        <a href="/products/act-100-u/">ACT-100-U</a>
+        <a href="/products/farm-tanks/">Farm Tanks</a>
+        <a href="/products/containment-pans/">Containment Pans</a>
+        <a href="/products/accessories/">Accessories</a>
+      </div>
+    </li>
+    <li><a href="#tank-finder">Tank Finder</a></li>
+    <li><a href="#configurator">Build Your Tank</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li>
+      <a href="/about/">Company &#9662;</a>
+      <div class="nav-dd">
+        <a href="/about/">About Us</a>
+        <a href="/about/#team">Leadership</a>
+        <a href="/about/#associations">Associations</a>
+        <a href="/careers/">Careers</a>
+      </div>
+    </li>
+    <li>
+      <button class="nav-cart" onclick="toggleCart()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Cart
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </li>
+    <li><a href="/contact/" class="nav-cta">Request a Quote</a></li>
+  </ul>
+</nav>
+
+
+
+<section style="background:var(--navy);padding:56px 80px 48px">
+  <div style="font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="width:22px;height:2px;background:var(--steel);display:inline-block"></span>Contact</div>
+  <h1 style="font-family:var(--fh);font-weight:800;font-size:clamp(32px,5vw,56px);line-height:1.0;color:var(--white);text-transform:uppercase;margin-bottom:14px">Request a Quote</h1>
+  <p style="font-size:15px;color:var(--steel);max-width:500px;line-height:1.75">We respond to every request within 24 hours. Factory-direct pricing — no distributor markup.</p>
+</section>
+
+<section class="section section-white">
+  <div style="display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:start">
+    
+    <!-- Form -->
+    <div>
+      <h2 class="display" style="margin-bottom:8px">Get in Touch</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:32px">Fill out the form below and a member of our sales team will be in touch within 24 hours.</p>
+      
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">First Name *</label>
+            <input name="first_name" required style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Last Name *</label>
+            <input name="last_name" required style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+        </div>
+        <div>
+          <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Company</label>
+          <input name="company" style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Email *</label>
+            <input type="email" name="email" required style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Phone</label>
+            <input type="tel" name="phone" style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+        </div>
+        <div>
+          <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Product Interest</label>
+          <select name="product" style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;background:white;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+            <option value="">Select a product...</option>
+            <option>UL 142 Single Wall</option>
+            <option>UL 142 Double Wall</option>
+            <option>UL 2085 Fireguard&reg;</option>
+            <option>Flameshield&reg;</option>
+            <option>Permatank&reg;</option>
+            <option>ACT-100-U</option>
+            <option>Farm Tank</option>
+            <option>Containment Pan</option>
+            <option>Accessories / Pump Package</option>
+            <option>Not Sure — Need Guidance</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Approximate Capacity</label>
+            <input name="capacity" placeholder="e.g. 2,000 gallons" style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+          <div>
+            <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">State / Location</label>
+            <input name="location" style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
+          </div>
+        </div>
+        <div>
+          <label style="font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Additional Details</label>
+          <textarea name="message" rows="5" placeholder="Tell us about your project, timeline, or any special requirements..." style="width:100%;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;resize:vertical;transition:border-color .2s" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="align-self:flex-start;font-size:14px;padding:15px 36px">Submit Request &rarr;</button>
+        <p style="font-size:12px;color:var(--muted)">* Required fields. We respond within 24 hours, Monday–Friday.</p>
+      </form>
+    </div>
+
+    <!-- Sidebar -->
+    <div style="position:sticky;top:90px;display:flex;flex-direction:column;gap:16px">
+      <div style="background:var(--navy);border-radius:6px;padding:28px">
+        <div style="font-family:var(--fh);font-weight:800;font-size:18px;text-transform:uppercase;color:var(--white);margin-bottom:20px">Contact Info</div>
+        <div style="display:flex;flex-direction:column;gap:16px;font-size:13px;color:var(--steel)">
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Address</div>2900 N FM 157<br>Venus, TX 76084</div>
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Phone</div><a href="tel:9723668684" style="color:var(--steel)">972-366-8684</a></div>
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Fax</div>972-366-3130</div>
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Email</div><a href="mailto:sales@hughestank.com" style="color:var(--steel)">sales@hughestank.com</a></div>
+          <div style="height:1px;background:rgba(255,255,255,0.07)"></div>
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Office Hours</div>Mon&ndash;Fri &middot; 8am&ndash;4:30pm CST</div>
+          <div><div style="font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Loading Hours</div>Mon&ndash;Fri &middot; 7am&ndash;2:30pm<br>Closed 11:30am&ndash;12pm</div>
+        </div>
+      </div>
+      <div style="background:var(--light-bg);border:1px solid var(--border);border-radius:6px;padding:24px">
+        <div style="font-family:var(--fh);font-weight:800;font-size:16px;text-transform:uppercase;color:var(--navy);margin-bottom:8px">24-Hour Response</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.65">Every quote request receives a response within one business day. Factory-direct pricing — no distributor markup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER (ink) ══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:44px;width:auto;margin-bottom:14px">
+      <p class="footer-brand-text">UL-certified manufacturer of steel fuel storage tanks. Serving agriculture, petroleum, industrial, and government customers throughout the U.S. since 1985.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
+        <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
+        <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
+        <a href="https://x.com/HughesTankCo" class="soc" title="X">X</a>
+        <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="/products/ul-142/">UL 142</a></li>
+        <li><a href="/products/fireguard/">UL 2085 Fireguard&reg;</a></li>
+        <li><a href="/products/flameshield/">Flameshield&reg;</a></li>
+        <li><a href="/products/permatank/">Permatank&reg;</a></li>
+        <li><a href="/products/act-100-u/">ACT-100-U</a></li>
+        <li><a href="/products/farm-tanks/">Farm Tanks</a></li>
+        <li><a href="/products/containment-pans/">Containment Pans</a></li>
+        <li><a href="/products/accessories/">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/about/#team">Leadership Team</a></li>
+        <li><a href="/about/#associations">Associations</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/careers/">Careers</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#shop">Shop</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <p class="footer-contact-text">
+        <strong>2900 N FM 157</strong><br>
+        Venus, TX 76084<br><br>
+        <strong>Phone:</strong> <a href="tel:9723668684" style="color:var(--steel)">972-366-8684</a><br>
+        <strong>Fax:</strong> 972-366-3130<br>
+        <strong>Email:</strong> <a href="mailto:sales@hughestank.com" style="color:var(--steel)">sales@hughestank.com</a><br><br>
+        <strong>Office Hours</strong><br>
+        Mon–Fri &middot; 8am–4:30pm<br><br>
+        <strong>Loading Hours</strong><br>
+        Mon–Fri &middot; 7am–2:30pm
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hughes Tank Company &middot; All Rights Reserved &middot; Venus, TX &middot; <a href="/privacy-policy/" style="color:var(--muted)">Privacy Policy</a> &middot; <a href="/terms/" style="color:var(--muted)">Terms &amp; Conditions</a></p>
+    <p>UL 142 &middot; UL 2085 Fireguard&reg; &middot; Flameshield&reg; &middot; Permatank&reg; &middot; ACT-100-U Certified Manufacturer</p>
+  </div>
+</footer>
+
+
+</body>
+</html>

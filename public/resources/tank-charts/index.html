@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tank Chart Generator – Gauge Charts for Fuel Storage Tanks | Hughes Tank Company</title>
+<meta name="description" content="Free tank chart generator for horizontal, vertical, and rectangular steel fuel storage tanks. Enter your dimensions and generate a printable gauge chart instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.gen-wrap{display:grid;grid-template-columns:320px 1fr;gap:40px;align-items:start}
+.gen-panel{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:sticky;top:90px}
+.gen-panel-header{background:var(--navy);padding:20px 24px}
+.gen-panel-header h3{font-family:var(--fh);font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--white)}
+.gen-panel-header p{font-size:12px;color:var(--steel);margin-top:3px}
+.gen-panel-body{padding:24px}
+.gen-field{margin-bottom:18px}
+.gen-label{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.gen-input{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;background:var(--white)}
+.gen-input:focus{border-color:var(--blue)}
+.gen-type-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.gen-type-btn{border:1.5px solid var(--border);border-radius:4px;padding:9px 6px;font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center;background:var(--white)}
+.gen-type-btn:hover{border-color:var(--blue);color:var(--navy)}
+.gen-type-btn.active{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.gen-inc-btns{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px}
+.gen-inc-btn{border:1.5px solid var(--border);border-radius:3px;padding:8px 4px;font-family:var(--fh);font-weight:700;font-size:11px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center;background:var(--white)}
+.gen-inc-btn.active{background:var(--blue);border-color:var(--blue);color:var(--white)}
+.quick-sizes{display:flex;flex-direction:column;gap:4px}
+.quick-size{font-family:var(--fh);font-weight:600;font-size:12px;color:var(--muted);cursor:pointer;padding:4px 0;transition:color .2s;border:none;background:none;text-align:left}
+.quick-size:hover{color:var(--blue)}
+.chart-output{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.chart-header{background:var(--navy);padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.chart-header h4{font-family:var(--fh);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:0.04em;color:var(--white)}
+.chart-header p{font-size:12px;color:var(--steel);margin-top:2px}
+.chart-table-wrap{overflow:auto;max-height:600px}
+.chart-table{width:100%;border-collapse:collapse}
+.chart-table th{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:12px 20px;text-align:left;border-bottom:2px solid var(--border);background:var(--light-bg);position:sticky;top:0}
+.chart-table td{padding:9px 20px;font-family:var(--fh);font-size:13px;border-bottom:1px solid var(--border);color:var(--navy)}
+.chart-table tr:nth-child(even) td{background:rgba(242,244,248,0.5)}
+.chart-table tr:last-child td{background:rgba(26,58,140,0.06);font-weight:700}
+.chart-table .val{font-weight:800;color:var(--blue)}
+.chart-empty{padding:80px 40px;text-align:center;color:var(--muted)}
+.chart-empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.pct-bar{display:inline-flex;align-items:center;gap:8px}
+.pct-track{width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:inline-block}
+.pct-fill{height:100%;background:var(--blue);border-radius:2px}
+.chart-summary{padding:16px 24px;background:var(--light-bg);border-top:1px solid var(--border);display:flex;gap:32px;flex-wrap:wrap}
+.sum-item{font-family:var(--fh)}
+.sum-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block}
+.sum-val{font-size:18px;font-weight:800;color:var(--navy)}
+@media print{
+  .topbar,.nav-links,.gen-panel,footer,.chart-header button{display:none!important}
+  .gen-wrap{grid-template-columns:1fr}
+  .chart-output{border:none}
+  .chart-table-wrap{max-height:none;overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="tel:9723668684">972-366-8684</a>
+    <a href="mailto:sales@hughestank.com">sales@hughestank.com</a>
+    <a href="#">Mon–Fri &middot; 8am–4:30pm CST</a>
+  </div>
+  <div class="topbar-right">
+    <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
+    <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
+    <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
+    <a href="https://x.com/HughesTankCo" class="soc" title="X">X</a>
+    <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo" style="gap:0">
+    <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:42px;width:auto;display:block">
+  </a>
+  <ul class="nav-links">
+    <li>
+      <a href="/#products">Products &#9662;</a>
+      <div class="nav-dd">
+        <a href="/products/ul-142/">UL 142</a>
+        <a href="/products/fireguard/">UL 2085 Fireguard&reg;</a>
+        <a href="/products/flameshield/">Flameshield&reg;</a>
+        <a href="/products/permatank/">Permatank&reg;</a>
+        <a href="/products/act-100-u/">ACT-100-U</a>
+        <a href="/products/farm-tanks/">Farm Tanks</a>
+        <a href="/products/containment-pans/">Containment Pans</a>
+        <a href="/products/accessories/">Accessories</a>
+      </div>
+    </li>
+    <li><a href="/tank-finder/">Tank Finder</a></li>
+    <li><a href="/#configurator">Build Your Tank</a></li>
+    <li><a href="/#shop">Shop</a></li>
+    <li><a href="/resources/specs/" style="color:var(--white)">Resources</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li>
+      <a href="/about/">Company &#9662;</a>
+      <div class="nav-dd">
+        <a href="/about/">About Us</a>
+        <a href="/about/#team">Leadership</a>
+        <a href="/careers/">Careers</a>
+      </div>
+    </li>
+    <li><a href="/contact/" class="nav-cta">Request a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--navy);padding:48px 80px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(26,58,140,0.05) 38px,rgba(26,58,140,0.05) 39px);pointer-events:none"></div>
+  <div style="position:relative;z-index:1">
+    <div style="font-family:var(--fh);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--steel);margin-bottom:8px">
+      <a href="/" style="color:var(--steel)">Home</a> / <a href="/resources/specs/" style="color:var(--steel)">Resources</a> / <span style="color:var(--white)">Tank Chart Generator</span>
+    </div>
+    <h1 style="font-family:var(--fh);font-weight:800;font-size:clamp(32px,4vw,52px);line-height:1.0;color:var(--white);text-transform:uppercase;margin-bottom:12px">Tank Chart Generator</h1>
+    <p style="font-size:15px;color:var(--steel);max-width:520px">Generate accurate gauge charts for horizontal, vertical, and rectangular tanks. Enter your dimensions and print or save as PDF — free forever.</p>
+  </div>
+</section>
+
+<!-- TOOL -->
+<section class="section section-white">
+  <div class="gen-wrap">
+    <!-- Controls -->
+    <div>
+      <div class="gen-panel">
+        <div class="gen-panel-header">
+          <h3>Tank Dimensions</h3>
+          <p>Enter your tank specs below</p>
+        </div>
+        <div class="gen-panel-body">
+          <div class="gen-field">
+            <label class="gen-label">Tank Type</label>
+            <div class="gen-type-btns">
+              <button class="gen-type-btn active" onclick="setType('h',this)">Horizontal</button>
+              <button class="gen-type-btn" onclick="setType('v',this)">Vertical</button>
+              <button class="gen-type-btn" onclick="setType('r',this)">Rectangle</button>
+            </div>
+          </div>
+          <div id="fieldDia" class="gen-field">
+            <label class="gen-label">Diameter (inches)</label>
+            <input class="gen-input" type="number" id="inDia" placeholder="e.g. 96" min="1">
+          </div>
+          <div id="fieldLen" class="gen-field">
+            <label class="gen-label" id="lenLabel">Length (inches)</label>
+            <input class="gen-input" type="number" id="inLen" placeholder="e.g. 119" min="1">
+          </div>
+          <div id="fieldW" class="gen-field" style="display:none">
+            <label class="gen-label">Width (inches)</label>
+            <input class="gen-input" type="number" id="inW" placeholder="e.g. 96" min="1">
+          </div>
+          <div class="gen-field">
+            <label class="gen-label">Increment (inches)</label>
+            <div class="gen-inc-btns">
+              <button class="gen-inc-btn" onclick="setInc(0.125,this)">1/8"</button>
+              <button class="gen-inc-btn" onclick="setInc(0.25,this)">1/4"</button>
+              <button class="gen-inc-btn" onclick="setInc(0.5,this)">1/2"</button>
+              <button class="gen-inc-btn active" onclick="setInc(1,this)">1"</button>
+            </div>
+          </div>
+          <button class="btn-primary" style="width:100%;justify-content:center;margin-bottom:16px" onclick="generate()">Generate Chart</button>
+          <button class="btn-outline" style="width:100%;justify-content:center;font-size:11px" onclick="window.print()">&#128438; Print / Save PDF</button>
+        </div>
+      </div>
+
+      <!-- Quick sizes -->
+      <div style="background:var(--light-bg);border:1px solid var(--border);border-radius:6px;padding:20px 24px;margin-top:16px">
+        <div style="font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Quick Select — Common Sizes</div>
+        <div class="quick-sizes">
+          <button class="quick-size" onclick="quickSet(48,63)">500 gal &nbsp;— 48" &times; 63"</button>
+          <button class="quick-size" onclick="quickSet(48,119)">1,000 gal — 48" &times; 119"</button>
+          <button class="quick-size" onclick="quickSet(64,119)">2,000 gal — 64" &times; 119"</button>
+          <button class="quick-size" onclick="quickSet(96,119)">5,000 gal — 96" &times; 119"</button>
+          <button class="quick-size" onclick="quickSet(96,183)">8,000 gal — 96" &times; 183"</button>
+          <button class="quick-size" onclick="quickSet(120,143)">10,000 gal — 120" &times; 143"</button>
+          <button class="quick-size" onclick="quickSet(120,210)">15,000 gal — 120" &times; 210"</button>
+          <button class="quick-size" onclick="quickSet(120,284)">20,000 gal — 120" &times; 284"</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div>
+      <div class="chart-output" id="chartOutput">
+        <div class="chart-header">
+          <div>
+            <h4 id="chartTitle">Tank Gauge Chart</h4>
+            <p id="chartSubtitle">Hughes Tank Company &middot; Venus, TX &middot; 972-366-8684</p>
+          </div>
+          <button class="btn-ghost" style="font-size:11px;padding:8px 16px" onclick="window.print()">Print PDF</button>
+        </div>
+        <div id="chartBody">
+          <div class="chart-empty">
+            <div class="chart-empty-icon">📊</div>
+            <div style="font-family:var(--fh);font-weight:700;font-size:16px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Enter dimensions and click Generate</div>
+            <div style="font-size:13px;color:var(--border)">Your gauge chart will appear here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:44px;width:auto;margin-bottom:14px">
+      <p class="footer-brand-text">UL-certified manufacturer of steel fuel storage tanks. Serving agriculture, petroleum, industrial, and government customers throughout the U.S. since 1985.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
+        <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
+        <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
+        <a href="https://x.com/HughesTankCo" class="soc" title="X">X</a>
+        <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Products</h5><ul>
+      <li><a href="/products/ul-142/">UL 142</a></li>
+      <li><a href="/products/fireguard/">UL 2085 Fireguard&reg;</a></li>
+      <li><a href="/products/flameshield/">Flameshield&reg;</a></li>
+      <li><a href="/products/permatank/">Permatank&reg;</a></li>
+      <li><a href="/products/act-100-u/">ACT-100-U</a></li>
+      <li><a href="/products/farm-tanks/">Farm Tanks</a></li>
+      <li><a href="/products/containment-pans/">Containment Pans</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Resources</h5><ul>
+      <li><a href="/resources/tank-charts/">Tank Chart Generator</a></li>
+      <li><a href="/resources/specs/">Spec Sheets</a></li>
+      <li><a href="/resources/compliance/">Compliance Guide</a></li>
+      <li><a href="/tank-finder/">Tank Finder</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5>
+      <p class="footer-contact-text"><strong>2900 N FM 157</strong><br>Venus, TX 76084<br><br>
+      <strong>Phone:</strong> <a href="tel:9723668684" style="color:var(--steel)">972-366-8684</a><br>
+      <strong>Email:</strong> <a href="mailto:sales@hughestank.com" style="color:var(--steel)">sales@hughestank.com</a><br><br>
+      <strong>Office Hours</strong><br>Mon–Fri &middot; 8am–4:30pm</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hughes Tank Company &middot; All Rights Reserved &middot; <a href="/privacy-policy/" style="color:var(--muted)">Privacy Policy</a> &middot; <a href="/terms/" style="color:var(--muted)">Terms &amp; Conditions</a></p>
+  </div>
+</footer>
+
+<script>
+let tankType = 'h', inc = 1;
+
+function setType(t, btn) {
+  tankType = t;
+  document.querySelectorAll('.gen-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('fieldW').style.display = t === 'r' ? 'block' : 'none';
+  document.getElementById('fieldDia').style.display = t === 'r' ? 'none' : 'block';
+  document.getElementById('lenLabel').textContent = t === 'v' ? 'Height (inches)' : 'Length (inches)';
+}
+
+function setInc(v, btn) {
+  inc = v;
+  document.querySelectorAll('.gen-inc-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function quickSet(d, l) {
+  document.getElementById('inDia').value = d;
+  document.getElementById('inLen').value = l;
+  // auto set type to horizontal
+  document.querySelectorAll('.gen-type-btn')[0].click();
+  generate();
+}
+
+function calcH(dia, len, depth) {
+  const r = dia / 2, h = depth - r;
+  if (depth <= 0) return 0;
+  if (depth >= dia) return Math.PI * r * r * len;
+  return Math.max(0, (r * r * Math.acos(-h / r) + h * Math.sqrt(r * r - h * h)) * len);
+}
+function calcV(dia, ht, depth) { return Math.PI * (dia/2) * (dia/2) * Math.min(depth, ht); }
+function calcR(w, l, depth) { return w * l * depth; }
+
+function generate() {
+  const dia = parseFloat(document.getElementById('inDia').value);
+  const len = parseFloat(document.getElementById('inLen').value);
+  const w = parseFloat(document.getElementById('inW').value) || 0;
+  if ((!dia && tankType !== 'r') || !len) { alert('Please enter all required dimensions.'); return; }
+
+  const maxD = tankType === 'v' ? len : (tankType === 'r' ? len : dia);
+  const rows = [];
+  for (let d = 0; d <= maxD + 0.0001; d += inc) {
+    const cd = Math.min(d, maxD);
+    let cu = tankType === 'h' ? calcH(dia, len, cd) : tankType === 'v' ? calcV(dia, len, cd) : calcR(w, len, cd);
+    rows.push({ d: Math.round(cd * 1000) / 1000, gal: Math.round(cu / 231 * 10) / 10 });
+    if (cd >= maxD) break;
+  }
+  const totalGal = rows[rows.length - 1].gal;
+  const typeLabel = tankType === 'h' ? 'Horizontal' : tankType === 'v' ? 'Vertical' : 'Rectangular';
+  const dimLabel = tankType === 'r' ? `W: ${w}" × L: ${len}"` : `Dia: ${dia}" × ${tankType === 'v' ? 'Ht' : 'L'}: ${len}"`;
+
+  document.getElementById('chartTitle').textContent = `${typeLabel} Tank Gauge Chart`;
+  document.getElementById('chartSubtitle').textContent = `${dimLabel} · Inc: ${inc}" · Hughes Tank Company`;
+
+  let html = `<div class="chart-table-wrap"><table class="chart-table">
+    <thead><tr><th>Depth (in)</th><th>Gallons</th><th>% Full</th><th>Rounded Gal</th></tr></thead><tbody>`;
+  rows.forEach(r => {
+    const pct = totalGal > 0 ? Math.min((r.gal / totalGal) * 100, 100) : 0;
+    html += `<tr>
+      <td>${r.d}"</td>
+      <td class="val">${r.gal.toFixed(1)}</td>
+      <td><span class="pct-bar"><span class="pct-track"><span class="pct-fill" style="width:${pct.toFixed(1)}%"></span></span>${pct.toFixed(1)}%</span></td>
+      <td>${Math.round(r.gal)}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>
+  <div class="chart-summary">
+    <div class="sum-item"><span class="sum-label">Total Capacity</span><span class="sum-val">${totalGal.toLocaleString()} gal</span></div>
+    <div class="sum-item"><span class="sum-label">Total Rows</span><span class="sum-val">${rows.length}</span></div>
+    <div class="sum-item"><span class="sum-label">Increment</span><span class="sum-val">${inc}"</span></div>
+    <div class="sum-item"><span class="sum-label">Type</span><span class="sum-val">${typeLabel}</span></div>
+  </div>`;
+  document.getElementById('chartBody').innerHTML = html;
+}
+</script>
+</body>
+</html>
