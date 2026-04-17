@@ -225,7 +225,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
     <div class="sfi"><div class="sfl">Weight</div><div class="sfv" id="fW">5,000 lbs</div></div>
     <div class="sfi"><div class="sfl">Lead Time</div><div class="sfv" id="fLead">2–4 wks</div><div class="sfcert" id="fWarranty">1-yr warranty</div></div>
     <div class="sfi"><div class="sfl">Certification</div><div class="sfv" id="fCert">UL 142</div><div class="sfcert" id="fBadge">UL Listed</div></div>
-    <div class="sfp"><div class="sfpl">Est. Starting Price</div><div class="sfpv" id="fP">$7,200</div><div class="sfpn">Factory direct &middot; 24-hr quote</div></div>
+    <div class="sfp"><div class="sfpl">Est. Starting Price</div><div class="sfpv" id="fP">$7,200</div><div class="sfpn">Available through distributors &middot; 24-hr quote</div></div>
     <div class="sfact">
       <button class="sfb1" onclick="openM()">Submit Build Sheet &rarr;</button>
       <button class="sfb2" onclick="xPDF()">&#8595; Export PDF Spec Sheet</button>
@@ -1877,15 +1877,36 @@ function openM(){
 }
 function closeM(){document.getElementById('qModal').classList.remove('on');}
 function sendQ(){
-  const n=document.getElementById('qn').value.trim(),e=document.getElementById('qe').value.trim();
+  const n=document.getElementById('qn').value.trim();
+  const e=document.getElementById('qe').value.trim();
+  const p=document.getElementById('qp').value.trim();
+  const co=document.getElementById('qc').value.trim();
+  const notes=document.getElementById('qnotes').value.trim();
   if(!n||!e){alert('Please enter your name and email.');return;}
-  document.querySelector('.mbox').innerHTML=`<div style="text-align:center;padding:22px 0">
-    <div style="font-size:52px;margin-bottom:12px;color:#1A3A8C">&#10003;</div>
-    <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;text-transform:uppercase;color:#0D1B3E;margin-bottom:10px">Build Sheet Sent!</h3>
-    <p style="font-size:14px;color:#5A6A88;line-height:1.6;max-width:300px;margin:0 auto 18px">We'll respond within 24 hours with exact pricing and lead time.</p>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid #DDE2EE;padding-top:12px">Hughes Tank Company &middot; 972-366-8684 &middot; Venus, TX</div>
-    <button onclick="closeM()" style="margin-top:14px;background:#1A3A8C;border:none;border-radius:4px;color:#fff;padding:9px 22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Close</button>
-  </div>`;
+  const res=getSpec();const td=res?.td||{};
+  const confSummary=document.getElementById('msum')?.innerText||'';
+  const subject=encodeURIComponent('Tank Build Sheet - '+td.label+' '+C.cap+' gal - Hughes Tank');
+  const body=encodeURIComponent(
+    'BUILD SHEET REQUEST\n'+'='.repeat(40)+'\n\n'+
+    confSummary+'\n\n'+
+    'CONTACT INFORMATION\n'+'-'.repeat(30)+'\n'+
+    'Name: '+n+'\nEmail: '+e+'\nPhone: '+(p||'—')+'\nCompany: '+(co||'—')+'\n\n'+
+    'Additional Notes:\n'+(notes||'None')+'\n\n'+
+    'Submitted from: Hughes Tank 3D Configurator\nhughestank.com/build-a-tank/'
+  );
+  // Open mailto as primary action - reliable cross-platform
+  window.location.href='mailto:sales@hughestank.com?subject='+subject+'&body='+body;
+  // Show success state
+  setTimeout(()=>{
+    document.querySelector('.mbox').innerHTML=`<div style="text-align:center;padding:22px 0">
+      <div style="font-size:52px;margin-bottom:12px;color:#1A3A8C">&#10003;</div>
+      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;text-transform:uppercase;color:#0D1B3E;margin-bottom:10px">Build Sheet Ready!</h3>
+      <p style="font-size:14px;color:#5A6A88;line-height:1.6;max-width:320px;margin:0 auto 18px">Your email client has opened with your full build sheet. Send it to <strong>sales@hughestank.com</strong> and we'll respond within one business day.</p>
+      <p style="font-size:13px;color:#5A6A88;margin-bottom:14px">Or call us directly: <a href="tel:9723668684" style="color:#1A3A8C;font-weight:700">972-366-8684</a></p>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid #DDE2EE;padding-top:12px">Hughes Tank Company &middot; Venus, TX</div>
+      <button onclick="closeM()" style="margin-top:14px;background:#1A3A8C;border:none;border-radius:4px;color:#fff;padding:9px 22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Close</button>
+    </div>`;
+  },500);
 }
 
 // --- PDF -------------------------------------------------------------
@@ -1927,7 +1948,7 @@ function xPDF(){
   y+=6;doc.setFillColor(230,240,255);doc.rect(14,y-3,188,20,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(26,58,140);doc.text('STANDARD EQUIPMENT ON ALL TANKS:',16,y+3);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(8);
   doc.text('Fill w/ dust cap  -  UL listed normal & emergency vents  -  Suction & return couplings  -  Manhole cover',16,y+9);
   doc.text('Red oxide primer  -  Saddle/skid support  -  Air tested at 5 PSI before shipment  -  1-year warranty',16,y+15);y+=26;
-  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(17);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom -- Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Factory-direct  -  No markup  -  Exact quote within 24 hours',108,y+14);
+  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(17);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom -- Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Through authorized distributors  -  Exact quote within 24 hours',108,y+14);
   doc.setFillColor(242,244,248);doc.rect(0,260,216,32,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('HUGHES TANK COMPANY',14,270);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(90,106,136);doc.text('2900 N FM 157  -  Venus, TX 76084  -  Phone: 972-366-8684  -  Fax: 972-366-3130  -  sales@hughestank.com',14,277);doc.text('Office: Mon-Fri 8am-4:30pm  -  Loading: Mon-Fri 7am-2:30pm',14,283);doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(168,184,208);doc.text('Estimates for reference only. Specifications and pricing subject to change. Contact Hughes Tank for confirmed quote.',14,294);
   doc.save('Hughes-Tank-'+C.type+'-'+res?.key+'gal.pdf');
 }
