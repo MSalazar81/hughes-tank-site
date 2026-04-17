@@ -1037,12 +1037,13 @@ footer{background:var(--ink);padding:56px 80px 36px}
 
   <!-- Customer logo strip (placeholders for now — drop real logos in /images/customers/) -->
   <div class="logo-strip">
-    <div class="logo-tile" data-logo="customer-1"><img src="/images/customers/customer-1.png" alt="Customer 1" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
-    <div class="logo-tile" data-logo="customer-2"><img src="/images/customers/customer-2.png" alt="Customer 2" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
-    <div class="logo-tile" data-logo="customer-3"><img src="/images/customers/customer-3.png" alt="Customer 3" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
-    <div class="logo-tile" data-logo="customer-4"><img src="/images/customers/customer-4.png" alt="Customer 4" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
-    <div class="logo-tile" data-logo="customer-5"><img src="/images/customers/customer-5.png" alt="Customer 5" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
-    <div class="logo-tile" data-logo="customer-6"><img src="/images/customers/customer-6.png" alt="Customer 6" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile"><img src="/images/customers/customer-hunt-sons.png" alt="Hunt &amp; Sons Inc." loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-senergy.png" alt="Senergy Petroleum" loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-jf-petroleum.png" alt="JF Petroleum Group" loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-agriland-fs.png" alt="Agriland FS" loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-northwest-pump.png" alt="Northwest Pump" loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-mascott.png" alt="Mascott Equipment Company" loading="lazy"></div>
+    <div class="logo-tile"><img src="/images/customers/customer-spatco.png" alt="SPATCO Energy Solutions" loading="lazy"></div>
   </div>
 
   <!-- Google Reviews block -->
@@ -1100,14 +1101,24 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </div>
 
   <style>
-    .logo-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:24px;align-items:center;max-width:1200px;margin:0 auto 56px;padding:0 80px}
-    @media(max-width:980px){.logo-strip{grid-template-columns:repeat(3,1fr);gap:32px}}
+    .logo-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:0;align-items:stretch;max-width:1240px;margin:0 auto 56px;padding:0;background:var(--navy);border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(13,27,62,0.18)}
+    @media(max-width:980px){.logo-strip{grid-template-columns:repeat(4,1fr)}}
     @media(max-width:560px){.logo-strip{grid-template-columns:repeat(2,1fr)}}
-    .logo-tile{aspect-ratio:5/2;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,box-shadow .2s;position:relative}
-    .logo-tile:hover{border-color:#C5CDDD;box-shadow:0 4px 12px rgba(13,27,62,0.06)}
-    .logo-tile img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(100%) opacity(0.7);transition:filter .2s}
-    .logo-tile:hover img{filter:grayscale(0%) opacity(1)}
-    .logo-fallback{display:none;font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--steel)}
+    .logo-tile{aspect-ratio:5/2;background:var(--navy);padding:20px 26px;display:flex;align-items:center;justify-content:center;transition:background .2s;position:relative;border-right:1px solid rgba(138,155,181,0.12)}
+    .logo-tile:last-child{border-right:0}
+    .logo-tile:hover{background:#132a5e}
+    @media(max-width:980px){
+      .logo-tile:nth-child(4n){border-right:0}
+      .logo-tile{border-bottom:1px solid rgba(138,155,181,0.12)}
+      .logo-tile:nth-child(n+5){border-bottom:0}
+    }
+    @media(max-width:560px){
+      .logo-tile{border-right:1px solid rgba(138,155,181,0.12)}
+      .logo-tile:nth-child(2n){border-right:0}
+      .logo-tile:nth-child(n+6){border-bottom:0}
+    }
+    .logo-tile img{max-width:100%;max-height:52px;width:auto;height:auto;object-fit:contain;opacity:0.85;transition:opacity .2s}
+    .logo-tile:hover img{opacity:1}
 
     .reviews-block{max-width:1200px;margin:0 auto;padding:0 80px}
     .reviews-header{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:var(--white);border:1px solid var(--border);border-radius:8px 8px 0 0;border-bottom:0;padding:24px 28px}
