@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hughes Tank Company | UL-Certified Steel Fuel Storage Tanks | Venus, TX</title>
-<meta name="description" content="Hughes Tank Company manufactures UL 142, UL 2085 Fireguard, Flameshield®, Permatank®, and ACT-100-U steel fuel storage tanks in Venus, TX. Custom sizes, fast lead times, available through our rep network since 1985.">
+<meta name="description" content="UL-certified manufacturer of aboveground and underground steel fuel storage tanks. UL 142, UL 2085 Fireguard, Permatank, ACT-100-U. 35+ years building tanks in Venus, Texas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -82,7 +82,10 @@ h2.display{
 .topbar{background:var(--ink);padding:8px 80px;display:flex;justify-content:space-between;align-items:center}
 .topbar a{font-family:var(--fh);font-weight:500;font-size:12px;letter-spacing:0.08em;color:var(--steel);transition:color .2s;display:flex;align-items:center;gap:6px}
 .topbar a:hover{color:var(--white)}
-.topbar-left{display:flex;gap:24px}
+.topbar-left{display:flex;gap:24px;align-items:center}
+.topbar a.phone{font-size:14px;font-weight:700;color:var(--white);letter-spacing:0.06em}
+.topbar a.phone:hover{color:#9DB8E6}
+.topbar a.phone svg{color:var(--blue)}
 .topbar-right{display:flex;gap:10px;align-items:center}
 .soc{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--steel);font-family:var(--fh);font-weight:700;font-size:10px;transition:background .2s,color .2s}
 .soc:hover{background:var(--blue);color:var(--white)}
@@ -110,14 +113,14 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 /* ════════════════════════════════
    HERO
 ════════════════════════════════ */
-.hero{background:var(--navy);min-height:560px;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(26,58,140,0.05) 38px,rgba(26,58,140,0.05) 39px);pointer-events:none}
+.hero{background:#F2F4F8;min-height:560px;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 38px,rgba(26,58,140,0.04) 38px,rgba(26,58,140,0.04) 39px);pointer-events:none}
 .hero-content{padding:72px 48px 72px 80px;position:relative;z-index:2}
-.hero-eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow{font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--blue)}
-.hero h1{font-family:var(--fh);font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1.0;color:var(--white);text-transform:uppercase;letter-spacing:0.01em;margin-bottom:22px}
-.hero h1 span{color:var(--steel)}
-.hero-sub{font-size:15px;color:var(--steel);max-width:420px;margin-bottom:36px;line-height:1.75}
+.hero h1{font-family:var(--fh);font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1.0;color:var(--navy);text-transform:uppercase;letter-spacing:0.01em;margin-bottom:22px}
+.hero h1 span{color:var(--muted)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:420px;margin-bottom:36px;line-height:1.75}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 .hero-right{padding:72px 80px 72px 40px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(26,58,140,0.2);border:1px solid rgba(138,155,181,0.1);border-radius:6px;overflow:hidden;width:100%;max-width:360px}
@@ -348,10 +351,10 @@ nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80px;disp
 .aside-divider{height:1px;background:rgba(255,255,255,0.07);margin:22px 0}
 
 /* INDUSTRIES */
-.industries-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;overflow:hidden}
-.industry-card{background:rgba(13,27,62,0.4);padding:26px 22px;transition:background .2s;cursor:pointer}
-.industry-card:hover{background:rgba(26,58,140,0.28)}
-.ind-icon{width:36px;height:36px;background:rgba(26,58,140,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.industries-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--navy);border:1px solid var(--navy);border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(13,27,62,0.18),0 2px 8px rgba(13,27,62,0.08)}
+.industry-card{background:var(--navy);padding:26px 22px;transition:background .2s;cursor:pointer}
+.industry-card:hover{background:#132a5e}
+.ind-icon{width:36px;height:36px;background:var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .ind-icon svg{width:18px;height:18px}
 .industry-card h4{font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:var(--white);margin-bottom:5px}
 .industry-card p{font-size:12px;color:var(--steel);line-height:1.6}
@@ -466,22 +469,67 @@ footer{background:var(--ink);padding:56px 80px 36px}
   .finder-options-grid{grid-template-columns:1fr 1fr}
 }
 </style>
+<script defer data-domain="hughestank.com" src="https://plausible.io/js/script.js"></script>
+<meta property="og:title" content="Hughes Tank Company | UL-Certified Steel Fuel Storage Tanks | Venus, TX">
+<meta property="og:description" content="UL-certified manufacturer of aboveground and underground steel fuel storage tanks. UL 142, UL 2085 Fireguard, Permatank, ACT-100-U. 35+ years building tanks in Venus, Texas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hughestank.com/">
+<meta property="og:image" content="https://hughestank.com/images/htc-logo-white.png">
+<meta property="og:site_name" content="Hughes Tank Company">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hughes Tank Company | UL-Certified Steel Fuel Storage Tanks | Venus, TX">
+<meta name="twitter:description" content="UL-certified manufacturer of aboveground and underground steel fuel storage tanks. UL 142, UL 2085 Fireguard, Permatank, ACT-100-U. 35+ years building tanks in Venus, Texas.">
+<link rel="canonical" href="https://hughestank.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hughes Tank Company",
+  "legalName": "Hughes Tank Company, LLC",
+  "url": "https://hughestank.com/",
+  "logo": "https://hughestank.com/images/htc-logo-white.png",
+  "foundingDate": "1989",
+  "description": "UL-certified manufacturer of aboveground and underground steel fuel storage tanks.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2900 N FM 157",
+    "addressLocality": "Venus",
+    "addressRegion": "TX",
+    "postalCode": "76084",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-972-366-8684",
+    "contactType": "sales",
+    "email": "sales@hughestank.com",
+    "availableLanguage": ["English"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/hughestankcompany/",
+    "https://www.linkedin.com/company/hughes-tank-company-inc/",
+    "https://www.instagram.com/hughestankcompany/",
+    "https://x.com/HughesTankCo",
+    "https://www.youtube.com/@HughesTankCompany/videos"
+  ]
+}
+</script>
 </head>
 <body>
 
 <!-- ══ TOPBAR ══ -->
 <div class="topbar">
   <div class="topbar-left">
-    <a href="tel:9723668684">972-366-8684</a>
+    <a href="tel:9723668684" class="phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>972-366-8684</a>
     <a href="mailto:sales@hughestank.com">sales@hughestank.com</a>
     <a href="#">Mon–Fri &middot; 8am–4:30pm CST</a>
   </div>
   <div class="topbar-right">
-    <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
-    <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
-    <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
-    <a href="https://x.com/HughesTankCo" class="soc" title="X / Twitter">X</a>
-    <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+    <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.2-1.5 1.5-1.5H16V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H7.4v3h2.5V21h3.6z"/></svg></a>
+    <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></a>
+    <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://x.com/HughesTankCo" class="soc" title="X / Twitter"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
   </div>
 </div>
 
@@ -492,7 +540,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </a>
   <ul class="nav-links">
     <li>
-      <a href="#products">Products &#9662;</a>
+      <a href="/#products">Products &#9662;</a>
       <div class="nav-dd">
         <a href="/products/ul-142/">UL 142</a>
         <a href="/products/fireguard/">UL 2085 Fireguard&reg;</a>
@@ -504,11 +552,9 @@ footer{background:var(--ink);padding:56px 80px 36px}
         <a href="/products/accessories/">Accessories</a>
       </div>
     </li>
-    <li><a href="#tank-finder">Tank Finder</a></li>
-    <li><a href="#resources" onclick="setTimeout(()=>{document.querySelector('.chart-tool').scrollIntoView({behavior:'smooth'})},300)">Tank Chart</a></li>
+    <li><a href="/tank-finder/">Tank Finder</a></li>
+    <li><a href="/resources/tank-charts/">Tank Chart</a></li>
     <li><a href="/build-a-tank/">Build Your Tank</a></li>
-    <li><a href="#shop">Shop</a></li>
-    <li><a href="#resources">Resources</a></li>
     <li><a href="/projects/">Projects</a></li>
     <li>
       <a href="/about/">Company &#9662;</a>
@@ -517,52 +563,48 @@ footer{background:var(--ink);padding:56px 80px 36px}
         <a href="/about/#team">Leadership</a>
         <a href="/about/#associations">Associations</a>
         <a href="/careers/">Careers</a>
+        <a href="/resources/compliance/">Compliance</a>
+        <a href="/resources/specs/">Spec Sheets</a>
+        <a href="/blog/">Blog</a>
       </div>
-    </li>
-    <li>
-      <button class="nav-cart" onclick="toggleCart()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Cart
-        <span class="cart-badge" id="cartBadge">0</span>
-      </button>
     </li>
     <li><a href="/contact/" class="nav-cta">Request a Quote</a></li>
   </ul>
 </nav>
 
-<!-- ══ HERO  (dark) ══ -->
+<!-- ══ HERO  (light gray) ══ -->
 <section class="hero" style="min-height:600px">
   <div class="hero-content">
     <div class="hero-eyebrow">UL-Certified Manufacturer &middot; Venus, Texas &middot; Est. 1985</div>
     <h1>Steel Fuel<br>Storage Tanks<br><span>Built to Last.</span></h1>
-    <p class="hero-sub">We build custom aboveground and underground fuel storage tanks — safety-rated, made in Venus, TX, and shipped direct to your site. Every order includes free CAD drawings and a 1-year warranty.</p>
+    <p class="hero-sub">We build custom aboveground and underground fuel storage tanks — safety-rated, made in Venus, TX, and delivered through our authorized distributor network. Every order includes free CAD drawings and a 1-year warranty.</p>
     <div class="hero-actions">
       <a href="/contact/" class="btn-primary">Request a Quote</a>
-      <a href="#tank-finder" class="btn-ghost">Find My Tank</a>
+      <a href="#tank-finder" class="btn-outline">Find My Tank</a>
     </div>
   </div>
-  <div class="hero-right" style="padding:0;position:relative;overflow:hidden;align-self:stretch;display:flex;align-items:center;justify-content:center;background:var(--navy)">
-    <!-- Tank image — centered, prominent -->
-    <img src="/images/tank-horizontal-single.png"
-         alt="Hughes Tank Company UL 142 horizontal steel fuel storage tank"
-         style="position:relative;z-index:2;width:88%;max-width:520px;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 8px 40px rgba(26,58,140,0.4));padding:24px 0">
-    <!-- Subtle left fade to blend with navy content -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to right, var(--navy) 0%, transparent 30%, transparent 100%);z-index:3;pointer-events:none"></div>
+  <div class="hero-right" style="padding:0;position:relative;overflow:hidden;align-self:stretch;display:flex;align-items:center;justify-content:center;background:#F2F4F8">
+    <!-- Tank image — centered, on clean white card -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:32px 24px;width:82%;max-width:520px;position:relative;z-index:2;box-shadow:0 12px 40px rgba(13,27,62,0.08)">
+      <img src="/images/tank-horizontal-single.png"
+           alt="Hughes Tank Company UL 142 horizontal steel fuel storage tank"
+           style="width:100%;height:auto;max-height:320px;object-fit:contain;display:block;mix-blend-mode:multiply">
+    </div>
     <!-- Stats row at bottom -->
-    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;background:rgba(7,16,31,0.7);backdrop-filter:blur(4px)">
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;background:var(--navy);border-top:3px solid var(--blue)">
+      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
         <div class="stat-num" style="font-size:28px">40<em style="font-size:18px">+</em></div>
         <div class="stat-label">Years Mfg.</div>
       </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
+      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
         <div class="stat-num" style="font-size:22px">UL<em style="font-size:14px">&reg;</em></div>
         <div class="stat-label">Certified</div>
       </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;border-right:1px solid rgba(138,155,181,0.15);padding:18px 16px">
+      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
         <div class="stat-num" style="font-size:22px">1<em style="font-size:14px">yr</em></div>
         <div class="stat-label">Warranty</div>
       </div>
-      <div class="stat-box" style="flex:1;border-bottom:none;padding:18px 16px">
+      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;padding:18px 16px;backdrop-filter:none">
         <div class="stat-num" style="font-size:18px;line-height:1.2">Free</div>
         <div class="stat-label">CAD w/ Order</div>
       </div>
@@ -592,7 +634,9 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </div>
   <style>
   /* ── Product Cards ── */
-  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  @media (max-width:980px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.products-grid{grid-template-columns:1fr}}
   .product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column}
   .product-card:hover{box-shadow:0 8px 32px rgba(13,27,62,0.12);transform:translateY(-2px);z-index:1}
   .product-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s var(--ease)}
@@ -835,24 +879,6 @@ footer{background:var(--ink);padding:56px 80px 36px}
 </section>
 
 
-<!-- ══ SHOP  (white) ══ -->
-<section class="section section-white" id="shop">
-  <div class="section-header">
-    <div class="eyebrow">Shop Accessories &amp; Parts</div>
-    <h2 class="display">Parts, Pumps &amp;<br>Accessories</h2>
-    <p class="section-intro">In-stock accessories, pump packages, and tank components. Order online or call us — most items ship same or next business day from Venus, TX.</p>
-  </div>
-  <div class="shop-filters">
-    <button class="shop-filter active" onclick="filterShop('all',this)">All Products</button>
-    <button class="shop-filter" onclick="filterShop('pumps',this)">Pump Packages</button>
-    <button class="shop-filter" onclick="filterShop('gauges',this)">Gauges &amp; Monitors</button>
-    <button class="shop-filter" onclick="filterShop('containment',this)">Containment</button>
-    <button class="shop-filter" onclick="filterShop('fittings',this)">Fittings &amp; Vents</button>
-    <button class="shop-filter" onclick="filterShop('safety',this)">Safety Equipment</button>
-  </div>
-  <div class="shop-grid" id="shopGrid"></div>
-</section>
-
 <!-- ══ WHY HUGHES  (light gray) ══ -->
 <section class="section section-alt" id="why">
   <div class="why-grid">
@@ -939,12 +965,12 @@ footer{background:var(--ink);padding:56px 80px 36px}
   <!-- Content -->
 
 
-<!-- ══ INDUSTRIES  (ink) ══ -->
-<section class="section section-ink">
+<!-- ══ INDUSTRIES  (white outer, dark navy inner panel) ══ -->
+<section class="section section-white">
   <div class="section-header">
-    <div class="eyebrow">Industries Served</div>
-    <h2 class="display">Built for Industries<br>That Can't Afford Downtime</h2>
-    <p class="section-intro">Our tanks are in the field across agriculture, petroleum, construction, mining, and government applications throughout the U.S.</p>
+    <div class="eyebrow" style="color:var(--blue)"><span style="background:var(--blue) !important"></span>Industries Served</div>
+    <h2 class="display" style="color:var(--navy)">Built for Industries<br>That Can't Afford Downtime</h2>
+    <p class="section-intro" style="color:var(--muted)">Our tanks are in the field across agriculture, petroleum, construction, mining, and government applications throughout the U.S.</p>
   </div>
   <div class="industries-grid">
     <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M5 2L5 22"/><path d="M19 2L19 11"/><path d="M5 11C5 11 7 9 12 9C17 9 19 11 19 11"/></svg></div><h4>Petroleum &amp; Fueling</h4><p>Retail stations, fleet fueling, and bulk petroleum storage.</p></div>
@@ -956,6 +982,146 @@ footer{background:var(--ink);padding:56px 80px 36px}
     <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><h4>Mining &amp; Energy</h4><p>Remote-site fuel storage for oil, gas, and mining operations.</p></div>
     <div class="industry-card"><div class="ind-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Government &amp; Military</h4><p>Tank systems built to federal spec for government and military installations.</p></div>
   </div>
+</section>
+
+<!-- ══ FACILITY VIDEO ══ -->
+<section class="section section-white" style="padding-top:80px;padding-bottom:60px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;max-width:560px;margin:0 auto 32px">
+      <div class="eyebrow" style="justify-content:center">
+        <span></span>Inside Hughes Tank
+      </div>
+      <h2 class="display" style="font-size:clamp(26px,3.4vw,38px)">Take a Look at the Facility<br>Where Your Tank Gets Built</h2>
+      <p class="section-intro" style="margin-top:14px">200,000 sq ft on 40 acres in Venus, Texas — purpose-built for steel fuel tank manufacturing.</p>
+    </div>
+
+    <!-- Video container — drop a YouTube video ID into VIDEO_ID below to embed -->
+    <div class="video-wrap">
+      <div class="video-aspect">
+        <!-- Replace VIDEO_ID with the actual YouTube video ID (the part after v= in the YouTube URL) -->
+        <!-- Example: if URL is https://www.youtube.com/watch?v=dQw4w9WgXcQ, VIDEO_ID is dQw4w9WgXcQ -->
+        <div class="video-placeholder">
+          <a href="https://www.youtube.com/@HughesTankCompany/videos" target="_blank" rel="noopener" class="video-play">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            <span>Watch on YouTube</span>
+          </a>
+        </div>
+        <!-- Once you have the video ID, replace the placeholder div above with:
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Hughes Tank Company facility tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        -->
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .video-wrap{max-width:960px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(13,27,62,0.12),0 2px 8px rgba(13,27,62,0.06)}
+    .video-aspect{position:relative;padding-top:56.25%;background:var(--navy)}
+    .video-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#0D1B3E 0%,#1A3A8C 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;background-image:repeating-linear-gradient(-55deg,transparent 0,transparent 60px,rgba(255,255,255,0.03) 60px,rgba(255,255,255,0.03) 62px),linear-gradient(135deg,#0D1B3E 0%,#1A3A8C 100%)}
+    .video-play{display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:white;transition:transform .2s}
+    .video-play:hover{transform:scale(1.04)}
+    .video-play svg{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3))}
+    .video-play span{font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.2em;text-transform:uppercase}
+  </style>
+</section>
+
+<!-- ══ TRUSTED BY (customer logos + reviews) ══ -->
+<section class="section section-alt" style="padding-top:56px;padding-bottom:56px">
+  <div style="text-align:center;max-width:560px;margin:0 auto 36px">
+    <div class="eyebrow" style="justify-content:center;color:var(--blue)">
+      <span style="background:var(--blue) !important"></span>Trusted Across America
+    </div>
+    <h2 class="display" style="color:var(--navy);font-size:clamp(26px,3.4vw,38px)">Built for the Companies<br>Who Move America</h2>
+  </div>
+
+  <!-- Customer logo strip (placeholders for now — drop real logos in /images/customers/) -->
+  <div class="logo-strip">
+    <div class="logo-tile" data-logo="customer-1"><img src="/images/customers/customer-1.png" alt="Customer 1" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile" data-logo="customer-2"><img src="/images/customers/customer-2.png" alt="Customer 2" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile" data-logo="customer-3"><img src="/images/customers/customer-3.png" alt="Customer 3" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile" data-logo="customer-4"><img src="/images/customers/customer-4.png" alt="Customer 4" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile" data-logo="customer-5"><img src="/images/customers/customer-5.png" alt="Customer 5" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+    <div class="logo-tile" data-logo="customer-6"><img src="/images/customers/customer-6.png" alt="Customer 6" onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'"><span class="logo-fallback">Customer Logo</span></div>
+  </div>
+
+  <!-- Google Reviews block -->
+  <div class="reviews-block">
+    <!-- Header -->
+    <div class="reviews-header">
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <div style="background:white;border-radius:50%;width:54px;height:54px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(13,27,62,0.1)">
+          <svg width="28" height="28" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--fh);font-weight:700;font-size:18px;color:var(--navy)">Google Reviews</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+            <div style="font-family:var(--fh);font-weight:800;font-size:24px;color:var(--navy)">4.5</div>
+            <div style="display:flex;gap:1px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="halfStar"><stop offset="50%" stop-color="#FBBC05"/><stop offset="50%" stop-color="#E0E0E0"/></linearGradient></defs><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5" fill="url(#halfStar)"/></svg>
+            </div>
+            <span style="font-size:13px;color:var(--muted);margin-left:4px">37 reviews</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://www.google.com/search?q=Hughes+Tank+Company+Venus+TX+reviews" target="_blank" rel="noopener" class="btn-outline" style="font-size:12px;padding:10px 18px">Read All Reviews &rarr;</a>
+    </div>
+
+    <!-- Review cards (verbatim from Google via Birdeye) -->
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+        </div>
+        <div class="review-text">"As a driver with 12 years of experience I gotta say this place is easy to come in and out. Plenty of space to make a u-turn. Staff is really professional and friendly! These kind of people make the trucking industry a little easier to work in."</div>
+        <div class="review-meta"><strong>Verified Driver</strong> &middot; September 2024</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+        </div>
+        <div class="review-text">"Are you an energy services company? Do you need fuel solutions? Look no further. This company can even coordinate delivery world wide!"</div>
+        <div class="review-meta"><strong>Verified Customer</strong> &middot; January 2025</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.2,21 12,17.7 5.8,21 7,14.1 2,9.3 9,8.5"/></svg>
+        </div>
+        <div class="review-text">"State-of-the-art facility manufacturing aboveground and underground storage tanks. The staff is awesome and friendly. Top-notch quality, exceeding industry standards, with quick turnaround and customizable options."</div>
+        <div class="review-meta"><strong>Verified Customer</strong> &middot; 2024</div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .logo-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:24px;align-items:center;max-width:1200px;margin:0 auto 56px;padding:0 80px}
+    @media(max-width:980px){.logo-strip{grid-template-columns:repeat(3,1fr);gap:32px}}
+    @media(max-width:560px){.logo-strip{grid-template-columns:repeat(2,1fr)}}
+    .logo-tile{aspect-ratio:5/2;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,box-shadow .2s;position:relative}
+    .logo-tile:hover{border-color:#C5CDDD;box-shadow:0 4px 12px rgba(13,27,62,0.06)}
+    .logo-tile img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(100%) opacity(0.7);transition:filter .2s}
+    .logo-tile:hover img{filter:grayscale(0%) opacity(1)}
+    .logo-fallback{display:none;font-family:var(--fh);font-weight:600;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--steel)}
+
+    .reviews-block{max-width:1200px;margin:0 auto;padding:0 80px}
+    .reviews-header{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:var(--white);border:1px solid var(--border);border-radius:8px 8px 0 0;border-bottom:0;padding:24px 28px}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:0 0 8px 8px;border-top:0;overflow:hidden}
+    @media(max-width:900px){.reviews-grid{grid-template-columns:1fr}}
+    .review-card{background:var(--white);padding:24px 26px}
+    .review-stars{display:flex;gap:2px;margin-bottom:12px}
+    .review-text{font-size:14px;color:#3A4A66;line-height:1.7;margin-bottom:14px;font-style:italic}
+    .review-meta{font-size:12px;color:var(--muted);font-family:var(--fh);letter-spacing:0.04em}
+    .review-meta strong{color:var(--navy)}
+    @media(max-width:780px){
+      .logo-strip{padding:0 24px}
+      .reviews-block{padding:0 24px}
+    }
+  </style>
 </section>
 
 <!-- ══ RESOURCES  (white) ══ -->
@@ -988,26 +1154,61 @@ footer{background:var(--ink);padding:56px 80px 36px}
 
       <div class="resource-col-title" style="margin-top:28px">Spec Sheet Downloads</div>
       <div class="resource-list">
-        <div class="resource-item" onclick="downloadSpecPDF('UL 142','Aboveground · Single & Double Wall','NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.','UL 142','Aboveground','Custom','Diesel, Gasoline, Ethanol Blends')">
-          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-          <div class="resource-info"><h4>UL 142 Spec Sheet</h4><p>Single &amp; double wall aboveground tanks</p></div>
+        <a href="/pdfs/htc-complete-spec-book.pdf" download class="resource-item" style="text-decoration:none;background:rgba(26,58,140,0.06);border-color:rgba(26,58,140,0.2)">
+          <div class="resource-icon" style="background:var(--blue);color:var(--white)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div class="resource-info"><h4 style="color:var(--blue)">Complete Spec Book</h4><p>All 10 tank lines &middot; 26 pages &middot; 160 KB</p></div>
           <span class="resource-dl">PDF &#8595;</span>
-        </div>
-        <div class="resource-item" onclick="downloadSpecPDF('UL 2085 Fireguard®','Fire-Rated Aboveground · UL Listed','Two-hour fire-rated aboveground tank. Required by code for high fire-risk locations. Meets EPA secondary containment requirements with integrated interstitial space.','UL 2085','Aboveground','Custom','Diesel, Gasoline')">
+        </a>
+        <a href="/pdfs/htc-ul-142-horizontal.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="resource-info"><h4>UL 142 Horizontal</h4><p>Aboveground &middot; Single &amp; Double Wall</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-ul-142-rectangular.pdf" download class="resource-item" style="text-decoration:none">
           <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div class="resource-info"><h4>UL 2085 Fireguard&reg; Spec Sheet</h4><p>2-hour fire-rated aboveground tanks</p></div>
+          <div class="resource-info"><h4>UL 142 Rectangular</h4><p>Aboveground &middot; Double Wall</p></div>
           <span class="resource-dl">PDF &#8595;</span>
-        </div>
-        <div class="resource-item" onclick="downloadSpecPDF('Permatank®','Underground · STI-P3 Fiberglass','STI-P3 fiberglass underground storage tank. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100. Factory-installed fittings.','STI-P3','Underground','Custom','Diesel, Gasoline, E100, B100')">
+        </a>
+        <a href="/pdfs/htc-ul-142-vertical.pdf" download class="resource-item" style="text-decoration:none">
           <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div class="resource-info"><h4>Permatank&reg; UST Spec Sheet</h4><p>Fiberglass underground storage tanks</p></div>
+          <div class="resource-info"><h4>UL 142 Vertical</h4><p>Aboveground &middot; Single &amp; Double Wall</p></div>
           <span class="resource-dl">PDF &#8595;</span>
-        </div>
-        <div class="resource-item" onclick="downloadSpecPDF('ACT-100-U','Underground · STI Listed Steel','Cathodically-protected steel underground storage tank. STI-listed with factory-applied external coating and interior lining system for corrosion protection.','STI ACT-100-U','Underground','Custom','Diesel, Gasoline')">
+        </a>
+        <a href="/pdfs/htc-ul-2085-fireguard.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>UL 2085 Fireguard&reg;</h4><p>2-hour fire-rated aboveground tanks</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-flameshield.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>Flameshield&reg;</h4><p>STI fire-protected aboveground</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-permatank.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>Permatank&reg;</h4><p>STI-P3 fiberglass underground</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-act-100-u.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>ACT-100-U</h4><p>Cathodic-protected steel underground</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-farm-tanks.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#7C4A03" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>Farm Tanks</h4><p>Non-UL agricultural &middot; 150 to 1,000 gal</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
+        <a href="/pdfs/htc-ul-142-oval.pdf" download class="resource-item" style="text-decoration:none">
           <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div class="resource-info"><h4>ACT-100-U Spec Sheet</h4><p>Steel underground storage tanks</p></div>
+          <div class="resource-info"><h4>UL 142 Oval</h4><p>Heating oil &middot; 275 &amp; 330 gal</p></div>
           <span class="resource-dl">PDF &#8595;</span>
-        </div>
+        </a>
+        <a href="/pdfs/htc-baffle-tanks.pdf" download class="resource-item" style="text-decoration:none">
+          <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="resource-info"><h4>Baffle Tanks</h4><p>UL 142 with internal baffles for mobile use</p></div>
+          <span class="resource-dl">PDF &#8595;</span>
+        </a>
       </div>
     </div>
     <div>
@@ -1054,11 +1255,11 @@ footer{background:var(--ink);padding:56px 80px 36px}
       <img src="/images/htc-logo-white.png" alt="Hughes Tank Company" style="height:44px;width:auto;margin-bottom:14px">
       <p class="footer-brand-text">UL-certified manufacturer of steel fuel storage tanks. Serving agriculture, petroleum, industrial, and government customers throughout the U.S. since 1985.</p>
       <div class="footer-socials">
-        <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook">f</a>
-        <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn">in</a>
-        <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram">ig</a>
-        <a href="https://x.com/HughesTankCo" class="soc" title="X">X</a>
-        <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube">yt</a>
+        <a href="https://www.facebook.com/hughestankcompany/" class="soc" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.2-1.5 1.5-1.5H16V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H7.4v3h2.5V21h3.6z"/></svg></a>
+        <a href="https://www.linkedin.com/company/hughes-tank-company-inc/" class="soc" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></a>
+        <a href="https://www.instagram.com/hughestankcompany/" class="soc" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://x.com/HughesTankCo" class="soc" title="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.youtube.com/@HughesTankCompany/videos" class="soc" title="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
       </div>
     </div>
     <div class="footer-col">
@@ -1106,27 +1307,6 @@ footer{background:var(--ink);padding:56px 80px 36px}
     <p>UL 142 &middot; UL 2085 Fireguard&reg; &middot; Flameshield&reg; &middot; Permatank&reg; &middot; ACT-100-U Certified Manufacturer</p>
   </div>
 </footer>
-
-<!-- ══ CART DRAWER ══ -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart(event)">
-  <div class="cart-drawer">
-    <div class="cart-drawer-header">
-      <h3>Your Cart</h3>
-      <span class="cart-close" onclick="toggleCart()">&#10005;</span>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <div class="cart-empty" id="cartEmpty">
-        <div class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
-        <p>Your cart is empty</p>
-      </div>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-subtotal"><span>Subtotal</span><span id="cartTotal">$0.00</span></div>
-      <p class="cart-note">Custom tanks are quoted separately. This cart is for accessories and parts only. Shipping calculated at checkout.</p>
-      <a href="/contact/" class="btn-navy" style="display:block;text-align:center;justify-content:center;width:100%">Proceed to Checkout &rarr;</a>
-    </div>
-  </div>
-</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1426,7 +1606,6 @@ function updatePrice() {
 }
 
 /* ══ SHOP ══ */
-let cart = [];
 const shopProducts = [
   { id:0,  name:'Fill-Rite FR1210G 12V Fuel Transfer Pump', category:'pumps', price:249, badge:'popular', desc:'Fill-Rite 12V DC pump, 15 GPM. Includes suction pipe, discharge hose, and manual nozzle. Ideal for farm and fleet applications.', icon:'pumps' },
   { id:1,  name:'15 GPM 12V DC Pump Kit', category:'pumps', price:380, badge:'', desc:'Complete 12V pump and hose kit. Includes pump, digital meter, automatic nozzle, and 18ft hose.', icon:'pumps' },
@@ -1457,33 +1636,6 @@ const shopIcons = {
 };
 
 let activeFilter = 'all';
-function filterShop(cat, btn) {
-  activeFilter = cat;
-  document.querySelectorAll('.shop-filter').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderShop();
-}
-function renderShop() {
-  const filtered = activeFilter==='all' ? shopProducts : shopProducts.filter(p=>p.category===activeFilter);
-  const catLabels = { pumps:'Pump Packages', gauges:'Gauges', containment:'Containment', fittings:'Fittings', safety:'Safety' };
-  document.getElementById('shopGrid').innerHTML = filtered.map(p=>`
-    <div class="shop-card">
-      <div class="shop-card-img">
-        ${p.badge ? `<span class="shop-badge badge-${p.badge}">${p.badge}</span>` : ''}
-        <div class="shop-card-img-icon">${shopIcons[p.icon]||shopIcons.fitting}</div>
-      </div>
-      <div class="shop-card-body">
-        <span class="tag">${catLabels[p.category]||p.category}</span>
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-      </div>
-      <div class="shop-card-footer">
-        <div class="shop-price">$${p.price.toLocaleString()} <span>/ ea</span></div>
-        <button class="add-to-cart" id="atc-${p.id}" onclick="handleAddToCart(${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price},'${p.icon}',this)">+ Add to Cart</button>
-      </div>
-    </div>
-  `).join('');
-}
 
 function handleAddToCart(id, name, price, icon, btn) {
   addToCart(name, price, icon);
@@ -1492,46 +1644,7 @@ function handleAddToCart(id, name, price, icon, btn) {
   setTimeout(()=>{ btn.textContent='+ Add to Cart'; btn.classList.remove('added'); }, 2200);
   if (!cartOpen) toggleCart();
 }
-function addToCart(name, price, icon) {
-  const ex = cart.find(i=>i.name===name);
-  if (ex) ex.qty++;
-  else cart.push({ name, price, icon, qty:1 });
-  renderCart();
-  showToast('"'+name.substring(0,28)+(name.length>28?'…':'') + '" added to cart');
-  const total = cart.reduce((s,i)=>s+i.qty,0);
-  const badge = document.getElementById('cartBadge');
-  badge.style.display = total>0 ? 'flex' : 'none';
-  badge.textContent = total;
-}
-function removeFromCart(name) {
-  cart = cart.filter(i=>i.name!==name);
-  renderCart();
-  const total = cart.reduce((s,i)=>s+i.qty,0);
-  const badge = document.getElementById('cartBadge');
-  badge.style.display = total>0 ? 'flex' : 'none';
-  badge.textContent = total;
-}
-function renderCart() {
-  const el = document.getElementById('cartItems');
-  const empty = document.getElementById('cartEmpty');
-  if (cart.length===0) { el.innerHTML=''; el.appendChild(empty); empty.style.display='flex'; document.getElementById('cartTotal').textContent='$0.00'; return; }
-  empty.style.display='none';
-  el.innerHTML = cart.map(i=>`
-    <div class="cart-item">
-      <div class="cart-item-icon">${shopIcons[i.icon]||shopIcons.fitting}</div>
-      <div class="cart-item-info"><h4>${i.name}</h4><p>Qty: ${i.qty}</p></div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-        <span class="cart-item-price">$${(i.price*i.qty).toLocaleString()}</span>
-        <span class="cart-item-remove" onclick="removeFromCart('${i.name.replace(/'/g,"\\'")}')">&#10005;</span>
-      </div>
-    </div>
-  `).join('');
-  document.getElementById('cartTotal').textContent = '$'+cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString();
-}
 
-let cartOpen = false;
-function toggleCart() { cartOpen=!cartOpen; document.getElementById('cartOverlay').classList.toggle('open',cartOpen); }
-function closeCart(e) { if(e.target===document.getElementById('cartOverlay')) toggleCart(); }
 function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
 
 /* ══ TANK CHART GENERATOR ══ */
@@ -1715,8 +1828,7 @@ function printChart() {
   <script>window.onload=function(){window.print()}<\/script></body></html>`);
   win.document.close();
 }
-
-renderShop();
 </script>
 </body>
 </html>
+

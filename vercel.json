@@ -1,42 +1,44 @@
 {
   "version": 2,
-  "builds": [{ "src": "public/**", "use": "@vercel/static" }],
-  "routes": [
-    {
-      "src": "/images/(.*)",
-      "dest": "/public/images/$1",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/public/assets/$1",
-      "headers": { "Cache-Control": "public, max-age=86400" }
-    },
-    { "src": "/products/ul-142/?",          "dest": "/public/products/ul-142/index.html" },
-    { "src": "/products/fireguard/?",        "dest": "/public/products/fireguard/index.html" },
-    { "src": "/products/flameshield/?",      "dest": "/public/products/flameshield/index.html" },
-    { "src": "/products/permatank/?",        "dest": "/public/products/permatank/index.html" },
-    { "src": "/products/act-100-u/?",        "dest": "/public/products/act-100-u/index.html" },
-    { "src": "/products/farm-tanks/?",       "dest": "/public/products/farm-tanks/index.html" },
-    { "src": "/products/containment-pans/?", "dest": "/public/products/containment-pans/index.html" },
-    { "src": "/products/accessories/?",      "dest": "/public/products/accessories/index.html" },
-    { "src": "/build-a-tank/?",              "dest": "/public/build-a-tank/index.html" },
-    { "src": "/contact/?",                   "dest": "/public/contact/index.html" },
-    { "src": "/about/?",                     "dest": "/public/about/index.html" },
-    { "src": "/about/(.+)",                  "dest": "/public/about/index.html" },
-    { "src": "/careers/?",                   "dest": "/public/careers/index.html" },
-    { "src": "/projects/?",                  "dest": "/public/projects/index.html" },
-    { "src": "/privacy-policy/?",            "dest": "/public/privacy-policy/index.html" },
-    { "src": "/terms/?",                     "dest": "/public/terms/index.html" },
-    { "src": "/",                            "dest": "/public/index.html" },
-    { "src": "/(.*)",                        "dest": "/public/$1" }
-  ],
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    },
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/pdfs/(.*)\\.pdf",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     }
   ]

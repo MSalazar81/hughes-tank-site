@@ -73,7 +73,10 @@ h2.display{
 .topbar{background:var(--ink);padding:8px 80px;display:flex;justify-content:space-between;align-items:center}
 .topbar a{font-family:var(--fh);font-weight:500;font-size:12px;letter-spacing:0.08em;color:var(--steel);transition:color .2s;display:flex;align-items:center;gap:6px}
 .topbar a:hover{color:var(--white)}
-.topbar-left{display:flex;gap:24px}
+.topbar-left{display:flex;gap:24px;align-items:center}
+.topbar a.phone{font-size:14px;font-weight:700;color:var(--white);letter-spacing:0.06em}
+.topbar a.phone:hover{color:#9DB8E6}
+.topbar a.phone svg{color:var(--blue)}
 .topbar-right{display:flex;gap:10px;align-items:center}
 .soc{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--steel);font-family:var(--fh);font-weight:700;font-size:10px;transition:background .2s,color .2s}
 .soc:hover{background:var(--blue);color:var(--white)}

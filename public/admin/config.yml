@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: MSalazar81/hughes-tank-site
+  branch: master
+  base_url: https://hughestank.com
+  auth_endpoint: api/auth
+
+# Where uploaded images go (relative to repo root)
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+# Site URL for the "View live" preview link
+site_url: https://hughestank.com
+display_url: https://hughestank.com
+logo_url: https://hughestank.com/images/htc-logo-white.png
+
+publish_mode: simple
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "public/content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    summary: "{{title}} - {{date | date('MMM YYYY')}}"
+    sortable_fields: ['date', 'title']
+    view_filters:
+      - label: "Published"
+        field: status
+        pattern: "published"
+      - label: "Drafts"
+        field: status
+        pattern: "draft"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "Headline for the blog post (also used in the URL)" }
+      - { label: "Subtitle / Lede", name: "subtitle", widget: "string", required: false, hint: "Short 1-2 sentence summary, shown in the post listing" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["draft", "published"]
+        default: "draft"
+        hint: "Drafts are not visible on the live site"
+      - { label: "Author", name: "author", widget: "string", default: "Hughes Tank Company", required: false }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Compliance & Codes", "Product Education", "Industry News", "Project Stories", "How-To Guides"]
+        default: "Compliance & Codes"
+      - { label: "Read Time", name: "read_time", widget: "string", default: "5 min read", required: false }
+      - { label: "Hero Image", name: "image", widget: "image", required: false, hint: "Optional. 1600x900 or similar." }
+      - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Use the toolbar for formatting. Click the image icon to upload images inline."
+      - { label: "SEO Description", name: "description", widget: "text", required: false, hint: "Aim for 50-160 chars. Shows up in Google search results." }

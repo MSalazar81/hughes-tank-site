@@ -1,8 +1,9 @@
 {
-  "name": "hughes-tank-website",
-  "version": "3.0.0",
+  "name": "hughes-tank-site",
+  "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "start": "echo Static site — no build step required"
+  "type": "module",
+  "engines": {
+    "node": ">=18"
   }
 }
