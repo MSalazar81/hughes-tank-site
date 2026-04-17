@@ -123,6 +123,13 @@ body > nav{position:sticky;top:0;z-index:200;background:var(--navy);padding:0 80
 .hero-sub{font-size:15px;color:var(--muted);max-width:420px;margin-bottom:36px;line-height:1.75}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 .hero-right{padding:72px 80px 72px 40px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
+.hero-features{margin-top:28px;font-family:var(--fb);font-weight:500;font-size:13px;letter-spacing:0.04em;color:var(--muted);line-height:1.8;display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;max-width:580px}
+.hero-features strong{color:var(--navy);font-weight:700;font-family:var(--fh);font-size:12px;letter-spacing:0.08em;text-transform:uppercase}
+.hero-features .sep{color:#C5CDDD;margin:0 12px;font-weight:300}
+@media(max-width:900px){
+  .hero-features{font-size:12px}
+  .hero-features .sep{margin:0 8px}
+}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(26,58,140,0.2);border:1px solid rgba(138,155,181,0.1);border-radius:6px;overflow:hidden;width:100%;max-width:360px}
 .stat-box{background:rgba(13,27,62,0.6);padding:28px 24px;backdrop-filter:blur(4px)}
 .stat-box:nth-child(-n+2){border-bottom:2px solid var(--blue)}
@@ -596,10 +603,17 @@ footer{background:var(--ink);padding:56px 80px 36px}
   <div class="hero-content">
     <div class="hero-eyebrow">UL-Certified Manufacturer &middot; Venus, Texas &middot; Est. 1985</div>
     <h1>Steel Fuel<br>Storage Tanks<br><span>Built to Last.</span></h1>
-    <p class="hero-sub">We build custom aboveground and underground fuel storage tanks — safety-rated, made in Venus, TX, and delivered through our authorized distributor network. Every order includes free CAD drawings and a 1-year warranty.</p>
+    <p class="hero-sub">Custom aboveground and underground fuel storage tanks — UL-certified, welded in Venus, Texas, shipped nationwide through our authorized distributor network.</p>
     <div class="hero-actions">
       <a href="/contact/" class="btn-primary">Request a Quote</a>
       <a href="#tank-finder" class="btn-outline">Find My Tank</a>
+    </div>
+    <div class="hero-features">
+      <strong>Safety-Rated</strong><span class="sep">|</span>
+      <strong>Made in Venus, TX</strong><span class="sep">|</span>
+      <strong>Distributor Network</strong><span class="sep">|</span>
+      <strong>Free CAD Drawings</strong><span class="sep">|</span>
+      <strong>1-Year Warranty</strong>
     </div>
   </div>
   <div class="hero-right" style="padding:0;position:relative;overflow:hidden;align-self:stretch;display:flex;align-items:center;justify-content:center;background:#F2F4F8">
@@ -609,40 +623,8 @@ footer{background:var(--ink);padding:56px 80px 36px}
            alt="Hughes Tank Company UL 142 horizontal steel fuel storage tank"
            style="width:100%;height:auto;max-height:320px;object-fit:contain;display:block;mix-blend-mode:multiply">
     </div>
-    <!-- Stats row at bottom -->
-    <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;background:var(--navy);border-top:3px solid var(--blue)">
-      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
-        <div class="stat-num" style="font-size:28px">40<em style="font-size:18px">+</em></div>
-        <div class="stat-label">Years Mfg.</div>
-      </div>
-      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
-        <div class="stat-num" style="font-size:22px">UL<em style="font-size:14px">&reg;</em></div>
-        <div class="stat-label">Certified</div>
-      </div>
-      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;border-right:1px solid rgba(138,155,181,0.18);padding:18px 16px;backdrop-filter:none">
-        <div class="stat-num" style="font-size:22px">1<em style="font-size:14px">yr</em></div>
-        <div class="stat-label">Warranty</div>
-      </div>
-      <div class="stat-box" style="flex:1;background:transparent;border-bottom:none;padding:18px 16px;backdrop-filter:none">
-        <div class="stat-num" style="font-size:18px;line-height:1.2">Free</div>
-        <div class="stat-label">CAD w/ Order</div>
-      </div>
-    </div>
   </div>
 </section>
-
-<!-- ══ CERT BAR (blue) ══ -->
-<div class="cert-bar">
-  <span class="cert-label">Certified &amp; Listed</span>
-  <span class="cert-pill">UL 142</span>
-  <span class="cert-pill">UL 2085 Fireguard&reg;</span>
-  <span class="cert-pill">Flameshield&reg;</span>
-  <span class="cert-pill">Permatank&reg;</span>
-  <span class="cert-pill">ACT-100-U</span>
-  <span class="cert-pill">STI-SPFA</span>
-  <span class="cert-pill">AWS</span>
-  <span class="cert-pill">PEI</span>
-</div>
 
 <!-- ══ PRODUCTS  (white) ══ -->
 <section class="section section-white" id="products">
