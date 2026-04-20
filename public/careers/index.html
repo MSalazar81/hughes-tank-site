@@ -68,7 +68,7 @@
         <a href="/about/#associations">Associations</a>
         <a href="/careers/">Careers</a>
         <a href="/resources/compliance/">Compliance</a>
-        <a href="/resources/specs/">Spec Sheets</a>
+        <a href="/resources/specs/">Resources</a>
         <a href="/blog/">Blog</a>
       </div>
     </li>
@@ -97,7 +97,7 @@
           </div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Venus, TX &middot; Manufacturing</div>
           <p style="font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px">Experienced welder/fabricator for steel fuel storage tank manufacturing. MIG welding experience required. AWS certification a plus.</p>
-          <a href="/contact/" class="btn-primary" style="font-size:11px;padding:9px 18px">Apply Now &rarr;</a>
+          <button type="button" class="btn-primary apply-btn" data-role="Welder / Fabricator" style="font-size:11px;padding:9px 18px;border:0;cursor:pointer">Apply Now &rarr;</button>
         </div>
         <div style="border:1.5px solid var(--border);border-radius:6px;padding:24px;border-left:4px solid var(--blue)">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
@@ -106,11 +106,11 @@
           </div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Venus, TX &middot; Manufacturing</div>
           <p style="font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px">General production and assembly work in a busy steel tank manufacturing environment. No experience required — we will train the right person.</p>
-          <a href="/contact/" class="btn-primary" style="font-size:11px;padding:9px 18px">Apply Now &rarr;</a>
+          <button type="button" class="btn-primary apply-btn" data-role="Production Team Member" style="font-size:11px;padding:9px 18px;border:0;cursor:pointer">Apply Now &rarr;</button>
         </div>
         <div style="border:1.5px solid var(--border);border-radius:6px;padding:20px 24px;background:var(--light-bg)">
           <div style="font-family:var(--fh);font-weight:700;font-size:14px;text-transform:uppercase;color:var(--navy);margin-bottom:6px">Don&rsquo;t See Your Role?</div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.6">Send your resume to <a href="mailto:sales@hughestank.com" style="color:var(--blue)">sales@hughestank.com</a> and we&rsquo;ll keep it on file for future openings.</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6">Submit a general application — <button type="button" class="apply-btn" data-role="General Application" style="color:var(--blue);background:transparent;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline">fill out our form &rarr;</button> — or email your resume to <a href="mailto:hr@hughestank.com" style="color:var(--blue)">hr@hughestank.com</a>.</p>
         </div>
       </div>
     </div>
@@ -129,6 +129,246 @@
     </div>
   </div>
 </section>
+
+<!-- ══ APPLICATION MODAL ══ -->
+<div id="applyModal" class="apply-modal" role="dialog" aria-modal="true" aria-labelledby="applyTitle" hidden>
+  <div class="apply-modal-backdrop" onclick="closeApplyModal()"></div>
+  <div class="apply-modal-card">
+    <button type="button" class="apply-modal-close" aria-label="Close" onclick="closeApplyModal()">&times;</button>
+
+    <div class="apply-modal-header">
+      <div class="eyebrow" style="margin-bottom:8px">Apply to Hughes Tank</div>
+      <h2 id="applyTitle" style="font-family:var(--fh);font-weight:800;font-size:24px;text-transform:uppercase;color:var(--navy);margin:0">Application</h2>
+    </div>
+
+    <form id="applyForm" enctype="multipart/form-data">
+      <input type="hidden" name="position" id="applyPosition" value="">
+      <!-- Honeypot -->
+      <input type="text" name="honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+
+      <div class="apply-grid">
+        <div class="apply-field">
+          <label>First Name *</label>
+          <input type="text" name="first_name" required>
+        </div>
+        <div class="apply-field">
+          <label>Last Name *</label>
+          <input type="text" name="last_name" required>
+        </div>
+      </div>
+
+      <div class="apply-grid">
+        <div class="apply-field">
+          <label>Email *</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="apply-field">
+          <label>Phone *</label>
+          <input type="tel" name="phone" required>
+        </div>
+      </div>
+
+      <div class="apply-field">
+        <label>Position Applied For *</label>
+        <select name="position_display" id="positionSelect" required>
+          <option value="">Select a position...</option>
+          <option value="Welder / Fabricator">Welder / Fabricator</option>
+          <option value="Production Team Member">Production Team Member</option>
+          <option value="General Application">General Application (no specific role)</option>
+        </select>
+      </div>
+
+      <div class="apply-grid">
+        <div class="apply-field">
+          <label>Years of Experience *</label>
+          <select name="years_experience" required>
+            <option value="">Select...</option>
+            <option value="Less than 1 year">Less than 1 year</option>
+            <option value="1-3 years">1-3 years</option>
+            <option value="3-5 years">3-5 years</option>
+            <option value="5-10 years">5-10 years</option>
+            <option value="10+ years">10+ years</option>
+          </select>
+        </div>
+        <div class="apply-field">
+          <label>Available Start Date</label>
+          <input type="date" name="start_date">
+        </div>
+      </div>
+
+      <div class="apply-field">
+        <label>Current / Most Recent Employer</label>
+        <input type="text" name="current_employer">
+      </div>
+
+      <div class="apply-field">
+        <label>Cover Letter / Why do you want to work at Hughes Tank?</label>
+        <textarea name="cover_letter" rows="5" placeholder="Briefly tell us about yourself, your experience, and why this role interests you."></textarea>
+      </div>
+
+      <div class="apply-field">
+        <label>Resume * <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(PDF, DOC, or DOCX &middot; max 5&nbsp;MB)</span></label>
+        <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required id="resumeFile">
+        <div id="resumeError" style="display:none;color:#B71C1C;font-size:12px;margin-top:6px"></div>
+      </div>
+
+      <div id="applyStatus" style="display:none;padding:14px 16px;border-radius:4px;font-size:13px;line-height:1.5;margin:16px 0"></div>
+
+      <div class="apply-actions">
+        <button type="button" class="btn-outline" onclick="closeApplyModal()">Cancel</button>
+        <button type="submit" class="btn-primary" id="applySubmit">Submit Application &rarr;</button>
+      </div>
+
+      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:14px">Your application will be sent to our HR team at hr@hughestank.com. We review every application and respond within 5-7 business days. Hughes Tank Company is an Equal Opportunity Employer.</p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .apply-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+  .apply-modal[hidden]{display:none}
+  .apply-modal-backdrop{position:fixed;inset:0;background:rgba(13,27,62,0.75);backdrop-filter:blur(4px);z-index:-1}
+  .apply-modal-card{background:var(--white);border-radius:8px;width:100%;max-width:620px;padding:40px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);margin:auto}
+  .apply-modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;background:transparent;color:var(--muted);font-size:28px;line-height:1;cursor:pointer;border-radius:4px;transition:background .15s,color .15s}
+  .apply-modal-close:hover{background:var(--light-bg);color:var(--navy)}
+  .apply-modal-header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .apply-field{margin-bottom:16px}
+  .apply-field label{display:block;font-family:var(--fh);font-weight:600;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .apply-field input[type=text],.apply-field input[type=email],.apply-field input[type=tel],.apply-field input[type=date],.apply-field select,.apply-field textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:4px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;background:var(--white)}
+  .apply-field input:focus,.apply-field select:focus,.apply-field textarea:focus{border-color:var(--blue)}
+  .apply-field input[type=file]{padding:10px;font-size:13px;background:var(--light-bg)}
+  .apply-field textarea{resize:vertical;min-height:100px}
+  .apply-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.apply-grid{grid-template-columns:1fr}.apply-modal-card{padding:28px 20px}}
+  .apply-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap}
+  body.modal-open{overflow:hidden}
+</style>
+
+<script>
+(function() {
+  var modal = document.getElementById('applyModal');
+  var form = document.getElementById('applyForm');
+  var status = document.getElementById('applyStatus');
+  var submit = document.getElementById('applySubmit');
+  var positionSelect = document.getElementById('positionSelect');
+  var hiddenPosition = document.getElementById('applyPosition');
+  var resumeInput = document.getElementById('resumeFile');
+  var resumeError = document.getElementById('resumeError');
+  if (!modal) return;
+
+  // Wire the "Apply Now" buttons
+  document.querySelectorAll('.apply-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var role = btn.getAttribute('data-role') || '';
+      positionSelect.value = role;
+      hiddenPosition.value = role;
+      openApplyModal();
+    });
+  });
+
+  // Escape key closes modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !modal.hidden) closeApplyModal();
+  });
+
+  // Resume size check
+  resumeInput.addEventListener('change', function() {
+    var f = resumeInput.files[0];
+    resumeError.style.display = 'none';
+    if (!f) return;
+    if (f.size > 5 * 1024 * 1024) {
+      resumeError.textContent = 'File too large. Please upload a resume under 5 MB.';
+      resumeError.style.display = 'block';
+      resumeInput.value = '';
+    }
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    status.style.display = 'none';
+    submit.disabled = true;
+    var origText = submit.innerHTML;
+    submit.innerHTML = 'Sending...';
+    submit.style.opacity = '0.7';
+
+    // Convert resume file to base64 so we can post as JSON
+    var file = resumeInput.files[0];
+    var fileData = null;
+    if (file) {
+      fileData = await new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload = function() {
+          // data URL like "data:application/pdf;base64,JVBERi0x..."
+          var res = reader.result;
+          var commaIdx = res.indexOf(',');
+          resolve({
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            data: res.slice(commaIdx + 1), // base64 part only
+          });
+        };
+        reader.onerror = function() { resolve(null); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    var fd = new FormData(form);
+    var payload = {
+      first_name: fd.get('first_name'),
+      last_name: fd.get('last_name'),
+      email: fd.get('email'),
+      phone: fd.get('phone'),
+      position: fd.get('position_display'),
+      years_experience: fd.get('years_experience'),
+      start_date: fd.get('start_date'),
+      current_employer: fd.get('current_employer'),
+      cover_letter: fd.get('cover_letter'),
+      resume: fileData,
+      honeypot: fd.get('honeypot'),
+    };
+
+    try {
+      var resp = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var data = await resp.json();
+
+      if (resp.ok && data.success) {
+        status.style.background = '#E8F5E9';
+        status.style.color = '#1B5E20';
+        status.style.border = '1px solid #A5D6A7';
+        status.innerHTML = '<strong>Application received!</strong> Our HR team will review your information and contact you within 5-7 business days if there is a match.';
+        status.style.display = 'block';
+        form.reset();
+        submit.style.display = 'none';
+      } else {
+        throw new Error(data.error || 'Submit failed');
+      }
+    } catch (err) {
+      status.style.background = '#FFEBEE';
+      status.style.color = '#B71C1C';
+      status.style.border = '1px solid #EF9A9A';
+      status.innerHTML = '<strong>Submission failed.</strong> Please email your resume directly to <a href="mailto:hr@hughestank.com" style="color:#B71C1C;font-weight:700">hr@hughestank.com</a>.';
+      status.style.display = 'block';
+      submit.disabled = false;
+      submit.innerHTML = origText;
+      submit.style.opacity = '1';
+    }
+  });
+
+  window.openApplyModal = function() {
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+  };
+  window.closeApplyModal = function() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+  };
+})();
+</script>
 
 <!-- ══ FOOTER (ink) ══ -->
 <footer>

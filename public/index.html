@@ -617,7 +617,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
         <a href="/about/#associations">Associations</a>
         <a href="/careers/">Careers</a>
         <a href="/resources/compliance/">Compliance</a>
-        <a href="/resources/specs/">Spec Sheets</a>
+        <a href="/resources/specs/">Resources</a>
         <a href="/blog/">Blog</a>
       </div>
     </li>
@@ -662,7 +662,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
   .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
   @media (max-width:980px){.products-grid{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:560px){.products-grid{grid-template-columns:1fr}}
-  .product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column}
+  .product-card{background:var(--white);padding:0;position:relative;transition:box-shadow .2s,transform .2s;cursor:pointer;display:flex;flex-direction:column;text-decoration:none;color:inherit}
   .product-card:hover{box-shadow:0 8px 32px rgba(13,27,62,0.12);transform:translateY(-2px);z-index:1}
   .product-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s var(--ease)}
   .product-card:hover::after{width:100%}
@@ -699,109 +699,101 @@ footer{background:var(--ink);padding:56px 80px 36px}
   </style>
   <div class="products-grid">
 
-    <div class="product-card">
+    <a href="/products/ul-142/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-horizontal-single.png" alt="UL 142 Horizontal Single Wall Tank">
       </div>
       <div class="product-card-body">
         <span class="tag">Aboveground &middot; UL 142</span>
         <h3>UL 142</h3>
         <p>NFPA 30-compliant aboveground steel tanks for flammable and combustible liquids. Single-wall and double-wall configurations, custom sizes, compartment options available.</p>
-        <a href="/products/ul-142/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/fireguard/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-horizontal-skid.png" alt="UL 2085 Fireguard Tank with Skids">
       </div>
       <div class="product-card-body">
         <span class="tag">Fire-Rated &middot; UL 2085</span>
         <h3>UL 2085 Fireguard&reg;</h3>
         <p>Two-hour fire-rated aboveground tanks. Required by code for high fire-risk locations. Meets EPA secondary containment requirements.</p>
-        <a href="/products/fireguard/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/flameshield/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-horizontal-skid.png" alt="Flameshield Fire-Protected Tank">
       </div>
       <div class="product-card-body">
         <span class="tag">Fire-Protected &middot; STI Listed</span>
         <h3>Flameshield&reg;</h3>
         <p>STI-listed fire-protected aboveground tank with intumescent material between the primary and secondary steel walls. Two-hour fire rating.</p>
-        <a href="/products/flameshield/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/permatank/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-vertical.png" alt="Permatank Fiberglass Underground Tank">
       </div>
       <div class="product-card-body">
         <span class="tag">Underground &middot; Fiberglass</span>
         <h3>Permatank&reg;</h3>
         <p>STI-P3 fiberglass underground storage tanks. Corrosion-resistant, compatible with ethanol and biodiesel blends up to E100/B100.</p>
-        <a href="/products/permatank/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/act-100-u/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-vertical.png" alt="ACT-100-U Steel Underground Tank">
       </div>
       <div class="product-card-body">
         <span class="tag">Underground &middot; Steel</span>
         <h3>ACT-100-U</h3>
         <p>Cathodically-protected steel underground storage tanks. STI-listed with factory-applied external coating and interior lining system.</p>
-        <a href="/products/act-100-u/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/farm-tanks/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-horizontal-single.png" alt="Farm Tank Aboveground Fuel Storage">
       </div>
       <div class="product-card-body">
         <span class="tag">Agriculture</span>
         <h3>Farm Tanks</h3>
         <p>Purpose-built aboveground fuel storage for agricultural operations. Skid-mounted, portable, and stationary configurations available.</p>
-        <a href="/products/farm-tanks/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/containment-pans/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-rectangular.png" alt="Steel Containment Pan">
       </div>
       <div class="product-card-body">
         <span class="tag">Secondary Containment</span>
         <h3>Containment Pans</h3>
         <p>Steel secondary containment pans custom-sized to any tank footprint. Meets EPA 40 CFR 112 spill prevention requirements.</p>
-        <a href="/products/containment-pans/" class="product-card-link">Learn More &rarr;</a>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
-    <div class="product-card">
+    <a href="/products/accessories/" class="product-card">
       <div class="product-card-img">
-        
         <img src="/images/tank-rectangular.png" alt="Tank Accessories and Pump Packages">
       </div>
       <div class="product-card-body">
         <span class="tag">Pump Packages</span>
         <h3>Accessories</h3>
-        <p>Pump and metering packages 15–100 GPM, plus gauges, vents, fittings, and safety equipment. Plumbed and tested before shipment.</p>
-        <a href="/products/accessories/" class="product-card-link">Learn More &rarr;</a>
+        <p>Pump and metering packages 15&ndash;100 GPM, plus gauges, vents, fittings, and safety equipment. Available pre-plumbed and tested before shipment for an additional cost.</p>
+        <span class="product-card-link">Learn More &rarr;</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -924,7 +916,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
         </li>
         <li class="why-item">
           <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          <div><h4>Air-Tested Before Every Shipment</h4><p>Every tank is plumbed on our yard and pressure air-tested before it leaves. You receive a tank that is ready to put into service immediately on delivery.</p></div>
+          <div><h4>Air-Tested Before Every Shipment</h4><p>Every tank is pressure air-tested on our yard before it leaves. Pump and plumbing packages are available for an additional cost — ask your sales contact for pricing.</p></div>
         </li>
         <li class="why-item">
           <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
@@ -959,7 +951,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
       <span style="width:22px;height:2px;background:var(--steel);display:inline-block"></span>Our Facility &middot; Venus, Texas
     </div>
     <h2 style="font-family:var(--fh);font-weight:800;font-size:clamp(26px,3vw,38px);text-transform:uppercase;letter-spacing:0.01em;color:var(--white);line-height:1.05;margin-bottom:16px">State-of-the-Art<br>Manufacturing Since 1985</h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:28px;max-width:440px">Our Venus, TX facility has multiple production bays with robotic and manual welding lines, a full paint and sandblast shop, and a test yard where every tank is plumbed and air-tested before it ships.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:28px;max-width:440px">Our Venus, TX facility has multiple production bays with robotic and manual welding lines, a full paint and sandblast shop, and a test yard where every tank is air-tested before shipment (pre-plumbed configurations available for an additional cost).</p>
     <div style="display:flex;gap:32px;flex-wrap:wrap;margin-bottom:32px">
       <div>
         <div style="font-family:var(--fh);font-weight:800;font-size:26px;color:var(--white);line-height:1">2900 N FM 157</div>
@@ -1020,20 +1012,13 @@ footer{background:var(--ink);padding:56px 80px 36px}
       <p class="section-intro" style="margin-top:14px">200,000 sq ft on 40 acres in Venus, Texas — purpose-built for steel fuel tank manufacturing.</p>
     </div>
 
-    <!-- Video container — drop a YouTube video ID into VIDEO_ID below to embed -->
+    <!-- Facility tour video — plays with controls, pauses when out of view -->
     <div class="video-wrap">
       <div class="video-aspect">
-        <!-- Replace VIDEO_ID with the actual YouTube video ID (the part after v= in the YouTube URL) -->
-        <!-- Example: if URL is https://www.youtube.com/watch?v=dQw4w9WgXcQ, VIDEO_ID is dQw4w9WgXcQ -->
-        <div class="video-placeholder">
-          <a href="https://www.youtube.com/@HughesTankCompany/videos" target="_blank" rel="noopener" class="video-play">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            <span>Watch on YouTube</span>
-          </a>
-        </div>
-        <!-- Once you have the video ID, replace the placeholder div above with:
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Hughes Tank Company facility tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        -->
+        <video controls preload="metadata" poster="/videos/facility-hero-poster.jpg" playsinline>
+          <source src="/videos/facility-hero.mp4" type="video/mp4">
+          Your browser doesn't support embedded videos. <a href="/videos/facility-hero.mp4" style="color:#6DAAFF">Download the video &rarr;</a>
+        </video>
       </div>
     </div>
   </div>
@@ -1041,12 +1026,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
   <style>
     .video-wrap{max-width:960px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(13,27,62,0.12),0 2px 8px rgba(13,27,62,0.06)}
     .video-aspect{position:relative;padding-top:56.25%;background:var(--navy)}
-    .video-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .video-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#0D1B3E 0%,#1A3A8C 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;background-image:repeating-linear-gradient(-55deg,transparent 0,transparent 60px,rgba(255,255,255,0.03) 60px,rgba(255,255,255,0.03) 62px),linear-gradient(135deg,#0D1B3E 0%,#1A3A8C 100%)}
-    .video-play{display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:white;transition:transform .2s}
-    .video-play:hover{transform:scale(1.04)}
-    .video-play svg{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3))}
-    .video-play span{font-family:var(--fh);font-weight:700;font-size:13px;letter-spacing:0.2em;text-transform:uppercase}
+    .video-aspect video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--navy)}
   </style>
 </section>
 
@@ -1246,7 +1226,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to get a tank?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We respond to every quote request within 24 hours, guaranteed. Lead times vary by tank size and configuration, but we consistently offer some of the shortest lead times in the industry. Contact us for current production availability on your specific configuration.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you build custom sizes?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Yes. Custom sizes are a core part of what we do. We can build tanks to virtually any dimension within the applicable UL standard's design parameters. Submit a quote request with your required dimensions and we will confirm feasibility and pricing.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do tanks ship with inspector documentation?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">Yes. Every UL-listed tank ships with the appropriate UL label and supporting documentation. We can also provide test records and manufacturer's declarations as required by your local inspector or permitting authority.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What pump packages are available?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We offer fully customizable pumping and metering packages from 15 to 100 GPM. Options include 12-volt DC, electric, and gas-powered pumps with a variety of meter and nozzle configurations. All packages are plumbed on our yard and tested before shipment.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What pump packages are available?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We offer fully customizable pumping and metering packages from 15 to 100 GPM. Options include 12-volt DC, electric, and gas-powered pumps with a variety of meter and nozzle configurations. Pump and plumbing packages are sold separately — when ordered together with a tank, we can pre-plumb the assembly on our yard and air-test it before shipment for an additional cost.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What warranty is included?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">All tanks come with a one-year manufacturer's warranty covering defects in materials and workmanship. Contact our sales team for specific warranty terms applicable to your configuration.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What areas do you serve?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a">We ship throughout the continental United States. We work with regional rep firms — including Wilson-Rogers &amp; Associates (West), Walsh-Long (Midwest), and Mike Long (Southeast) — to provide local support and help you navigate local code requirements.</div></div>
       </div>
@@ -1264,7 +1244,7 @@ footer{background:var(--ink);padding:56px 80px 36px}
     <div class="process-step"><div class="step-num">01</div><h4>Request a Quote</h4><p>Submit specs online or call. We respond within 24 hours — guaranteed.</p></div>
     <div class="process-step"><div class="step-num">02</div><h4>Engineering Review</h4><p>Our team confirms the right certification standard for your project and location.</p></div>
     <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Built in Venus, TX by AWS-certified welders using robotic and manual welding processes.</p></div>
-    <div class="process-step"><div class="step-num">04</div><h4>Air Test &amp; Inspection</h4><p>Every tank is plumbed, pressure tested, and inspected before leaving our yard.</p></div>
+    <div class="process-step"><div class="step-num">04</div><h4>Air Test &amp; Inspection</h4><p>Every tank is pressure air-tested and inspected before leaving our yard. Pre-plumbed pump packages are optional and available for an additional cost.</p></div>
     <div class="process-step"><div class="step-num">05</div><h4>Delivery</h4><p>Shipped to your site through our rep network with all documentation your inspector requires.</p></div>
   </div>
 </section>

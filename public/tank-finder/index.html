@@ -100,7 +100,7 @@
         <a href="/about/#associations">Associations</a>
         <a href="/careers/">Careers</a>
         <a href="/resources/compliance/">Compliance</a>
-        <a href="/resources/specs/">Spec Sheets</a>
+        <a href="/resources/specs/">Resources</a>
         <a href="/blog/">Blog</a>
       </div>
     </li>
@@ -203,8 +203,9 @@
         <div style="font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Why this tank?</div>
         <ul class="why-list" id="rWhy"></ul>
         <div class="result-actions">
-          <a id="rLink" href="/contact/" class="btn-primary">View Tank &amp; Get a Quote &rarr;</a>
-          <a href="/#configurator" class="btn-outline">Build &amp; Price</a>
+          <a id="rLink" href="/contact/" class="btn-primary">Get a Quote &rarr;</a>
+          <a id="rProductLink" href="#" class="btn-outline">View Tank Specs</a>
+          <a href="/#configurator" class="btn-outline">Configure &amp; Price</a>
         </div>
       </div>
       <div class="restart-row">
@@ -316,7 +317,18 @@ function showResult() {
   document.getElementById('rName').textContent = r.name;
   document.getElementById('rCert').textContent = r.cert;
   document.getElementById('rDesc').textContent = r.desc;
-  document.getElementById('rLink').href = r.link;
+  // Quote link with URL params that auto-prefill contact form
+  const quoteParams = new URLSearchParams({
+    product: r.name,
+    from: 'tank-finder',
+    use_case: answers.q1 || '',
+    placement: answers.q2 || '',
+    requirement: answers.q3 || '',
+    containment: answers.q4 || '',
+    capacity: answers.q5 || '',
+  });
+  document.getElementById('rLink').href = '/contact/?' + quoteParams.toString();
+  document.getElementById('rProductLink').href = r.link;
   const ul = document.getElementById('rWhy');
   ul.innerHTML = r.why.map(w => '<li>' + w + '</li>').join('');
   document.getElementById('tfResult').classList.add('show');

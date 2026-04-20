@@ -68,7 +68,7 @@
         <a href="/about/#associations">Associations</a>
         <a href="/careers/">Careers</a>
         <a href="/resources/compliance/">Compliance</a>
-        <a href="/resources/specs/">Spec Sheets</a>
+        <a href="/resources/specs/">Resources</a>
         <a href="/blog/">Blog</a>
       </div>
     </li>
@@ -171,6 +171,65 @@
         var btn = document.getElementById('submitBtn');
         var status = document.getElementById('formStatus');
         if (!form) return;
+
+        // ── Prefill from URL parameters (e.g. from Tank Finder) ──
+        var params = new URLSearchParams(window.location.search);
+        if (params.has('product') || params.has('from')) {
+          // Match product from dropdown
+          var productInput = form.elements['product'];
+          if (productInput && params.get('product')) {
+            var wanted = params.get('product').toLowerCase();
+            for (var i = 0; i < productInput.options.length; i++) {
+              var opt = productInput.options[i].text.toLowerCase();
+              // Match e.g. "UL 142 Double-Wall" → "UL 142 Double Wall"
+              if (wanted.indexOf('fireguard') !== -1 && opt.indexOf('fireguard') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('flameshield') !== -1 && opt.indexOf('flameshield') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('permatank') !== -1 && opt.indexOf('permatank') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('act-100') !== -1 && opt.indexOf('act-100') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('double-wall') !== -1 && opt.indexOf('double wall') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('single-wall') !== -1 && opt.indexOf('single wall') !== -1) { productInput.selectedIndex = i; break; }
+              if (wanted.indexOf('farm') !== -1 && opt.indexOf('farm') !== -1) { productInput.selectedIndex = i; break; }
+            }
+          }
+
+          // Prefill capacity from q5 (sizes like "under-1000", "1000-5000", etc)
+          var capInput = form.elements['capacity'];
+          var cap = params.get('capacity');
+          if (capInput && cap) {
+            var capMap = {
+              'under-1000': 'Under 1,000 gallons',
+              '1000-5000': '1,000 – 5,000 gallons',
+              '5000-15000': '5,000 – 15,000 gallons',
+              '15000-plus': '15,000+ gallons',
+              'custom': 'Custom / Need help sizing',
+            };
+            capInput.value = capMap[cap] || cap;
+          }
+
+          // Build a Message prefill summarizing the Tank Finder answers
+          var msgInput = form.elements['message'];
+          if (msgInput && params.get('from') === 'tank-finder') {
+            var useCase = params.get('use_case') || '';
+            var placement = params.get('placement') || '';
+            var requirement = params.get('requirement') || '';
+            var containment = params.get('containment') || '';
+            var msg = "I used the Tank Finder and got a recommendation for " + (params.get('product') || '[unknown]') + ".\n\n";
+            msg += "My answers:\n";
+            if (useCase) msg += "  • Primary use: " + useCase + "\n";
+            if (placement) msg += "  • Placement: " + placement + "\n";
+            if (requirement) msg += "  • Special requirements: " + requirement + "\n";
+            if (containment) msg += "  • Containment preference: " + containment + "\n";
+            if (cap) msg += "  • Approximate capacity: " + (capInput ? capInput.value : cap) + "\n";
+            msg += "\nPlease contact me with pricing, lead time, and next steps.";
+            msgInput.value = msg;
+          }
+
+          // Show a friendly banner at the top of the form to confirm prefill worked
+          var banner = document.createElement('div');
+          banner.style.cssText = 'background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7;padding:12px 16px;border-radius:4px;font-size:13px;margin-bottom:8px';
+          banner.innerHTML = '<strong>&#10003; Prefilled from your Tank Finder results.</strong> Review the details below and add your contact info to get a quote.';
+          form.insertBefore(banner, form.firstChild);
+        }
 
         form.addEventListener('submit', async function(e) {
           e.preventDefault();
