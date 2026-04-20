@@ -21,10 +21,20 @@
 <link rel="canonical" href="https://hughestank.com/products/ul-142/">
 <style>
 /* Spec table styles (imported from /resources/specs/) */
-.tank-spec-block{margin-bottom:40px;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.tank-spec-head{padding:18px 28px 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
-.tank-spec-head h3{font-family:var(--fh);font-weight:800;font-size:18px;letter-spacing:0.01em;text-transform:uppercase;color:var(--navy);margin:0}
+/* Collapsible spec tables */
+.tank-spec-block{margin-bottom:12px;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .15s}
+.tank-spec-block.open{box-shadow:0 4px 16px rgba(13,27,62,0.06)}
+.tank-spec-head{padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;user-select:none;transition:background .15s;border-bottom:1px solid transparent}
+.tank-spec-head:hover{background:rgba(26,58,140,0.03)}
+.tank-spec-block.open .tank-spec-head{border-bottom-color:var(--border)}
+.tank-spec-head-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.tank-spec-head h3{font-family:var(--fh);font-weight:800;font-size:17px;letter-spacing:0.01em;text-transform:uppercase;color:var(--navy);margin:0}
+.tank-spec-head-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
 .tsh-cert{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:rgba(26,58,140,0.06);padding:5px 10px;border-radius:3px;white-space:nowrap}
+.tank-spec-chevron{width:20px;height:20px;color:var(--blue);transition:transform .2s ease;flex-shrink:0}
+.tank-spec-block.open .tank-spec-chevron{transform:rotate(180deg)}
+.tank-spec-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.tank-spec-block.open .tank-spec-body{max-height:3000px}
 .tank-spec-sub{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:18px 28px 6px}
 .tank-spec-table-wrap{padding:0 28px 16px;overflow-x:auto}
 .tank-spec-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
@@ -158,11 +168,12 @@
         <div class="eyebrow" style="margin-bottom:14px">Size &amp; Capacity</div>
         <h3 style="font-family:var(--fh);font-weight:800;font-size:22px;text-transform:uppercase;color:var(--navy);margin-bottom:20px">Available Dimensions</h3>
         <p style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:600px">Standard sizes shown below. Custom dimensions, multi-compartment configurations, and special fittings available on request.</p>
-        <div class="tank-spec-block" id="ul142-horiz">
-    <div class="tank-spec-head">
-      <h3>UL 142 Horizontal</h3>
-      <span class="tsh-cert">UL 142 Aboveground</span>
-    </div>
+        <div class="tank-spec-block open" id="ul142-horiz">
+  <div class="tank-spec-head" role="button" tabindex="0" aria-expanded="true" aria-controls="ul142-horiz-body">
+    <div class="tank-spec-head-left"><h3>UL 142 Horizontal</h3></div>
+    <div class="tank-spec-head-right"><span class="tsh-cert">UL 142 Aboveground</span><svg class="tank-spec-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+  </div>
+  <div class="tank-spec-body" id="ul142-horiz-body">
     <div class="tank-spec-sub">Single Wall</div>
 <div class="tank-spec-table-wrap"><table class="tank-spec-table"><thead><tr>
       <th>Gallons</th><th>Tank Dims</th><th>Weight</th><th>CFH</th>
@@ -172,21 +183,23 @@
       <th>Gallons</th><th>Inside Dims</th><th>Outside Dims</th><th>Weight</th><th>CFH</th><th>Annular CFH</th>
     </tr></thead><tbody><tr><td>300</td><td>36.5" x 58"</td><td>38" x 62"</td><td>600 LBS</td><td>48,460</td><td>52,700</td></tr><tr><td>500</td><td>47.75" x 67"</td><td>48" x 74"</td><td>1,000 LBS</td><td>74,750</td><td>81,050</td></tr><tr><td>1,000</td><td>48.5" x 117"</td><td>50" x 122"</td><td>2,000 LBS</td><td>117,600</td><td>126,000</td></tr><tr><td>1,000</td><td>64" x 74"</td><td>65.5" x 86"</td><td>2,000 LBS</td><td>116,500</td><td>133,350</td></tr><tr><td>2,000</td><td>64" x 146"</td><td>64" x 158"</td><td>3,500 LBS</td><td>196,300</td><td>209,950</td></tr><tr><td>3,000</td><td>64" x 216"</td><td>65.5" x 228"</td><td>6,000 LBS</td><td>269,000</td><td>278,340</td></tr><tr><td>4,000</td><td>96" x 134"</td><td>98" x 146"</td><td>8,000 LBS</td><td>269,600</td><td>270,980</td></tr><tr><td>4,000 Long</td><td>64" x 288"</td><td>65.5" x 300"</td><td>8,000 LBS</td><td>281,560</td><td>291,360</td></tr><tr><td>5,000</td><td>96" x 164"</td><td>98" x 176"</td><td>10,000 LBS</td><td>280,180</td><td>293,280</td></tr><tr><td>6,000</td><td>96" x 194"</td><td>98" x 206"</td><td>12,000 LBS</td><td>302,400</td><td>315,780</td></tr><tr><td>8,000</td><td>96" x 278"</td><td>98" x 290"</td><td>16,000 LBS</td><td>358,560</td><td>370,720</td></tr><tr><td>10,000</td><td>96" x 324"</td><td>98" x 386"</td><td>18,000 LBS</td><td>385,920</td><td>399,560</td></tr><tr><td>12,000</td><td>96" x 386"</td><td>98" x 398"</td><td>22,000 LBS</td><td>421,520</td><td>433,780</td></tr><tr><td>15,000</td><td>96" x 482"</td><td>98" x 494"</td><td>28,000 LBS</td><td>472,230</td><td>496,100</td></tr><tr><td>20,000</td><td>118" x 432"</td><td>120" x 446"</td><td>32,000 LBS</td><td>509,120</td><td>507,880</td></tr><tr><td>25,000</td><td>120" x 516"</td><td>126" x 420"</td><td>32,000 LBS</td><td>545,615</td><td>522,760</td></tr></tbody></table></div><div class="tank-spec-note">* All double-wall tanks available in multi-compartment configurations.</div>
   </div>
-<div class="tank-spec-block" id="ul142-rect">
-    <div class="tank-spec-head">
-      <h3>UL 142 Rectangular</h3>
-      <span class="tsh-cert">UL 142 Aboveground</span>
-    </div>
+</div><div class="tank-spec-block" id="ul142-rect">
+  <div class="tank-spec-head" role="button" tabindex="0" aria-expanded="false" aria-controls="ul142-rect-body">
+    <div class="tank-spec-head-left"><h3>UL 142 Rectangular</h3></div>
+    <div class="tank-spec-head-right"><span class="tsh-cert">UL 142 Aboveground</span><svg class="tank-spec-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+  </div>
+  <div class="tank-spec-body" id="ul142-rect-body">
     <div class="tank-spec-sub">Double Wall</div>
 <div class="tank-spec-table-wrap"><table class="tank-spec-table"><thead><tr>
       <th>Gallons</th><th>Inside Dims</th><th>Outside Dims</th><th>Weight</th><th>CFH</th><th>Annular CFH</th>
     </tr></thead><tbody><tr><td>300</td><td>53" x 38" x 36"</td><td>62" x 40" x 35"</td><td>600 LBS</td><td>63,200</td><td>70,550</td></tr><tr><td>500</td><td>60" x 50" x 40"</td><td>69" x 52" x 39"</td><td>1,000 LBS</td><td>86,320</td><td>94,800</td></tr><tr><td>1,000</td><td>98" x 56" x 43"</td><td>110" x 58" x 42"</td><td>2,000 LBS</td><td>136,500</td><td>149,100</td></tr><tr><td>2,000</td><td>132" x 60" x 60"</td><td>140" x 64" x 66"</td><td>4,000 LBS</td><td>219,400</td><td>230,600</td></tr><tr><td>3,000</td><td>180" x 60" x 65"</td><td>186" x 64" x 66"</td><td>6,000 LBS</td><td>260,840</td><td>270,520</td></tr><tr><td>4,000</td><td>180" x 72" x 72"</td><td>188" x 75" x 73"</td><td>8,000 LBS</td><td>284,320</td><td>294,900</td></tr><tr><td>5,000</td><td>176" x 87.5" x 76"</td><td>284" x 94" x 77"</td><td>10,000 LBS</td><td>304,800</td><td>319,140</td></tr><tr><td>6,000</td><td>240" x 78.5" x 74"</td><td>248" x 82" x 75"</td><td>12,000 LBS</td><td>336,360</td><td>347,700</td></tr><tr><td>8,000</td><td>278" x 88" x 76"</td><td>286" x 94" x 77"</td><td>16,000 LBS</td><td>375,280</td><td>389,340</td></tr><tr><td>10,000</td><td>346" x 88" x 76"</td><td>352" x 94" x 77"</td><td>18,000 LBS</td><td>417,200</td><td>430,380</td></tr><tr><td>12,000</td><td>360" x 88" x 88"</td><td>366" x 94" x 89"</td><td>22,000 LBS</td><td>451,120</td><td>464,480</td></tr></tbody></table></div><div class="tank-spec-note">* All double-wall tanks available in multi-compartment configurations.</div>
   </div>
-<div class="tank-spec-block" id="ul142-vert">
-    <div class="tank-spec-head">
-      <h3>UL 142 Vertical</h3>
-      <span class="tsh-cert">UL 142 Aboveground</span>
-    </div>
+</div><div class="tank-spec-block" id="ul142-vert">
+  <div class="tank-spec-head" role="button" tabindex="0" aria-expanded="false" aria-controls="ul142-vert-body">
+    <div class="tank-spec-head-left"><h3>UL 142 Vertical</h3></div>
+    <div class="tank-spec-head-right"><span class="tsh-cert">UL 142 Aboveground</span><svg class="tank-spec-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+  </div>
+  <div class="tank-spec-body" id="ul142-vert-body">
     <div class="tank-spec-sub">Single Wall</div>
 <div class="tank-spec-table-wrap"><table class="tank-spec-table"><thead><tr>
       <th>Gallons</th><th>Tank Dims</th><th>Weight</th><th>CFH</th>
@@ -196,17 +209,18 @@
       <th>Gallons</th><th>Inside Dims</th><th>Outside Dims</th><th>Weight</th><th>CFH</th><th>Annular CFH</th>
     </tr></thead><tbody><tr><td>300</td><td>36.5" x 58"</td><td>38" x 62"</td><td>600 LBS</td><td>48,460</td><td>52,700</td></tr><tr><td>500</td><td>47.75" x 67"</td><td>48" x 74"</td><td>1,000 LBS</td><td>74,750</td><td>81,050</td></tr><tr><td>1,000</td><td>48.5" x 117"</td><td>50" x 122"</td><td>2,000 LBS</td><td>117,600</td><td>126,000</td></tr><tr><td>1,000</td><td>64" x 74"</td><td>65.5" x 86"</td><td>2,000 LBS</td><td>116,500</td><td>133,350</td></tr><tr><td>2,000</td><td>64" x 146"</td><td>64" x 158"</td><td>3,500 LBS</td><td>196,300</td><td>209,950</td></tr><tr><td>3,000</td><td>64" x 216"</td><td>65.5" x 228"</td><td>6,000 LBS</td><td>269,000</td><td>278,340</td></tr><tr><td>4,000</td><td>96" x 134"</td><td>98" x 146"</td><td>8,000 LBS</td><td>269,600</td><td>270,980</td></tr><tr><td>4,000 Long</td><td>64" x 288"</td><td>65.5" x 300"</td><td>8,000 LBS</td><td>281,560</td><td>291,360</td></tr><tr><td>5,000</td><td>96" x 164"</td><td>98" x 176"</td><td>10,000 LBS</td><td>280,180</td><td>293,280</td></tr><tr><td>6,000</td><td>96" x 194"</td><td>98" x 206"</td><td>12,000 LBS</td><td>302,400</td><td>315,780</td></tr><tr><td>8,000</td><td>96" x 278"</td><td>98" x 290"</td><td>16,000 LBS</td><td>358,560</td><td>370,720</td></tr><tr><td>10,000</td><td>96" x 324"</td><td>98" x 386"</td><td>18,000 LBS</td><td>385,920</td><td>399,560</td></tr><tr><td>12,000</td><td>96" x 386"</td><td>98" x 398"</td><td>22,000 LBS</td><td>421,520</td><td>433,780</td></tr><tr><td>15,000</td><td>96" x 482"</td><td>98" x 494"</td><td>28,000 LBS</td><td>472,230</td><td>496,100</td></tr><tr><td>20,000</td><td>118" x 432"</td><td>120" x 446"</td><td>32,000 LBS</td><td>509,120</td><td>507,880</td></tr><tr><td>25,000</td><td>120" x 516"</td><td>126" x 420"</td><td>32,000 LBS</td><td>545,615</td><td>522,760</td></tr></tbody></table></div><div class="tank-spec-note">* All double-wall tanks available in multi-compartment configurations.</div>
   </div>
-<div class="tank-spec-block" id="oval">
-    <div class="tank-spec-head">
-      <h3>UL 142 Oval</h3>
-      <span class="tsh-cert">UL 142 Aboveground</span>
-    </div>
+</div><div class="tank-spec-block" id="oval">
+  <div class="tank-spec-head" role="button" tabindex="0" aria-expanded="false" aria-controls="oval-body">
+    <div class="tank-spec-head-left"><h3>UL 142 Oval</h3></div>
+    <div class="tank-spec-head-right"><span class="tsh-cert">UL 142 Aboveground</span><svg class="tank-spec-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+  </div>
+  <div class="tank-spec-body" id="oval-body">
     <div class="tank-spec-sub">Single Wall Oval</div>
 <div class="tank-spec-table-wrap"><table class="tank-spec-table"><thead><tr>
       <th>Gallons</th><th>Tank Dims</th><th>Weight</th><th>CFH</th>
     </tr></thead><tbody><tr><td>275</td><td>27" x 44" x 62"</td><td>275</td><td>63,956</td></tr><tr><td>330</td><td>27" x 44" x 73.5"</td><td>330</td><td>75,819</td></tr></tbody></table></div>
   </div>
-        <p style="margin-top:20px;font-size:12px;color:var(--muted)">Don't see the size you need? <a href="/contact/" style="color:var(--blue);font-weight:600">Ask about custom configurations &rarr;</a></p>
+</div><p style="margin-top:20px;font-size:12px;color:var(--muted)">Don't see the size you need? <a href="/contact/" style="color:var(--blue);font-weight:600">Ask about custom configurations &rarr;</a></p>
       </div>
       <!-- CTA -->
       <div style="background:var(--navy);border-radius:6px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
@@ -347,5 +361,23 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   if (a.href === window.location.href) a.style.color = 'white';
 });
 </script>
+
+<script>
+(function() {
+  document.querySelectorAll('.tank-spec-head').forEach(function(head) {
+    var toggle = function() {
+      var block = head.closest('.tank-spec-block');
+      var wasOpen = block.classList.contains('open');
+      block.classList.toggle('open');
+      head.setAttribute('aria-expanded', (!wasOpen).toString());
+    };
+    head.addEventListener('click', toggle);
+    head.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

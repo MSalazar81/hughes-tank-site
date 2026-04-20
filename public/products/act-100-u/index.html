@@ -21,10 +21,20 @@
 <link rel="canonical" href="https://hughestank.com/products/act-100-u/">
 <style>
 /* Spec table styles (imported from /resources/specs/) */
-.tank-spec-block{margin-bottom:40px;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.tank-spec-head{padding:18px 28px 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
-.tank-spec-head h3{font-family:var(--fh);font-weight:800;font-size:18px;letter-spacing:0.01em;text-transform:uppercase;color:var(--navy);margin:0}
+/* Collapsible spec tables */
+.tank-spec-block{margin-bottom:12px;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .15s}
+.tank-spec-block.open{box-shadow:0 4px 16px rgba(13,27,62,0.06)}
+.tank-spec-head{padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;user-select:none;transition:background .15s;border-bottom:1px solid transparent}
+.tank-spec-head:hover{background:rgba(26,58,140,0.03)}
+.tank-spec-block.open .tank-spec-head{border-bottom-color:var(--border)}
+.tank-spec-head-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.tank-spec-head h3{font-family:var(--fh);font-weight:800;font-size:17px;letter-spacing:0.01em;text-transform:uppercase;color:var(--navy);margin:0}
+.tank-spec-head-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
 .tsh-cert{font-family:var(--fh);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:rgba(26,58,140,0.06);padding:5px 10px;border-radius:3px;white-space:nowrap}
+.tank-spec-chevron{width:20px;height:20px;color:var(--blue);transition:transform .2s ease;flex-shrink:0}
+.tank-spec-block.open .tank-spec-chevron{transform:rotate(180deg)}
+.tank-spec-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.tank-spec-block.open .tank-spec-body{max-height:3000px}
 .tank-spec-sub{font-family:var(--fh);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:18px 28px 6px}
 .tank-spec-table-wrap{padding:0 28px 16px;overflow-x:auto}
 .tank-spec-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
@@ -158,17 +168,18 @@
         <div class="eyebrow" style="margin-bottom:14px">Size &amp; Capacity</div>
         <h3 style="font-family:var(--fh);font-weight:800;font-size:22px;text-transform:uppercase;color:var(--navy);margin-bottom:20px">Available Dimensions</h3>
         <p style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:600px">Standard sizes shown below. Custom dimensions, multi-compartment configurations, and special fittings available on request.</p>
-        <div class="tank-spec-block" id="act100u">
-    <div class="tank-spec-head">
-      <h3>ACT-100-U</h3>
-      <span class="tsh-cert">STI-Listed Underground</span>
-    </div>
+        <div class="tank-spec-block open" id="act100u">
+  <div class="tank-spec-head" role="button" tabindex="0" aria-expanded="true" aria-controls="act100u-body">
+    <div class="tank-spec-head-left"><h3>ACT-100-U</h3></div>
+    <div class="tank-spec-head-right"><span class="tsh-cert">STI-Listed Underground</span><svg class="tank-spec-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+  </div>
+  <div class="tank-spec-body" id="act100u-body">
     <div class="tank-spec-sub">Cathodically-Protected Steel UST</div>
 <div class="tank-spec-table-wrap"><table class="tank-spec-table"><thead><tr>
       <th>Gallons</th><th>Inside Dims</th><th>Outside Dims</th><th>Weight</th><th>Annular CFH</th><th>CFH</th>
     </tr></thead><tbody><tr><td>15,000</td><td>96" x 482"</td><td>98" x 494"</td><td>28,000 LBS</td><td>472,230</td><td>484,010</td></tr><tr><td>25,000</td><td>124" x 482"</td><td>126" x 494"</td><td>38,000 LBS</td><td>541,160</td><td>548,420</td></tr></tbody></table></div>
   </div>
-        <p style="margin-top:20px;font-size:12px;color:var(--muted)">Don't see the size you need? <a href="/contact/" style="color:var(--blue);font-weight:600">Ask about custom configurations &rarr;</a></p>
+</div><p style="margin-top:20px;font-size:12px;color:var(--muted)">Don't see the size you need? <a href="/contact/" style="color:var(--blue);font-weight:600">Ask about custom configurations &rarr;</a></p>
       </div>
       <!-- CTA -->
       <div style="background:var(--navy);border-radius:6px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
@@ -309,5 +320,23 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   if (a.href === window.location.href) a.style.color = 'white';
 });
 </script>
+
+<script>
+(function() {
+  document.querySelectorAll('.tank-spec-head').forEach(function(head) {
+    var toggle = function() {
+      var block = head.closest('.tank-spec-block');
+      var wasOpen = block.classList.contains('open');
+      block.classList.toggle('open');
+      head.setAttribute('aria-expanded', (!wasOpen).toString());
+    };
+    head.addEventListener('click', toggle);
+    head.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
