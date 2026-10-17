@@ -12,7 +12,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
-.cfg-wrap{display:grid;grid-template-rows:36px 60px 48px 1fr 68px;height:100vh;background:linear-gradient(140deg,#e8ecf0 0%,#d8dde5 60%,#cdd3dc 100%)}
+.cfg-wrap{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:36px 60px 48px minmax(0,1fr) 68px;height:100vh;height:100dvh;background:linear-gradient(140deg,#e8ecf0 0%,#d8dde5 60%,#cdd3dc 100%)}
 
 /* ── SITE TOPBAR (matches homepage) ── */
 .site-topbar{background:#07101F;padding:0 32px;display:flex;justify-content:space-between;align-items:center;z-index:100}
@@ -68,7 +68,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .prog-step.done .prog-arrow{border-left-color:rgba(26,58,140,0.28)}
 .prog-step:last-child .prog-arrow{display:none}
 
-.cfg-content{display:grid;grid-template-columns:260px 1fr;overflow:hidden}
+.cfg-content{display:grid;grid-template-columns:260px minmax(0,1fr);overflow:hidden;min-height:0}
 .left-panel{background:#fff;border-right:1px solid #DDE2EE;display:flex;flex-direction:column;overflow-y:auto;box-shadow:2px 0 16px rgba(13,27,62,0.07);z-index:10}
 .left-panel::-webkit-scrollbar{width:3px}
 .left-panel::-webkit-scrollbar-thumb{background:#DDE2EE}
@@ -115,8 +115,11 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .aprc{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;color:#1A3A8C;flex-shrink:0}
 .sdiv{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#A8B8D0;padding:5px 14px 2px;border-top:1px solid #EEF0F5;margin-top:3px}
 
-.canvas-area{position:relative;overflow:hidden}
-#tc{width:100%;height:100%;display:block}
+.canvas-area{position:relative;overflow:hidden;min-width:0;min-height:0}
+#tc{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#tc:active{cursor:grabbing}
+.no3d{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#5A6A88}
+.no3d.on{display:flex}
 .ctags{position:absolute;bottom:14px;left:14px;display:flex;flex-direction:column;gap:3px}
 .ctag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;background:rgba(255,255,255,.84);border:1px solid rgba(26,58,140,.16);border-radius:3px;color:#1A3A8C;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .vbtns{position:absolute;top:12px;right:12px;display:flex;gap:4px}
@@ -124,8 +127,9 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .vb:hover,.vb.on{background:#1A3A8C;color:#fff;border-color:#1A3A8C}
 .dhint{position:absolute;top:12px;left:12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(13,27,62,.38);background:rgba(255,255,255,.6);padding:3px 8px;border-radius:3px}
 
-.spec-footer{background:#0D1B3E;display:grid;grid-template-columns:repeat(6,1fr) auto;align-items:center;padding:0 14px;gap:0;border-top:2px solid #1A3A8C}
-.sfi{padding:0 10px;border-right:1px solid rgba(255,255,255,.07);height:100%;display:flex;flex-direction:column;justify-content:center}
+.spec-footer{background:#0D1B3E;display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) auto auto;align-items:center;padding:0 14px;gap:0;border-top:2px solid #1A3A8C;min-width:0}
+.sfi{padding:0 10px;border-right:1px solid rgba(255,255,255,.07);height:100%;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.sfi .sfv{overflow-wrap:anywhere}
 .sfl{font-family:'Barlow Condensed',sans-serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2px}
 .sfv{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;color:#fff;line-height:1}
 .sfv.ac{color:#5A9FE3}
@@ -142,7 +146,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(13,27,62,.5);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .modal.on{display:flex}
-.mbox{background:#fff;border-radius:8px;padding:30px;width:480px;max-width:95vw;box-shadow:0 28px 72px rgba(13,27,62,.2)}
+.mbox{background:#fff;border-radius:8px;padding:30px;width:480px;max-width:95vw;max-height:92vh;overflow-y:auto;box-shadow:0 28px 72px rgba(13,27,62,.2)}
 .mbox h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.06em;color:#0D1B3E;margin-bottom:4px}
 .mbox p{font-size:13px;color:#5A6A88;margin-bottom:14px;line-height:1.6}
 .msum{background:#F8F9FC;border:1px solid #DDE2EE;border-radius:4px;padding:11px 14px;margin-bottom:14px;font-size:11px;color:#5A6A88;line-height:1.7}
@@ -154,7 +158,23 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .ms{flex:2;background:#1A3A8C;border:none;border-radius:4px;color:#fff;padding:10px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 .ms:hover{background:#2248b0}
 
-@media(max-width:768px){.cfg-content{grid-template-columns:1fr}.left-panel{max-height:260px}html,body{overflow:auto}.cfg-wrap{height:auto;grid-template-rows:auto auto 1fr auto}.canvas-area{min-height:300px}.spec-footer{grid-template-columns:repeat(2,1fr)}.nav-link{display:none}}
+@media(max-width:1100px){.spec-footer{grid-template-columns:repeat(4,minmax(0,1fr)) auto auto}.sfi.sf-xl{display:none}}
+@media(max-width:768px){
+  html,body{overflow:auto;height:auto}
+  .cfg-wrap{height:auto;min-height:100vh;grid-template-rows:auto 48px auto auto}
+  .site-topbar{display:none}
+  .site-nav{padding:10px 16px}
+  .site-nav-links>li:not(:last-child){display:none}
+  .cfg-content{grid-template-columns:minmax(0,1fr);overflow:visible}
+  .canvas-area{order:-1;height:46vh;min-height:280px}
+  .left-panel{overflow:visible;box-shadow:none;border-right:none}
+  .ctags{bottom:8px;left:8px}.ctag{font-size:9px;padding:2px 7px}
+  .rec-bar{top:40px;left:8px;right:8px}
+  .spec-footer{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px 14px;row-gap:10px}
+  .sfi{border-right:none}.sfi.sf-xl{display:flex}
+  .sfp,.sfact{grid-column:1/-1;padding-left:10px;border-right:none}
+  .sfact{flex-direction:row;padding:4px 0 6px 10px}
+}
 
 /* Smart recommendation banner */
 .rec-bar{display:none;position:absolute;top:46px;left:12px;right:12px;background:rgba(26,58,140,0.92);border-radius:4px;padding:7px 12px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.06em;z-index:20;backdrop-filter:blur(4px);box-shadow:0 2px 12px rgba(13,27,62,0.25)}
@@ -276,7 +296,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
         <div class="step-ctr" id="stepCtr">Step 1 of 12</div>
         <button class="nav-btn next" onclick="goNext()">Next &#8594;</button>
       </div>
-      <div style="padding:0 22px 10px">
+      <div style="padding:10px 14px">
         <button onclick="startOver()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid #DDE2EE;color:#5A6A88;padding:5px 12px;border-radius:3px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#E24B4A';this.style.color='#E24B4A'" onmouseout="this.style.borderColor='#DDE2EE';this.style.color='#5A6A88'">&#8635; Start Over</button>
       </div>
       <div id="stepContent"></div>
@@ -286,7 +306,8 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
       </div>
     </div>
     <div class="canvas-area">
-      <canvas id="tc"></canvas>
+      <canvas id="tc" aria-label="3D preview of your tank"></canvas>
+      <div class="no3d" id="no3d">3D preview isn&rsquo;t available on this device &mdash; your selections, pricing and build sheet still work.</div>
       <div class="dhint">Drag to rotate &middot; Scroll to zoom</div>
       <!-- Smart recommendation banner -->
       <div class="rec-bar" id="recBar">
@@ -313,8 +334,8 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
     <div class="sfi"><div class="sfl">Capacity</div><div class="sfv" id="fC">5,000 gal</div></div>
     <div class="sfi"><div class="sfl">Dimensions</div><div class="sfv" id="fD">96&Prime;&times;164&Prime;</div></div>
     <div class="sfi"><div class="sfl">Weight</div><div class="sfv" id="fW">5,000 lbs</div></div>
-    <div class="sfi"><div class="sfl">Lead Time</div><div class="sfv" id="fLead">2–4 wks</div><div class="sfcert" id="fWarranty">1-yr warranty</div></div>
-    <div class="sfi"><div class="sfl">Certification</div><div class="sfv" id="fCert">UL 142</div><div class="sfcert" id="fBadge">UL Listed</div></div>
+    <div class="sfi sf-xl"><div class="sfl">Lead Time</div><div class="sfv" id="fLead">2–4 wks</div><div class="sfcert" id="fWarranty">1-yr warranty</div></div>
+    <div class="sfi sf-xl"><div class="sfl">Certification</div><div class="sfv" id="fCert">UL 142</div><div class="sfcert" id="fBadge">UL Listed</div></div>
     <div class="sfp"><div class="sfpl">Est. Starting Price</div><div class="sfpv" id="fP">$7,200</div><div class="sfpn">Available through distributors &middot; 24-hr quote</div></div>
     <div class="sfact">
       <button class="sfb1" onclick="openM()">Submit Build Sheet &rarr;</button>
@@ -325,8 +346,9 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 
 <div class="modal" id="qModal">
   <div class="mbox">
+   <div id="mForm">
     <h3>Send Your Build Sheet</h3>
-    <p>We'll respond within 24 hours with exact pricing and lead time — guaranteed.</p>
+    <p>We'll respond within 24 hours with pricing and lead time through an authorized Hughes Tank distributor.</p>
     <div class="msum" id="msum"></div>
     <input class="mi" type="text" id="qn" placeholder="Your name *">
     <input class="mi" type="email" id="qe" placeholder="Email address *">
@@ -342,10 +364,21 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
       <option value="researching">Just researching</option>
     </select>
     <textarea class="mi" id="qnotes" rows="2" placeholder="Additional notes..." style="resize:none"></textarea>
+    <input type="text" id="qhp" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
+    <div id="qErr" style="display:none;font-size:12px;color:#B71C1C;background:#FFEBEE;border:1px solid #EF9A9A;border-radius:4px;padding:8px 10px;margin-bottom:8px"></div>
     <div class="mbtns">
       <button class="mc" onclick="closeM()">Cancel</button>
-      <button class="ms" onclick="sendQ()">Send Build Sheet &rarr;</button>
+      <button class="ms" id="qSend" onclick="sendQ()">Send Build Sheet &rarr;</button>
     </div>
+   </div>
+   <div id="mSent" style="display:none;text-align:center;padding:22px 0">
+      <div style="font-size:52px;margin-bottom:12px;color:#1A3A8C">&#10003;</div>
+      <h3 id="mSentTitle" style="margin-bottom:10px">Build Sheet Sent!</h3>
+      <p id="mSentMsg" style="max-width:340px;margin:0 auto 18px"></p>
+      <p style="font-size:13px;color:#5A6A88;margin-bottom:14px">Or call us directly: <a href="tel:9723668684" style="color:#1A3A8C;font-weight:700">972-366-8684</a></p>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid #DDE2EE;padding-top:12px">Hughes Tank Company &middot; Venus, TX</div>
+      <button onclick="closeM()" style="margin-top:14px;background:#1A3A8C;border:none;border-radius:4px;color:#fff;padding:9px 22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Close</button>
+   </div>
   </div>
 </div>
 
@@ -426,7 +459,7 @@ const TD={
       }}
     }
   },
-  fireguard:{label:'Fireguard(R)',cert:'UL 2085',badge:'UL 2085',lead:'4-6 wks',warranty:'1 yr',
+  fireguard:{label:'Fireguard®',cert:'UL 2085',badge:'UL 2085',lead:'4-6 wks',warranty:'1 yr',
     // Per SPATCO Kroger 12K drawing:
     // Head: 102" diameter - Saddles: 102" saddle assembly - 3 saddles on 12K+
     // Lug: LIFTING LUG 2085 (different from UL 142) + LUG PLATE 2085 backing plate
@@ -467,7 +500,7 @@ const TD={
       }}
     }
   },
-  flameshield:{label:'Flameshield(R)',cert:'STI-P3',badge:'STI-P3',lead:'4-6 wks',warranty:'1 yr',
+  flameshield:{label:'Flameshield®',cert:'STI-P3',badge:'STI-P3',lead:'4-6 wks',warranty:'1 yr',
     sizes:{horiz:{double:{
       '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'4,500', price:11000,saddles:2},
       '2000':{di:64, do_:70,  li:146, lo:158, wt:'6,500', price:15000,saddles:2},
@@ -488,7 +521,7 @@ const TD={
       '1000':{d:50,l:122, wt:'1,000',price:3800,sh:'10 ga',farmType:'ground'},
     }}}
   },
-  permatank:{label:'Permatank(R)',cert:'ACT-100',badge:'STI ACT-100',lead:'6-8 wks',warranty:'30 yr',
+  permatank:{label:'Permatank®',cert:'ACT-100',badge:'STI ACT-100',lead:'6-8 wks',warranty:'30 yr',
     fixedColor:'#E07A10',fixedColorName:'Orange',
     // From 7-Eleven 27K model tree:
     // Strap: STRAP 120IN W 1X18" TURNBUCKLE - 1"x18" turnbuckle, 120" wide
@@ -537,29 +570,29 @@ const COLORS=[
 
 const ACCESSORIES=[
   // MONITORING & SAFETY (from real HTC builds)
-  {id:'hlalarm',  ico:'alrm',name:'High-Level Alarm',         sub:'Audible + visual, 120V AC -- auto shutoff at 95% capacity',   price:320,  noUST:false, group:'mon'},
+  {id:'hlalarm',  ico:'alrm',name:'High-Level Alarm',         sub:'Audible + visual, 120V AC — auto shutoff at 95% capacity',   price:320,  noUST:false, group:'mon'},
   {id:'overfill', ico:'stop',name:'Overfill Prevention Valve', sub:'Morrison gravity float shutoff at 95% capacity',              price:265,  noUST:false, group:'mon'},
   {id:'gauge',    ico:'gauge',name:'Mechanical Level Gauge',    sub:'Morrison clock gauge, 2" NPT sidewinder float',               price:145,  noUST:false, group:'mon'},
   {id:'atg',      ico:'atg',name:'ATG Probe Port',            sub:'Veeder-Root / OPW compatible interstitial port',              price:185,  noUST:false, group:'mon'},
   {id:'sensor',   ico:'sens',name:'Interstitial Leak Sensor',  sub:'Electronic leak detection probe for double-wall annular space',price:310,  noUST:false, group:'mon'},
-  {id:'cond_elim',ico:'cond',name:'Condensation Eliminators',  sub:'Standard on all DW tanks -- PVC fitting assembly (x2)',       price:85,   noUST:false, group:'mon'},
+  {id:'cond_elim',ico:'cond',name:'Condensation Eliminators',  sub:'Standard on all DW tanks — PVC fitting assembly (x2)',       price:85,   noUST:false, group:'mon'},
   // FUELING EQUIPMENT
-  {id:'meter',    ico:'meter',name:'Flow Meter',                sub:'Oval gear +/-0.5% accuracy, in-line -- required for billing', price:280,  noUST:false, group:'fuel'},
+  {id:'meter',    ico:'meter',name:'Flow Meter',                sub:'Oval gear ±0.5% accuracy, in-line — required for billing', price:280,  noUST:false, group:'fuel'},
   {id:'spill',    ico:'spill',name:'Spill Box w/ Bracket Kit',  sub:'2" fill point spill box + welded bracket, 5-gal capacity',   price:245,  noUST:false, group:'fuel'},
-  {id:'antisiphon',ico:'🔧',name:'Anti-Siphon Valve',        sub:'Morrison 1-1/2" anti-siphon -- required for elevated pumps',  price:185,  noUST:false, group:'fuel'},
+  {id:'antisiphon',ico:'valv',name:'Anti-Siphon Valve',        sub:'Morrison 1-1/2" anti-siphon — required for elevated pumps',  price:185,  noUST:false, group:'fuel'},
   {id:'hose',     ico:'hose',name:'Hose Reel',                 sub:'20 ft static hose with spring rewind',                       price:390,  noUST:false, group:'fuel'},
   {id:'cabinet',  ico:'cab',name:'Pump Cabinet',              sub:'Lockable steel enclosure, HUGHES TANK branded',              price:480,  noUST:false, group:'fuel'},
   {id:'dispenser',ico:'disp',name:'Single Dispenser',          sub:'Commercial fuel dispenser, UL listed',                       price:1200, noUST:true,  group:'fuel'},
   {id:'dual_disp',ico:'disp',name:'Dual Dispenser',            sub:'Two-product simultaneous dispensing',                        price:2100, noUST:true,  group:'fuel'},
   // STRUCTURE & ACCESS
-  {id:'forklift', ico:'fork',name:'Forklift Pockets',         sub:'Welded tube pockets both ends, through skid -- 3.5" pipe',   price:220,  noUST:false, group:'struct'},
-  {id:'pump_plat',ico:'plat',name:'Pump Platform (69x30)',     sub:'Welded steel platform both ends -- ag/fleet standard',        price:380,  noUST:false, group:'struct'},
+  {id:'forklift', ico:'fork',name:'Forklift Pockets',         sub:'Welded tube pockets both ends, through skid — 3.5" pipe',   price:220,  noUST:false, group:'struct'},
+  {id:'pump_plat',ico:'plat',name:'Pump Platform (69x30)',     sub:'Welded steel platform both ends — ag/fleet standard',        price:380,  noUST:false, group:'struct'},
   {id:'lean2',    ico:'lean',name:'Lean 2 Bracket Kit',        sub:'Pipe support bracket for suction/return plumbing',           price:145,  noUST:false, group:'struct'},
-  {id:'pan',      ico:'pan',name:'Containment Pan / Box',     sub:'110% capacity -- SPCC compliant, drain port, 6" I-beam',     price:550,  noUST:false, group:'struct'},
+  {id:'pan',      ico:'pan',name:'Containment Pan / Box',     sub:'110% capacity — SPCC compliant, drain port, 6" I-beam',     price:550,  noUST:false, group:'struct'},
   {id:'ladder',   ico:'ladr',name:'Ladder & Platform',         sub:'175" steel ladder, 20" wide, 3/4" round rungs, galvanized',  price:680,  noUST:true,  group:'struct'},
   {id:'catwalk',  ico:'walk',name:'Full Catwalk',              sub:'42" wide grated walkway, hot-dip galvanized',                price:2200, noUST:true,  group:'struct'},
   {id:'tieoff',   ico:'tie',name:'Tie-Off Points',            sub:'Fireguard K-fittings for transport/installation rigging',     price:125,  noUST:false, group:'struct'},
-  {id:'grounding',ico:'gnd',name:'Grounding Lug',             sub:'Static/bonding lug -- code required for gasoline storage',   price:85,   noUST:false, group:'struct'},
+  {id:'grounding',ico:'gnd',name:'Grounding Lug',             sub:'Static/bonding lug — code required for gasoline storage',   price:85,   noUST:false, group:'struct'},
   {id:'rainshield',ico:'rain',name:'Rain Shield',              sub:'Steel curved overhang, 442 lbs, 12,585 sq in coverage',      price:580,  noUST:true,  group:'struct'},
 ];
 
@@ -580,12 +613,12 @@ const STEPS=[
    hint:'Choose the certification that matches your project. Fire-rated tanks require UL 2085 or STI-P3.',
    type:'tiles',c:2,
     opts:[
-      {v:'ul142',     i:'tank',l:'UL 142',        s:'Aboveground -- standard steel',  t:'Most Popular'},
-      {v:'fireguard', i:'fire',l:'Fireguard(R)',     s:'2-hr fire rated',               t:'UL 2085'},
-      {v:'flameshield',i:'shld',l:'Flameshield(R)', s:'STI-P3 secondary containment',  t:'STI-P3'},
+      {v:'ul142',     i:'tank',l:'UL 142',        s:'Aboveground — standard steel',  t:'Most Popular'},
+      {v:'fireguard', i:'fire',l:'Fireguard®',     s:'2-hr fire rated',               t:'UL 2085'},
+      {v:'flameshield',i:'shld',l:'Flameshield®', s:'STI-P3 secondary containment',  t:'STI-P3'},
       {v:'farm',      i:'agri',l:'Farm / Ag Tank', s:'Non-UL agricultural fuel'},
-      {v:'permatank', i:'ust',l:'Permatank(R)',    s:'Underground  -  Orange only',      t:'ACT-100'},
-      {v:'act100u',   i:'ust2',l:'ACT-100-U',     s:'Underground ethanol  -  Black only',t:'ACT-100-U'},
+      {v:'permatank', i:'ust',l:'Permatank®',    s:'Underground — orange only',      t:'ACT-100'},
+      {v:'act100u',   i:'ust2',l:'ACT-100-U',     s:'Underground ethanol — black only',t:'ACT-100-U'},
     ]},
   // STEP 2 - Product stored
   {id:'product',lbl:'Product',q:'What will be stored in this tank?',
@@ -604,8 +637,8 @@ const STEPS=[
    hint:'Horizontal cylindrical is the most common. Rectangular is typical for Fireguard fire-rated.',
    type:'tiles',c:2,
     opts:[
-      {v:'horiz',i:'<>️',l:'Horizontal Cylinder',s:'Most common -- skid mounted'},
-      {v:'vert', i:'^v️',l:'Vertical Cylinder',  s:'Smaller footprint'},
+      {v:'horiz',i:'horz',l:'Horizontal Cylinder',s:'Most common — skid mounted'},
+      {v:'vert', i:'vert',l:'Vertical Cylinder',  s:'Smaller footprint'},
       {v:'rect', i:'rect',l:'Rectangular',         s:'Fireguard / UL 142 double wall'},
     ]},
   // STEP 4 - Wall
@@ -613,8 +646,8 @@ const STEPS=[
    hint:'Double-wall provides built-in secondary containment. EPA SPCC often requires it. 3D shows cutaway of inner tank.',
    type:'tiles',c:2,
     opts:[
-      {v:'single',i:'rect',l:'Single Wall',  s:'Most economical -- standard'},
-      {v:'double',i:'=',l:'Double Wall',  s:'Secondary containment built-in', p:'+~35%'},
+      {v:'single',i:'sw',l:'Single Wall',  s:'Most economical — standard'},
+      {v:'double',i:'dw',l:'Double Wall',  s:'Secondary containment built-in', p:'+~35%'},
     ]},
   // STEP 5 - Capacity
   {id:'cap',lbl:'Capacity',q:'Choose your tank capacity',
@@ -629,7 +662,7 @@ const STEPS=[
    hint:'18" standard on most tanks. Larger = easier cleaning and internal equipment access.',
    type:'tiles',c:2,
     opts:[
-      {v:'16', i:'mh',l:'16" Manhole',  s:'Small tanks <=1,000 gal'},
+      {v:'16', i:'mh',l:'16" Manhole',  s:'Small tanks up to 1,000 gal'},
       {v:'18', i:'mh',l:'18" Manhole',  s:'Standard',               t:'Standard'},
       {v:'24', i:'mh',l:'24" Manhole',  s:'Wide access',            p:'+$165'},
       {v:'30', i:'mh',l:'30" Manhole',  s:'Full interior access',   p:'+$280'},
@@ -639,7 +672,7 @@ const STEPS=[
    hint:'Standard is 2" flat-face coupling. Every tank includes suction, return, and vent connections.',
    type:'tiles',c:2,
     opts:[
-      {v:'1.5',i:'fit',l:'11/2" Fill',  s:'Low-flow / small tanks'},
+      {v:'1.5',i:'fit',l:'1-1/2" Fill',  s:'Low-flow / small tanks'},
       {v:'2',  i:'fit',l:'2" Fill',   s:'Standard',               t:'Standard'},
       {v:'3',  i:'fit',l:'3" Fill',   s:'High-flow filling',      p:'+$95'},
       {v:'4',  i:'fit',l:'4" Fill',   s:'Bulk / terminal',        p:'+$165'},
@@ -649,8 +682,8 @@ const STEPS=[
    hint:'Emergency vents are flat disc/cap style up to 8". Sized per NFPA 30 and tank capacity.',
    type:'tiles',c:2,
     opts:[
-      {v:'std',i:'vent',l:'2" NV + 2" EV',  s:'Standard -- tanks <=3,000 gal', t:'Standard'},
-      {v:'med',i:'vent',l:'2" NV + 4" EV',  s:'3,000-10,000 gal',             t:'Standard'},
+      {v:'std',i:'vent',l:'2" NV + 2" EV',  s:'Standard — up to 3,000 gal', t:'Standard'},
+      {v:'med',i:'vent',l:'2" NV + 4" EV',  s:'3,000–10,000 gal',             t:'Standard'},
       {v:'lrg',i:'vent',l:'3" NV + 6" EV',  s:'10,000+ gal',                  p:'+$165'},
       {v:'xl', i:'vent',l:'4" NV + 8" EV',  s:'Large / Fireguard standard',   p:'+$285'},
       {v:'pvv',i:'pwr', l:'P/V Valve',       s:'Pressure-vacuum relief system', p:'+$125'},
@@ -660,7 +693,7 @@ const STEPS=[
    hint:'Pumps are sold as an optional add-on. When ordered with a tank, we can plumb, prime, and air-check the assembly on our yard for an additional cost.',
    type:'tiles',c:2,
     opts:[
-      {v:'none', i:'x', l:'No Pump',      s:'Tank only -- customer supplies'},
+      {v:'none', i:'x', l:'No Pump',      s:'Tank only — customer supplies'},
       {v:'15dc', i:'pwr',l:'15 GPM DC',    s:'12V battery / remote',    p:'+$620'},
       {v:'15ac', i:'pwr',l:'15 GPM AC',    s:'120V electric',           p:'+$720'},
       {v:'30ac', i:'pwr',l:'30 GPM AC',    s:'High-flow electric',      p:'+$950'},
@@ -679,777 +712,792 @@ const PC={none:0,'15dc':620,'15ac':720,'30ac':950,'50ac':1350,gas:890};
 const isUST=()=>C.type==='permatank'||C.type==='act100u';
 
 const C={
-  type:'ul142',product:'diesel',shape:'horiz',wall:'single',cap:'5000',
+  type:'ul142',product:'diesel',shape:'horiz',wall:'single',cap:'5000',capPref:'5000',
+  shapePref:'horiz',wallPref:'single',manholePref:'18',ventPref:null,   // the visitor's own picks, restored when a tank type allows them
   compart:1,comp2gal:0,comp1product:'diesel',comp2product:'gasoline',
   manhole:'18',fill:'2',vent:'med',pump:'none',
   colorHex:'#E0E2E8',colorName:'White',
   acc:new Set(),accCost:0
 };
+// Human-readable label for an option code (used in the build sheet, email and PDF)
+function optLabel(stepId,v){const s=STEPS.find(x=>x.id===stepId);return s?.opts?.find(o=>o.v===v)?.l||v;}
+const SHAPE_NAMES={horiz:'Horizontal',vert:'Vertical',rect:'Rectangular'};
+// Accessory total is always recomputed from the selection (items that don't apply to underground tanks are skipped)
+function accCostNow(){return[...C.acc].reduce((t,id)=>{const a=ACCESSORIES.find(x=>x.id===id);return t+(a&&!(isUST()&&a.noUST)?a.price:0);},0);}
+function capNum(){return parseInt(getSpec()?.key||C.cap)||0;}
+function splitMin(cap){return Math.round(cap*0.1/500)*500||500;}
+function splitVols(){
+  const cap=capNum(),lo=splitMin(cap);
+  let c1=C.comp2gal||Math.round(cap/2/500)*500||Math.round(cap/2);
+  c1=Math.min(Math.max(c1,lo),Math.max(lo,cap-lo));
+  return[c1,cap-c1];
+}
+function prodName(v){return PRODUCTS.find(p=>p.v===v)?.l||v;}
 let step=0;
 
 // --- THREE.JS --------------------------------------------------------
+// Scene units: 1 unit = 48 inches (see u()).
 let scene,camera,renderer,meshes=[];
-let rx=0.22,ry=0.55,dist=5.5,drag=false,px=0,py=0;
+let keyLight=null,frameBox=null,frameSig='';
+let rx=0.30,ry=0.62,rxGoal=0.30,ryGoal=0.62;           // camera elevation / azimuth
+let dist=6,distGoal=6,fitDist=6,drag=false,px=0,py=0;  // camera distance (auto-fitted to the tank)
+let tgt=null,tgtGoal=null;                              // orbit target (centre of the tank)
+const VIEWS={iso:[0.30,0.62],front:[0.06,0.0],side:[0.06,Math.PI/2],top:[1.48,0.0]};
 
 function u(inches){return inches/48;}
 
 function initThree(){
   const cv=document.getElementById('tc'),wp=cv.parentElement;
-  const W=wp.clientWidth||800,H=wp.clientHeight||500;
-  scene=new THREE.Scene();
-  scene.background=new THREE.Color(0xD4D9E2);
-  camera=new THREE.PerspectiveCamera(36,W/H,0.1,200);
+  tgt=new THREE.Vector3(0,0.8,0);tgtGoal=tgt.clone();
   renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
-  renderer.setSize(W,H);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  const W=Math.max(1,wp.clientWidth),H=Math.max(1,wp.clientHeight);
+  renderer.setSize(W,H,false);   // CSS size comes from the layout, not from the renderer
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.35;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=0.9;
+  renderer.outputEncoding=THREE.sRGBEncoding;   // colours are authored as sRGB hex; light in linear, display in sRGB
 
-  // Studio lighting
-  const key=new THREE.DirectionalLight(0xFFFEFA,2.2);key.position.set(-5,12,9);
-  key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.bias=-0.0004;scene.add(key);
-  const fill=new THREE.DirectionalLight(0xE8F2FF,1.0);fill.position.set(9,4,-6);scene.add(fill);
-  const top=new THREE.DirectionalLight(0xFFFFFF,1.1);top.position.set(0,16,3);scene.add(top);
-  scene.add(new THREE.AmbientLight(0xEEF4FF,0.78));
+  scene=new THREE.Scene();
+  const bg=new THREE.Color(0xD4D9E2);
+  scene.background=bg;
+  scene.fog=new THREE.Fog(bg,30,90);   // fades the floor edge into the backdrop (r128 applies fog after encoding, so it takes the raw colour)
+  camera=new THREE.PerspectiveCamera(36,W/H,0.05,500);
+  // Soft studio reflections so steel fittings read as metal instead of black
+  try{scene.environment=buildStudioEnv(renderer);}catch(e){console.warn('Environment map unavailable',e);}
 
-  const fl=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:0xBFC5D0,roughness:0.92}));
-  fl.rotation.x=-Math.PI/2;fl.position.y=0;fl.receiveShadow=true;scene.add(fl);
-  const grid=new THREE.GridHelper(50,50,0xAEB5C2,0xAEB5C2);
-  grid.position.y=0.001;grid.material.opacity=0.22;grid.material.transparent=true;scene.add(grid);
+  keyLight=new THREE.DirectionalLight(0xFFFDF8,1.25);
+  keyLight.castShadow=true;keyLight.shadow.mapSize.set(2048,2048);
+  keyLight.shadow.bias=-0.0004;keyLight.shadow.normalBias=0.02;
+  scene.add(keyLight);scene.add(keyLight.target);
+  const fill=new THREE.DirectionalLight(0xE8F0FF,0.35);fill.position.set(9,4,-6);scene.add(fill);
+  scene.add(new THREE.HemisphereLight(0xF4F7FF,0x9AA2AE,0.25));
+
+  const floor=new THREE.Mesh(new THREE.CircleGeometry(120,72),new THREE.MeshStandardMaterial({color:0xC3C9D3,roughness:0.95,metalness:0}));
+  floor.material.color.convertSRGBToLinear();
+  floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+  const grid=new THREE.GridHelper(120,120,0xA3ABB8,0xA3ABB8);
+  grid.position.y=0.002;grid.material.opacity=0.3;grid.material.transparent=true;scene.add(grid);
+  (Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>{if(m.color)m.color.convertSRGBToLinear();});
 
   buildTank();
+  if(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches){
+    const h=document.querySelector('.dhint');if(h)h.textContent='Drag to rotate · Pinch to zoom';
+  }
 
-  const cv2=document.getElementById('tc');
-  cv2.addEventListener('mousedown',e=>{drag=true;px=e.clientX;py=e.clientY;});
-  window.addEventListener('mouseup',()=>drag=false);
-  cv2.addEventListener('mousemove',e=>{if(!drag)return;ry+=(e.clientX-px)*0.012;rx+=(e.clientY-py)*0.006;rx=Math.max(-0.72,Math.min(0.72,rx));px=e.clientX;py=e.clientY;});
-  cv2.addEventListener('wheel',e=>{dist=Math.max(2,Math.min(18,dist+e.deltaY*0.014));e.preventDefault();},{passive:false});
-  let tl=null;
-  cv2.addEventListener('touchstart',e=>{tl=e.touches[0];});
-  cv2.addEventListener('touchmove',e=>{if(!tl)return;const t=e.touches[0];ry+=(t.clientX-tl.clientX)*0.015;rx+=(t.clientY-tl.clientY)*0.008;rx=Math.max(-0.72,Math.min(0.72,rx));tl=t;e.preventDefault();},{passive:false});
+  // Orbit controls — pointer events cover mouse, pen and touch (incl. pinch zoom)
+  const ptrs=new Map();let pinch0=0;
+  cv.addEventListener('pointerdown',e=>{
+    ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    try{cv.setPointerCapture(e.pointerId);}catch(_){}
+    if(ptrs.size===1){drag=true;px=e.clientX;py=e.clientY;}
+    if(ptrs.size===2){const[a,b]=[...ptrs.values()];pinch0=Math.hypot(a.x-b.x,a.y-b.y);drag=false;}
+    e.preventDefault();
+  });
+  cv.addEventListener('pointermove',e=>{
+    if(!ptrs.has(e.pointerId))return;
+    ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size===2){
+      const[a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(pinch0>0&&d>0)zoomBy(pinch0/d);pinch0=d;return;
+    }
+    if(!drag)return;
+    ry+=(e.clientX-px)*0.01;rx+=(e.clientY-py)*0.006;
+    rx=Math.max(0.02,Math.min(1.5,rx));rxGoal=rx;ryGoal=ry;
+    px=e.clientX;py=e.clientY;
+  });
+  const endPtr=e=>{
+    ptrs.delete(e.pointerId);
+    if(ptrs.size<2)pinch0=0;
+    if(!ptrs.size)drag=false;
+    else if(ptrs.size===1){const p=[...ptrs.values()][0];px=p.x;py=p.y;drag=true;}
+  };
+  cv.addEventListener('pointerup',endPtr);cv.addEventListener('pointercancel',endPtr);
+  cv.addEventListener('wheel',e=>{e.preventDefault();zoomBy(Math.exp(e.deltaY*0.0012));},{passive:false});
+
+  const onResize=()=>{
+    const W2=Math.max(1,wp.clientWidth),H2=Math.max(1,wp.clientHeight);
+    renderer.setSize(W2,H2,false);camera.aspect=W2/H2;camera.updateProjectionMatrix();
+    if(frameBox){const old=fitDist;fitDist=fitDistance(frameBox,rxGoal,ryGoal);const k=fitDist/old;dist*=k;distGoal*=k;}
+  };
+  if('ResizeObserver' in window)new ResizeObserver(onResize).observe(wp);
+  else window.addEventListener('resize',onResize);
   animate();
-  window.addEventListener('resize',()=>{const W2=wp.clientWidth,H2=wp.clientHeight||500;camera.aspect=W2/H2;camera.updateProjectionMatrix();renderer.setSize(W2,H2);});
 }
 
-function clr(){meshes.forEach(m=>scene.remove(m));meshes=[];}
+function zoomBy(k){distGoal=Math.max(fitDist*0.35,Math.min(fitDist*2.6,distGoal*k));}
+
+// Procedural studio environment (no external HDR needed)
+function buildStudioEnv(rend){
+  const pm=new THREE.PMREMGenerator(rend);
+  const es=new THREE.Scene();
+  const domeG=new THREE.SphereGeometry(30,32,16);
+  const p=domeG.attributes.position,cols=[];
+  for(let i=0;i<p.count;i++){
+    const t=THREE.MathUtils.clamp((p.getY(i)/30+0.3)/1.3,0,1);
+    cols.push(0.28+0.5*t,0.30+0.5*t,0.34+0.52*t);
+  }
+  domeG.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));
+  es.add(new THREE.Mesh(domeG,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide})));
+  const box=(w,h,x,y,z,k)=>{
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(k,k,k),side:THREE.DoubleSide}));
+    m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m);
+  };
+  box(16,6,0,22,4,2.0);     // overhead softbox
+  box(10,8,-20,8,12,1.3);   // key side
+  box(8,8,18,6,-10,0.7);    // fill side
+  box(30,3,0,2,-25,0.5);    // rim strip
+  const tex=pm.fromScene(es,0.035).texture;
+  pm.dispose();
+  return tex;
+}
+
+function clr(){
+  meshes.forEach(m=>{
+    scene.remove(m);
+    if(m.geometry)m.geometry.dispose();
+    (Array.isArray(m.material)?m.material:[m.material]).forEach(mt=>mt&&mt.dispose());
+  });
+  meshes=[];
+}
 function addM(geo,mat,pos,rot){const m=new THREE.Mesh(geo,mat);if(pos)m.position.set(...pos);if(rot)m.rotation.set(...rot);m.castShadow=true;m.receiveShadow=true;scene.add(m);meshes.push(m);return m;}
 function addML(pts,mat){const geo=new THREE.BufferGeometry().setFromPoints(pts);const l=new THREE.Line(geo,mat);scene.add(l);meshes.push(l);return l;}
+// Cylinder between two points (rods, pipes)
+function addRod(a,b,rad,mat,seg){
+  const d=new THREE.Vector3().subVectors(b,a),len=d.length();
+  const m=addM(new THREE.CylinderGeometry(rad,rad,len,seg||10),mat);
+  m.position.copy(a).addScaledVector(d,0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());
+  return m;
+}
 
+// --- SIZE DATA HELPERS ------------------------------------------------
+function sizesFor(type,shape,wall){const s=TD[type]?.sizes?.[shape]?.[wall];return s&&Object.keys(s).length?s:null;}
+function availShapes(type){return['horiz','vert','rect'].filter(sh=>availWalls(type,sh).length);}
+function availWalls(type,shape){return['single','double'].filter(w=>sizesFor(type,shape,w));}
+// Exact key first (keeps variants like '4000L' / '15000B'), else nearest capacity
+function nearestCapKey(sizes,want){
+  const keys=Object.keys(sizes);if(!keys.length)return null;
+  if(want!=null&&sizes[want])return String(want);
+  const w=parseInt(want)||5000,plain=k=>/^\d+$/.test(k);
+  return keys.reduce((best,k)=>{
+    const dk=Math.abs(parseInt(k)-w),db=Math.abs(parseInt(best)-w);
+    if(dk<db||(dk===db&&plain(k)&&!plain(best)))return k;
+    return best;
+  },keys[0]);
+}
+// Keep shape / wall / capacity consistent with what this tank type is actually built in
+function normalizeConfig(){
+  const shapes=availShapes(C.type);
+  if(shapes.length){
+    const want=C.shapePref&&shapes.includes(C.shapePref)?C.shapePref:C.shape;
+    C.shape=shapes.includes(want)?want:shapes[0];
+  }
+  const walls=availWalls(C.type,C.shape);
+  if(walls.length){
+    const want=C.wallPref&&walls.includes(C.wallPref)?C.wallPref:C.wall;
+    C.wall=walls.includes(want)?want:walls[0];
+  }
+  const sizes=sizesFor(C.type,C.shape,C.wall);
+  if(sizes){const k=nearestCapKey(sizes,C.capPref||C.cap);if(k)C.cap=k;}
+}
 function getSpec(){
   const td=TD[C.type];if(!td)return null;
-  const shKey=C.shape==='rect'?'rect':C.shape==='vert'?'vert':'horiz';
-  const wKey=C.wall;
-  // Try the exact wall type first, then fallback to what the tank actually has
-  let sizes=td.sizes?.[shKey]?.[wKey];
-  if(!sizes||!Object.keys(sizes).length){
-    // Fallback: try the other wall type, then horiz/double, then horiz/single
-    const alt=wKey==='double'?'single':'double';
-    sizes=td.sizes?.[shKey]?.[alt]
-       || td.sizes?.horiz?.double
-       || td.sizes?.horiz?.single
-       || {};
-  }
-  const caps=Object.keys(sizes).map(Number).filter(n=>!isNaN(n)).sort((a,b)=>a-b);
-  if(!caps.length)return null;
-  const capN=parseInt(C.cap)||5000;
-  const best=caps.reduce((p,c)=>Math.abs(c-capN)<Math.abs(p-capN)?c:p,caps[0]);
-  const key=best.toString();
-  return{spec:sizes[key]||sizes[caps[0].toString()],key,td};
+  let sizes=sizesFor(C.type,C.shape,C.wall);
+  if(!sizes){const sh=availShapes(C.type)[0],wl=sh&&availWalls(C.type,sh)[0];sizes=wl?sizesFor(C.type,sh,wl):null;}
+  if(!sizes)return null;
+  const key=nearestCapKey(sizes,C.cap);
+  return key?{spec:sizes[key],key,td}:null;
 }
 
 function buildTank(){
+  if(!scene)return;
   clr();
-  const res=getSpec();if(!res)return;
-  const{spec,key,td}=res;if(!spec)return;
-  const col=new THREE.Color(C.colorHex);
-  const tankMat=new THREE.MeshStandardMaterial({color:col,roughness:0.12,metalness:0.05});
-  const steelMat=new THREE.MeshStandardMaterial({color:0x8A9BAA,roughness:0.28,metalness:0.8});
-  const darkSt=new THREE.MeshStandardMaterial({color:0x555F6A,roughness:0.35,metalness:0.75});
+  const res=getSpec();if(!res||!res.spec)return;
+  const{spec}=res;
+  const col=new THREE.Color(C.colorHex==='#custom'?'#B9BFC9':C.colorHex);
+  const tankMat=new THREE.MeshStandardMaterial({color:col,roughness:0.24,metalness:0.05});
+  const steelMat=new THREE.MeshStandardMaterial({color:0xA3AEBA,roughness:0.32,metalness:0.85});
+  const darkSt=new THREE.MeshStandardMaterial({color:0x5C6670,roughness:0.42,metalness:0.8});
+  if(spec.shape==='rect') buildRect(spec,col,tankMat,steelMat,darkSt);
+  else if(C.shape==='vert') buildVertCyl(spec,col,tankMat,steelMat,darkSt);
+  else if(C.type==='farm'&&spec.farmType==='overhead') buildOverheadFarm(spec,col,tankMat,steelMat,darkSt);
+  else buildHorizCyl(spec,col,tankMat,steelMat,darkSt);
+  // Material colours are written as sRGB hex values; convert each new material to linear once
+  const seen=new Set();
+  meshes.forEach(m=>(Array.isArray(m.material)?m.material:[m.material]).forEach(mt=>{
+    if(mt&&mt.color&&!seen.has(mt)){seen.add(mt);mt.color.convertSRGBToLinear();}
+  }));
+  autoFrame();
+}
 
-  if(spec.shape==='rect'){
-    buildRect(spec,col,tankMat,steelMat,darkSt);
-  } else if(C.shape==='vert'){
-    buildVertCyl(spec,col,tankMat,steelMat,darkSt);
-  } else if(C.type==='farm'&&spec.farmType==='overhead'){
-    buildOverheadFarm(spec,col,tankMat,steelMat,darkSt);
-  } else {
-    buildHorizCyl(spec,col,tankMat,steelMat,darkSt);
+// --- CAMERA FRAMING ---------------------------------------------------
+function viewDir(a,b){return new THREE.Vector3(Math.sin(b)*Math.cos(a),Math.sin(a),Math.cos(b)*Math.cos(a));}
+// Distance at which every corner of the bounding box fits in the view from angles (a,b)
+function fitDistance(box,a,b){
+  const c=box.getCenter(new THREE.Vector3()),dir=viewDir(a,b),fwd=dir.clone().negate();
+  const right=new THREE.Vector3().crossVectors(fwd,new THREE.Vector3(0,1,0));
+  if(right.lengthSq()<1e-8)right.set(1,0,0);
+  right.normalize();
+  const up=new THREE.Vector3().crossVectors(right,fwd).normalize();
+  const tv=Math.tan(THREE.MathUtils.degToRad(camera.fov)/2),th=tv*camera.aspect,m=0.84;
+  let need=0;
+  for(let i=0;i<8;i++){
+    const p=new THREE.Vector3(i&1?box.max.x:box.min.x,i&2?box.max.y:box.min.y,i&4?box.max.z:box.min.z).sub(c);
+    const z=p.dot(dir);
+    need=Math.max(need,z+Math.abs(p.dot(right))/(th*m),z+Math.abs(p.dot(up))/(tv*m));
   }
+  return Math.max(need,0.5);
+}
+function autoFrame(){
+  const box=new THREE.Box3();meshes.forEach(m=>box.expandByObject(m));
+  if(box.isEmpty())return;
+  const c=box.getCenter(new THREE.Vector3()),s=box.getSize(new THREE.Vector3());
+  const sig=[c.x,c.y,c.z,s.x,s.y,s.z].map(v=>v.toFixed(2)).join(',');
+  const first=!frameBox;
+  frameBox=box;
+  updateShadowFrustum(box);
+  if(!first&&sig===frameSig)return;   // same footprint (e.g. colour change) — keep the user's zoom
+  frameSig=sig;
+  tgtGoal.copy(c);
+  fitDist=fitDistance(box,rxGoal,ryGoal);
+  distGoal=fitDist;
+  if(first){dist=distGoal;tgt.copy(tgtGoal);}
+  scene.fog.near=fitDist*2+s.length();scene.fog.far=scene.fog.near+fitDist*6+40;
+}
+function updateShadowFrustum(box){
+  const c=box.getCenter(new THREE.Vector3()),s=box.getSize(new THREE.Vector3());
+  const R=Math.max(s.x,s.z)*0.5+s.y+1.5;
+  keyLight.target.position.set(c.x,0,c.z);keyLight.target.updateMatrixWorld();
+  keyLight.position.set(c.x-R*0.9,R*2.2,c.z+R*1.3);
+  const sc=keyLight.shadow.camera;
+  sc.left=-R*1.2;sc.right=R*1.2;sc.top=R*1.2;sc.bottom=-R*1.2;sc.near=0.1;sc.far=R*6;
+  sc.updateProjectionMatrix();
 }
 
 // --- HORIZONTAL CYLINDER ---------------------------------------------
 function buildHorizCyl(spec,col,tankMat,steelMat,darkSt){
-  const isDBL=C.wall==='double';
   const ust=isUST();
+  const dbl=C.wall==='double'&&!!(spec.do_||spec.lo);
   const di=spec.di||spec.d||96, li=spec.li||spec.l||164;
   const r=u(di)/2, L=u(li);
-  // gY: tank center height so bottom sits on Y=0 ground plane
-  const gY=r;
+  // Secondary (outer) shell — never drawn smaller than the primary, even if the data says so
+  const ro=dbl?Math.max(u(spec.do_||di+2)/2,r+u(0.75)):r;
+  const Lo=dbl?Math.max(u(spec.lo||li+12),L+u(6)):L;
+  // Aboveground tanks sit up on their saddles; underground tanks rest on the deadman bed
+  const lift=ust?0:Math.max(u(4),ro*0.14);
+  const gY=ro+lift;
 
-  if(ust){
-    addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,gY,0],[0,0,Math.PI/2]);
-    buildFlatHead(r,L/2,1,col,tankMat,gY);
-    buildFlatHead(r,-L/2,-1,col,tankMat,gY);
-    const ro2=u(spec.do_||di+2)/2,Lo2=u(spec.lo||li+12);
-    const outerMatUST=new THREE.MeshStandardMaterial({
-      color:col,roughness:0.14,metalness:0.04,
-      transparent:true,opacity:0.30,side:THREE.DoubleSide,depthWrite:false
-    });
-    addM(new THREE.CylinderGeometry(ro2,ro2,Lo2,64),outerMatUST,[0,gY,0],[0,0,Math.PI/2]);
-    buildFlatHead(ro2,Lo2/2,1,col,outerMatUST,gY);
-    buildFlatHead(ro2,-Lo2/2,-1,col,outerMatUST,gY);
-    buildDeadmanAnchors(r,L,gY);
-    buildFittings(r,L,steelMat,darkSt,false,gY,true);
-    buildAccessories(r,L,col,gY);
-  } else {
-    addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,gY,0],[0,0,Math.PI/2]);
-    buildFlatHead(r,L/2,1,col,tankMat,gY);
-    buildFlatHead(r,-L/2,-1,col,tankMat,gY);
-    if(isDBL){
-      const ro=u(spec.do_||di+2)/2,Lo=u(spec.lo||li+12);
-      const outerMat=new THREE.MeshStandardMaterial({
-        color:col,roughness:0.14,metalness:0.04,
-        transparent:true,opacity:0.35,side:THREE.DoubleSide,depthWrite:false
-      });
-      addM(new THREE.CylinderGeometry(ro,ro,Lo,64),outerMat,[0,gY,0],[0,0,Math.PI/2]);
-      buildFlatHead(ro,Lo/2,1,col,new THREE.MeshStandardMaterial({
-        color:col,roughness:0.14,metalness:0.04,transparent:true,opacity:0.25,depthWrite:false
-      }),gY);
-    }
-    if(C.compart===2){
-      const cap=parseInt(C.cap)||5000;
-      const comp2=C.comp2gal||Math.round(cap/2);
-      const divX=L*((comp2/cap)-0.5)*2*0.5;
-      addM(new THREE.CylinderGeometry(r*0.98,r*0.98,0.04,48),steelMat,[divX,gY,0],[0,0,Math.PI/2]);
-      addM(new THREE.TorusGeometry(r*0.98,0.018,8,48),
-        new THREE.MeshStandardMaterial({color:0x6A7A8A,roughness:0.4,metalness:0.7}),
-        [divX,gY,0],[Math.PI/2,0,0]);
-      [[divX/2-L/4],[divX/2+L/4]].forEach(([lx])=>{
-        addM(new THREE.BoxGeometry(0.08,0.04,0.12),steelMat,[lx,gY+r+0.02,0]);
-      });
-    }
-    buildSaddles(r,L,col,gY);
-    buildFittings(r,L,steelMat,darkSt,false,gY,false);
-    if(C.pump!=='none') buildPump(r,L,gY);
-    buildAccessories(r,L,col,gY);
+  addM(new THREE.CylinderGeometry(r,r,L,72),tankMat,[0,gY,0],[0,0,Math.PI/2]);
+  buildFlatHead(r,L/2,1,tankMat,gY);
+  buildFlatHead(r,-L/2,-1,tankMat,gY);
+  if(dbl){
+    const om=new THREE.MeshStandardMaterial({color:col,roughness:0.14,metalness:0.04,transparent:true,opacity:ust?0.30:0.34,side:THREE.DoubleSide,depthWrite:false});
+    addM(new THREE.CylinderGeometry(ro,ro,Lo,72,1,true),om,[0,gY,0],[0,0,Math.PI/2]);
+    buildFlatHead(ro,Lo/2,1,om,gY);
+    buildFlatHead(ro,-Lo/2,-1,om,gY);
   }
+  if(C.compart===2) buildCompartSplit(ro,L,gY,steelMat);
+  const o={kind:'horiz',rs:ro,L:Lo,cy:gY,top:gY+ro,ust,dbl};
+  if(ust){Object.assign(o,ustLayout(Lo,ro));buildDeadmanAnchors(ro,Lo,gY,o.straps);}
+  else buildSaddles(ro,Lo,col,gY);
+  buildFittings(o,steelMat,darkSt);
+  if(!ust&&C.pump!=='none') buildPump(o);
+  buildAccessories(o,col);
 }
 
-function buildFlatHead(r,xpos,dir,col,mat,sinkY){
-  const sy=sinkY||0;
-  const discGeo=new THREE.CylinderGeometry(r,r,0.025,64);
-  addM(discGeo,mat,[xpos+dir*0.012,sy,0],[0,0,Math.PI/2]);
-  const dishGeo=new THREE.SphereGeometry(r*1.02,48,6,0,Math.PI*2,0,0.18);
-  const dish=new THREE.Mesh(dishGeo,mat);
-  dish.position.set(xpos,sy,0);
-  dish.rotation.set(0,dir>0?-Math.PI/2:Math.PI/2,0);
-  dish.castShadow=true;scene.add(dish);meshes.push(dish);
+// Flat end plate with a shallow dished cap facing outward (±X)
+function buildFlatHead(r,xpos,dir,mat,cy){
+  addM(new THREE.CylinderGeometry(r,r,0.02,72),mat,[xpos+dir*0.01,cy,0],[0,0,Math.PI/2]);
+  const th=0.1,R=r/Math.sin(th);
+  addM(new THREE.SphereGeometry(R,72,3,0,Math.PI*2,0,th),mat,[xpos+dir*(0.02-R*Math.cos(th)),cy,0],[0,0,-dir*Math.PI/2]);
+}
+function headBulge(r){const th=0.1;return r/Math.sin(th)*(1-Math.cos(th))+0.02;}
+
+// Two-compartment bulkhead + weld seam on the shell
+function buildCompartSplit(rs,L,gY,steelMat){
+  const cap=capNum()||5000;
+  const c1=splitVols()[0];
+  const x=-L/2+L*(c1/cap);
+  addM(new THREE.CylinderGeometry(rs*0.985,rs*0.985,0.03,48),steelMat,[x,gY,0],[0,0,Math.PI/2]);
+  addM(new THREE.TorusGeometry(rs+0.006,0.014,8,96),steelMat,[x,gY,0],[0,Math.PI/2,0]);
 }
 
-// --- DEADMAN ANCHORS + TURNBUCKLE STRAPS (from 7-Eleven 27K Permatank model)
-// Strap spec: STRAP 120IN W 1X18" TURNBUCKLE - 1"x18" turnbuckle, 120" wide
-// 27K = 11 straps - 3 concrete deadman bodies
-// Dielectric bushings 5"-4" (x6) at strap contact points
-function buildDeadmanAnchors(r,L,gY){
-  gY=gY||r;
-  // Materials
-  const concMat=new THREE.MeshStandardMaterial({color:0xCCCAB8,roughness:0.97,metalness:0.0});
-  const concDark=new THREE.MeshStandardMaterial({color:0xB8B5A0,roughness:0.98,metalness:0.0});
-  // Strap: flat wide green band (like a seatbelt, ~8" wide x 1/4" thick)
-  const strapMat=new THREE.MeshStandardMaterial({color:0x6A9E68,roughness:0.6,metalness:0.25,side:THREE.DoubleSide});
-  const tbMat=new THREE.MeshStandardMaterial({color:0x888888,roughness:0.3,metalness:0.85});
-
-  const res=getSpec();
-  const numStraps=res?.spec?.straps||Math.max(4,Math.round(L/0.55));
-  const spacing=L/(numStraps-1);
-
-  // Deadman beam Z position - sits beside tank, like in the photo
-  const deadmanZ=r*1.6;
-  const beamH=0.18;  // beam height
-  const beamW=0.38;  // beam width (toward tank)
-  const beamY=beamH/2; // beam center above Y=0
-
-  // TWO LONG CONCRETE DEADMAN RUNNERS - full length of tank, one on each side
-  [-deadmanZ, deadmanZ].forEach(zOff=>{
-    // Main long beam - runs full tank length
-    addM(new THREE.BoxGeometry(L+0.3,beamH,beamW),concMat,[0,beamY,zOff]);
-    // Base footing (wider, thinner, sits on ground)
-    addM(new THREE.BoxGeometry(L+0.42,0.06,beamW+0.1),concDark,[0,0.03,zOff]);
-    // Strap notches cut into beam top at each strap position
-    for(let i=0;i<numStraps;i++){
-      const xp=-L/2+i*spacing;
-      addM(new THREE.BoxGeometry(0.07,beamH*0.55,beamW+0.02),concDark,[xp,beamY+0.04,zOff]);
-    }
-  });
-
-  // STRAPS - wide flat bands arcing over tank
-  // Each strap is a series of flat ribbon segments following the tank profile
-  // Width along tank X axis = u(8) = ~0.167 (8 inches wide)
-  const strapWidth=u(9);   // 9" wide strap
-  const strapThk=0.012;    // thin flat strap
-  const strapR=r+0.04;     // runs just over tank surface
-
-  // Strap arc: from right deadman (z=+deadmanZ, y=beamTop)
-  // up and over tank (z=0, y=gY+strapR) to left deadman (z=-deadmanZ, y=beamTop)
-  const beamTop=beamH; // top face of beam
-
-  for(let i=0;i<numStraps;i++){
-    const xp=-L/2+i*spacing;
-    const nArc=40; // segments for smooth arc
-
-    // Build arc point array
-    const pts=[];
-    for(let j=0;j<=nArc;j++){
-      const t=j/nArc; // 0=right side (+Z), 1=left side (-Z)
-      // angle: starts at -PI/2 (right equator), goes over top to +PI/2 (left equator)
-      // But we extend to the deadman on each side
-      const angle=(t-0.5)*Math.PI; // -PI/2 to +PI/2
-      const cz=Math.cos(angle)*strapR; // z on circle
-      const cy=gY+Math.sin(angle)*strapR; // y on circle (above gY)
-
-      if(Math.abs(cz)<=r+0.01){
-        // On the tank body - follow circle arc
-        pts.push(new THREE.Vector3(xp,cy,cz));
-      } else {
-        // Off the tank - extend straight down to deadman
-        const sideSign=cz>0?1:-1;
-        const frac=(Math.abs(cz)-r)/(deadmanZ-r);
-        const pz=sideSign*(r+(deadmanZ-r)*frac);
-        const py=gY+(beamTop-gY)*frac; // linearly drops to beam top
-        pts.push(new THREE.Vector3(xp,Math.max(beamTop,py),pz));
-      }
-    }
-
-    // Render each segment as a flat wide ribbon
-    // The ribbon lies in the YZ plane at fixed X=xp, width along X axis
-    for(let j=0;j<pts.length-1;j++){
-      const p1=pts[j], p2=pts[j+1];
-      if(!p1||!p2) continue;
-      const mid=new THREE.Vector3().addVectors(p1,p2).multiplyScalar(0.5);
-      const seg=p2.clone().sub(p1);
-      const segLen=seg.length()+0.003;
-
-      // Create the ribbon mesh: width along X (strapWidth), thin in Z/Y direction, length = segLen
-      const geo=new THREE.BoxGeometry(strapWidth,strapThk,segLen);
-      const mesh=new THREE.Mesh(geo,strapMat);
-      mesh.position.copy(mid);
-
-      // Rotate so Z axis of box aligns with segment direction
-      // Segment direction is in YZ plane, so we rotate around X axis
-      const angle2=Math.atan2(seg.y,seg.z);
-      mesh.rotation.set(angle2,0,0);
-      mesh.castShadow=true;
-      scene.add(mesh);meshes.push(mesh);
-    }
-
-    // TURNBUCKLE RODS - drop from strap end on each side down into deadman slot
-    [-deadmanZ,deadmanZ].forEach(zD=>{
-      const strapFootY=beamTop+0.02; // strap meets top of beam
-      const anchorY=0.06;            // anchor bolt near ground through beam
-      const rodLen=strapFootY-anchorY;
-      // Vertical rod through beam slot
-      addM(new THREE.CylinderGeometry(0.013,0.013,rodLen,8),tbMat,
-        [xp,(strapFootY+anchorY)/2,zD]);
-      // Turnbuckle barrel (thicker center section)
-      addM(new THREE.CylinderGeometry(0.024,0.024,0.12,8),tbMat,
-        [xp,(strapFootY+anchorY)/2,zD]);
-      // U-bolt at top (strap attachment)
-      addM(new THREE.TorusGeometry(0.025,0.009,6,12,Math.PI),tbMat,
-        [xp,strapFootY,zD],[0,Math.PI/2,0]);
-      // Anchor plate at bottom
-      addM(new THREE.BoxGeometry(0.07,0.025,0.07),tbMat,[xp,anchorY,zD]);
+// --- DEADMAN ANCHORS + HOLD-DOWN STRAPS (Permatank / ACT-100-U only) ---
+// Each strap runs from a turnbuckle on one concrete deadman, tangent up to the shell,
+// over the top and back down to the deadman on the other side.
+// Strap stations along the tank; the 48" manway collar takes the station nearest 30% of the length,
+// and the lifting lugs go in the clear spaces between straps (one each side of centre)
+function ustLayout(L,rs){
+  const n=Math.max(2,getSpec()?.spec?.straps||Math.max(4,Math.round(L/0.55)));
+  const inset=Math.min(u(24),L*0.08),span=L-inset*2,step=span/(n-1);
+  let xs=[...Array(n)].map((_,i)=>-span/2+i*step);
+  const collarR=u(24);
+  const mhX=xs.reduce((a,b)=>Math.abs(b-L*0.3)<Math.abs(a-L*0.3)?b:a);
+  xs=xs.filter(x=>Math.abs(x-mhX)>collarR+u(3));
+  // free stretches of the top centreline
+  const obs=xs.map(x=>[x-u(2)-0.03,x+u(2)+0.03]).concat([[mhX-collarR-0.05,mhX+collarR+0.05]]).sort((a,b)=>a[0]-b[0]);
+  const free=[];let cur=-L/2+0.04;
+  obs.forEach(([a,b])=>{if(a>cur)free.push([cur,a]);cur=Math.max(cur,b);});
+  if(L/2-0.04>cur)free.push([cur,L/2-0.04]);
+  const s0=THREE.MathUtils.clamp(rs,0.5,1.1),full=0.26*s0+0.04;
+  const place=(target,side)=>{
+    const c=free.filter(([a,b])=>(side<0?b<=0.001:a>=-0.001)&&(b-a)>=0.26*0.45+0.04);
+    if(!c.length)return null;
+    const best=c.reduce((p,q)=>{const d=([a,b])=>Math.abs(THREE.MathUtils.clamp(target,a+full/2,b-full/2)-target)-(b-a)*0.01;return d(q)<d(p)?q:p;});
+    const[a,b]=best,sc=Math.min(s0,(b-a-0.04)/0.26),half=0.13*sc+0.02;
+    return{x:a+half>b-half?(a+b)/2:THREE.MathUtils.clamp(target,a+half,b-half),s:sc};
+  };
+  return{straps:xs,mhX,lugs:[place(-L*0.38,-1),place(L*0.4,1)].filter(Boolean)};
+}
+function buildDeadmanAnchors(rs,L,gY,stations){
+  const concMat=new THREE.MeshStandardMaterial({color:0xC9C6B4,roughness:0.97,metalness:0});
+  const strapMat=new THREE.MeshStandardMaterial({color:0x6A9E68,roughness:0.55,metalness:0.2,side:THREE.DoubleSide});
+  const tbMat=new THREE.MeshStandardMaterial({color:0x8E959C,roughness:0.3,metalness:0.85});
+  const beamH=u(10),beamW=u(16);
+  const dmZ=rs+Math.max(u(18),rs*0.45);      // deadman centre line, beside the tank
+  [-dmZ,dmZ].forEach(z=>addM(new THREE.BoxGeometry(L+u(12),beamH,beamW),concMat,[0,beamH/2,z]));
+  const R=rs+u(0.6),w=u(4),tbLen=u(18);
+  const eZ=dmZ-beamW*0.3;                     // anchor eye on the deadman
+  const dz=eZ,dy=beamH-gY,d=Math.hypot(dz,dy);
+  const a1=Math.atan2(dy,dz)+Math.acos(Math.min(1,R/d));   // tangent point above the anchor
+  const T=new THREE.Vector2(Math.cos(a1)*R,gY+Math.sin(a1)*R);
+  const E=new THREE.Vector2(eZ,beamH);
+  const Q=E.clone().add(T.clone().sub(E).normalize().multiplyScalar(tbLen));  // strap end / turnbuckle top
+  const prof=[[Q.x,Q.y]];
+  const N=56;
+  for(let j=0;j<=N;j++){const a=a1+(Math.PI-2*a1)*j/N;prof.push([Math.cos(a)*R,gY+Math.sin(a)*R]);}
+  prof.push([-Q.x,Q.y]);
+  stations.forEach(xp=>{
+    const pos=[],idx=[];
+    prof.forEach(([z,y],k)=>{
+      pos.push(xp-w/2,y,z,xp+w/2,y,z);
+      if(k){const b=(k-1)*2;idx.push(b,b+2,b+1,b+1,b+2,b+3);}
     });
-  }
-}
-
-// --- SADDLES - curved cradle below tank equator, two legs per side ---
-function buildSaddles(r,L,col,gY){
-  gY=gY||r;
-  const sM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.08});
-  const res=getSpec();
-  const numSaddles=(res?.spec?.saddles)||2;
-  const positions=numSaddles===3?[-L*0.30,0,L*0.30]:[-L*0.27,L*0.27];
-
-  positions.forEach(xp=>{
-    const arcCenter=-Math.PI/2;
-    const arcHalfSpan=Math.PI*0.62;
-    const sR=r+0.012;
-    const nPts=48;
-    const plateThk=0.06; // plate width along X axis
-    const plateDepth=0.058; // how thick the steel plate is (depth of saddle)
-
-    // Build the saddle as a LatheGeometry-style extrusion:
-    // Create a thick flat ring arc using two concentric TubeGeometry paths
-    // OUTER tube (outside edge of saddle plate)
-    const outerPts=[], innerPts=[];
-    for(let j=0;j<=nPts;j++){
-      const a=arcCenter-arcHalfSpan+(j/nPts)*arcHalfSpan*2;
-      const cy=gY+Math.sin(a)*sR, cz=Math.cos(a)*sR;
-      outerPts.push(new THREE.Vector3(xp, cy, cz));
-      innerPts.push(new THREE.Vector3(xp, gY+Math.sin(a)*(sR-plateDepth), Math.cos(a)*(sR-plateDepth)));
-    }
-
-    // Build saddle as a set of quad faces between outer and inner arc
-    // This gives a proper solid curved plate with no extrusion artifacts
-    const verts=[]; const indices=[];
-    const halfT=plateThk/2;
-
-    for(let j=0;j<=nPts;j++){
-      const o=outerPts[j], inn=innerPts[j];
-      // Each point gets 4 verts: outer-front, outer-back, inner-front, inner-back
-      verts.push(o.x-halfT,o.y,o.z);   // 0: outer front
-      verts.push(o.x+halfT,o.y,o.z);   // 1: outer back
-      verts.push(inn.x-halfT,inn.y,inn.z); // 2: inner front
-      verts.push(inn.x+halfT,inn.y,inn.z); // 3: inner back
-    }
-
-    for(let j=0;j<nPts;j++){
-      const b=j*4;
-      const n=b+4;
-      // Outer face (front cap)
-      indices.push(b,n,b+1, n,n+1,b+1);
-      // Inner face
-      indices.push(b+2,b+3,n+2, b+3,n+3,n+2);
-      // Top face (outer edge)
-      indices.push(b,b+1,n, b+1,n+1,n);
-      // Bottom face (inner edge)
-      indices.push(b+2,n+2,b+3, n+2,n+3,b+3);
-      // Side face Z-front
-      indices.push(b,b+2,n, b+2,n+2,n);
-      // Side face Z-back
-      indices.push(b+1,n+1,b+3, n+1,n+3,b+3);
-    }
-    // End caps
-    // Front end (j=0)
-    indices.push(0,1,2, 1,3,2);
-    // Back end (j=nPts)
-    const eb=nPts*4;
-    indices.push(eb,eb+2,eb+1, eb+1,eb+2,eb+3);
-
-    const geo=new THREE.BufferGeometry();
-    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(verts),3));
-    geo.setIndex(indices);
-    geo.computeVertexNormals();
-    const mesh=new THREE.Mesh(geo,sM);
-    mesh.castShadow=true;mesh.receiveShadow=true;
-    scene.add(mesh);meshes.push(mesh);
-
-    // LEGS - positioned INSIDE the tank footprint, not at the arc endpoints
-    // Pull legs inward to ~75% of tank radius so they stay under the tank body
-    const legZ=r*0.72;          // inset from tank centerline - well inside tank footprint
-    const legTopY=gY-r*0.25;    // height: up to where saddle plate sits (~halfway up tank side)
-    const legW=r*0.28;          // leg width in Z - kept narrow so it doesn't stick out
-    const legThk=plateThk;
-
-    [-legZ,legZ].forEach(zLeg=>{
-      addM(new THREE.BoxGeometry(legThk,legTopY,legW),sM,[xp,legTopY/2,zLeg]);
-      addM(new THREE.BoxGeometry(legThk*3.2,0.04,legW*1.9),sM,[xp,0.02,zLeg]);
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+    g.setIndex(idx);g.computeVertexNormals();
+    addM(g,strapMat);
+    [1,-1].forEach(s=>{
+      const e3=new THREE.Vector3(xp,E.y,s*E.x),q3=new THREE.Vector3(xp,Q.y,s*Q.x);
+      addRod(e3,q3,u(0.5),tbMat,8);
+      const mid=e3.clone().lerp(q3,0.5),dirv=q3.clone().sub(e3).normalize();
+      addRod(mid.clone().addScaledVector(dirv,-u(4)),mid.clone().addScaledVector(dirv,u(4)),u(1.1),tbMat,10);
+      addM(new THREE.BoxGeometry(u(5),u(1),u(5)),tbMat,[xp,beamH+u(0.5),s*E.x]);
     });
-    // Horizontal cross brace connecting the two legs
-    addM(new THREE.BoxGeometry(legThk*0.5,0.036,legZ*2),sM,[xp,legTopY*0.42,0]);
   });
 }
 
-// --- SKID BASE - two rail runners under saddle positions only --------
-function buildSkid(r,L,col,gY){
-  gY=gY||r;
-  const skM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.22,metalness:0.1});
-  const baseY=0; // ground level
-  const railW=0.08, railH=0.055;
-  // Two runner rails (Z direction) under the saddle footprint only
-  // No full-length base plate, no end walls - just saddle support
-  const res=getSpec();
-  const numSaddles=(res?.spec?.saddles)||2;
-  const positions=numSaddles===3?[-L*0.30,0,L*0.30]:[-L*0.27,L*0.27];
-  const bW=r*1.65; // rail span width
-  positions.forEach(xp=>{
-    // Two short runners under each saddle, Z direction
-    [-bW/2, bW/2].forEach(z=>{
-      addM(new THREE.BoxGeometry(railW*2.5,railH,railW),skM,[xp,baseY+railH/2,z]);
+// --- SADDLES — one continuous curved cradle + exactly two legs (one per side) ---
+function buildSaddles(rs,L,col,gY){
+  const sM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.4,metalness:0.12});
+  const n=(getSpec()?.spec?.saddles)||2;
+  const xs=n===3?[-L*0.32,0,L*0.32]:[-L*0.3,L*0.3];
+  const half=THREE.MathUtils.degToRad(72);      // cradle wraps 144° of the shell
+  const bandW=Math.max(u(5),rs*0.12);           // cradle width along the tank axis
+  const bandT=Math.max(u(1.25),rs*0.035);       // cradle plate depth
+  const Ro=rs+bandT;
+  const legW=Math.max(u(6),rs*0.22);            // leg width across the tank
+  const zo=Ro*Math.sin(half),zi=zo-legW;
+  const yAt=z=>gY-Math.sqrt(Math.max(0,Ro*Ro-z*z));
+  xs.forEach(xp=>{
+    const cr=new THREE.Shape();
+    cr.absarc(0,0,Ro,-Math.PI/2-half,-Math.PI/2+half,false);
+    cr.absarc(0,0,rs,-Math.PI/2+half,-Math.PI/2-half,true);
+    cr.closePath();
+    const g=new THREE.ExtrudeGeometry(cr,{depth:bandW,bevelEnabled:false,curveSegments:48});
+    g.translate(0,0,-bandW/2);
+    addM(g,sM,[xp,gY,0],[0,-Math.PI/2,0]);
+    [-1,1].forEach(s=>{
+      // leg plate whose top follows the cradle
+      const sh=new THREE.Shape();
+      sh.moveTo(s*zi,0);sh.lineTo(s*zo,0);sh.lineTo(s*zo,yAt(zo));
+      for(let k=1;k<=12;k++){const z=zo-(zo-zi)*k/12;sh.lineTo(s*z,yAt(z));}
+      sh.closePath();
+      const lg=new THREE.ExtrudeGeometry(sh,{depth:bandW*0.55,bevelEnabled:false});
+      lg.translate(0,0,-bandW*0.275);
+      addM(lg,sM,[xp,0,0],[0,-Math.PI/2,0]);
+      addM(new THREE.BoxGeometry(bandW*1.5,u(0.75),legW*1.3),sM,[xp,u(0.375),s*(zo-legW/2)]);
     });
+    addM(new THREE.BoxGeometry(bandW*0.35,u(3),zo*2-legW),sM,[xp,u(7),0]);   // low tie between the legs
   });
 }
 
 // --- FITTINGS ---------------------------------------------------------
-function buildFittings(r,L,steelMat,darkSt,isVert,sinkY,isUSTtank){
-  const sy=sinkY||0;
-  const topY=r+sy;
-
+// o: {kind:'horiz'|'vert'|'rect', rs, L, cy, top, ust, dbl, W(rect), base(vert/rect)}
+function shellDrop(o,z,rad){
+  if(o.kind!=='horiz')return 0;
+  const e=Math.min(o.rs*0.98,Math.abs(z)+rad);
+  return o.rs-Math.sqrt(o.rs*o.rs-e*e);
+}
+function topLayout(o){
+  const mhR=Math.min(u(parseInt(C.manhole)||18)/2,o.rs*0.32);
+  const f=mhR*1.4,a=f+0.16;
+  const depth=o.kind==='rect'?o.W/2:o.rs;
+  return{mhR,f,a,
+    fill:[a,0],nv:[-a,0],
+    ev:[-a*0.75,depth*0.42],ev2:[a*0.75,depth*0.42],
+    lugX:Math.min(Math.max((o.kind==='vert'?o.rs*0.72:o.L*0.38),a+0.22),(o.kind==='vert'?o.rs*0.8:o.L/2-0.08)),
+    pump:[o.kind==='vert'?a*0.5:Math.min(Math.max(o.L*0.28,a+0.3),o.L/2-0.15),-depth*0.45]};
+}
+function buildFittings(o,steelMat,darkSt){
+  const top=o.top,lay=topLayout(o);
+  const nozzle=(x,z,rad,h,seg)=>{
+    const drop=shellDrop(o,z,rad)+0.012,len=h+drop;
+    addM(new THREE.CylinderGeometry(rad,rad,len,seg||16),steelMat,[x,top+h-len/2,z]);
+  };
+  // MANHOLE
   if(C.manhole!=='none'){
-    if(isUSTtank){
-      // PERMATANK / ACT-100-U: 48" diameter x 10" tall collar with full bolt ring + nozzles
-      const collarR=u(48)/2;
-      const collarH=u(10);
-      const mhX=L*0.3; // right side of tank
-      addM(new THREE.CylinderGeometry(collarR,collarR,collarH,48),steelMat,[mhX,topY+collarH/2,0]);
-      addM(new THREE.CylinderGeometry(collarR*1.06,collarR*1.06,0.02,48),steelMat,[mhX,topY+0.01,0]);
-      for(let i=0;i<24;i++){const a=i/24*Math.PI*2;
-        addM(new THREE.CylinderGeometry(0.016,0.016,0.035,6),darkSt,[mhX+Math.cos(a)*collarR*1.04,topY+0.018,Math.sin(a)*collarR*1.04]);
-      }
-      // Top plate with inner manhole dome + nozzles
-      addM(new THREE.CylinderGeometry(collarR,collarR,0.022,48),steelMat,[mhX,topY+collarH+0.011,0]);
-      addM(new THREE.CylinderGeometry(collarR*1.05,collarR*1.05,0.016,48),steelMat,[mhX,topY+collarH+0.008,0]);
+    if(o.ust){
+      // Permatank / ACT-100-U: 48" collar x 10" tall with bolt rings, cover and nozzles
+      const collarR=u(48)/2,collarH=u(10),mhX=o.mhX!=null?o.mhX:o.L*0.3,drop=shellDrop(o,0,collarR)+0.01;
+      addM(new THREE.CylinderGeometry(collarR,collarR,collarH+drop,48),steelMat,[mhX,top+(collarH-drop)/2,0]);
+      addM(new THREE.CylinderGeometry(collarR*1.05,collarR*1.05,0.016,48),steelMat,[mhX,top+collarH+0.008,0]);
       for(let i=0;i<28;i++){const a=i/28*Math.PI*2;
-        addM(new THREE.CylinderGeometry(0.014,0.014,0.03,6),darkSt,[mhX+Math.cos(a)*collarR*1.03,topY+collarH+0.025,Math.sin(a)*collarR*1.03]);
-      }
-      const mhInnerR=collarR*0.38;
-      addM(new THREE.CylinderGeometry(mhInnerR,mhInnerR,0.04,32),steelMat,[mhX,topY+collarH+0.032,0]);
-      addM(new THREE.CylinderGeometry(mhInnerR*1.28,mhInnerR*1.28,0.016,32),steelMat,[mhX,topY+collarH+0.02,0]);
-      addM(new THREE.CylinderGeometry(mhInnerR*0.9,mhInnerR*0.9,0.025,32),steelMat,[mhX,topY+collarH+0.07,0]);
-      addM(new THREE.SphereGeometry(mhInnerR*0.9,24,8,0,Math.PI*2,0,Math.PI/5),steelMat,[mhX,topY+collarH+0.088,0]);
+        addM(new THREE.CylinderGeometry(0.014,0.014,0.03,6),darkSt,[mhX+Math.cos(a)*collarR*1.03,top+collarH+0.025,Math.sin(a)*collarR*1.03]);}
+      const ir=collarR*0.38;
+      addM(new THREE.CylinderGeometry(ir*1.28,ir*1.28,0.016,32),steelMat,[mhX,top+collarH+0.024,0]);
+      addM(new THREE.CylinderGeometry(ir,ir,0.04,32),steelMat,[mhX,top+collarH+0.036,0]);
       for(let i=0;i<12;i++){const a=i/12*Math.PI*2;
-        addM(new THREE.CylinderGeometry(0.012,0.012,0.028,6),darkSt,[mhX+Math.cos(a)*mhInnerR*1.22,topY+collarH+0.025,Math.sin(a)*mhInnerR*1.22]);
-      }
-      [[collarR*0.5,collarR*0.18],[collarR*0.5,-collarR*0.18],[-(collarR*0.4),collarR*0.24]].forEach(([nz,nx])=>{
-        addM(new THREE.CylinderGeometry(0.055,0.055,0.08,16),steelMat,[mhX+nx,topY+collarH+0.04,nz]);
-        addM(new THREE.CylinderGeometry(0.075,0.075,0.016,16),steelMat,[mhX+nx,topY+collarH+0.088,nz]);
+        addM(new THREE.CylinderGeometry(0.012,0.012,0.028,6),darkSt,[mhX+Math.cos(a)*ir*1.18,top+collarH+0.04,Math.sin(a)*ir*1.18]);}
+      [[collarR*0.55,collarR*0.2],[collarR*0.55,-collarR*0.2],[-collarR*0.5,collarR*0.25]].forEach(([nz,nx])=>{
+        addM(new THREE.CylinderGeometry(0.055,0.055,0.08,16),steelMat,[mhX+nx,top+collarH+0.05,nz]);
+        addM(new THREE.CylinderGeometry(0.075,0.075,0.016,16),steelMat,[mhX+nx,top+collarH+0.096,nz]);
       });
     } else {
-      // ALL OTHER TANKS: simple flanged manhole collar + domed bolt-down cap
-      const mhR={'16':r*0.16,'18':r*0.20,'24':r*0.25,'30':r*0.30}[C.manhole]||r*0.20;
-      addM(new THREE.CylinderGeometry(mhR,mhR,0.06,32),steelMat,[0,topY+0.03,0]);
-      addM(new THREE.CylinderGeometry(mhR*1.5,mhR*1.5,0.025,32),steelMat,[0,topY+0.022,0]);
-      addM(new THREE.CylinderGeometry(mhR*0.9,mhR*0.9,0.04,32),steelMat,[0,topY+0.075,0]);
-      addM(new THREE.SphereGeometry(mhR*0.9,24,8,0,Math.PI*2,0,Math.PI/6),steelMat,[0,topY+0.095,0]);
-      for(let i=0;i<16;i++){const a=i/16*Math.PI*2,br=mhR*1.35;
-        addM(new THREE.CylinderGeometry(0.012,0.012,0.04,6),darkSt,[Math.cos(a)*br,topY+0.022,Math.sin(a)*br]);
-      }
+      // Flanged manhole: collar welded to the shell, bolted cover with shallow dome
+      const r0=lay.mhR,h=u(4);
+      nozzle(0,0,r0,h,40);
+      addM(new THREE.CylinderGeometry(r0*1.4,r0*1.4,u(0.8),40),steelMat,[0,top+h+u(0.4),0]);
+      addM(new THREE.CylinderGeometry(r0*1.18,r0*1.32,u(1.2),40),steelMat,[0,top+h+u(1.4),0]);
+      addM(new THREE.SphereGeometry(r0*1.18,32,6,0,Math.PI*2,0,Math.PI/7),steelMat,[0,top+h+u(2)-r0*1.18*Math.cos(Math.PI/7),0]);
+      for(let i=0;i<16;i++){const a=i/16*Math.PI*2;
+        addM(new THREE.CylinderGeometry(u(0.5),u(0.5),u(1.6),6),darkSt,[Math.cos(a)*r0*1.27,top+h+u(1),Math.sin(a)*r0*1.27]);}
     }
   }
-
-  // EMERGENCY VENT - flat disc cap style, right of manhole
+  // EMERGENCY VENT(S) — flat disc/cap style
   const evR={'std':0.035,'med':0.055,'lrg':0.08,'xl':0.1}[C.vent]||0.055;
-  const evX=-(L*0.18);
-  addM(new THREE.CylinderGeometry(evR,evR,0.045,16),steelMat,[evX,topY+0.022,0]);
-  addM(new THREE.CylinderGeometry(evR*1.55,evR*1.55,0.022,24),steelMat,[evX,topY+0.055,0]);
-  addM(new THREE.CylinderGeometry(evR*1.2,evR*1.2,0.018,24),steelMat,[evX,topY+0.072,0]);
-
-  // NORMAL VENT
-  const nvR={'std':0.025,'med':0.032,'lrg':0.045,'xl':0.06}[C.vent]||0.032;
-  addM(new THREE.CylinderGeometry(nvR,nvR,0.2,12),steelMat,[-(L*0.06),topY+0.1,0]);
-  addM(new THREE.CylinderGeometry(nvR*1.4,nvR*1.4,0.02,12),steelMat,[-(L*0.06),topY+0.22,0]);
-
-  // FILL CAP
-  const fR={'1.5':0.05,'2':0.065,'3':0.085,'4':0.105}[C.fill]||0.065;
-  addM(new THREE.CylinderGeometry(fR,fR,0.07,16),steelMat,[L*0.1,topY+0.035,0]);
-  addM(new THREE.CylinderGeometry(fR*1.3,fR*1.3,0.02,16),steelMat,[L*0.1,topY+0.075,0]);
-
-  // FLAT COUPLINGS ON TANK ENDS (inline with tank axis)
-  [-L/2-0.01,L/2+0.01].forEach(xp=>{
-    const dir=xp<0?-1:1;
-    addM(new THREE.CylinderGeometry(0.065,0.065,0.05,16),steelMat,[xp,sy,0],[0,0,Math.PI/2]);
-    addM(new THREE.CylinderGeometry(0.09,0.09,0.016,16),steelMat,[xp+dir*0.033,sy,0],[0,0,Math.PI/2]);
-  });
-  addM(new THREE.CylinderGeometry(0.05,0.05,0.05,16),steelMat,[-L/2-0.01,sy-r*0.3,0],[0,0,Math.PI/2]);
-  addM(new THREE.CylinderGeometry(0.07,0.07,0.016,16),steelMat,[-L/2-0.044,sy-r*0.3,0],[0,0,Math.PI/2]);
-  addM(new THREE.CylinderGeometry(0.04,0.04,0.05,16),steelMat,[-L/2-0.01,sy-r*0.62,0],[0,0,Math.PI/2]);
-  addM(new THREE.CylinderGeometry(0.058,0.058,0.016,16),steelMat,[-L/2-0.044,sy-r*0.62,0],[0,0,Math.PI/2]);
-
-  // LIFTING LUGS - horizontal, inline with tank (parallel to tank axis)
-  buildLiftingLug(L*0.3,topY,0,steelMat,true);
-  buildLiftingLug(-L*0.3,topY,0,steelMat,true);
+  const ev=(x,z)=>{
+    nozzle(x,z,evR,u(2.5));
+    addM(new THREE.CylinderGeometry(evR*1.55,evR*1.55,0.022,24),steelMat,[x,top+u(2.5)+0.011,z]);
+    addM(new THREE.CylinderGeometry(evR*1.2,evR*1.2,0.018,24),steelMat,[x,top+u(2.5)+0.03,z]);
+  };
+  if(!o.ust){ev(...lay.ev);if(o.dbl)ev(...lay.ev2);}
+  if(!o.ust){
+    // NORMAL VENT — riser pipe with mushroom cap
+    const nvR={'std':0.025,'med':0.032,'lrg':0.045,'xl':0.06}[C.vent]||0.032;
+    nozzle(lay.nv[0],lay.nv[1],nvR,0.2,12);
+    addM(new THREE.CylinderGeometry(nvR*1.5,nvR*1.5,0.02,16),steelMat,[lay.nv[0],top+0.21,lay.nv[1]]);
+    addM(new THREE.SphereGeometry(nvR*1.5,16,6,0,Math.PI*2,0,Math.PI/2),steelMat,[lay.nv[0],top+0.22,lay.nv[1]]);
+    // FILL with cap
+    const fR={'1.5':0.05,'2':0.065,'3':0.085,'4':0.105}[C.fill]||0.065;
+    nozzle(lay.fill[0],lay.fill[1],fR,u(3));
+    addM(new THREE.CylinderGeometry(fR*1.3,fR*1.3,0.03,16),darkSt,[lay.fill[0],top+u(3)+0.015,lay.fill[1]]);
+  }
+  // Extra plugged couplings across the top of rectangular tanks
+  if(o.kind==='rect'){
+    const k=Math.max(2,Math.min(5,Math.round(o.L/1.1)));
+    for(let i=0;i<k;i++){const x=-o.L*0.36+i*(o.L*0.72/(k-1));if(Math.abs(x)<lay.a+0.08)continue;
+      nozzle(x,o.W*0.3,0.05,u(2));addM(new THREE.CylinderGeometry(0.06,0.06,0.025,16),darkSt,[x,top+u(2)+0.012,o.W*0.3]);}
+  }
+  // COUPLINGS on the heads / side wall (suction, return, drain)
+  const cpl=(x,y,z,rad,ax)=>{
+    const g=new THREE.CylinderGeometry(rad,rad,0.05,16),rot=ax==='x'?[0,0,Math.PI/2]:[Math.PI/2,0,0];
+    addM(g,steelMat,[x,y,z],rot);
+    const fx=ax==='x'?Math.sign(x)*0.03:0,fz=ax==='z'?Math.sign(z)*0.03:0;
+    addM(new THREE.CylinderGeometry(rad*1.35,rad*1.35,0.016,16),steelMat,[x+fx,y,z+fz],rot);
+  };
+  if(o.kind==='horiz'){
+    const ex=o.L/2+headBulge(o.rs)+0.012;
+    cpl(ex,o.cy,0,0.065,'x');cpl(-ex,o.cy,0,0.065,'x');
+    cpl(-ex,o.cy-o.rs*0.3,0,0.05,'x');cpl(-ex,o.cy-o.rs*0.62,0,0.04,'x');
+  } else if(o.kind==='vert'){
+    const z=o.rs+0.012,b=o.base;
+    cpl(0,b+u(10),z,0.065,'z');cpl(o.rs*0.35,b+u(10),z*0.94,0.05,'z');cpl(0,b+u(22),z,0.04,'z');
+  } else {
+    const ex=o.L/2+0.012;
+    cpl(ex,o.base+o.H*0.3,0,0.065,'x');cpl(-ex,o.base+o.H*0.3,0,0.065,'x');cpl(-ex,o.base+o.H*0.12,o.W*0.25,0.05,'x');
+  }
+  // LIFTING LUGS — inline with the tank axis
+  const s=THREE.MathUtils.clamp(o.rs,0.5,1.1);
+  if(o.kind==='vert'){buildLiftingLug(0,top,o.rs*0.8,steelMat,s);buildLiftingLug(0,top,-o.rs*0.8,steelMat,s);}
+  else if(o.ust&&o.lugs){o.lugs.forEach(g=>buildLiftingLug(g.x,top,0,steelMat,g.s));}
+  else{buildLiftingLug(lay.lugX,top,0,steelMat,s);buildLiftingLug(-lay.lugX,top,0,steelMat,s);}
 }
 
-// LIFTING LUG - flat plate with hole, HORIZONTAL inline with tank axis
-function buildLiftingLug(xpos,topY,zpos,mat,horizontal){
+// LIFTING LUG — flat plate with hole, parallel to the tank axis
+function buildLiftingLug(xpos,topY,zpos,mat,s){
+  s=s||1;
+  const w=0.13*s,h=0.13*s,tip=0.22*s;
   const lug=new THREE.Shape();
-  // Horizontal orientation: lug lies flat along tank axis
-  lug.moveTo(-0.13,0);
-  lug.lineTo(0.13,0);
-  lug.lineTo(0.13,0.13);
-  lug.quadraticCurveTo(0,0.22,-0.13,0.13);
-  lug.closePath();
-  const hole=new THREE.Path();
-  hole.absarc(0,0.1,0.026,0,Math.PI*2,false);
-  lug.holes.push(hole);
-  const geo=new THREE.ExtrudeGeometry(lug,{depth:0.022,bevelEnabled:false});
-  const m=new THREE.Mesh(geo,mat);
-  // Horizontal: rotate so lug lies flat along X axis (tank axis direction)
-  m.position.set(xpos,topY-0.11,zpos-0.011);
-  m.rotation.set(0,0,0); // lies flat, pointing up, parallel to tank
-  m.castShadow=true;scene.add(m);meshes.push(m);
+  lug.moveTo(-w,0);lug.lineTo(w,0);lug.lineTo(w,h);lug.quadraticCurveTo(0,tip,-w,h);lug.closePath();
+  const hole=new THREE.Path();hole.absarc(0,h*0.8,0.026*s,0,Math.PI*2,false);lug.holes.push(hole);
+  const geo=new THREE.ExtrudeGeometry(lug,{depth:0.022*s,bevelEnabled:false});
+  geo.translate(0,0,-0.011*s);
+  addM(geo,mat,[xpos,topY-0.035*s,zpos]);
 }
 
-// --- RECTANGULAR TANK - true box shape -------------------------------
+// --- RECTANGULAR TANK — true box on skids -----------------------------
 function buildRect(spec,col,tankMat,steelMat,darkSt){
-  const W=u(spec.dep), H=u(spec.h), L=u(spec.w);
-  const gY=H/2; // center height so bottom sits on ground
-  const skM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.08});
-  const stiffMat=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.18,metalness:0.07});
-  // TRUE RECTANGULAR BOX - confirmed from HTC product photos and Fireguard renders
-  addM(new THREE.BoxGeometry(L,H,W),tankMat,[0,gY,0]);
-  // Vertical corner ribs
-  [[L/2,W/2],[L/2,-W/2],[-L/2,W/2],[-L/2,-W/2]].forEach(([x,z])=>{
-    addM(new THREE.BoxGeometry(0.045,H+0.01,0.045),stiffMat,[x,gY,z]);
+  const W=u(spec.dep),H=u(spec.h),L=u(spec.w);
+  const dbl=C.wall==='double';
+  const gap=dbl?u(3):0;                 // interstitial space
+  const skidH=u(4);
+  const Wo=W+gap*2,Ho=H+gap*2,Lo=L+gap*2;
+  const base=skidH,cy=base+Ho/2;
+  const stiffMat=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.07});
+  const skM=new THREE.MeshStandardMaterial({color:new THREE.Color(col).multiplyScalar(0.82),roughness:0.4,metalness:0.12});
+  // skid channels under the tank
+  [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(Lo+u(8),skidH,u(4)),skM,[0,skidH/2,sd*(Wo/2-u(5))]));
+  [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(u(4),skidH,Wo-u(6)),skM,[sd*(Lo/2-u(6)),skidH/2,0]));
+  // primary tank with corner and ring stiffeners
+  addM(new THREE.BoxGeometry(L,H,W),tankMat,[0,cy,0]);
+  [[L/2,W/2],[L/2,-W/2],[-L/2,W/2],[-L/2,-W/2]].forEach(([x,z])=>addM(new THREE.BoxGeometry(0.045,H+0.01,0.045),stiffMat,[x,cy,z]));
+  [-H*0.3,0,H*0.3].forEach(dy=>{
+    const y=cy+dy;
+    addM(new THREE.BoxGeometry(L+0.01,0.045,0.045),stiffMat,[0,y,W/2]);
+    addM(new THREE.BoxGeometry(L+0.01,0.045,0.045),stiffMat,[0,y,-W/2]);
+    addM(new THREE.BoxGeometry(0.045,0.045,W+0.01),stiffMat,[L/2,y,0]);
+    addM(new THREE.BoxGeometry(0.045,0.045,W+0.01),stiffMat,[-L/2,y,0]);
   });
-  // Horizontal ring ribs at top, mid, bottom
-  [-H*0.3+gY,gY,H*0.3+gY].forEach(yp=>{
-    addM(new THREE.BoxGeometry(L+0.01,0.045,0.045),stiffMat,[0,yp,W/2]);
-    addM(new THREE.BoxGeometry(L+0.01,0.045,0.045),stiffMat,[0,yp,-W/2]);
-    addM(new THREE.BoxGeometry(0.045,0.045,W+0.01),stiffMat,[L/2,yp,0]);
-    addM(new THREE.BoxGeometry(0.045,0.045,W+0.01),stiffMat,[-L/2,yp,0]);
-  });
-  // Flat end plates
-  addM(new THREE.BoxGeometry(0.03,H+0.01,W+0.01),stiffMat,[L/2+0.015,gY,0]);
-  addM(new THREE.BoxGeometry(0.03,H+0.01,W+0.01),stiffMat,[-(L/2+0.015),gY,0]);
-  // Corner leg pads + base rails
-  [[L/2-0.1,W/2-0.08],[L/2-0.1,-(W/2-0.08)],[-(L/2-0.1),W/2-0.08],[-(L/2-0.1),-(W/2-0.08)]].forEach(([x,z])=>{
-    addM(new THREE.BoxGeometry(0.2,0.14,0.2),skM,[x,0.07,z]);
-  });
-  addM(new THREE.BoxGeometry(L+0.05,0.06,0.14),skM,[0,0.03,W/2-0.08]);
-  addM(new THREE.BoxGeometry(L+0.05,0.06,0.14),skM,[0,0.03,-(W/2-0.08)]);
-  // Emergency vents across top (flat disc/cap style)
-  const topY=H;
-  const evCount=Math.max(3,Math.round(L/0.4));
-  for(let i=0;i<evCount;i++){
-    const fx=-L*0.38+i*(L*0.76/(evCount-1));
-    const evR=C.type==='fireguard'?0.055:0.04;
-    addM(new THREE.CylinderGeometry(evR,evR,0.045,16),steelMat,[fx,topY+0.022,0]);
-    addM(new THREE.CylinderGeometry(evR*1.55,evR*1.55,0.022,24),steelMat,[fx,topY+0.052,0]);
-    addM(new THREE.CylinderGeometry(evR*1.2,evR*1.2,0.018,24),steelMat,[fx,topY+0.068,0]);
+  if(dbl){
+    const om=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.28,side:THREE.DoubleSide,depthWrite:false});
+    addM(new THREE.BoxGeometry(Lo,Ho,Wo),om,[0,cy,0]);
+    const em=new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.7)});
+    const edges=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(Lo,Ho,Wo)),em);
+    edges.position.set(0,cy,0);scene.add(edges);meshes.push(edges);
   }
-  // Manhole - standard flanged dome cap (NOT the big UST collar)
-  if(C.manhole!=='none'){
-    const mhR={'16':0.12,'18':0.15,'24':0.19,'30':0.24}[C.manhole]||0.15;
-    addM(new THREE.CylinderGeometry(mhR,mhR,0.055,32),steelMat,[0,topY+0.028,0]);
-    addM(new THREE.CylinderGeometry(mhR*1.5,mhR*1.5,0.022,32),steelMat,[0,topY+0.018,0]);
-    addM(new THREE.CylinderGeometry(mhR*0.9,mhR*0.9,0.038,32),steelMat,[0,topY+0.07,0]);
-    addM(new THREE.SphereGeometry(mhR*0.9,24,8,0,Math.PI*2,0,Math.PI/6),steelMat,[0,topY+0.088,0]);
-    for(let i=0;i<16;i++){const a=i/16*Math.PI*2;
-      addM(new THREE.CylinderGeometry(0.011,0.011,0.038,6),darkSt,[Math.cos(a)*mhR*1.36,topY+0.018,Math.sin(a)*mhR*1.36]);
-    }
-  }
-  buildLiftingLug(L*0.28,topY,0,steelMat,true);
-  buildLiftingLug(-L*0.28,topY,0,steelMat,true);
-  // Fireguard placard on front face
+  // Fireguard / Flameshield placard on the front face
   if(C.type==='fireguard'||C.type==='flameshield'){
-    const placardMat=new THREE.MeshStandardMaterial({color:0xEEEEEE,roughness:0.6,metalness:0.1});
-    addM(new THREE.BoxGeometry(0.03,0.18,0.28),placardMat,[-L*0.1,0,W/2+0.015]);
+    const placardMat=new THREE.MeshStandardMaterial({color:0xE9EBEE,roughness:0.45,metalness:0.4});
+    addM(new THREE.BoxGeometry(Math.min(0.42,Lo*0.22),Math.min(0.3,Ho*0.35),0.02),placardMat,[Lo*0.18,cy,Wo/2+0.011]);
   }
-  // Double wall outer box - semi-transparent cutaway
-  if(C.wall==='double'){
-    const gap=u(6.5);
-    const outerMat=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.28,side:THREE.DoubleSide,depthWrite:false});
-    const outerBox=new THREE.Mesh(new THREE.BoxGeometry(L+gap*2,H+gap*2,W+gap*2),outerMat);
-    outerBox.position.set(0,gY,0);outerBox.castShadow=true;scene.add(outerBox);meshes.push(outerBox);
+  if(C.compart===2){
+    const cap=capNum()||5000,x=-L/2+L*(splitVols()[0]/cap);
+    addM(new THREE.BoxGeometry(0.03,H*0.98,W*0.98),steelMat,[x,cy,0]);
+    addM(new THREE.BoxGeometry(0.03,0.03,Wo+0.02),steelMat,[x,base+Ho+0.005,0]);
+    [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(0.03,Ho+0.02,0.03),steelMat,[x,cy,sd*(Wo/2+0.005)]));
   }
+  const o={kind:'rect',rs:Math.min(Wo,Ho)/2,L:Lo,W:Wo,H:Ho,base,cy,top:base+Ho,ust:false,dbl};
+  buildFittings(o,steelMat,darkSt);
+  if(C.pump!=='none') buildPump(o);
+  buildAccessories(o,col);
 }
 
-// --- VERTICAL CYLINDER -----------------------------------------------
+// --- VERTICAL CYLINDER — on four legs ---------------------------------
 function buildVertCyl(spec,col,tankMat,steelMat,darkSt){
-  const d=spec.d||spec.di||96,l=spec.l||spec.li||164;
-  const r=u(d)/2,L=u(l);
-  // gY: center at L/2 so bottom sits on Y=0
-  const gY=L/2;
-  addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,gY,0]);
-  addM(new THREE.CylinderGeometry(r,r,0.025,64),tankMat,[0,gY+L/2+0.012,0]);
-  addM(new THREE.CylinderGeometry(r,r,0.025,64),tankMat,[0,gY-(L/2+0.012),0]);
-  const dGeo=new THREE.SphereGeometry(r,48,6,0,Math.PI*2,0,0.14);
-  const d2=new THREE.Mesh(dGeo,tankMat);d2.position.y=L;d2.castShadow=true;scene.add(d2);meshes.push(d2);
-  const legM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.08});
-  [[r*0.65,r*0.65],[r*0.65,-r*0.65],[-r*0.65,r*0.65],[-r*0.65,-r*0.65]].forEach(([x,z])=>{
-    addM(new THREE.BoxGeometry(0.08,0.5,0.08),legM,[x,0.25,z]);
-    addM(new THREE.BoxGeometry(0.24,0.055,0.08),legM,[x,0.02,z]);
-  });
-  if(C.wall==='double'&&(spec.do_||spec.di)){
-    const ro=u(spec.do_||d+2)/2;
-    addM(new THREE.CylinderGeometry(ro,ro,L+u(12),64),
-      new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.35,side:THREE.DoubleSide}),[0,gY,0]);
+  const d=spec.d||spec.di||96, l=spec.l||spec.li||164;
+  const dbl=C.wall==='double'&&!!spec.do_;
+  const r=u(d)/2,H=u(l);
+  const ro=dbl?Math.max(u(spec.do_)/2,r+u(0.75)):r;
+  const Ho=dbl?Math.max(u(spec.lo||l+12),H+u(6)):H;
+  const legH=Math.max(u(6),ro*0.16);
+  const base=legH,cy=base+Ho/2,top=base+Ho;
+  addM(new THREE.CylinderGeometry(r,r,H,72),tankMat,[0,cy,0]);
+  addM(new THREE.CylinderGeometry(r,r,0.02,72),tankMat,[0,cy+H/2+0.01,0]);
+  addM(new THREE.CylinderGeometry(r,r,0.02,72),tankMat,[0,cy-H/2-0.01,0]);
+  if(dbl){
+    const om=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.34,side:THREE.DoubleSide,depthWrite:false});
+    addM(new THREE.CylinderGeometry(ro,ro,Ho,72,1,true),om,[0,cy,0]);
+    addM(new THREE.CylinderGeometry(ro,ro,0.02,72),om,[0,top-0.01,0]);
+    addM(new THREE.CylinderGeometry(ro,ro,0.02,72),om,[0,base+0.01,0]);
   }
-  buildFittings(r,r*2,steelMat,darkSt,true,gY,false);
-  if(C.pump!=='none') buildPump(r,r*2,gY);
-  buildAccessories(r,r*2,col,gY);
+  const legM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.3,metalness:0.1});
+  for(let i=0;i<4;i++){
+    const a=Math.PI/4+i*Math.PI/2,lx=Math.cos(a)*ro*0.93,lz=Math.sin(a)*ro*0.93;
+    addM(new THREE.BoxGeometry(u(4),legH+u(16),u(4)),legM,[lx,(legH+u(16))/2,lz]);
+    addM(new THREE.BoxGeometry(u(9),u(0.75),u(9)),legM,[lx,u(0.375),lz]);
+  }
+  if(C.compart===2){
+    const cap=capNum()||5000,y=cy-H/2+H*(splitVols()[0]/cap);
+    addM(new THREE.CylinderGeometry(ro*0.985,ro*0.985,0.03,48),steelMat,[0,y,0]);
+    addM(new THREE.TorusGeometry(ro+0.006,0.014,8,96),steelMat,[0,y,0],[Math.PI/2,0,0]);
+  }
+  const o={kind:'vert',rs:ro,L:ro*2,cy,top,base,ust:false,dbl};
+  buildFittings(o,steelMat,darkSt);
+  if(C.pump!=='none') buildPump(o);
+  buildAccessories(o,col);
 }
 
 // --- OVERHEAD FARM TANK -----------------------------------------------
 function buildOverheadFarm(spec,col,tankMat,steelMat,darkSt){
   const r=u(spec.d||50)/2,L=u(spec.l||60);
-  // Tank center elevated above ground so bottom clears legs
-  const elev=r+r*1.1; // tank center height above ground
+  const elev=r+r*1.1;                 // tank centre height above ground
   addM(new THREE.CylinderGeometry(r,r,L,64),tankMat,[0,elev,0],[0,0,Math.PI/2]);
-  buildFlatHead(r,L/2,1,col,tankMat,elev);
-  buildFlatHead(r,-L/2,-1,col,tankMat,elev);
+  buildFlatHead(r,L/2,1,tankMat,elev);
+  buildFlatHead(r,-L/2,-1,tankMat,elev);
   const stM=new THREE.MeshStandardMaterial({color:0x2A2A2A,roughness:0.45,metalness:0.7});
-  const standH=elev-r; // height of legs from ground to tank bottom
+  const standH=elev-r;                // legs from ground to tank bottom
+  const spread=r*0.85;
   [-L*0.3,L*0.3].forEach(xp=>{
-    const spread=r*0.85;
     [-spread,spread].forEach(z=>{
-      // Legs from ground (Y=0) to tank bottom (Y=elev-r)
       addM(new THREE.BoxGeometry(0.04,standH,0.04),stM,[xp,standH/2,z]);
-    });
-    // X-brace diagonals at 35% and 70% of stand height
-    addM(new THREE.BoxGeometry(0.04,0.04,spread*2),stM,[xp,standH*0.35,0]);
-    addM(new THREE.BoxGeometry(0.04,0.04,spread*2),stM,[xp,standH*0.7,0]);
-    // Foot pads on ground
-    [-spread,spread].forEach(z=>{
       addM(new THREE.BoxGeometry(0.07,0.04,0.22),stM,[xp,0.02,z]);
     });
+    addM(new THREE.BoxGeometry(0.04,0.04,spread*2),stM,[xp,standH*0.35,0]);
+    addM(new THREE.BoxGeometry(0.04,0.04,spread*2),stM,[xp,standH*0.7,0]);
+    addM(new THREE.BoxGeometry(0.06,0.04,spread*2.1),stM,[xp,standH-0.02,0]);   // cradle bar under the tank
   });
-  // Cross brace between frames
   addM(new THREE.BoxGeometry(L*0.65,0.03,0.03),stM,[0,standH*0.52,spread]);
-  addM(new THREE.BoxGeometry(L*0.65,0.03,0.03),stM,[0,standH*0.52,-r*0.85]);
-  buildFittings(r,L,steelMat,darkSt,false,elev,false);
+  addM(new THREE.BoxGeometry(L*0.65,0.03,0.03),stM,[0,standH*0.52,-spread]);
+  const o={kind:'horiz',rs:r,L,cy:elev,top:elev+r,ust:false,dbl:false};
+  buildFittings(o,steelMat,darkSt);
+  if(C.pump!=='none') buildPump(o);
+  buildAccessories(o,col);
+  // gravity outlet + ball valve under the front head
+  addRod(new THREE.Vector3(L/2-0.05,elev-r*0.7,0),new THREE.Vector3(L/2+0.14,elev-r*0.7,0),0.03,steelMat,12);
+  addM(new THREE.BoxGeometry(0.07,0.07,0.07),stM,[L/2+0.17,elev-r*0.7,0]);
 }
 
-// --- PUMP ASSEMBLY ---------------------------------------------------
-function buildPump(r,L,gY){
-  gY=gY||r;
-  const pxOff=typeof L==='number'?L:r*2;
-  const pM=new THREE.MeshStandardMaterial({color:0x4A6080,roughness:0.3,metalness:0.7});
-  const pBaseY=gY-r+0.16; // pump body height above ground
-  addM(new THREE.BoxGeometry(0.22,0.32,0.18),pM,[pxOff*0.44,pBaseY,0.15]);
-  addM(new THREE.CylinderGeometry(0.085,0.085,0.28,16),
-    new THREE.MeshStandardMaterial({color:0x3A5070,roughness:0.28,metalness:0.75}),
-    [pxOff*0.44,pBaseY,0.15],[0,0,Math.PI/2]);
-  addM(new THREE.CylinderGeometry(0.026,0.026,0.5,8),
-    new THREE.MeshStandardMaterial({color:0x222222,roughness:0.8}),
-    [pxOff*0.44,Math.max(0.25,gY-r-0.4),0.15]);
+// --- PUMP ASSEMBLY — transfer pump on a top bung, hose and nozzle ---
+function buildPump(o){
+  const pM=new THREE.MeshStandardMaterial({color:0x3E5878,roughness:0.35,metalness:0.6});
+  const mM=new THREE.MeshStandardMaterial({color:0x2E3A48,roughness:0.4,metalness:0.6});
+  const hM=new THREE.MeshStandardMaterial({color:0x1E1E1E,roughness:0.75,metalness:0});
+  const lay=topLayout(o);
+  const x=lay.pump[0],z=lay.pump[1];
+  const y0=o.top-shellDrop(o,z,u(4));
+  addM(new THREE.CylinderGeometry(u(1.5),u(1.5),u(5),12),pM,[x,y0+u(2.5)-0.03,z]);        // riser
+  addM(new THREE.BoxGeometry(u(9),u(7),u(7)),pM,[x,y0+u(8.5),z]);                         // pump body
+  addM(new THREE.CylinderGeometry(u(3.3),u(3.3),u(10),20),mM,[x-u(9),y0+u(8.5),z],[0,0,Math.PI/2]);  // motor
+  addM(new THREE.BoxGeometry(u(4),u(3),u(3)),mM,[x-u(9),y0+u(13),z]);                     // switch box
+  // hose from the discharge, over the side, down to a nozzle
+  const side=Math.sign(z)||-1,outZ=(o.kind==='rect'?o.W/2:o.rs)+u(5);
+  const yEnd=Math.max(o.top-u(46),u(26));
+  const pts=[[x+u(4),y0+u(9),z],[x+u(8),y0+u(14),z+side*u(4)],[x+u(10),y0+u(10),side*(outZ-u(4))],[x+u(10),o.top-u(8),side*outZ],[x+u(8),yEnd+u(10),side*(outZ+u(1))],[x+u(6),yEnd,side*(outZ+u(2))]].map(p=>new THREE.Vector3(...p));
+  addM(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),48,u(0.75),8,false),hM);
+  addM(new THREE.BoxGeometry(u(3),u(8),u(2.5)),mM,[x+u(6),yEnd-u(3),side*(outZ+u(2))]);   // nozzle
 }
 
 // --- ACCESSORIES -----------------------------------------------------
-function buildAccessories(r,L,col,gY){
-  gY=gY||r;
-  const Lh=typeof L==='number'?L:r*2;
-  const bot=gY-r; // Y of tank bottom = ground level
+function buildAccessories(o,col){
+  const hx=o.L/2,hz=o.kind==='rect'?o.W/2:o.rs,top=o.top,cy=o.cy;
+  const surfY=z=>o.kind==='horiz'?cy+Math.sqrt(Math.max(0,o.rs*o.rs-z*z)):top;
+  const tint=k=>new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.25,metalness:0.1,...k});
 
   if(C.acc.has('pan')){
-    const pM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.22,metalness:0.07,transparent:true,opacity:0.6});
-    const pW=Lh+0.5,pD=r*2+0.7;
+    const pM=tint({transparent:true,opacity:0.6});
+    const pW=hx*2+0.5,pD=hz*2+0.7;
     addM(new THREE.BoxGeometry(pW,0.055,pD),pM,[0,-0.02,0]);
     [[0,0.1,pD/2],[0,0.1,-pD/2]].forEach(p=>addM(new THREE.BoxGeometry(pW,0.24,0.05),pM,p));
     [[pW/2,0.1,0],[-pW/2,0.1,0]].forEach(p=>addM(new THREE.BoxGeometry(0.05,0.24,pD),pM,p));
   }
 
   if(C.acc.has('ladder')&&!isUST()){
-    const lM=new THREE.MeshStandardMaterial({color:0xCCCCCC,roughness:0.45,metalness:0.6});
-    const pM2=new THREE.MeshStandardMaterial({color:0xBBBBBB,roughness:0.55,metalness:0.5});
-    const ladH=r*2+0.3;const lx=Lh/2+0.3;
-    addM(new THREE.BoxGeometry(0.04,ladH,0.04),lM,[lx,ladH/2,0.18]);
-    addM(new THREE.BoxGeometry(0.04,ladH,0.04),lM,[lx,ladH/2,-0.18]);
-    for(let i=0;i<10;i++) addM(new THREE.CylinderGeometry(0.015,0.015,0.38,8),lM,[lx,0.05+i*(ladH/9),0],[0,0,Math.PI/2]);
-    addM(new THREE.BoxGeometry(0.55,0.04,0.55),pM2,[lx-0.2,gY+r+0.12,0]);
-    [[lx-0.46,gY+r+0.42,0.24],[lx-0.46,gY+r+0.42,-0.24],[lx+0.06,gY+r+0.42,0.24],[lx+0.06,gY+r+0.42,-0.24]].forEach(pos=>addM(new THREE.BoxGeometry(0.03,0.6,0.03),lM,pos));
-    addM(new THREE.BoxGeometry(0.03,0.03,0.5),lM,[lx-0.2,gY+r+0.7,0.24]);
-    addM(new THREE.BoxGeometry(0.03,0.03,0.5),lM,[lx-0.2,gY+r+0.7,-0.24]);
-    addM(new THREE.BoxGeometry(0.54,0.03,0.03),lM,[lx-0.2,gY+r+0.7,0.24]);
+    const lM=new THREE.MeshStandardMaterial({color:0xC8CCD0,roughness:0.4,metalness:0.7});
+    const clearPlat=C.acc.has('pump_plat')&&o.kind!=='vert';
+    const lx=hx+(clearPlat?u(30)+0.36:0.3),ladH=top+0.3;
+    addM(new THREE.BoxGeometry(0.04,ladH,0.04),lM,[lx,ladH/2,0.2]);
+    addM(new THREE.BoxGeometry(0.04,ladH,0.04),lM,[lx,ladH/2,-0.2]);
+    const nR=Math.max(3,Math.floor(ladH/u(12)));
+    for(let i=1;i<=nR;i++) addM(new THREE.CylinderGeometry(0.015,0.015,0.4,8),lM,[lx,i*(ladH/(nR+0.6)),0],[Math.PI/2,0,0]);
+    // landing platform from the ladder back over the tank end
+    const x0=Math.min(lx-0.46,hx-0.26),x1=lx+0.06,pl=x1-x0,pc=(x0+x1)/2;
+    addM(new THREE.BoxGeometry(pl,0.04,0.55),lM,[pc,top+0.1,0]);
+    [[x0,0.24],[x0,-0.24],[x1,0.24],[x1,-0.24]].forEach(([x,z])=>addM(new THREE.BoxGeometry(0.03,0.6,0.03),lM,[x,top+0.4,z]));
+    addM(new THREE.BoxGeometry(0.03,0.03,0.5),lM,[x0,top+0.7,0]);
+    addM(new THREE.BoxGeometry(pl,0.03,0.03),lM,[pc,top+0.7,0.24]);
+    addM(new THREE.BoxGeometry(pl,0.03,0.03),lM,[pc,top+0.7,-0.24]);
+  }
+
+  if(C.acc.has('catwalk')&&!isUST()){
+    const cwM=new THREE.MeshStandardMaterial({color:0xBDC1C6,roughness:0.5,metalness:0.6});
+    const cwW=Math.min(u(42),hz*1.6),len=o.kind==='vert'?hz*2:hx*2*0.92,y=top+0.2;
+    addM(new THREE.BoxGeometry(len,0.025,cwW),cwM,[0,y,0]);
+    const nP=Math.max(3,Math.round(len/0.4));
+    for(let i=0;i<=nP;i++){const x=-len/2+i*(len/nP);
+      addM(new THREE.BoxGeometry(0.025,0.32,0.025),cwM,[x,y+0.16,cwW/2]);
+      addM(new THREE.BoxGeometry(0.025,0.32,0.025),cwM,[x,y+0.16,-cwW/2]);}
+    addM(new THREE.BoxGeometry(len,0.025,0.025),cwM,[0,y+0.32,cwW/2]);
+    addM(new THREE.BoxGeometry(len,0.025,0.025),cwM,[0,y+0.32,-cwW/2]);
+    [-len*0.35,len*0.35].forEach(x=>addM(new THREE.BoxGeometry(0.04,y-top+0.06,0.04),cwM,[x,(y+top)/2-0.02,0]));
   }
 
   if(C.acc.has('rainshield')&&!isUST()){
-    const rsM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.16,metalness:0.06,side:THREE.DoubleSide});
-    // Quarter-sphere overhang over manhole/fitting area
-    const rsGeo=new THREE.SphereGeometry(r*0.55,24,12,0,Math.PI,0,Math.PI/2);
-    const rs=new THREE.Mesh(rsGeo,rsM);
-    rs.position.set(Lh*0.25,gY+r+0.06,0);rs.castShadow=true;scene.add(rs);meshes.push(rs);
-    addM(new THREE.BoxGeometry(0.04,0.04,r*0.55),rsM,[Lh*0.25,gY+r+0.05,r*0.28]);
-    addM(new THREE.BoxGeometry(0.04,0.04,r*0.55),rsM,[Lh*0.25,gY+r+0.05,-r*0.28]);
+    const rsM=tint({roughness:0.16,metalness:0.06,side:THREE.DoubleSide});
+    const R=Math.min(hz,0.9)*0.6,x=-hx*0.4;
+    addM(new THREE.SphereGeometry(R,24,12,0,Math.PI,0,Math.PI/2),rsM,[x,top+0.06,0]);
+    addM(new THREE.BoxGeometry(0.04,0.08,0.04),rsM,[x,top+0.03,R*0.6]);
+    addM(new THREE.BoxGeometry(0.04,0.08,0.04),rsM,[x,top+0.03,-R*0.6]);
   }
 
-  // FORK POCKETS (from Agriland 6K drawing: 3.5" pipe, 42" center-to-center, through skid)
+  // FORK POCKETS (Agriland 6K drawing: 3.5" pipe, 42" centre-to-centre)
   if(C.acc.has('forklift')){
-    const fM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.12});
-    const pipeR=u(3.5)/2;
-    // Two fork tubes, 42" apart center-to-center (from drawing: 42-42-42-42 spacing)
+    const fM=tint({roughness:0.2,metalness:0.12});
+    const pr=u(3.5)/2,len=hx*2+0.12;
     [-u(42)/2,u(42)/2].forEach(z=>{
-      // Full-length pipe tube
-      addM(new THREE.CylinderGeometry(pipeR,pipeR,Lh+0.12,12),fM,[0,bot+pipeR,z],[0,0,Math.PI/2]);
-      // End caps (pipe circles from BOM: 6" pipe circles x4)
-      [Lh/2+0.06,-(Lh/2+0.06)].forEach(xp=>{
-        addM(new THREE.CylinderGeometry(pipeR*1.1,pipeR*1.1,0.03,12),fM,[xp,bot+pipeR,z],[0,0,Math.PI/2]);
-      });
-    });
-    // Top splice plates connecting pockets to skid (from BOM: 98 SPLICE PLATE x4)
-    [-u(42)/2,u(42)/2].forEach(z=>{
-      addM(new THREE.BoxGeometry(Lh+0.06,0.04,0.18),fM,[0,bot+pipeR*1.8,z]);
+      addM(new THREE.CylinderGeometry(pr,pr,len,12),fM,[0,pr+0.003,z],[0,0,Math.PI/2]);
+      [len/2,-len/2].forEach(xp=>addM(new THREE.CylinderGeometry(pr*1.15,pr*1.15,0.03,12),fM,[xp,pr+0.003,z],[0,0,Math.PI/2]));
     });
   }
 
   if(C.acc.has('cabinet')){
-    const cM=new THREE.MeshStandardMaterial({color:0x8A9AA6,roughness:0.3,metalness:0.3});
-    addM(new THREE.BoxGeometry(0.55,0.75,0.42),cM,[-(Lh*0.28),-(r*0.6),0]);
-    addM(new THREE.BoxGeometry(0.01,0.72,0.01),new THREE.MeshStandardMaterial({color:0x555566}),[-(Lh*0.28)+0.28,-(r*0.6),0]);
+    const cM=new THREE.MeshStandardMaterial({color:0x8A9AA6,roughness:0.35,metalness:0.4});
+    const cz=-(hz+0.45),cx=-hx*0.45;
+    addM(new THREE.BoxGeometry(0.55,0.75,0.42),cM,[cx,0.375,cz]);
+    addM(new THREE.BoxGeometry(0.5,0.02,0.01),new THREE.MeshStandardMaterial({color:0x555566}),[cx,0.6,cz+0.215]);
   }
 
-  if(C.acc.has('dispenser')&&!isUST()){
-    const dM=new THREE.MeshStandardMaterial({color:0xEEEEEE,roughness:0.35,metalness:0.2});
-    addM(new THREE.BoxGeometry(0.28,0.9,0.22),dM,[Lh*0.35,0.45,0]);
-    addM(new THREE.BoxGeometry(0.26,0.12,0.2),new THREE.MeshStandardMaterial({color:0x333333}),[Lh*0.35,0.06,0]);
+  if((C.acc.has('dispenser')||C.acc.has('dual_disp'))&&!isUST()){
+    const dual=C.acc.has('dual_disp');
+    const dM=new THREE.MeshStandardMaterial({color:0xEDEFF2,roughness:0.35,metalness:0.2});
+    const kM=new THREE.MeshStandardMaterial({color:0x2B2F36,roughness:0.5,metalness:0.3});
+    const w=dual?0.5:0.3,dx=hx*0.45,dz=hz+0.6;
+    addM(new THREE.BoxGeometry(w,0.95,0.24),dM,[dx,0.475,dz]);
+    addM(new THREE.BoxGeometry(w+0.04,0.1,0.28),kM,[dx,0.05,dz]);
+    addM(new THREE.BoxGeometry(w*0.7,0.16,0.01),kM,[dx,0.72,dz+0.125]);
+    (dual?[-w*0.3,w*0.3]:[0]).forEach(ox=>addM(new THREE.BoxGeometry(0.06,0.14,0.06),kM,[dx+ox,0.45,dz+0.15]));
   }
 
-  // PUMP PLATFORM 69x30 (from Agriland/agricultural builds — both ends)
-  // Real dims: 69" wide x 30" deep welded steel platform
-  if(C.acc.has('pump_plat')&&!isUST()){
-    const ppM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.25,metalness:0.1});
-    const ppW=u(69),ppD=u(30),ppH=0.05;
-    // Platform plate each end, sitting below tank bottom
-    [Lh/2+ppD/2+0.04,-(Lh/2+ppD/2+0.04)].forEach(xp=>{
-      addM(new THREE.BoxGeometry(ppD,ppH,ppW),ppM,[xp,ppH/2,0]);
-      // Platform legs (4 corner posts)
-      [-ppW/2*0.75,ppW/2*0.75].forEach(z=>{
-        addM(new THREE.BoxGeometry(0.045,r*0.7,0.045),ppM,[xp,r*0.35,z]);
-        // Foot pad
-        addM(new THREE.BoxGeometry(0.14,0.04,0.14),ppM,[xp,0.02,z]);
+  // PUMP PLATFORM 69x30 at each end (ag / fleet builds)
+  if(C.acc.has('pump_plat')&&!isUST()&&o.kind!=='vert'){
+    const ppM=tint({roughness:0.25,metalness:0.1});
+    const ppW=Math.min(u(69),hz*2),ppD=u(30),y=Math.max(0.25,cy-hz*0.35);
+    [1,-1].forEach(sd=>{
+      const xp=sd*(hx+ppD/2+0.04);
+      addM(new THREE.BoxGeometry(ppD,0.05,ppW),ppM,[xp,y,0]);
+      [-ppW*0.38,ppW*0.38].forEach(z=>{
+        addM(new THREE.BoxGeometry(0.045,y,0.045),ppM,[xp+sd*ppD*0.35,y/2,z]);
+        addM(new THREE.BoxGeometry(0.14,0.04,0.14),ppM,[xp+sd*ppD*0.35,0.02,z]);
       });
-      // Cross brace
-      addM(new THREE.BoxGeometry(0.03,0.03,ppW*0.85),ppM,[xp,r*0.2,0]);
     });
   }
 
-  // LEAN 2 BRACKET (from Agriland/Hunt BOMs — pipe support bracket on tank shell)
-  // Small welded L-bracket that supports suction/return plumbing
+  // LEAN 2 BRACKETS — pipe supports carrying the suction/return line along the top
   if(C.acc.has('lean2')){
     const l2M=new THREE.MeshStandardMaterial({color:0x8A9BAA,roughness:0.3,metalness:0.7});
-    // Two bracket positions: one left of center, one right (from 6K drawing: 2 kits)
-    [-Lh*0.12,Lh*0.12].forEach(xp=>{
-      // Vertical upright
-      addM(new THREE.BoxGeometry(0.04,0.22,0.04),l2M,[xp,r-0.05,r*0.85]);
-      // Horizontal arm
-      addM(new THREE.BoxGeometry(0.04,0.04,0.18),l2M,[xp,r+0.06,r*0.94]);
-      // Pipe sitting in bracket (the suction/return line)
-      addM(new THREE.CylinderGeometry(0.025,0.025,0.2,12),
-        new THREE.MeshStandardMaterial({color:0x555F6A,roughness:0.4,metalness:0.75}),
-        [xp,gY+r+0.07,r*0.94],[0,0,Math.PI/2]);
+    const z=hz*0.55,ys=surfY(z),pipeY=ys+u(6),len=o.kind==='vert'?hz:hx*0.7;
+    [-len*0.4,len*0.4].forEach(xp=>{
+      addM(new THREE.BoxGeometry(0.04,pipeY-ys+0.03,0.04),l2M,[xp,(pipeY+ys)/2-0.01,z]);
+      addM(new THREE.BoxGeometry(0.04,0.03,0.12),l2M,[xp,pipeY-u(1.2),z]);
     });
-  }
-
-  // CATWALK (from 20K OIL EQUIPMENT drawing: 432" total, 42" wide, hot-dip galvanized)
-  if(C.acc.has('catwalk')&&!isUST()){
-    const cwM=new THREE.MeshStandardMaterial({color:0xBBBBBB,roughness:0.55,metalness:0.55,wireframe:false});
-    const cwW=u(42);
-    // Grating surface
-    addM(new THREE.BoxGeometry(Lh,0.025,cwW),cwM,[0,gY+r+0.18,0]);
-    // Handrail posts (every ~4 ft)
-    const nPosts=Math.max(4,Math.round(Lh/0.35));
-    for(let i=0;i<=nPosts;i++){
-      const px=-Lh/2+i*(Lh/nPosts);
-      addM(new THREE.BoxGeometry(0.025,0.32,0.025),cwM,[px,gY+r+0.34,cwW/2]);
-      addM(new THREE.BoxGeometry(0.025,0.32,0.025),cwM,[px,gY+r+0.34,-cwW/2]);
-    }
-    // Top handrail
-    addM(new THREE.BoxGeometry(Lh,0.025,0.025),cwM,[0,gY+r+0.5,cwW/2]);
-    addM(new THREE.BoxGeometry(Lh,0.025,0.025),cwM,[0,gY+r+0.5,-cwW/2]);
+    addM(new THREE.CylinderGeometry(u(1),u(1),len,12),new THREE.MeshStandardMaterial({color:0x555F6A,roughness:0.4,metalness:0.75}),[0,pipeY,z],[0,0,Math.PI/2]);
   }
 }
 
 function animate(){
   requestAnimationFrame(animate);
-  camera.position.x=dist*Math.sin(ry)*Math.cos(rx);
-  camera.position.y=dist*Math.sin(rx)+1.2;
-  camera.position.z=dist*Math.cos(ry)*Math.cos(rx);
-  camera.lookAt(0,0.8,0);renderer.render(scene,camera);
+  if(!drag){rx+=(rxGoal-rx)*0.14;ry+=(ryGoal-ry)*0.14;}
+  dist+=(distGoal-dist)*0.14;
+  tgt.lerp(tgtGoal,0.14);
+  const cr=Math.cos(rx);
+  camera.position.set(tgt.x+dist*Math.sin(ry)*cr,tgt.y+dist*Math.sin(rx),tgt.z+dist*Math.cos(ry)*cr);
+  camera.lookAt(tgt);
+  renderer.render(scene,camera);
 }
 function sv(v,btn){
-  document.querySelectorAll('.vb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  const views={
-    iso:  [0.28, 0.62],
-    front:[0.05, 0.01],
-    side: [0.05, Math.PI/2],
-    top:  [Math.PI/2-0.08, 0.01]
-  };
-  [rx,ry]=views[v];dist=5.5;
+  document.querySelectorAll('.vb').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');
+  if(!camera)return;
+  const[a,b]=VIEWS[v]||VIEWS.iso,twoPi=Math.PI*2;
+  const d=(((b-ry)%twoPi)+twoPi*1.5)%twoPi-Math.PI;   // rotate the short way round
+  rxGoal=a;ryGoal=ry+d;
+  if(frameBox){fitDist=fitDistance(frameBox,rxGoal,ryGoal);distGoal=fitDist;}
 }
 
 // --- STEP RENDERING --------------------------------------------------
+let lastStep=-1;
 function renderStep(){
   const s=STEPS[step];
+  if(step!==lastStep){const lp=document.querySelector('.left-panel');if(lp&&lp.scrollHeight>lp.clientHeight)lp.scrollTop=0;lastStep=step;}
   document.getElementById('stepCtr').textContent=`Step ${step+1} of ${STEPS.length}`;
   buildPgBar();
   let html=`<div class="step-q">${s.q}</div>`;
@@ -1471,15 +1519,7 @@ function renderStep(){
   }
 
   if(s.type==='cap'){
-    const td2=TD[C.type];
-    const shK=C.shape==='rect'?'rect':C.shape==='vert'?'vert':'horiz';
-    const wK=C.wall;
-    // Try exact wall first, fall back gracefully
-    let sizes=td2?.sizes?.[shK]?.[wK];
-    if(!sizes||!Object.keys(sizes).length){
-      const alt=wK==='double'?'single':'double';
-      sizes=td2?.sizes?.[shK]?.[alt]||td2?.sizes?.horiz?.double||td2?.sizes?.horiz?.single||{};
-    }
+    const sizes=sizesFor(C.type,C.shape,C.wall)||{};
     const caps=Object.keys(sizes).filter(k=>!isNaN(parseInt(k))).sort((a,b)=>parseInt(a)-parseInt(b));
     // Most common sizes to highlight per type
     const commonCaps={ul142:['5000','10000','20000'],fireguard:['5000','8000','12000'],
@@ -1490,9 +1530,9 @@ function renderStep(){
     caps.forEach(cap=>{
       const sp=sizes[cap];
       const dimStr=sp.shape==='rect'
-        ?`${sp.w}"L x ${sp.dep}"W x ${sp.h}"H`
-        :`${sp.d||sp.di}"O x ${sp.l||sp.li}"L`;
-      const shellStr=sp.sh?`  -  ${sp.sh} shell`:'';
+        ?`${sp.w}"L × ${sp.dep}"W × ${sp.h}"H`
+        :`${sp.d||sp.di}"Ø × ${sp.l||sp.li}"L`;
+      const shellStr=sp.sh?` · ${sp.sh} shell`:'';
       const isSel=C.cap===cap;
       const isHot=!isSel&&highlights.has(cap);
       html+=`<div class="tile${isSel?' sel':''}${isHot?' highlight':''}" onclick="pick('cap','${cap}',this)">
@@ -1508,17 +1548,17 @@ function renderStep(){
     // Custom fabrication dimensions section
     html+=`<div style="margin:8px 12px 0;border:1px solid #DDE2EE;border-radius:5px;background:#F8F9FC;padding:10px 12px">
       <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1A3A8C;margin-bottom:6px">Custom Fabrication</div>
-      <div style="font-size:11px;color:#5A6A88;margin-bottom:8px;line-height:1.4">Need a non-standard size? Enter exact dimensions below and we'll quote it direct from the shop.</div>
+      <div style="font-size:11px;color:#5A6A88;margin-bottom:8px;line-height:1.4">Need a non-standard size? Enter exact dimensions below and we'll review it for a custom quote through an authorized distributor.</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">
         <div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:#8A9BB5;letter-spacing:.08em;margin-bottom:2px">DIAMETER (inches)</div>
-          <input type="number" id="custDia" min="24" max="144" placeholder="e.g. 96"
+          <input type="number" id="custDia" min="24" max="144" placeholder="e.g. 96" value="${C.customDia||''}"
             style="width:100%;border:1px solid #DDE2EE;border-radius:3px;padding:6px 8px;font-size:12px;font-family:'Barlow',sans-serif;color:#0D1B3E;background:#fff;outline:none"
             oninput="updateCustomDims()" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
         </div>
         <div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:#8A9BB5;letter-spacing:.08em;margin-bottom:2px">LENGTH (inches)</div>
-          <input type="number" id="custLen" min="24" max="600" placeholder="e.g. 164"
+          <input type="number" id="custLen" min="24" max="600" placeholder="e.g. 164" value="${C.customLen||''}"
             style="width:100%;border:1px solid #DDE2EE;border-radius:3px;padding:6px 8px;font-size:12px;font-family:'Barlow',sans-serif;color:#0D1B3E;background:#fff;outline:none"
             oninput="updateCustomDims()" onfocus="this.style.borderColor='#1A3A8C'" onblur="this.style.borderColor='#DDE2EE'">
         </div>
@@ -1543,47 +1583,47 @@ function renderStep(){
     } else {
       html+=`<div class="color-grid">`;
       COLORS.forEach(c=>{
-        html+=`<div class="csw${C.colorHex===c.hex?' sel':''}" style="background:${c.hex}${c.fix?';outline:1px solid #ccc':''}" onclick="pickColor('${c.hex}','${c.name}',this)" title="${c.name}"></div>`;
+        const bgc=c.hex==='#custom'?'conic-gradient(#CC2222,#DDAA00,#2D5A1B,#1A3A8C,#8B4513,#CC2222)':c.hex;
+        html+=`<div class="csw${C.colorHex===c.hex?' sel':''}" style="background:${bgc}${c.fix?';outline:1px solid #ccc':''}" onclick="pickColor('${c.hex}','${c.name}',this)" title="${c.name}"></div>`;
       });
       html+='</div>';
-      html+=`<div class="clbl" id="colorLbl">${C.colorName} &mdash; Polyurethane Top Coat</div>`;
+      html+=`<div class="clbl" id="colorLbl">${colorLabel()}</div>`;
       html+=`<div class="step-hint" style="border-top:none;padding-top:0">Custom RAL colors available. All tanks sandblasted SSPC-SP6 before coating.</div>`;
     }
   }
 
   if(s.type==='compart'){
-    const cap=parseInt(C.cap)||5000;
+    const cap=capNum()||5000;
     const canSplit=(C.wall==='double'||isUST())&&cap>=2000;
     html+=`<div class="step-hint" style="border-top:none;padding-top:4px">`;
     if(!canSplit){
+      if(C.compart!==1){C.compart=1;C.comp2gal=0;}
       html+=`Single-wall tanks and tanks under 2,000 gal are single compartment only. Select double-wall to enable split options.</div>`;
-      html+=`<div class="opts c2"><div class="tile sel" onclick="void(0)"><div class="ti">🛢️</div><div class="tl">Single Compartment</div><div class="ts">${cap.toLocaleString()} gal total</div></div></div>`;
+      html+=`<div class="opts c2"><div class="tile sel"><div class="ti">one</div><div class="tl">Single Compartment</div><div class="ts">${cap.toLocaleString()} gal total</div></div></div>`;
     } else {
-      html+=`Multi-compartment tanks store two different products in one tank -- ideal for diesel + gasoline at fuel stations.</div>`;
-      const halves=Math.round(cap/2/500)*500;
+      html+=`Multi-compartment tanks store two different products in one tank — ideal for diesel + gasoline at fuel stations.</div>`;
+      const [h1,h2]=splitVols();
       html+=`<div class="opts c2">
-        <div class="tile${C.compart===1?' sel':''}" onclick="C.compart=1;updateFooter();buildTank();renderStep()">
-          <div class="ti">🛢️</div><div class="tl">Single</div><div class="ts">${cap.toLocaleString()} gal -- one product</div>
+        <div class="tile${C.compart===1?' sel':''}" onclick="setCompart(1)">
+          <div class="ti">one</div><div class="tl">Single</div><div class="ts">${cap.toLocaleString()} gal — one product</div>
         </div>
-        <div class="tile${C.compart===2?' sel':''}" onclick="C.compart=2;updateFooter();buildTank();renderStep()">
-          <div class="ti">🛢️🛢️</div><div class="tl">Split -- 2 Compartments</div><div class="ts">e.g. ${halves.toLocaleString()} + ${(cap-halves).toLocaleString()} gal</div>
+        <div class="tile${C.compart===2?' sel':''}" onclick="setCompart(2)">
+          <div class="ti">split</div><div class="tl">Split — 2 Compartments</div><div class="ts">e.g. ${h1.toLocaleString()} + ${h2.toLocaleString()} gal</div>
           <div class="tt">Multi-compartment</div>
         </div>
       </div>`;
       if(C.compart===2){
-        const splits=[];
-        const step2=Math.round(cap*0.1/500)*500||500;
-        for(let g=step2;g<cap;g+=step2) splits.push(g);
+        const lo=splitMin(cap);
         html+=`<div class="step-q" style="font-size:13px;margin-top:8px">Compartment split (drag to adjust):</div>`;
         html+=`<div style="padding:10px 14px">`;
-        html+=`<input type="range" min="${step2}" max="${cap-step2}" step="${step2}" value="${C.comp2gal||halves}" style="width:100%;accent-color:#1A3A8C" oninput="C.comp2gal=parseInt(this.value);document.getElementById('splitLbl').textContent=C.comp2gal.toLocaleString()+' / '+(${cap}-C.comp2gal).toLocaleString()+' gal';updateFooter()">`;
-        html+=`<div id="splitLbl" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:#1A3A8C;text-align:center;margin-top:6px">${(C.comp2gal||halves).toLocaleString()} / ${(cap-(C.comp2gal||halves)).toLocaleString()} gal</div>`;
+        html+=`<input type="range" min="${lo}" max="${cap-lo}" step="500" value="${h1}" style="width:100%;accent-color:#1A3A8C" oninput="onSplit(this.value)">`;
+        html+=`<div id="splitLbl" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:#1A3A8C;text-align:center;margin-top:6px">${h1.toLocaleString()} / ${h2.toLocaleString()} gal</div>`;
         html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">`;
-        html+=`<div><div class="step-q" style="font-size:12px">Compartment 1 product:</div>`;
-        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp1product===p.v?' sel':''}" onclick="C.comp1product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.i} ${p.l}</div></div></div>`; });
+        html+=`<div><div class="step-q" style="font-size:12px;padding:6px 0">Compartment 1 product:</div>`;
+        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp1product===p.v?' sel':''}" onclick="C.comp1product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
         html+=`</div>`;
-        html+=`<div><div class="step-q" style="font-size:12px">Compartment 2 product:</div>`;
-        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp2product===p.v?' sel':''}" onclick="C.comp2product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.i} ${p.l}</div></div></div>`; });
+        html+=`<div><div class="step-q" style="font-size:12px;padding:6px 0">Compartment 2 product:</div>`;
+        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp2product===p.v?' sel':''}" onclick="C.comp2product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
         html+=`</div></div></div>`;
       }
     }
@@ -1604,7 +1644,7 @@ function renderStep(){
         html+=`<div class="arow${C.acc.has(a.id)?' sel':''}${ust?' disabled':''}" onclick="toggleAcc('${a.id}',${a.price},this)">
           <div class="achk"></div>
           <div class="aico">${a.ico}</div>
-          <div class="ainf"><div class="aname">${a.name}</div><div class="asub">${a.sub}${ust?' - N/A underground':''}</div></div>
+          <div class="ainf"><div class="aname">${a.name}</div><div class="asub">${a.sub}${ust?' · N/A underground':''}</div></div>
           <div class="aprc">+$${a.price.toLocaleString()}</div>
         </div>`;
       });
@@ -1613,6 +1653,8 @@ function renderStep(){
   }
 
   document.getElementById('stepContent').innerHTML=html;
+  const nb=document.querySelector('.nav-btn.next');
+  if(nb)nb.innerHTML=step===STEPS.length-1?'Finish &#8594;':'Next &#8594;';
   updateFooter();
   updateStdList();
   updateRecommendation();
@@ -1647,8 +1689,8 @@ function updateStdList(){
     fireguard:[
       'UL 2085 & STI certification',
       '4" Fireguard-rated couplings (fire-rated pass-through)',
-      '24" manhole -- standard on all Fireguard',
-      '8" emergency vent (<=20K) or 10" EV (25K)',
+      '24" manhole — standard on all Fireguard',
+      '8" emergency vent (up to 20K) or 10" EV (25K)',
       '2085 lifting lug + backing plate',
       'Fireguard placard & decals',
       'Enviroastic 940 LV polyurethane coating',
@@ -1665,10 +1707,10 @@ function updateStdList(){
       'Condensation eliminators (x2)',
     ],
     permatank:[
-      'STI ACT-100 certification -- 30-yr warranty',
+      'STI ACT-100 certification — 30-yr warranty',
       'Buoyancy calculation document',
       'Tank strapping/dip chart (per compartment)',
-      'FRP jacket -- orange pigment in resin (not paint)',
+      'FRP jacket — orange pigment in resin (not paint)',
       'Vacuum monitoring kit (glycerine gauge + transducer)',
       '42" sump collar CLS4204-10 (per compartment)',
       '24" manhole (per compartment)',
@@ -1682,7 +1724,7 @@ function updateStdList(){
       'FRP deadman anchors (Pultrusion Tech)',
     ],
     act100u:[
-      'STI ACT-100-U certification -- 30-yr warranty',
+      'STI ACT-100-U certification — 30-yr warranty',
       'Ethanol-rated seals & all fittings',
       'Buoyancy calculation document',
       'Vacuum monitoring kit',
@@ -1698,8 +1740,9 @@ function updateStdList(){
     ],
   };
 
-  const items=[...base,...(extras[C.type]||[])];
-  itemEl.innerHTML=items.map(i=>`<div class="std-item"><span class="std-check">v</span>${i}</div>`).join('');
+  const dwOnly=/double-wall|\(double-wall\)/i;
+  const items=[...base,...(extras[C.type]||[]).filter(i=>C.wall==='double'||!dwOnly.test(i))];
+  itemEl.innerHTML=items.map(i=>`<div class="std-item"><span class="std-check">&#10003;</span>${i}</div>`).join('');
   stdEl.style.display='block';
 }
 
@@ -1707,21 +1750,21 @@ function updateStdList(){
 const RECS=[
   // Product compatibility
   {check:()=>C.product==='def'&&C.type==='ul142',
-   msg:'DEF requires stainless steel or fiberglass -- carbon steel UL 142 will corrode. Consider a different material.',
+   msg:'DEF requires stainless steel or fiberglass — carbon steel UL 142 will corrode. Consider a different material.',
    warn:true,icon:'⚠️'},
   {check:()=>C.product==='gasoline'&&C.wall==='single'&&parseInt(C.cap)>=1000,
-   msg:'Gasoline tanks >=1,000 gal typically require double-wall for SPCC compliance. Check your local fire code.',
+   msg:'Gasoline tanks of 1,000+ gal typically require double-wall for SPCC compliance. Check your local fire code.',
    warn:true,icon:'⚠️'},
   // Vent sizing (from real BOMs: 25K Fireguard = 10" EV, 15K = 8" EV)
   {check:()=>parseInt(C.cap)>=10000&&(C.vent==='std'||C.vent==='med')&&C.type!=='fireguard'&&C.type!=='flameshield',
-   msg:'Tanks >=10,000 gal typically require 3" NV + 6" EV or larger per NFPA 30.',
+   msg:'Tanks of 10,000+ gal typically require 3" NV + 6" EV or larger per NFPA 30.',
    warn:true,icon:'⚠️'},
   {check:()=>C.type==='fireguard'&&C.vent!=='xl',
    msg:'Fireguard tanks use a 8" emergency vent (4" NV + 8" EV). 25K Fireguard uses 10" EV.',
    warn:false,icon:'💡'},
   // Compartment suggestions
   {check:()=>C.product==='mixed'&&C.compart===1,
-   msg:'You selected Multi-product -- enable split compartments in the next step to store two products in one tank.',
+   msg:'You selected Multi-product — choose a split tank in the Compartments step to store two products in one tank.',
    warn:false,icon:'💡'},
   // Gasoline grounding
   {check:()=>C.product==='gasoline'&&!C.acc.has('grounding'),
@@ -1729,7 +1772,7 @@ const RECS=[
    warn:true,icon:'⚠️'},
   // Double wall monitoring
   {check:()=>C.wall==='double'&&!C.acc.has('sensor')&&!C.acc.has('atg')&&!isUST(),
-   msg:'Double-wall tanks have an interstitial space -- add a leak sensor or ATG port to monitor it.',
+   msg:'Double-wall tanks have an interstitial space — add a leak sensor or ATG port to monitor it.',
    warn:false,icon:'💡'},
   // Pump + meter
   {check:()=>C.pump!=='none'&&!C.acc.has('meter'),
@@ -1737,7 +1780,7 @@ const RECS=[
    warn:false,icon:'💡'},
   // Pump platform for ag builds
   {check:()=>C.type==='farm'&&C.pump!=='none'&&!C.acc.has('pump_plat'),
-   msg:'Agricultural pump setups typically include a 69x30 pump platform on each end -- add it in accessories.',
+   msg:'Agricultural pump setups typically include a 69x30 pump platform on each end — add it in accessories.',
    warn:false,icon:'💡'},
   // Spill box for pump installs (standard on Agriland builds)
   {check:()=>C.pump!=='none'&&!C.acc.has('spill'),
@@ -1745,11 +1788,11 @@ const RECS=[
    warn:false,icon:'💡'},
   // UST restrictions
   {check:()=>isUST()&&C.acc.has('ladder'),
-   msg:'Ladder & platform is not available for underground tanks -- it will be removed from your build.',
+   msg:'Ladder & platform is not available for underground tanks — it has been removed from your build.',
    warn:true,icon:'⚠️'},
   // Large tank access
   {check:()=>parseInt(C.cap)>=15000&&C.shape==='horiz'&&!isUST()&&!C.acc.has('catwalk')&&!C.acc.has('ladder'),
-   msg:'Tanks >=15,000 gal typically require a catwalk or ladder for safe inspection access.',
+   msg:'Tanks of 15,000+ gal typically require a catwalk or ladder for safe inspection access.',
    warn:false,icon:'💡'},
   // Anti-siphon for elevated/overhead pumps
   {check:()=>C.type==='farm'&&C.pump!=='none'&&!C.acc.has('antisiphon'),
@@ -1757,7 +1800,7 @@ const RECS=[
    warn:false,icon:'💡'},
   // Condensation eliminators reminder for DW
   {check:()=>C.wall==='double'&&!C.acc.has('cond_elim')&&!isUST(),
-   msg:'Condensation eliminators (x2) are standard on all double-wall tanks -- already included in your build.',
+   msg:'Condensation eliminators (x2) are standard on all double-wall tanks — already included in your build.',
    warn:false,icon:'💡'},
 ];
 
@@ -1774,13 +1817,11 @@ function updateRecommendation(){
 }
 
 function isDis(field,val){
-  if(field==='shape'){
-    if(val==='vert'&&(C.type==='fireguard'||C.type==='flameshield'||C.type==='permatank'||C.type==='act100u'))return true;
-    if(val==='rect'&&(C.type==='farm'||C.type==='permatank'||C.type==='act100u'))return true;
-  }
-  if(field==='wall'){
-    if(val==='single'&&(C.type==='fireguard'||C.type==='flameshield'||C.type==='act100u'||C.type==='permatank'))return true;
-  }
+  // Only offer shapes / wall types that this tank type is actually built in
+  if(field==='shape')return !availWalls(C.type,val).length;
+  if(field==='wall')return !sizesFor(C.type,C.shape,val);
+  // Fire-rated tanks always ship with a 24" (or larger) manhole
+  if(field==='manhole'&&(C.type==='fireguard'||C.type==='flameshield'))return val==='16'||val==='18';
   return false;
 }
 
@@ -1794,83 +1835,96 @@ function buildPgBar(){
   }).join('');
 }
 
+let advTimer=null;
+// Manhole / vent follow the visitor's own picks unless the tank type or size needs something larger
+// (fire-rated: 24"+ manhole and 8" EV standard per Fireguard BOMs; 10,000+ gal: at least 3" NV + 6" EV)
+function applyFittingDefaults(){
+  const fire=C.type==='fireguard'||C.type==='flameshield';
+  const mh=C.manholePref||'18';
+  C.manhole=fire?(mh==='24'||mh==='30'?mh:'24'):mh;
+  const small=v=>v==='std'||v==='med';
+  let vent=C.ventPref||(fire?'xl':C.type==='farm'?'std':'med');
+  if(fire&&small(vent))vent='xl';
+  else if(!fire&&capNum()>=10000&&small(vent))vent='lrg';
+  C.vent=vent;
+}
 function pick(f,v,el){
+  if(el&&el.classList.contains('disabled'))return;
+  if(f==='shape')C.shapePref=v;
+  if(f==='wall')C.wallPref=v;
+  if(f==='manhole')C.manholePref=v;
+  if(f==='vent')C.ventPref=v;
   if(f==='type'){
-    // Apply fixed color for underground
+    // Underground tanks have a fixed colour; going back to an aboveground type resets to white
     const fixCol=TD[v]?.fixedColor;
     if(fixCol){C.colorHex=fixCol;C.colorName=TD[v].fixedColorName;}
-    else if(C.type==='permatank'||C.type==='act100u'){
-      C.colorHex='#E0E2E8';C.colorName='White';
-    }
-    // Force wall=double for fire-rated + underground
-    if(['fireguard','flameshield','act100u','permatank'].includes(v)) C.wall='double';
-    // Force shape=horiz for underground
-    if(v==='permatank'||v==='act100u') C.shape='horiz';
-    // Fireguard: manhole is always 24" (confirmed from all Fireguard BOMs)
-    if(v==='fireguard'||v==='flameshield') C.manhole='24';
-    // Auto-select vent size based on type
-    if(v==='fireguard'||v==='flameshield') C.vent='xl'; // 8" EV standard on Fireguard
-    else if(v==='farm') C.vent='std';
-    else C.vent='med'; // default for UL142
-    // Reset compartment when type changes
+    else if(TD[C.type]?.fixedColor){C.colorHex='#E0E2E8';C.colorName='White';}
+    // Drop add-ons that don't apply underground
+    if(v==='permatank'||v==='act100u')ACCESSORIES.forEach(a=>{if(a.noUST)C.acc.delete(a.id);});
     C.compart=1;C.comp2gal=0;
   }
-  if(f==='shape'&&v==='rect') C.wall='double';
-  if(f==='cap'){
-    C.compart=1; // reset compartment on cap change
-    // Auto-correct vent for Fireguard based on actual capacity
-    const capN=parseInt(v)||5000;
-    if(C.type==='fireguard'||C.type==='flameshield'){
-      // From BOMs: 25K uses 10" EV (xl), <=20K uses 8" EV (xl) -- both xl but noted in spec
-      C.vent='xl';
-    } else if(capN>=10000){
-      if(C.vent==='std'||C.vent==='med') C.vent='lrg';
-    }
-    // Auto-correct manhole: Fireguard always 24"
-    if(C.type==='fireguard'||C.type==='flameshield') C.manhole='24';
-  }
+  if(f==='shape'||f==='wall'){C.compart=1;C.comp2gal=0;}
+  if(f==='cap'){C.capPref=v;C.compart=1;C.comp2gal=0;}
   C[f]=v;
-  el.closest('.opts').querySelectorAll('.tile').forEach(t=>t.classList.remove('sel'));
-  el.classList.add('sel');
-  updateFooter();buildTank();
-  // Don't auto-advance on color step - let them browse colors
-  if(f!=='color') setTimeout(()=>{if(step<STEPS.length-1)goNext();},380);
-  updateRecommendation();
+  normalizeConfig();   // keeps shape / wall / capacity valid and restores the visitor's picks where allowed
+  if(f==='type'||f==='cap')applyFittingDefaults();
+  const box=el&&el.closest('.opts');
+  if(box){box.querySelectorAll('.tile').forEach(t=>t.classList.remove('sel'));el.classList.add('sel');}
+  C.accCost=accCostNow();
+  updateFooter();buildTank();updateRecommendation();
+  // Auto-advance (not on colour, so people can browse swatches); one pending advance at a time
+  clearTimeout(advTimer);
+  if(f!=='color'){const at=step;advTimer=setTimeout(()=>{if(step===at&&step<STEPS.length-1)goNext();},380);}
 }
 
+function colorLabel(){return C.colorName+' — Polyurethane Top Coat · SSPC-SP6 Blast';}
 function pickColor(hex,name,el){
   C.colorHex=hex;C.colorName=name;
   document.querySelectorAll('.csw').forEach(t=>t.classList.remove('sel'));
   el.classList.add('sel');
   const lbl=document.getElementById('colorLbl');
-  if(lbl)lbl.textContent=name+' -- Polyurethane Top Coat  -  SSPC-SP6 Blast';
+  if(lbl)lbl.textContent=colorLabel();
   buildTank();updateFooter();updateRecommendation();
 }
 
 function toggleAcc(id,price,el){
   if(el.classList.contains('disabled'))return;
-  el.classList.toggle('sel');
-  if(el.classList.contains('sel')){C.acc.add(id);C.accCost+=price;}
-  else{C.acc.delete(id);C.accCost-=price;}
+  if(C.acc.has(id))C.acc.delete(id);else C.acc.add(id);
+  el.classList.toggle('sel',C.acc.has(id));
+  C.accCost=accCostNow();
   buildTank();updateFooter();updateRecommendation();
 }
 
-function goNext(){if(step<STEPS.length-1){step++;renderStep();}else openM();}
-function goBack(){if(step>0){step--;renderStep();}}
-function jumpTo(i){step=i;renderStep();}
+function setCompart(n){C.compart=n;if(n===1)C.comp2gal=0;updateFooter();buildTank();renderStep();}
+let splitRaf=0;
+function onSplit(v){
+  C.comp2gal=parseInt(v)||0;
+  const[a,b]=splitVols();
+  const l=document.getElementById('splitLbl');
+  if(l)l.textContent=a.toLocaleString()+' / '+b.toLocaleString()+' gal';
+  updateFooter();
+  if(!splitRaf)splitRaf=requestAnimationFrame(()=>{splitRaf=0;buildTank();});
+}
+
+function goNext(){clearTimeout(advTimer);if(step<STEPS.length-1){step++;renderStep();}else openM();}
+function goBack(){clearTimeout(advTimer);if(step>0){step--;renderStep();}}
+function jumpTo(i){clearTimeout(advTimer);step=i;renderStep();}
 
 /* ── Start Over: fully reset configuration ── */
 function startOver(){
   if(!confirm('Start over? This will clear all your current selections.'))return;
-  C.type='ul142';C.product='diesel';C.shape='horiz';C.wall='single';C.cap='5000';
+  clearTimeout(advTimer);
+  C.type='ul142';C.product='diesel';C.shape='horiz';C.wall='single';C.cap='5000';C.capPref='5000';
+  C.shapePref='horiz';C.wallPref='single';C.manholePref='18';C.ventPref=null;
   C.compart=1;C.comp2gal=0;C.comp1product='diesel';C.comp2product='gasoline';
   C.manhole='18';C.fill='2';C.vent='med';C.pump='none';
   C.colorHex='#E0E2E8';C.colorName='White';
   C.acc=new Set();C.accCost=0;
-  if(C.customDia!==undefined){C.customDia=0;C.customLen=0;C.customGal=0;}
+  C.customDia=0;C.customLen=0;C.customGal=0;C.customQuote=null;
   step=0;
   renderStep();
   buildTank();updateFooter();
+  sv('iso',document.querySelector('.vb'));
   const rb=document.getElementById('recBar');if(rb)rb.classList.remove('on');
 }
 
@@ -1883,48 +1937,50 @@ function dismissDW(){
   try{
     if(sessionStorage.getItem('htc_dw_dismissed')==='1')return;
   }catch(e){}
-  /* Show on any screen under 1100px OR on touch devices */
+  /* Small screens, or devices whose main input is touch (not touch-screen laptops) */
   const small=window.innerWidth<1100;
-  const touch=('ontouchstart' in window)||(navigator.maxTouchPoints>0);
-  if(small||touch){
+  const touchOnly=!!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches);
+  if(small||touchOnly){
     setTimeout(()=>{document.getElementById('dwOverlay').classList.add('on');},300);
   }
 })();
 
+function customCalc(dia,len){
+  const gals=Math.round(Math.PI*(dia/2)**2*len/231);
+  const sa=Math.PI*dia*len+2*Math.PI*(dia/2)**2;
+  return{gals,wtLbs:Math.round(sa*0.25*0.284)};
+}
 function updateCustomDims(){
   const dia=parseInt(document.getElementById('custDia')?.value)||0;
   const len=parseInt(document.getElementById('custLen')?.value)||0;
   const res=document.getElementById('custDimResult');
   if(!res)return;
+  C.customDia=dia;C.customLen=len;
   if(dia>=24&&len>=24){
-    const gals=Math.round(Math.PI*(dia/2)**2*len/231);
-    const sa=Math.PI*dia*len+2*Math.PI*(dia/2)**2;
-    const wtLbs=Math.round(sa*0.25*0.284);
-    res.textContent=`~${gals.toLocaleString()} gal  |  ${dia}"O x ${len}"L  |  Est. ${wtLbs.toLocaleString()} lbs - Custom quote required`;
-    C.customDia=dia;C.customLen=len;C.customGal=gals;
+    const{gals,wtLbs}=customCalc(dia,len);
+    res.textContent=`~${gals.toLocaleString()} gal · ${dia}"Ø × ${len}"L · est. ${wtLbs.toLocaleString()} lbs — custom quote required`;
+    C.customGal=gals;
   } else {
     res.textContent='';
-    C.customDia=0;C.customLen=0;C.customGal=0;
+    C.customGal=0;
   }
 }
 
 function quoteCustomDims(){
   const dia=parseInt(document.getElementById('custDia')?.value)||0;
   const len=parseInt(document.getElementById('custLen')?.value)||0;
-  if(!dia||!len){alert('Please enter both diameter and length first.');return;}
-  const gals=Math.round(Math.PI*(dia/2)**2*len/231);
-  const sa=Math.PI*dia*len+2*Math.PI*(dia/2)**2;
-  const wtLbs=Math.round(sa*0.25*0.284);
-  const res2=getSpec();const td=res2?.td||TD[C.type]||{label:'Custom',cert:'UL 142',badge:'UL Listed',lead:'TBD',warranty:'1 yr'};
-  // Pre-fill modal with custom dimensions
+  if(dia<24||len<24){alert('Please enter both a diameter and a length (24" or more).');return;}
+  const{gals,wtLbs}=customCalc(dia,len);
+  const td=getSpec()?.td||TD[C.type]||{label:'Custom'};
+  C.customQuote={diameter_in:dia,length_in:len,est_gallons:gals,est_weight_lbs:wtLbs};
   document.getElementById('msum').innerHTML=
     `<strong>Custom Fabrication Request</strong><br>
-    Tank Type: ${td.label} - ${C.wall==='double'?'Double Wall':'Single Wall'}<br>
-    Custom Dimensions: ${dia}"Ø x ${len}"L<br>
+    Tank Type: ${td.label} · ${C.wall==='double'?'Double Wall':'Single Wall'}<br>
+    Custom Dimensions: ${dia}"Ø × ${len}"L<br>
     Estimated Capacity: ~${gals.toLocaleString()} gallons<br>
     Estimated Weight: ~${wtLbs.toLocaleString()} lbs<br>
-    <strong>Non-standard size - requires custom quote from shop</strong>`;
-  document.getElementById('qModal').classList.add('on');
+    <strong>Non-standard size — custom quote required</strong>`;
+  showModal();
 }
 
 function calcP(){
@@ -1948,149 +2004,198 @@ function calcP(){
     p+=Math.round(p*splitPct);
   }
   // Pump + accessories
-  p+=(PC[C.pump]||0)+C.accCost;
+  p+=(PC[C.pump]||0)+accCostNow();
   return Math.round(p);
 }
 
 function getDim(){
-  const res=getSpec();if(!res?.spec)return'--';
+  const res=getSpec();if(!res?.spec)return'—';
   const s=res.spec;
-  return s.shape==='rect'?`${s.w}"x${s.dep}"x${s.h}"`:`${s.d||s.di}"Ox${s.l||s.li}"`;
+  return s.shape==='rect'?`${s.w}" × ${s.dep}" × ${s.h}"`:`${s.d||s.di}"Ø × ${s.l||s.li}"`;
+}
+// Weight incl. split-tank adder (7-Eleven BOMs: 20K single=20,000, split=22,000 = +2,000 lbs)
+function weightDisplay(){
+  const spec=getSpec()?.spec;if(!spec)return'—';
+  if(C.compart!==2)return spec.wt;
+  const wtNum=parseInt(String(spec.wt).replace(/,/g,''));
+  if(isNaN(wtNum))return spec.wt;
+  return(wtNum+(isUST()?2000:Math.round(wtNum*0.04))).toLocaleString();
 }
 
 function updateFooter(){
   const res=getSpec();if(!res?.spec)return;
-  const{spec,key,td}=res;const p=calcP();
-  const capN=parseInt(key);
-  // Weight adjustment for split tanks (7-Eleven BOMs: 20K single=20,000, split=22,000 = +2,000 lbs)
-  let wtDisplay=spec.wt;
-  if(C.compart===2){
-    const wtNum=parseInt(String(spec.wt).replace(/,/g,''));
-    if(!isNaN(wtNum)){
-      const addedWt=isUST()?2000:Math.round(wtNum*0.04);
-      wtDisplay=(wtNum+addedWt).toLocaleString();
-    }
-  }
-  const half=C.comp2gal||Math.round(capN/2);
-  const compartStr=C.compart===2?` - Split ${half.toLocaleString()}/${(capN-half).toLocaleString()} gal`:'';
+  const{td}=res;const p=calcP();
+  const capN=capNum(),wtDisplay=weightDisplay();
+  const[c1,c2]=splitVols();
+  const compartStr=C.compart===2?` · split ${c1.toLocaleString()}/${c2.toLocaleString()}`:'';
   document.getElementById('fT').textContent=td.label;
   document.getElementById('fC').textContent=capN.toLocaleString()+' gal'+compartStr;
   document.getElementById('fD').textContent=getDim();
   document.getElementById('fW').textContent=wtDisplay+' lbs';
-  document.getElementById('fLead').textContent=td.lead||'--';
+  document.getElementById('fLead').textContent=td.lead||'—';
   document.getElementById('fWarranty').textContent=(td.warranty||'1 yr')+' warranty';
   document.getElementById('fCert').textContent=td.cert;
   document.getElementById('fBadge').textContent=td.badge;
   document.getElementById('fP').textContent=p>0?'$'+p.toLocaleString():'Call for Quote';
-  const prodLabel=PRODUCTS.find(p2=>p2.v===C.product)?.l||'';
-  document.getElementById('lt1').innerHTML=td.label+' - '+(C.shape==='vert'?'Vertical':C.shape==='rect'?'Rectangular':'Horizontal');
-  document.getElementById('lt2').textContent=(C.wall==='double'?'Double Wall':'Single Wall')+' - '+capN.toLocaleString()+' gal'+(C.compart===2?' (2-comp)':'');
-  document.getElementById('lt3').textContent=getDim()+' - '+wtDisplay+' lbs'+(prodLabel?' - '+prodLabel:'');
+  const prodLabel=C.compart===2?prodName(C.comp1product)+' + '+prodName(C.comp2product):prodName(C.product);
+  document.getElementById('lt1').textContent=td.label+' · '+(SHAPE_NAMES[C.shape]||'Horizontal');
+  document.getElementById('lt2').textContent=(C.wall==='double'?'Double Wall':'Single Wall')+' · '+capN.toLocaleString()+' gal'+(C.compart===2?' (2-comp)':'');
+  document.getElementById('lt3').textContent=getDim()+' · '+wtDisplay+' lbs'+(prodLabel?' · '+prodLabel:'');
+}
+
+// --- BUILD SHEET (shared by the quote form, the email and the PDF) ---
+function buildSheet(){
+  const res=getSpec(),spec=res?.spec||{},td=res?.td||{label:'—',cert:'—',badge:'—'};
+  const[c1,c2]=splitVols();
+  const acc=[...C.acc].map(id=>ACCESSORIES.find(a=>a.id===id)).filter(a=>a&&!(isUST()&&a.noUST)).map(a=>a.name);
+  return{
+    type:td.label,certification:td.badge,capacity_gal:capNum(),
+    shape:SHAPE_NAMES[C.shape]||C.shape,wall:C.wall==='double'?'Double Wall':'Single Wall',
+    dimensions:getDim(),est_weight:weightDisplay()+' lbs',shell:spec.sh||'',
+    product:C.compart===2?`${c1.toLocaleString()} gal ${prodName(C.comp1product)} / ${c2.toLocaleString()} gal ${prodName(C.comp2product)}`:prodName(C.product),
+    compartments:C.compart===2?2:1,
+    manhole:C.manhole+'"',fill:C.fill+'"',venting:optLabel('vent',C.vent),
+    pump:C.pump==='none'?'None — tank only':optLabel('pump',C.pump),
+    color:C.colorName,accessories:acc,lead_time:td.lead||'TBD',warranty:td.warranty||'1 yr',
+    est_starting_price:calcP()
+  };
 }
 
 // --- MODAL -----------------------------------------------------------
-function openM(){
-  const res=getSpec();const spec=res?.spec||{};const td=res?.td||{label:'--'};
-  const p=calcP();
-  const accList=[...C.acc].map(id=>ACCESSORIES.find(a=>a.id===id)?.name).filter(Boolean).join(', ')||'None';
-  const prodLabel=PRODUCTS.find(p2=>p2.v===C.product)?.l||C.product;
-  const compStr=C.compart===2?`Split 2-compartment: ${(C.comp2gal||0).toLocaleString()} gal ${C.comp1product} / ${(parseInt(res?.key||5000)-(C.comp2gal||0)).toLocaleString()} gal ${C.comp2product}`:'Single compartment -- '+prodLabel;
-  document.getElementById('msum').innerHTML=
-    `<strong>Configuration Summary</strong><br>
-    ${td.label} &nbsp; - &nbsp; ${parseInt(res?.key||5000).toLocaleString()} gal &nbsp; - &nbsp; ${C.wall==='double'?'Double Wall':'Single Wall'} &nbsp; - &nbsp; ${C.shape}<br>
-    Product: ${compStr}<br>
-    Manhole: ${C.manhole+'"'} &nbsp; - &nbsp; Fill: ${C.fill}" &nbsp; - &nbsp; Venting: ${C.vent}<br>
-    Pump: ${C.pump==='none'?'None':C.pump} &nbsp; - &nbsp; Color: ${C.colorName}<br>
-    Accessories: ${accList}<br>
-    Lead time: ${td.lead||'TBD'} &nbsp; - &nbsp; Warranty: ${td.warranty||'1 yr'}<br>
-    <strong>Est. Price: ${p>0?'$'+p.toLocaleString():'Custom -- Contact Us'}</strong>`;
+let sending=false;   // a build sheet is on its way — don't allow a second send
+function showModal(){
+  document.getElementById('mForm').style.display='';
+  document.getElementById('mSent').style.display='none';
+  document.getElementById('qErr').style.display='none';
+  const btn=document.getElementById('qSend');
+  if(sending){btn.disabled=true;btn.textContent='Sending…';}
+  else{btn.disabled=false;btn.innerHTML='Send Build Sheet &rarr;';}
   document.getElementById('qModal').classList.add('on');
 }
+function openM(){
+  C.customQuote=null;
+  const b=buildSheet(),p=b.est_starting_price;
+  document.getElementById('msum').innerHTML=
+    `<strong>Configuration Summary</strong><br>
+    ${b.type} · ${b.capacity_gal.toLocaleString()} gal · ${b.wall} · ${b.shape}<br>
+    Dimensions: ${b.dimensions} · Est. weight: ${b.est_weight}<br>
+    Product: ${b.product}<br>
+    Manhole: ${b.manhole} · Fill: ${b.fill} · Venting: ${b.venting}<br>
+    Pump: ${b.pump} · Color: ${b.color}<br>
+    Accessories: ${b.accessories.join(', ')||'None'}<br>
+    Lead time: ${b.lead_time} · Warranty: ${b.warranty}<br>
+    <strong>Est. Starting Price: ${p>0?'$'+p.toLocaleString():'Custom — contact us'}</strong>`;
+  showModal();
+}
 function closeM(){document.getElementById('qModal').classList.remove('on');}
-function sendQ(){
-  const n=document.getElementById('qn').value.trim();
-  const e=document.getElementById('qe').value.trim();
-  const p=document.getElementById('qp').value.trim();
-  const co=document.getElementById('qc').value.trim();
-  const dl=document.getElementById('qdl').value.trim();
-  const pt=document.getElementById('qpt').value;
-  const notes=document.getElementById('qnotes').value.trim();
-  if(!n||!e){alert('Please enter your name and email.');return;}
-  if(!pt){alert('Please let us know when you are ready to purchase.');return;}
-  const res=getSpec();const td=res?.td||{};
-  const confSummary=document.getElementById('msum')?.innerText||'';
+function showSent(title,msg,html){
+  document.getElementById('mSentTitle').textContent=title;
+  const m=document.getElementById('mSentMsg');
+  if(html)m.innerHTML=msg;else m.textContent=msg;
+  document.getElementById('mForm').style.display='none';
+  document.getElementById('mSent').style.display='block';
+}
+async function sendQ(){
+  if(sending)return;
+  const val=id=>document.getElementById(id).value.trim();
+  const n=val('qn'),e=val('qe'),p=val('qp'),co=val('qc'),dl=val('qdl'),pt=document.getElementById('qpt').value,notes=val('qnotes');
+  const err=document.getElementById('qErr');
+  const fail=m=>{err.textContent=m;err.style.display='block';};
+  err.style.display='none';
+  if(!n||!e)return fail('Please enter your name and email.');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return fail('Please enter a valid email address.');
+  if(!pt)return fail('Please let us know when you are ready to purchase.');
   const ptLabels={'immediately':'Immediately','1-3 months':'1–3 months','3-6 months':'3–6 months','6-12 months':'6–12 months','researching':'Just researching'};
-  const subject=encodeURIComponent('Tank Build Sheet - '+td.label+' '+C.cap+' gal - Hughes Tank');
-  const body=encodeURIComponent(
-    'BUILD SHEET REQUEST\n'+'='.repeat(40)+'\n\n'+
-    confSummary+'\n\n'+
-    'CONTACT INFORMATION\n'+'-'.repeat(30)+'\n'+
-    'Name: '+n+'\nEmail: '+e+'\nPhone: '+(p||'—')+'\nCompany: '+(co||'—')+'\n'+
-    'Delivery Location: '+(dl||'—')+'\nPurchase Timeline: '+(ptLabels[pt]||pt)+'\n\n'+
-    'Additional Notes:\n'+(notes||'None')+'\n\n'+
-    'Submitted from: Hughes Tank 3D Configurator\nhughestank.com/build-a-tank/'
-  );
-  // Open mailto as primary action - reliable cross-platform
+  const summary=document.getElementById('msum')?.innerText||'';
+  const sheet=buildSheet();
+  if(C.customQuote)sheet.custom_fabrication=C.customQuote;
+  const message='BUILD SHEET REQUEST\n'+summary+(notes?'\n\nAdditional notes:\n'+notes:'')+'\n\nSubmitted from the Hughes Tank 3D Configurator (hughestank.com/build-a-tank/)';
+  const btn=document.getElementById('qSend');btn.disabled=true;btn.textContent='Sending…';
+  sending=true;
+  let sent=false;
+  try{
+    // Same endpoint as the contact page (emails sales@hughestank.com)
+    const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:n,email:e,phone:p,company:co,delivery_location:dl,purchase_timeline:ptLabels[pt]||pt,
+      message,source:'quote-request',quote_data:sheet,honeypot:document.getElementById('qhp').value})});
+    sent=r.ok;
+  }catch(_){sent=false;}
+  sending=false;
+  if(sent){
+    showSent('Build Sheet Sent!','Thanks, '+n.split(' ')[0]+'! Your build sheet is on its way to our sales team — we\'ll follow up within one business day.');
+    return;
+  }
+  // Fallback: open the visitor's email app with the build sheet filled in
+  const subject=encodeURIComponent('Tank Build Sheet - '+sheet.type+' '+sheet.capacity_gal.toLocaleString()+' gal - Hughes Tank');
+  const body=encodeURIComponent(message+'\n\nCONTACT INFORMATION\nName: '+n+'\nEmail: '+e+'\nPhone: '+(p||'—')+'\nCompany: '+(co||'—')+'\nDelivery Location: '+(dl||'—')+'\nPurchase Timeline: '+(ptLabels[pt]||pt));
   window.location.href='mailto:sales@hughestank.com?subject='+subject+'&body='+body;
-  // Show success state
-  setTimeout(()=>{
-    document.querySelector('.mbox').innerHTML=`<div style="text-align:center;padding:22px 0">
-      <div style="font-size:52px;margin-bottom:12px;color:#1A3A8C">&#10003;</div>
-      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;text-transform:uppercase;color:#0D1B3E;margin-bottom:10px">Build Sheet Ready!</h3>
-      <p style="font-size:14px;color:#5A6A88;line-height:1.6;max-width:320px;margin:0 auto 18px">Your email client has opened with your full build sheet. Send it to <strong>sales@hughestank.com</strong> and we'll respond within one business day.</p>
-      <p style="font-size:13px;color:#5A6A88;margin-bottom:14px">Or call us directly: <a href="tel:9723668684" style="color:#1A3A8C;font-weight:700">972-366-8684</a></p>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid #DDE2EE;padding-top:12px">Hughes Tank Company &middot; Venus, TX</div>
-      <button onclick="closeM()" style="margin-top:14px;background:#1A3A8C;border:none;border-radius:4px;color:#fff;padding:9px 22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Close</button>
-    </div>`;
-  },500);
+  showSent('Almost Done!','Your email app should open with your build sheet filled in — hit send to <strong>sales@hughestank.com</strong> and we\'ll respond within one business day.',true);
 }
 
 // --- PDF -------------------------------------------------------------
 function xPDF(){
-  if(typeof window.jspdf==='undefined'){alert('PDF loading... try again.');return;}
+  if(typeof window.jspdf==='undefined'){alert('The PDF tool is still loading — please try again in a moment.');return;}
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'letter'});
-  const res=getSpec();const spec=res?.spec||{};const td=res?.td||{label:'--',cert:'--',badge:'--',lead:'--'};
-  const p=calcP();const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  const accList=[...C.acc].map(id=>ACCESSORIES.find(a=>a.id===id)?.name).filter(Boolean).join(', ')||'None';
+  const b=buildSheet(),p=b.est_starting_price;
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   doc.setFillColor(13,27,62);doc.rect(0,0,216,42,'F');
   doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('HUGHES TANK COMPANY',14,15);
   doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(168,184,208);
-  doc.text('2900 N FM 157  -  Venus, TX 76084  -  972-366-8684  -  sales@hughestank.com',14,23);
+  doc.text('2900 N FM 157  ·  Venus, TX 76084  ·  972-366-8684  ·  sales@hughestank.com',14,23);
   doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text('TANK CONFIGURATION SPEC SHEET',14,33);
-  doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Generated: '+now,155,33);
+  doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Generated: '+now,202,33,{align:'right'});
   doc.setFillColor(26,58,140);doc.rect(0,42,216,2.5,'F');
   doc.setFillColor(242,244,248);doc.rect(0,44.5,216,20,'F');
-  doc.setTextColor(13,27,62);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(td.label,14,57);
+  doc.setTextColor(13,27,62);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(b.type,14,57);
   doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(90,106,136);
-  doc.text(td.badge+'  -  '+(C.wall==='double'?'Double-Wall':'Single-Wall')+'  -  '+C.shape.charAt(0).toUpperCase()+C.shape.slice(1)+'  -  Venus, TX',14,63);
-  const specs=[['Tank Type',td.label],['Certification',td.badge],
-    ['Capacity',parseInt(res?.key||5000).toLocaleString()+' gallons'],
-    ['Dimensions',getDim()],['Estimated Weight',spec.wt+' lbs'],
+  doc.text(b.certification+'  ·  '+b.wall+'  ·  '+b.shape+'  ·  Venus, TX',14,63);
+  const rows=[['Tank Type',b.type],['Certification',b.certification],
+    ['Capacity',b.capacity_gal.toLocaleString()+' gallons'+(b.compartments===2?' (2 compartments)':'')],
+    ['Product Stored',b.product],
+    ['Dimensions',b.dimensions],['Estimated Weight',b.est_weight],
     ['Wall Construction',C.wall==='double'?'Double-Wall (Secondary Containment)':'Single-Wall'],
-    ['Shell Thickness',(spec.sh||'Per UL specification')],
-    ['Shape / Orientation',C.shape.charAt(0).toUpperCase()+C.shape.slice(1)],
-    ['Manhole Size',C.manhole==='none'?'None':C.manhole+'" diameter flanged collar'],
+    ['Shell Thickness',b.shell||'Per UL specification'],
+    ['Shape / Orientation',b.shape],
+    ['Manhole Size',C.manhole+'" diameter flanged collar'],
     ['Fill Connection',C.fill+'" NPT flat-face coupling'],
-    ['Vent Sizing',{std:'2" NV + 2" EV',med:'2" NV + 4" EV',lrg:'3" NV + 6" EV',xl:'4" NV + 8" EV'}[C.vent]||C.vent],
-    ['Pump Package',C.pump==='none'?'None -- Tank Only':C.pump.toUpperCase()],
-    ['Color / Finish',C.colorName+' -- Polyurethane Top Coat'],
-    ['Accessories',accList],
-    ['Estimated Lead Time',td.lead+' from confirmed order']];
+    ['Vent Sizing',b.venting],
+    ['Pump Package',b.pump],
+    ['Color / Finish',b.color+' — '+(C.type==='permatank'?'FRP jacket (pigmented resin)':'Polyurethane Top Coat')],
+    ['Accessories',b.accessories.join(', ')||'None'],
+    ['Est. Lead Time',b.lead_time+' from confirmed order'],
+    ['Warranty',b.warranty]];
   let y=75;
   doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(13,27,62);doc.text('FULL SPECIFICATIONS',14,y);y+=5;
   doc.setFillColor(26,58,140);doc.rect(14,y,188,.5,'F');y+=5;
-  specs.forEach((row,i)=>{if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4,188,8,'F');}doc.setFont('helvetica','bold');doc.setTextColor(90,106,136);doc.setFontSize(8);doc.text(row[0].toUpperCase(),16,y);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(10);doc.text((row[1]||'--').substring(0,55),82,y);y+=8;});
-  y+=6;doc.setFillColor(230,240,255);doc.rect(14,y-3,188,20,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(26,58,140);doc.text('STANDARD EQUIPMENT ON ALL TANKS:',16,y+3);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(8);
-  doc.text('Fill w/ dust cap  -  UL listed normal & emergency vents  -  Suction & return couplings  -  Manhole cover',16,y+9);
-  doc.text('Red oxide primer  -  Saddle/skid support  -  Air tested at 5 PSI before shipment  -  1-year warranty',16,y+15);y+=26;
-  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(17);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom -- Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Through authorized distributors  -  Exact quote within 24 hours',108,y+14);
-  doc.setFillColor(242,244,248);doc.rect(0,260,216,32,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('HUGHES TANK COMPANY',14,270);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(90,106,136);doc.text('2900 N FM 157  -  Venus, TX 76084  -  Phone: 972-366-8684  -  Fax: 972-366-3130  -  sales@hughestank.com',14,277);doc.text('Office: Mon-Fri 8am-4:30pm  -  Loading: Mon-Fri 7am-2:30pm',14,283);doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(168,184,208);doc.text('Estimates for reference only. Specifications and pricing subject to change. Contact Hughes Tank for confirmed quote.',14,294);
-  doc.save('Hughes-Tank-'+C.type+'-'+res?.key+'gal.pdf');
+  rows.forEach((row,i)=>{
+    doc.setFontSize(10);
+    const lines=doc.splitTextToSize(String(row[1]||'—'),118);
+    const h=Math.max(7,lines.length*4.6+2.4);
+    if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4.2,188,h,'F');}
+    doc.setFont('helvetica','bold');doc.setTextColor(90,106,136);doc.setFontSize(8);doc.text(row[0].toUpperCase(),16,y);
+    doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(10);doc.text(lines,82,y);
+    y+=h;
+  });
+  if(y>208){doc.addPage();y=20;}
+  const coat=C.type==='permatank'?'FRP jacket (orange pigment in resin)':C.type==='act100u'?'Black polyurethane coating':'SSPC-SP6 blast + polyurethane topcoat';
+  y+=4;doc.setFillColor(230,240,255);doc.rect(14,y-3,188,20,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(26,58,140);doc.text('STANDARD EQUIPMENT ON ALL TANKS:',16,y+3);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(8);
+  doc.text('Fill w/ dust cap  ·  UL-listed normal & emergency vents  ·  Suction & return connections  ·  Manhole cover',16,y+9);
+  doc.text(coat+'  ·  Air tested 3-5 PSI before shipment  ·  '+b.warranty+' warranty',16,y+15);y+=25;
+  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(17);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom — Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Through authorized distributors  ·  Exact quote within 24 hours',199,y+14,{align:'right'});
+  doc.setFillColor(242,244,248);doc.rect(0,260,216,32,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('HUGHES TANK COMPANY',14,270);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(90,106,136);doc.text('2900 N FM 157  ·  Venus, TX 76084  ·  Phone: 972-366-8684  ·  Fax: 972-366-3130  ·  sales@hughestank.com',14,277);doc.text('Office: Mon-Fri 8am-4:30pm  ·  Loading: Mon-Fri 7am-2:30pm',14,283);doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(168,184,208);doc.text('Estimates for reference only. Specifications and pricing subject to change. Contact Hughes Tank for confirmed quote.',14,294);
+  doc.save('Hughes-Tank-'+C.type+'-'+(getSpec()?.key||C.cap)+'gal.pdf');
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  initThree();renderStep();updateFooter();
+  normalizeConfig();
+  try{initThree();}
+  catch(e){
+    console.error('3D preview could not start',e);scene=null;camera=null;
+    document.getElementById('no3d')?.classList.add('on');
+    document.querySelectorAll('.dhint,.vbtns').forEach(el=>el.style.display='none');
+  }
+  renderStep();updateFooter();
 });
 </script>
 </body>

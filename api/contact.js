@@ -58,7 +58,7 @@ export default async function handler(req, res) {
   let html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #0D1B3E; color: white; padding: 24px; border-radius: 6px 6px 0 0;">
-        <h2 style="margin: 0; font-size: 20px;">${subject}</h2>
+        <h2 style="margin: 0; font-size: 20px;">${escapeHtml(subject)}</h2>
         <p style="margin: 4px 0 0 0; opacity: 0.7; font-size: 13px;">Submitted via hughestank.com</p>
       </div>
       <div style="background: #F8F9FC; padding: 24px; border-radius: 0 0 6px 6px;">
