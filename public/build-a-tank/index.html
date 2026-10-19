@@ -120,6 +120,8 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .no3d.on{display:flex}
 .ctags{position:absolute;bottom:14px;left:14px;display:flex;flex-direction:column;gap:3px}
 .ctag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;background:rgba(255,255,255,.84);border:1px solid rgba(26,58,140,.16);border-radius:3px;color:#1A3A8C;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.ctag-split{display:flex;flex-direction:column;gap:2px;margin-bottom:2px}
+.ctag-split .lq{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
 .vbtns{position:absolute;top:12px;right:12px;display:flex;gap:4px}
 .vb{background:rgba(255,255,255,.84);border:1px solid rgba(26,58,140,.16);border-radius:3px;color:#1A3A8C;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;cursor:pointer;transition:all .15s}
 .vb:hover,.vb.on{background:#1A3A8C;color:#fff;border-color:#1A3A8C}
@@ -332,6 +334,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
         <button class="vb" onclick="sv('top',this)">Top</button>
       </div>
       <div class="ctags">
+        <div class="ctag ctag-split" id="ltSplit" style="display:none"></div>
         <div class="ctag" id="lt1">UL 142 &middot; Horizontal</div>
         <div class="ctag" id="lt2">Single Wall &middot; 5,000 gal</div>
         <div class="ctag" id="lt3">96&Prime;&times;164&Prime; &middot; 5,000 lbs</div>
@@ -831,6 +834,7 @@ function initThree(){
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=0.9;
   renderer.outputEncoding=THREE.sRGBEncoding;   // colours are authored as sRGB hex; light in linear, display in sRGB
+  renderer.localClippingEnabled=true;           // split tanks: cutaway window in the shell
 
   scene=new THREE.Scene();
   const bg=new THREE.Color(0xD4D9E2);
@@ -989,6 +993,7 @@ function getSpec(){
 function buildTank(){
   if(!scene)return;
   clr();
+  CUT=null;
   const res=getSpec();if(!res||!res.spec)return;
   const{spec}=res;
   const col=new THREE.Color(C.colorHex==='#custom'?'#B9BFC9':C.colorHex);
@@ -1067,16 +1072,30 @@ function buildHorizCyl(spec,col,tankMat,steelMat,darkSt){
     :(mount==='pipe'?rowFor(PIPESKID_BY_D,Din)[6]:rowFor(SKID_BY_D,Din)[3])+(C.acc.has('forklift')?2:0);  // fork-pocket skids sit 2" higher
   const gY=ro+u(bot);
 
+  // Split tank: a window cut in the shell (top-front, clear of the fittings) shows the bulkhead and both products
+  let cut=null;
+  if(C.compart===2){
+    const zc=cutawayZ(r,ro),y0=gY-r*0.12,xm=L/2-u(6);
+    CUT=[new THREE.Plane(new THREE.Vector3(0,0,-1),zc),new THREE.Plane(new THREE.Vector3(0,-1,0),y0),
+         new THREE.Plane(new THREE.Vector3(-1,0,0),-xm),new THREE.Plane(new THREE.Vector3(1,0,0),-xm)];
+    cut={r,L,gY,zc,y0,xm,ro:dbl?ro:0};
+    clipTo(tankMat);
+  }
   addM(new THREE.CylinderGeometry(r,r,L,72),tankMat,[0,gY,0],[0,0,Math.PI/2]);
   buildFlatHead(r,L/2,1,tankMat,gY);
   buildFlatHead(r,-L/2,-1,tankMat,gY);
+  if(cut){
+    // inside of the primary tank, seen through the window
+    addM(new THREE.CylinderGeometry(r*0.995,r*0.995,L,72,1,true),clipTo(interiorMat(true)),[0,gY,0],[0,0,Math.PI/2]).castShadow=false;
+    [-1,1].forEach(s=>{addM(new THREE.CircleGeometry(r*0.995,48),interiorMat(false),[s*(L/2-0.004),gY,0],[0,-s*Math.PI/2,0]).castShadow=false;});
+  }
   if(dbl){
-    const om=new THREE.MeshStandardMaterial({color:col,roughness:0.14,metalness:0.04,transparent:true,opacity:ust?0.30:0.34,side:THREE.DoubleSide,depthWrite:false});
+    const om=clipTo(new THREE.MeshStandardMaterial({color:col,roughness:0.14,metalness:0.04,transparent:true,opacity:ust?0.30:0.34,side:THREE.DoubleSide,depthWrite:false}));
     addM(new THREE.CylinderGeometry(ro,ro,Lo,72,1,true),om,[0,gY,0],[0,0,Math.PI/2]);
     buildFlatHead(ro,Lo/2,1,om,gY);
     buildFlatHead(ro,-Lo/2,-1,om,gY);
   }
-  if(C.compart===2) buildCompartSplit(ro,L,gY,steelMat);
+  if(cut) buildSplitHoriz(cut,steelMat);
   const o={kind:'horiz',rs:ro,L:Lo,cy:gY,top:gY+ro,ust,dbl,ri:r,Li:L,Din,Lin:Lo*48,mount};
   if(ust){Object.assign(o,ustLayout(Lo,ro));buildDeadmanAnchors(ro,Lo,gY,o.straps);}
   else if(mount==='skid')buildFlushSkid(o,col);
@@ -1095,13 +1114,92 @@ function buildFlatHead(r,xpos,dir,mat,cy){
 }
 function headBulge(r){const th=0.1;return r/Math.sin(th)*(1-Math.cos(th))+0.02;}
 
-// Two-compartment bulkhead + weld seam on the shell
-function buildCompartSplit(rs,L,gY,steelMat){
-  const cap=capNum()||5000;
-  const c1=splitVols()[0];
-  const x=-L/2+L*(c1/cap);
-  addM(new THREE.CylinderGeometry(rs*0.985,rs*0.985,0.03,48),steelMat,[x,gY,0],[0,0,Math.PI/2]);
-  addM(new THREE.TorusGeometry(rs+0.006,0.014,8,96),steelMat,[x,gY,0],[0,Math.PI/2,0]);
+// --- SPLIT-TANK CUTAWAY ------------------------------------------------
+// A window cut in the shell shows the bulkhead and the product in each compartment; it follows the split slider.
+const LIQUID={diesel:'#C98A12',gasoline:'#D9431E',premium:'#A3266A',def:'#2B86C9',used_oil:'#4A2E16',mixed:'#5E7A2E'};
+let CUT=null;   // clipping planes of the current window (null when the tank is not split)
+function clipTo(mat){if(CUT){mat.clippingPlanes=CUT;mat.clipIntersection=true;mat.clipShadows=true;}return mat;}
+function liquidMat(prod){
+  const c=new THREE.Color(LIQUID[prod]||LIQUID.diesel);
+  return new THREE.MeshStandardMaterial({color:c,roughness:0.1,metalness:0.02,emissive:c.clone().multiplyScalar(0.1)});
+}
+function interiorMat(back){return new THREE.MeshStandardMaterial({color:0x8E97A1,roughness:0.6,metalness:0.3,side:back?THREE.BackSide:THREE.FrontSide});}
+function addEdge(pts,mat){addM(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),Math.max(2,pts.length*2),u(0.6),6,false),mat);}
+function splitX(L){const cap=capNum()||5000;return -L/2+L*(splitVols()[0]/cap);}
+// How far in front of the top centreline the window starts: clear of the manhole, vents, lugs and grab bar
+function cutawayZ(r,ro){
+  let need=u(11.5);
+  if(isUST())need=Math.max(need,u(24)*1.05+u(1.5));
+  else if(C.manhole!=='none')need=Math.max(need,Math.min(u(parseInt(C.manhole)||18)/2,ro*0.42)*1.35+u(1.5));
+  need=Math.max(need,u(({std:2,med:3.25,lrg:4.25,xl:5,xxl:8,pvv:3.25}[C.vent]||3.25)*1.5+1.5));
+  return Math.min(Math.max(r*0.28,need),r*0.72);
+}
+// Horizontal tank: product in each compartment (78% full) cut by the window, notched bulkhead, window edges
+function buildSplitHoriz(c,steelMat){
+  const{r,L,gY,zc,y0,xm}=c,xs=splitX(L),tb=u(0.75),v0=y0-gY;
+  const rl=r-u(0.4),vL=rl*0.56,uL=Math.sqrt(rl*rl-vL*vL),u0=Math.sqrt(rl*rl-v0*v0);
+  const liq=new THREE.Shape();
+  liq.moveTo(-uL,vL);liq.lineTo(zc,vL);liq.lineTo(zc,v0);liq.lineTo(u0,v0);
+  liq.absarc(0,0,rl,Math.atan2(v0,u0),Math.atan2(vL,-uL),true);
+  const fill=(x0,x1,prod)=>{
+    const d=x1-x0;if(d<0.01)return;
+    const g=new THREE.ExtrudeGeometry(liq,{depth:d,bevelEnabled:false,curveSegments:40});g.translate(0,0,-d/2);
+    addM(g,liquidMat(prod),[(x0+x1)/2,gY,0],[0,-Math.PI/2,0]).castShadow=false;
+  };
+  fill(-L/2+u(0.6),xs-tb/2,C.comp1product);
+  fill(xs+tb/2,L/2-u(0.6),C.comp2product);
+  // bulkhead plate, cut along the window
+  const rb=r-u(0.1),vT=Math.sqrt(rb*rb-zc*zc),ub=Math.sqrt(rb*rb-v0*v0),bh=new THREE.Shape();
+  bh.moveTo(zc,vT);bh.absarc(0,0,rb,Math.atan2(vT,zc),Math.atan2(v0,ub)+Math.PI*2,false);bh.lineTo(zc,v0);bh.closePath();
+  const bg=new THREE.ExtrudeGeometry(bh,{depth:tb,bevelEnabled:false,curveSegments:48});bg.translate(0,0,-tb/2);
+  addM(bg,steelMat,[xs,gY,0],[0,-Math.PI/2,0]);
+  // window edges on each shell
+  [r].concat(c.ro?[c.ro]:[]).forEach(R=>{
+    const yt=gY+Math.sqrt(Math.max(0,R*R-zc*zc)),zf=Math.sqrt(Math.max(0,R*R-v0*v0));
+    addEdge([new THREE.Vector3(-xm,yt,zc),new THREE.Vector3(xm,yt,zc)],steelMat);
+    addEdge([new THREE.Vector3(-xm,y0,zf),new THREE.Vector3(xm,y0,zf)],steelMat);
+    const a0=Math.asin(Math.min(1,zc/R)),a1=Math.acos(Math.max(-1,Math.min(1,v0/R)));
+    [-xm,xm].forEach(x=>{const pts=[];for(let k=0;k<=16;k++){const a=a0+(a1-a0)*k/16;pts.push(new THREE.Vector3(x,gY+R*Math.cos(a),R*Math.sin(a)));}addEdge(pts,steelMat);});
+  });
+}
+
+// Circle minus the window corner (x > x0 and z > z0), drawn in the shape's (x, y) plane
+function notchedDisc(R,x0,z0){
+  const qa=Math.sqrt(R*R-x0*x0),pb=Math.sqrt(R*R-z0*z0),sh=new THREE.Shape();
+  sh.moveTo(x0,qa);sh.absarc(0,0,R,Math.atan2(qa,x0),Math.atan2(z0,pb)+Math.PI*2,false);sh.lineTo(x0,z0);sh.closePath();
+  return sh;
+}
+// Vertical tank: compartment 1 at the bottom (90% full), compartment 2 on the bulkhead (80% full)
+function buildSplitVert(c,steelMat){
+  const{r,H,cy,x0,z0,yb,yt}=c,tb=u(0.75),y0=cy-H/2,ys=y0+H*(splitVols()[0]/(capNum()||5000));
+  const disc=notchedDisc(r-u(0.4),x0,z0);
+  // shape (x, y) -> world (x, z); extrudes downward from the top of the product
+  const fill=(yA,yB,prod)=>{const d=yB-yA;if(d<0.01)return;
+    addM(new THREE.ExtrudeGeometry(disc,{depth:d,bevelEnabled:false,curveSegments:40}),liquidMat(prod),[0,yB,0],[Math.PI/2,0,0]).castShadow=false;};
+  const h1=ys-tb/2-(y0+u(0.6)),h2=(y0+H-u(0.6))-(ys+tb/2);
+  fill(y0+u(0.6),y0+u(0.6)+h1*0.9,C.comp1product);
+  fill(ys+tb/2,ys+tb/2+h2*0.8,C.comp2product);
+  addM(new THREE.ExtrudeGeometry(notchedDisc(r-u(0.1),x0,z0),{depth:tb,bevelEnabled:false,curveSegments:48}),steelMat,[0,ys+tb/2,0],[Math.PI/2,0,0]);
+  [r].concat(c.ro?[c.ro]:[]).forEach(R=>{
+    const qa=Math.sqrt(R*R-x0*x0),pb=Math.sqrt(R*R-z0*z0);
+    addEdge([new THREE.Vector3(x0,yb,qa),new THREE.Vector3(x0,yt,qa)],steelMat);
+    addEdge([new THREE.Vector3(pb,yb,z0),new THREE.Vector3(pb,yt,z0)],steelMat);
+    const t0=Math.atan2(z0,pb),t1=Math.atan2(qa,x0);
+    [yb,yt].forEach(y=>{const pts=[];for(let k=0;k<=16;k++){const t=t0+(t1-t0)*k/16;pts.push(new THREE.Vector3(R*Math.cos(t),y,R*Math.sin(t)));}addEdge(pts,steelMat);});
+  });
+}
+// Rectangular tank: product boxes (78% full) and a bulkhead seen through the front-wall window
+function buildSplitRect(c,steelMat){
+  const{W,H,L,cy,yb,yt,xm}=c,tb=u(0.75),xs=splitX(L),y0=cy-H/2+u(0.6),hl=(H-u(1.2))*0.78,wl=W-u(1.2);
+  const fill=(x0,x1,prod)=>{const d=x1-x0;if(d<0.01)return;addM(new THREE.BoxGeometry(d,hl,wl),liquidMat(prod),[(x0+x1)/2,y0+hl/2,0]).castShadow=false;};
+  fill(-L/2+u(0.6),xs-tb/2,C.comp1product);
+  fill(xs+tb/2,L/2-u(0.6),C.comp2product);
+  addM(new THREE.BoxGeometry(tb,H-u(0.2),W-u(0.2)),steelMat,[xs,cy,0]);
+  [W/2].concat(c.Wo?[c.Wo/2]:[]).forEach(z=>{
+    addEdge([new THREE.Vector3(-xm,yb,z),new THREE.Vector3(xm,yb,z)],steelMat);
+    addEdge([new THREE.Vector3(-xm,yt,z),new THREE.Vector3(xm,yt,z)],steelMat);
+    [-xm,xm].forEach(x=>addEdge([new THREE.Vector3(x,yb,z),new THREE.Vector3(x,yt,z)],steelMat));
+  });
 }
 
 // --- DEADMAN ANCHORS + HOLD-DOWN STRAPS (Permatank / ACT-100-U only) ---
@@ -1133,7 +1231,7 @@ function ustLayout(L,rs){
 }
 function buildDeadmanAnchors(rs,L,gY,stations){
   const concMat=new THREE.MeshStandardMaterial({color:0xC9C6B4,roughness:0.97,metalness:0});
-  const strapMat=new THREE.MeshStandardMaterial({color:0x6A9E68,roughness:0.55,metalness:0.2,side:THREE.DoubleSide});
+  const strapMat=clipTo(new THREE.MeshStandardMaterial({color:0x6A9E68,roughness:0.55,metalness:0.2,side:THREE.DoubleSide}));
   const tbMat=new THREE.MeshStandardMaterial({color:0x8E959C,roughness:0.3,metalness:0.85});
   const beamH=u(10),beamW=u(16);
   const dmZ=rs+Math.max(u(18),rs*0.45);      // deadman centre line, beside the tank
@@ -1544,13 +1642,23 @@ function buildRect(spec,col,tankMat,steelMat,darkSt){
   const skidH=u(4);
   const Wo=W+gap*2,Ho=H+gap*2,Lo=L+gap*2;
   const base=skidH,cy=base+Ho/2;
-  const stiffMat=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.07});
+  // Split tank: window in the front wall of the primary tank (and the secondary wall in front of it)
+  let cut=null;
+  if(C.compart===2){
+    const zf=W/2-u(1.5),yb=cy-H/2+u(4),yt=cy+H/2-u(4),xm=L/2-u(6);
+    CUT=[new THREE.Plane(new THREE.Vector3(0,0,-1),zf),new THREE.Plane(new THREE.Vector3(0,1,0),-yt),new THREE.Plane(new THREE.Vector3(0,-1,0),yb),
+         new THREE.Plane(new THREE.Vector3(-1,0,0),-xm),new THREE.Plane(new THREE.Vector3(1,0,0),-xm)];
+    cut={W,H,L,cy,yb,yt,xm,Wo:dbl?Wo:0};
+    clipTo(tankMat);
+  }
+  const stiffMat=clipTo(new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.2,metalness:0.07}));
   const skM=new THREE.MeshStandardMaterial({color:new THREE.Color(col).multiplyScalar(0.82),roughness:0.4,metalness:0.12});
   // skid channels under the tank
   [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(Lo+u(8),skidH,u(4)),skM,[0,skidH/2,sd*(Wo/2-u(5))]));
   [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(u(4),skidH,Wo-u(6)),skM,[sd*(Lo/2-u(6)),skidH/2,0]));
   // primary tank with corner and ring stiffeners
   addM(new THREE.BoxGeometry(L,H,W),tankMat,[0,cy,0]);
+  if(cut)addM(new THREE.BoxGeometry(L*0.998,H*0.998,W*0.998),clipTo(interiorMat(true)),[0,cy,0]).castShadow=false;
   [[L/2,W/2],[L/2,-W/2],[-L/2,W/2],[-L/2,-W/2]].forEach(([x,z])=>addM(new THREE.BoxGeometry(0.045,H+0.01,0.045),stiffMat,[x,cy,z]));
   [-H*0.3,0,H*0.3].forEach(dy=>{
     const y=cy+dy;
@@ -1560,7 +1668,7 @@ function buildRect(spec,col,tankMat,steelMat,darkSt){
     addM(new THREE.BoxGeometry(0.045,0.045,W+0.01),stiffMat,[-L/2,y,0]);
   });
   if(dbl){
-    const om=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.28,side:THREE.DoubleSide,depthWrite:false});
+    const om=clipTo(new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.28,side:THREE.DoubleSide,depthWrite:false}));
     addM(new THREE.BoxGeometry(Lo,Ho,Wo),om,[0,cy,0]);
     const em=new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.7)});
     const edges=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(Lo,Ho,Wo)),em);
@@ -1568,15 +1676,10 @@ function buildRect(spec,col,tankMat,steelMat,darkSt){
   }
   // Fireguard / Flameshield placard on the front face
   if(C.type==='fireguard'||C.type==='flameshield'){
-    const placardMat=new THREE.MeshStandardMaterial({color:0xE9EBEE,roughness:0.45,metalness:0.4});
+    const placardMat=clipTo(new THREE.MeshStandardMaterial({color:0xE9EBEE,roughness:0.45,metalness:0.4}));
     addM(new THREE.BoxGeometry(Math.min(0.42,Lo*0.22),Math.min(0.3,Ho*0.35),0.02),placardMat,[Lo*0.18,cy,Wo/2+0.011]);
   }
-  if(C.compart===2){
-    const cap=capNum()||5000,x=-L/2+L*(splitVols()[0]/cap);
-    addM(new THREE.BoxGeometry(0.03,H*0.98,W*0.98),steelMat,[x,cy,0]);
-    addM(new THREE.BoxGeometry(0.03,0.03,Wo+0.02),steelMat,[x,base+Ho+0.005,0]);
-    [-1,1].forEach(sd=>addM(new THREE.BoxGeometry(0.03,Ho+0.02,0.03),steelMat,[x,cy,sd*(Wo/2+0.005)]));
-  }
+  if(cut) buildSplitRect(cut,steelMat);
   const o={kind:'rect',rs:Math.min(Wo,Ho)/2,L:Lo,W:Wo,H:Ho,base,cy,top:base+Ho,ust:false,dbl};
   buildFittings(o,steelMat,darkSt);
   if(C.pump!=='none') buildPump(o);
@@ -1592,11 +1695,24 @@ function buildVertCyl(spec,col,tankMat,steelMat,darkSt){
   const Ho=dbl?Math.max(u(spec.lo||l+12),H+u(6)):H;
   const legH=Math.max(u(6),ro*0.16);
   const base=legH,cy=base+Ho/2,top=base+Ho;
+  // Split tank: window in the side wall facing the default view, above the legs and below the top head
+  let cut=null;
+  if(C.compart===2){
+    const x0=r*0.1,z0=r*0.1,yb=Math.max(base+u(18),cy-H/2+u(4)),yt=cy+H/2-u(6);
+    CUT=[new THREE.Plane(new THREE.Vector3(-1,0,0),x0),new THREE.Plane(new THREE.Vector3(0,0,-1),z0),
+         new THREE.Plane(new THREE.Vector3(0,1,0),-yt),new THREE.Plane(new THREE.Vector3(0,-1,0),yb)];
+    cut={r,H,cy,x0,z0,yb,yt,ro:dbl?ro:0};
+    clipTo(tankMat);
+  }
   addM(new THREE.CylinderGeometry(r,r,H,72),tankMat,[0,cy,0]);
   addM(new THREE.CylinderGeometry(r,r,0.02,72),tankMat,[0,cy+H/2+0.01,0]);
   addM(new THREE.CylinderGeometry(r,r,0.02,72),tankMat,[0,cy-H/2-0.01,0]);
+  if(cut){
+    addM(new THREE.CylinderGeometry(r*0.995,r*0.995,H,72,1,true),clipTo(interiorMat(true)),[0,cy,0]).castShadow=false;
+    [-1,1].forEach(s=>{addM(new THREE.CircleGeometry(r*0.995,48),interiorMat(false),[0,cy+s*(H/2-0.004),0],[s*Math.PI/2,0,0]).castShadow=false;});
+  }
   if(dbl){
-    const om=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.34,side:THREE.DoubleSide,depthWrite:false});
+    const om=clipTo(new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.14,metalness:0.04,transparent:true,opacity:0.34,side:THREE.DoubleSide,depthWrite:false}));
     addM(new THREE.CylinderGeometry(ro,ro,Ho,72,1,true),om,[0,cy,0]);
     addM(new THREE.CylinderGeometry(ro,ro,0.02,72),om,[0,top-0.01,0]);
     addM(new THREE.CylinderGeometry(ro,ro,0.02,72),om,[0,base+0.01,0]);
@@ -1607,11 +1723,7 @@ function buildVertCyl(spec,col,tankMat,steelMat,darkSt){
     addM(new THREE.BoxGeometry(u(4),legH+u(16),u(4)),legM,[lx,(legH+u(16))/2,lz]);
     addM(new THREE.BoxGeometry(u(9),u(0.75),u(9)),legM,[lx,u(0.375),lz]);
   }
-  if(C.compart===2){
-    const cap=capNum()||5000,y=cy-H/2+H*(splitVols()[0]/cap);
-    addM(new THREE.CylinderGeometry(ro*0.985,ro*0.985,0.03,48),steelMat,[0,y,0]);
-    addM(new THREE.TorusGeometry(ro+0.006,0.014,8,96),steelMat,[0,y,0],[Math.PI/2,0,0]);
-  }
+  if(cut) buildSplitVert(cut,steelMat);
   const o={kind:'vert',rs:ro,L:ro*2,cy,top,base,ust:false,dbl};
   buildFittings(o,steelMat,darkSt);
   if(C.pump!=='none') buildPump(o);
@@ -1777,7 +1889,7 @@ function buildAccessories(o,col){
   // LEAN 2 BRACKETS — pipe supports carrying the suction/return line along the top
   if(C.acc.has('lean2')){
     const l2M=new THREE.MeshStandardMaterial({color:0x8A9BAA,roughness:0.3,metalness:0.7});
-    const z=hz*0.55,ys=surfY(z),pipeY=ys+u(6),len=o.kind==='vert'?hz:hx*0.7;
+    const z=(CUT?-1:1)*hz*0.55,ys=surfY(z),pipeY=ys+u(6),len=o.kind==='vert'?hz:hx*0.7;
     [-len*0.4,len*0.4].forEach(xp=>{
       addM(new THREE.BoxGeometry(0.04,pipeY-ys+0.03,0.04),l2M,[xp,(pipeY+ys)/2-0.01,z]);
       addM(new THREE.BoxGeometry(0.04,0.03,0.12),l2M,[xp,pipeY-u(1.2),z]);
@@ -1954,10 +2066,10 @@ function renderStep(){
         html+=`<div id="splitLbl" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:#1A3A8C;text-align:center;margin-top:6px">${h1.toLocaleString()} / ${h2.toLocaleString()} gal</div>`;
         html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">`;
         html+=`<div><div class="step-q" style="font-size:12px;padding:6px 0">Compartment 1 product:</div>`;
-        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp1product===p.v?' sel':''}" onclick="C.comp1product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
+        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp1product===p.v?' sel':''}" onclick="C.comp1product='${p.v}';renderStep();buildTank()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
         html+=`</div>`;
         html+=`<div><div class="step-q" style="font-size:12px;padding:6px 0">Compartment 2 product:</div>`;
-        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp2product===p.v?' sel':''}" onclick="C.comp2product='${p.v}';renderStep()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
+        PRODUCTS.forEach(p=>{ html+=`<div class="arow${C.comp2product===p.v?' sel':''}" onclick="C.comp2product='${p.v}';renderStep();buildTank()" style="padding:4px 8px;margin-bottom:3px"><div class="ainf"><div class="aname">${p.l}</div></div></div>`; });
         html+=`</div></div></div>`;
       }
     }
@@ -2388,6 +2500,14 @@ function updateFooter(){
   document.getElementById('lt1').textContent=td.label+' · '+(SHAPE_NAMES[C.shape]||'Horizontal');
   document.getElementById('lt2').textContent=(C.wall==='double'?'Double Wall':'Single Wall')+' · '+capN.toLocaleString()+' gal'+(C.compart===2?' (2-comp)':'');
   document.getElementById('lt3').textContent=getDim()+' · '+wtDisplay+' lbs'+(prodLabel?' · '+prodLabel:'');
+  // product key for the split-tank cutaway
+  const key=document.getElementById('ltSplit');
+  if(key){
+    if(C.compart===2){
+      const row=(n,g,p)=>`<div><span class="lq" style="background:${LIQUID[p]||LIQUID.diesel}"></span>Comp ${n} · ${g.toLocaleString()} gal ${esc(prodName(p))}</div>`;
+      key.innerHTML=row(1,c1,C.comp1product)+row(2,c2,C.comp2product);key.style.display='';
+    } else key.style.display='none';
+  }
 }
 
 // --- BUILD SHEET (one source for the quote request, the email and the PDF) ---
