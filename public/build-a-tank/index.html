@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Build Your Tank | Online Tank Configurator | Hughes Tank Company</title>
-<meta name="description" content="Build and price a custom steel fuel storage tank online. Configure size, wall type, fittings, and pump package. Get a spec sheet and submit for a real quote.">
+<meta name="description" content="Design a custom steel fuel storage tank in 3D. Choose the tank type, size, wall, fittings, pump and add-ons, then send your build sheet to Hughes Tank for a quote.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -78,7 +78,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .nav-btn.back:hover{background:#DDE2EE}
 .nav-btn.next{background:#1A3A8C;color:#fff}
 .nav-btn.next:hover{background:#2248b0}
-.step-ctr{flex:1;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A9BB5}
+.step-ctr{flex:1;white-space:nowrap;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A9BB5}
 .step-q{padding:14px 16px 8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:#0D1B3E;line-height:1.2;border-bottom:1px solid #EEF0F5;flex-shrink:0}
 .step-hint{padding:5px 16px 9px;font-size:11px;color:#8A9BB5;line-height:1.45;border-bottom:1px solid #EEF0F5;flex-shrink:0}
 
@@ -93,7 +93,6 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .ti{font-size:22px;line-height:1;margin-bottom:4px}
 .tl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#0D1B3E;text-align:center;line-height:1.2}
 .ts{font-size:9px;color:#8A9BB5;text-align:center;margin-top:2px;line-height:1.2}
-.tp{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;color:#1A3A8C;margin-top:2px}
 .tt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:8px;letter-spacing:.08em;text-transform:uppercase;background:#0D1B3E;color:rgba(255,255,255,.7);padding:1px 5px;border-radius:2px;margin-top:2px}
 .color-grid{padding:10px 12px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .csw{aspect-ratio:1;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all .15s;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.12)}
@@ -112,7 +111,6 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .ainf{flex:1}
 .aname{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#0D1B3E}
 .asub{font-size:9px;color:#8A9BB5}
-.aprc{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;color:#1A3A8C;flex-shrink:0}
 .sdiv{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#A8B8D0;padding:5px 14px 2px;border-top:1px solid #EEF0F5;margin-top:3px}
 
 .canvas-area{position:relative;overflow:hidden;min-width:0;min-height:0}
@@ -138,6 +136,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .sfpl{font-family:'Barlow Condensed',sans-serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1px}
 .sfpv{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;color:#fff;line-height:1}
 .sfpn{font-size:9px;color:rgba(255,255,255,.28);margin-top:2px}
+.sfpv-q{font-size:15px;letter-spacing:.02em}
 .sfact{display:flex;flex-direction:column;gap:4px;padding:8px 0 8px 12px}
 .sfb1{background:#1A3A8C;color:#fff;border:none;border-radius:3px;padding:7px 11px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
 .sfb1:hover{background:#2248b0}
@@ -149,7 +148,18 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 .mbox{background:#fff;border-radius:8px;padding:30px;width:480px;max-width:95vw;max-height:92vh;overflow-y:auto;box-shadow:0 28px 72px rgba(13,27,62,.2)}
 .mbox h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.06em;color:#0D1B3E;margin-bottom:4px}
 .mbox p{font-size:13px;color:#5A6A88;margin-bottom:14px;line-height:1.6}
-.msum{background:#F8F9FC;border:1px solid #DDE2EE;border-radius:4px;padding:11px 14px;margin-bottom:14px;font-size:11px;color:#5A6A88;line-height:1.7}
+.msum{background:#F8F9FC;border:1px solid #DDE2EE;border-radius:4px;padding:11px 14px;margin-bottom:14px;font-size:11px;color:#5A6A88;line-height:1.55;max-height:230px;overflow-y:auto}
+.msum-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0D1B3E;margin-bottom:6px}
+.msum dl{display:grid;grid-template-columns:92px 1fr;gap:3px 10px;margin:0}
+.msum dt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8A9BB5;padding-top:1px}
+.msum dd{margin:0;color:#0D1B3E}
+.msum ul{margin:0;padding-left:15px}
+.msum details{margin-top:8px;border-top:1px solid #DDE2EE;padding-top:6px}
+.msum summary{cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#1A3A8C}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mrow-q{grid-template-columns:96px 1fr}
+.mfl{display:block}
+.mfl span{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8A9BB5;margin-bottom:2px}
 .mi{width:100%;background:#F8F9FC;border:1px solid #DDE2EE;border-radius:4px;padding:9px 12px;color:#0D1B3E;font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:7px;outline:none;transition:border-color .15s}
 .mi:focus{border-color:#1A3A8C;background:#fff}
 .mi::placeholder{color:#A8B8D0}
@@ -208,14 +218,14 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 </style>
 <script defer data-domain="hughestank.com" src="https://plausible.io/js/script.js"></script>
 <meta property="og:title" content="Build Your Tank | Online Tank Configurator | Hughes Tank Company">
-<meta property="og:description" content="Build and price a custom steel fuel storage tank online. Configure size, wall type, fittings, and pump package. Get a spec sheet and submit for a real quote.">
+<meta property="og:description" content="Design a custom steel fuel storage tank in 3D. Choose the tank type, size, wall, fittings, pump and add-ons, then send your build sheet to Hughes Tank for a quote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hughestank.com/build-a-tank/">
 <meta property="og:image" content="https://hughestank.com/images/htc-logo-white.png">
 <meta property="og:site_name" content="Hughes Tank Company">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Build Your Tank | Online Tank Configurator | Hughes Tank Company">
-<meta name="twitter:description" content="Build and price a custom steel fuel storage tank online. Configure size, wall type, fittings, and pump package. Get a spec sheet and submit for a real quote.">
+<meta name="twitter:description" content="Design a custom steel fuel storage tank in 3D. Choose the tank type, size, wall, fittings, pump and add-ons, then send your build sheet to Hughes Tank for a quote.">
 <link rel="canonical" href="https://hughestank.com/build-a-tank/">
 </head>
 <body>
@@ -307,7 +317,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
     </div>
     <div class="canvas-area">
       <canvas id="tc" aria-label="3D preview of your tank"></canvas>
-      <div class="no3d" id="no3d">3D preview isn&rsquo;t available on this device &mdash; your selections, pricing and build sheet still work.</div>
+      <div class="no3d" id="no3d">3D preview isn&rsquo;t available on this device &mdash; your selections and quote request still work.</div>
       <div class="dhint">Drag to rotate &middot; Scroll to zoom</div>
       <!-- Smart recommendation banner -->
       <div class="rec-bar" id="recBar">
@@ -336,10 +346,10 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
     <div class="sfi"><div class="sfl">Weight</div><div class="sfv" id="fW">5,000 lbs</div></div>
     <div class="sfi sf-xl"><div class="sfl">Lead Time</div><div class="sfv" id="fLead">2–4 wks</div><div class="sfcert" id="fWarranty">1-yr warranty</div></div>
     <div class="sfi sf-xl"><div class="sfl">Certification</div><div class="sfv" id="fCert">UL 142</div><div class="sfcert" id="fBadge">UL Listed</div></div>
-    <div class="sfp"><div class="sfpl">Est. Starting Price</div><div class="sfpv" id="fP">$7,200</div><div class="sfpn">Available through distributors &middot; 24-hr quote</div></div>
+    <div class="sfp"><div class="sfpl">Pricing</div><div class="sfpv sfpv-q">Quote on request</div><div class="sfpn">Through authorized distributors &middot; 24-hr response</div></div>
     <div class="sfact">
-      <button class="sfb1" onclick="openM()">Submit Build Sheet &rarr;</button>
-      <button class="sfb2" onclick="xPDF()">&#8595; Export PDF Spec Sheet</button>
+      <button class="sfb1" onclick="openM()">Request a Quote &rarr;</button>
+      <button class="sfb2" onclick="xPDF()">&#8595; Download Build Sheet</button>
     </div>
   </div>
 </div>
@@ -347,14 +357,27 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 <div class="modal" id="qModal">
   <div class="mbox">
    <div id="mForm">
-    <h3>Send Your Build Sheet</h3>
-    <p>We'll respond within 24 hours with pricing and lead time through an authorized Hughes Tank distributor.</p>
+    <h3>Request a Quote</h3>
+    <p>Send this build to our sales team. We'll reply within 24 hours with pricing and lead time through an authorized Hughes Tank distributor.</p>
     <div class="msum" id="msum"></div>
-    <input class="mi" type="text" id="qn" placeholder="Your name *">
-    <input class="mi" type="email" id="qe" placeholder="Email address *">
-    <input class="mi" type="tel" id="qp" placeholder="Phone number">
-    <input class="mi" type="text" id="qc" placeholder="Company name">
-    <input class="mi" type="text" id="qdl" placeholder="Delivery location (City, State)">
+    <input class="mi" type="text" id="qn" placeholder="Your name *" autocomplete="name">
+    <input class="mi" type="email" id="qe" placeholder="Email address *" autocomplete="email">
+    <div class="mrow">
+      <input class="mi" type="tel" id="qp" placeholder="Phone number" autocomplete="tel">
+      <input class="mi" type="text" id="qc" placeholder="Company name" autocomplete="organization">
+    </div>
+    <input class="mi" type="text" id="qdl" placeholder="Delivery city, state or ZIP *">
+    <div class="mrow mrow-q">
+      <label class="mfl"><span>Quantity</span><input class="mi" type="number" id="qqty" min="1" max="999" step="1" value="1" inputmode="numeric"></label>
+      <label class="mfl"><span>I am a&hellip;</span><select class="mi" id="qrole" style="background:#fff;color:#0D1B3E">
+        <option value="">Select (optional)</option>
+        <option>End user / owner</option>
+        <option>Contractor / installer</option>
+        <option>Distributor / dealer</option>
+        <option>Engineer / specifier</option>
+        <option>Other</option>
+      </select></label>
+    </div>
     <select class="mi" id="qpt" style="background:#fff;color:#0D1B3E">
       <option value="">When will you be ready to purchase? *</option>
       <option value="immediately">Immediately</option>
@@ -363,17 +386,17 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
       <option value="6-12 months">6–12 months</option>
       <option value="researching">Just researching</option>
     </select>
-    <textarea class="mi" id="qnotes" rows="2" placeholder="Additional notes..." style="resize:none"></textarea>
+    <textarea class="mi" id="qnotes" rows="2" placeholder="Anything else? Site details, needed-by date, special requirements..." style="resize:none"></textarea>
     <input type="text" id="qhp" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
     <div id="qErr" style="display:none;font-size:12px;color:#B71C1C;background:#FFEBEE;border:1px solid #EF9A9A;border-radius:4px;padding:8px 10px;margin-bottom:8px"></div>
     <div class="mbtns">
       <button class="mc" onclick="closeM()">Cancel</button>
-      <button class="ms" id="qSend" onclick="sendQ()">Send Build Sheet &rarr;</button>
+      <button class="ms" id="qSend" onclick="sendQ()">Send Quote Request &rarr;</button>
     </div>
    </div>
    <div id="mSent" style="display:none;text-align:center;padding:22px 0">
       <div style="font-size:52px;margin-bottom:12px;color:#1A3A8C">&#10003;</div>
-      <h3 id="mSentTitle" style="margin-bottom:10px">Build Sheet Sent!</h3>
+      <h3 id="mSentTitle" style="margin-bottom:10px">Quote Request Sent!</h3>
       <p id="mSentMsg" style="max-width:340px;margin:0 auto 18px"></p>
       <p style="font-size:13px;color:#5A6A88;margin-bottom:14px">Or call us directly: <a href="tel:9723668684" style="color:#1A3A8C;font-weight:700">972-366-8684</a></p>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8B8D0;border-top:1px solid #DDE2EE;padding-top:12px">Hughes Tank Company &middot; Venus, TX</div>
@@ -395,67 +418,67 @@ const TD={
     //   D=2" interstitial, E=18" manhole, F=medium lifting lug (x2)
     sizes:{
       horiz:{single:{
-        '300': {d:38, l:62,  wt:'300',  price:2100, sh:'12 ga', saddles:2},
-        '500': {d:48, l:72,  wt:'500',  price:2900, sh:'12 ga', saddles:2},
-        '1000':{d:64, l:74,  wt:'1,000',price:3600, sh:'10 ga', saddles:2},
-        '2000':{d:64, l:146, wt:'2,000',price:5000, sh:'7 ga',  saddles:2},
-        '3000':{d:64, l:216, wt:'3,000',price:5800, sh:'7 ga',  saddles:2},
-        '4000':{d:64, l:288, wt:'4,000',price:6800, sh:'7 ga',  saddles:2},
-        '5000':{d:96, l:164, wt:'5,000',price:7200, sh:'5 ga',  saddles:2},
-        '6000':{d:96, l:194, wt:'6,000',price:8600, sh:'5 ga',  saddles:2},
-        '8000':{d:96, l:278, wt:'8,000',price:10800,sh:'5 ga',  saddles:2},
-        '10000':{d:96,l:324, wt:'10,000',price:14000,sh:'3/16"',saddles:2},
-        '12000':{d:96,l:386, wt:'12,000',price:16500,sh:'3/16"',saddles:3},
-        '15000':{d:96,l:482, wt:'16,000',price:20000,sh:'1/4"', saddles:3},
-        '20000':{d:118,l:434,wt:'25,000',price:26000,sh:'1/4"', saddles:3},
-        '25000':{d:120,l:516,wt:'30,000',price:32000,sh:'1/4"', saddles:3},
+        '300': {d:38, l:62,  wt:'300',  sh:'12 ga', saddles:2},
+        '500': {d:48, l:72,  wt:'500',  sh:'12 ga', saddles:2},
+        '1000':{d:64, l:74,  wt:'1,000',sh:'10 ga', saddles:2},
+        '2000':{d:64, l:146, wt:'2,000',sh:'7 ga',  saddles:2},
+        '3000':{d:64, l:216, wt:'3,000',sh:'7 ga',  saddles:2},
+        '4000':{d:64, l:288, wt:'4,000',sh:'7 ga',  saddles:2},
+        '5000':{d:96, l:164, wt:'5,000',sh:'5 ga',  saddles:2},
+        '6000':{d:96, l:194, wt:'6,000',sh:'5 ga',  saddles:2},
+        '8000':{d:96, l:278, wt:'8,000',sh:'5 ga',  saddles:2},
+        '10000':{d:96,l:324, wt:'10,000',sh:'3/16"',saddles:2},
+        '12000':{d:96,l:386, wt:'12,000',sh:'3/16"',saddles:3},
+        '15000':{d:96,l:482, wt:'16,000',sh:'1/4"', saddles:3},
+        '20000':{d:118,l:434,wt:'25,000',sh:'1/4"', saddles:3},
+        '25000':{d:120,l:516,wt:'30,000',sh:'1/4"', saddles:3},
       },double:{
-        '300': {di:36.5,do_:38, li:58, lo:62, wt:'600',  price:3800, sh:'10 ga', saddles:2},
-        '500': {di:47.75,do_:48,li:67, lo:74, wt:'1,000',price:5200, sh:'10 ga', saddles:2},
-        '1000':{di:64,  do_:65.5,li:74, lo:86, wt:'2,000',price:5400, sh:'10 ga', saddles:2},
-        '2000':{di:64,  do_:64,  li:146,lo:158,wt:'3,500',price:7200, sh:'7 ga',  saddles:2},
-        '3000':{di:64,  do_:65.5,li:216,lo:228,wt:'6,000',price:9600, sh:'7 ga',  saddles:2},
-        '4000':{di:96,  do_:98,  li:134,lo:146,wt:'8,000',price:11500,sh:'5 ga',  saddles:2},
-        '5000':{di:96,  do_:98,  li:164,lo:176,wt:'10,000',price:12800,sh:'5 ga', saddles:2},
-        '6000':{di:96,  do_:98,  li:194,lo:206,wt:'12,000',price:14800,sh:'5 ga', saddles:2},
-        '8000':{di:96,  do_:98,  li:278,lo:290,wt:'16,000',price:18400,sh:'5 ga', saddles:2},
-        '10000':{di:96, do_:98,  li:324,lo:386,wt:'18,000',price:22000,sh:'3/16"',saddles:2},
-        '12000':{di:96, do_:98,  li:386,lo:398,wt:'22,000',price:26000,sh:'3/16"',saddles:3},
-        '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',price:28000,sh:'1/4"', saddles:3},
-        '20000':{di:118,do_:120, li:432,lo:446,wt:'32,000',price:36000,sh:'1/4"', saddles:3},
-        '25000':{di:120,do_:126, li:516,lo:420,wt:'32,000',price:42000,sh:'1/4"', saddles:3},
+        '300': {di:36.5,do_:38, li:58, lo:62, wt:'600',  sh:'10 ga', saddles:2},
+        '500': {di:47.75,do_:48,li:67, lo:74, wt:'1,000',sh:'10 ga', saddles:2},
+        '1000':{di:64,  do_:65.5,li:74, lo:86, wt:'2,000',sh:'10 ga', saddles:2},
+        '2000':{di:64,  do_:64,  li:146,lo:158,wt:'3,500',sh:'7 ga',  saddles:2},
+        '3000':{di:64,  do_:65.5,li:216,lo:228,wt:'6,000',sh:'7 ga',  saddles:2},
+        '4000':{di:96,  do_:98,  li:134,lo:146,wt:'8,000',sh:'5 ga',  saddles:2},
+        '5000':{di:96,  do_:98,  li:164,lo:176,wt:'10,000',sh:'5 ga', saddles:2},
+        '6000':{di:96,  do_:98,  li:194,lo:206,wt:'12,000',sh:'5 ga', saddles:2},
+        '8000':{di:96,  do_:98,  li:278,lo:290,wt:'16,000',sh:'5 ga', saddles:2},
+        '10000':{di:96, do_:98,  li:324,lo:386,wt:'18,000',sh:'3/16"',saddles:2},
+        '12000':{di:96, do_:98,  li:386,lo:398,wt:'22,000',sh:'3/16"',saddles:3},
+        '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',sh:'1/4"', saddles:3},
+        '20000':{di:118,do_:120, li:432,lo:446,wt:'32,000',sh:'1/4"', saddles:3},
+        '25000':{di:120,do_:126, li:516,lo:420,wt:'32,000',sh:'1/4"', saddles:3},
       }},
       vert:{single:{
-        '1000':{d:64,l:74,  wt:'1,000',price:3800,sh:'10 ga'},
-        '2000':{d:64,l:146, wt:'2,000',price:5200,sh:'7 ga'},
-        '3000':{d:64,l:216, wt:'3,000',price:6200,sh:'7 ga'},
-        '5000':{d:96,l:164, wt:'5,000',price:7600,sh:'5 ga'},
-        '8000':{d:96,l:278, wt:'8,000',price:11200,sh:'5 ga'},
-        '10000':{d:96,l:324,wt:'10,000',price:14500,sh:'3/16"'},
-        '12000':{d:96,l:386,wt:'12,000',price:17000,sh:'3/16"'},
-        '15000':{d:96,l:482,wt:'16,000',price:21000,sh:'1/4"'},
-        '20000':{d:118,l:434,wt:'25,000',price:27000,sh:'1/4"'},
-        '25000':{d:120,l:516,wt:'30,000',price:33000,sh:'1/4"'},
+        '1000':{d:64,l:74,  wt:'1,000',sh:'10 ga'},
+        '2000':{d:64,l:146, wt:'2,000',sh:'7 ga'},
+        '3000':{d:64,l:216, wt:'3,000',sh:'7 ga'},
+        '5000':{d:96,l:164, wt:'5,000',sh:'5 ga'},
+        '8000':{d:96,l:278, wt:'8,000',sh:'5 ga'},
+        '10000':{d:96,l:324,wt:'10,000',sh:'3/16"'},
+        '12000':{d:96,l:386,wt:'12,000',sh:'3/16"'},
+        '15000':{d:96,l:482,wt:'16,000',sh:'1/4"'},
+        '20000':{d:118,l:434,wt:'25,000',sh:'1/4"'},
+        '25000':{d:120,l:516,wt:'30,000',sh:'1/4"'},
       },double:{
-        '1000':{di:64,do_:65.5,li:74, lo:86, wt:'2,000',price:5600,sh:'10 ga'},
-        '2000':{di:64,do_:64,  li:146,lo:158,wt:'3,500',price:7600,sh:'7 ga'},
-        '5000':{di:96,do_:98,  li:164,lo:176,wt:'10,000',price:13200,sh:'5 ga'},
-        '10000':{di:96,do_:98, li:324,lo:386,wt:'18,000',price:22500,sh:'3/16"'},
-        '15000':{di:96,do_:98, li:482,lo:494,wt:'28,000',price:29000,sh:'1/4"'},
-        '20000':{di:118,do_:120,li:432,lo:446,wt:'32,000',price:37000,sh:'1/4"'},
+        '1000':{di:64,do_:65.5,li:74, lo:86, wt:'2,000',sh:'10 ga'},
+        '2000':{di:64,do_:64,  li:146,lo:158,wt:'3,500',sh:'7 ga'},
+        '5000':{di:96,do_:98,  li:164,lo:176,wt:'10,000',sh:'5 ga'},
+        '10000':{di:96,do_:98, li:324,lo:386,wt:'18,000',sh:'3/16"'},
+        '15000':{di:96,do_:98, li:482,lo:494,wt:'28,000',sh:'1/4"'},
+        '20000':{di:118,do_:120,li:432,lo:446,wt:'32,000',sh:'1/4"'},
       }},
       rect:{double:{
-        '300': {shape:'rect',w:53, dep:38,  h:36,wt:'600',  price:4200, sh:'10 ga'},
-        '500': {shape:'rect',w:60, dep:50,  h:40,wt:'1,000',price:5600, sh:'7 ga'},
-        '1000':{shape:'rect',w:98, dep:56,  h:43,wt:'2,000',price:8200, sh:'7 ga'},
-        '2000':{shape:'rect',w:132,dep:60,  h:60,wt:'4,000',price:13000,sh:'5 ga'},
-        '3000':{shape:'rect',w:180,dep:60,  h:65,wt:'6,000',price:17000,sh:'5 ga'},
-        '4000':{shape:'rect',w:180,dep:72,  h:72,wt:'8,000',price:21000,sh:'5 ga'},
-        '5000':{shape:'rect',w:176,dep:87.5,h:76,wt:'10,000',price:22000,sh:'3/16"'},
-        '6000':{shape:'rect',w:240,dep:78.5,h:74,wt:'12,000',price:27000,sh:'3/16"'},
-        '8000':{shape:'rect',w:278,dep:88,  h:76,wt:'16,000',price:30000,sh:'1/4"'},
-        '10000':{shape:'rect',w:346,dep:88, h:76,wt:'18,000',price:36000,sh:'1/4"'},
-        '12000':{shape:'rect',w:360,dep:88, h:88,wt:'22,000',price:42000,sh:'1/4"'},
+        '300': {shape:'rect',w:53, dep:38,  h:36,wt:'600',  sh:'10 ga'},
+        '500': {shape:'rect',w:60, dep:50,  h:40,wt:'1,000',sh:'7 ga'},
+        '1000':{shape:'rect',w:98, dep:56,  h:43,wt:'2,000',sh:'7 ga'},
+        '2000':{shape:'rect',w:132,dep:60,  h:60,wt:'4,000',sh:'5 ga'},
+        '3000':{shape:'rect',w:180,dep:60,  h:65,wt:'6,000',sh:'5 ga'},
+        '4000':{shape:'rect',w:180,dep:72,  h:72,wt:'8,000',sh:'5 ga'},
+        '5000':{shape:'rect',w:176,dep:87.5,h:76,wt:'10,000',sh:'3/16"'},
+        '6000':{shape:'rect',w:240,dep:78.5,h:74,wt:'12,000',sh:'3/16"'},
+        '8000':{shape:'rect',w:278,dep:88,  h:76,wt:'16,000',sh:'1/4"'},
+        '10000':{shape:'rect',w:346,dep:88, h:76,wt:'18,000',sh:'1/4"'},
+        '12000':{shape:'rect',w:360,dep:88, h:88,wt:'22,000',sh:'1/4"'},
       }}
     }
   },
@@ -470,55 +493,55 @@ const TD={
     // Rain shield Body1: Steel, 442.5 lbs, 12,585 in2 area
     sizes:{
       horiz:{double:{
-        '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'5,800', price:14000,saddles:2},
-        '2000':{di:64, do_:70,  li:146, lo:158, wt:'8,000', price:18000,saddles:2},
-        '3000':{di:64, do_:70,  li:216, lo:228, wt:'11,000',price:24000,saddles:2},
-        '4000':{di:96, do_:102, li:134, lo:146, wt:'16,000',price:28000,saddles:2},
-        '4000L':{di:64,do_:70,  li:288, lo:300, wt:'16,000',price:28000,saddles:2},
-        '5000':{di:96, do_:102, li:168, lo:180, wt:'18,000',price:30000,saddles:2},
-        '6000':{di:96, do_:102, li:194, lo:180, wt:'20,000',price:36000,saddles:2},
-        '8000':{di:96, do_:102, li:278, lo:290, wt:'24,000',price:40000,saddles:2},
-        '10000':{di:96,do_:102, li:324, lo:338, wt:'30,000',price:48000,saddles:2},
-        '12000':{di:96,do_:102, li:386, lo:398, wt:'34,000',price:56000,saddles:3},
-        '15000':{di:96,do_:102, li:482, lo:494, wt:'37,000',price:60000,saddles:3},
-        '15000B':{di:120,do_:126,li:314,lo:326, wt:'37,000',price:60000,saddles:2},
-        '20000':{di:114,do_:120, li:462,lo:474, wt:'46,000',price:74000,saddles:3},
-        '25000':{di:120,do_:126, li:516,lo:528, wt:'58,000',price:90000,saddles:3},
+        '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'5,800', saddles:2},
+        '2000':{di:64, do_:70,  li:146, lo:158, wt:'8,000', saddles:2},
+        '3000':{di:64, do_:70,  li:216, lo:228, wt:'11,000',saddles:2},
+        '4000':{di:96, do_:102, li:134, lo:146, wt:'16,000',saddles:2},
+        '4000L':{di:64,do_:70,  li:288, lo:300, wt:'16,000',saddles:2},
+        '5000':{di:96, do_:102, li:168, lo:180, wt:'18,000',saddles:2},
+        '6000':{di:96, do_:102, li:194, lo:180, wt:'20,000',saddles:2},
+        '8000':{di:96, do_:102, li:278, lo:290, wt:'24,000',saddles:2},
+        '10000':{di:96,do_:102, li:324, lo:338, wt:'30,000',saddles:2},
+        '12000':{di:96,do_:102, li:386, lo:398, wt:'34,000',saddles:3},
+        '15000':{di:96,do_:102, li:482, lo:494, wt:'37,000',saddles:3},
+        '15000B':{di:120,do_:126,li:314,lo:326, wt:'37,000',saddles:2},
+        '20000':{di:114,do_:120, li:462,lo:474, wt:'46,000',saddles:3},
+        '25000':{di:120,do_:126, li:516,lo:528, wt:'58,000',saddles:3},
       }},
       rect:{double:{
-        '300': {shape:'rect',w:54, dep:38,h:36,wt:'2,800', price:12000},
-        '500': {shape:'rect',w:60, dep:50,h:40,wt:'3,200', price:14000},
-        '1000':{shape:'rect',w:98, dep:56,h:43,wt:'5,800', price:20000},
-        '2000':{shape:'rect',w:132,dep:60,h:60,wt:'8,000', price:28000},
-        '3000':{shape:'rect',w:180,dep:60,h:65,wt:'11,000',price:36000},
-        '4000':{shape:'rect',w:180,dep:72,h:72,wt:'16,000',price:44000},
-        '5000':{shape:'rect',w:176,dep:87,h:76,wt:'18,000',price:48000},
-        '6000':{shape:'rect',w:240,dep:78.5,h:74,wt:'20,000',price:56000},
-        '8000':{shape:'rect',w:278,dep:88,h:76,wt:'24,000',price:64000},
-        '10000':{shape:'rect',w:346,dep:88,h:76,wt:'30,000',price:78000},
-        '12000':{shape:'rect',w:360,dep:88,h:88,wt:'34,000',price:88000},
+        '300': {shape:'rect',w:54, dep:38,h:36,wt:'2,800'},
+        '500': {shape:'rect',w:60, dep:50,h:40,wt:'3,200'},
+        '1000':{shape:'rect',w:98, dep:56,h:43,wt:'5,800'},
+        '2000':{shape:'rect',w:132,dep:60,h:60,wt:'8,000'},
+        '3000':{shape:'rect',w:180,dep:60,h:65,wt:'11,000'},
+        '4000':{shape:'rect',w:180,dep:72,h:72,wt:'16,000'},
+        '5000':{shape:'rect',w:176,dep:87,h:76,wt:'18,000'},
+        '6000':{shape:'rect',w:240,dep:78.5,h:74,wt:'20,000'},
+        '8000':{shape:'rect',w:278,dep:88,h:76,wt:'24,000'},
+        '10000':{shape:'rect',w:346,dep:88,h:76,wt:'30,000'},
+        '12000':{shape:'rect',w:360,dep:88,h:88,wt:'34,000'},
       }}
     }
   },
   flameshield:{label:'Flameshield®',cert:'STI-P3',badge:'STI-P3',lead:'4-6 wks',warranty:'1 yr',
     sizes:{horiz:{double:{
-      '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'4,500', price:11000,saddles:2},
-      '2000':{di:64, do_:70,  li:146, lo:158, wt:'6,500', price:15000,saddles:2},
-      '3000':{di:64, do_:70,  li:216, lo:228, wt:'9,000', price:20000,saddles:2},
-      '5000':{di:96, do_:102, li:164, lo:176, wt:'14,000',price:22000,saddles:2},
-      '8000':{di:96, do_:102, li:278, lo:290, wt:'20,000',price:32000,saddles:2},
-      '10000':{di:96,do_:102, li:324, lo:338, wt:'24,000',price:38000,saddles:2},
-      '12000':{di:96,do_:102, li:386, lo:398, wt:'28,000',price:44000,saddles:3},
-      '15000':{di:96,do_:102, li:482, lo:494, wt:'30,000',price:48000,saddles:3},
-      '20000':{di:114,do_:120,li:462, lo:474, wt:'38,000',price:62000,saddles:3},
+      '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'4,500', saddles:2},
+      '2000':{di:64, do_:70,  li:146, lo:158, wt:'6,500', saddles:2},
+      '3000':{di:64, do_:70,  li:216, lo:228, wt:'9,000', saddles:2},
+      '5000':{di:96, do_:102, li:164, lo:176, wt:'14,000',saddles:2},
+      '8000':{di:96, do_:102, li:278, lo:290, wt:'20,000',saddles:2},
+      '10000':{di:96,do_:102, li:324, lo:338, wt:'24,000',saddles:2},
+      '12000':{di:96,do_:102, li:386, lo:398, wt:'28,000',saddles:3},
+      '15000':{di:96,do_:102, li:482, lo:494, wt:'30,000',saddles:3},
+      '20000':{di:114,do_:120,li:462, lo:474, wt:'38,000',saddles:3},
     }}}
   },
   farm:{label:'Farm Tank',cert:'Non-UL',badge:'Agricultural',lead:'2-3 wks',warranty:'1 yr',
     sizes:{horiz:{single:{
-      '150': {d:38,l:32,  wt:'150',  price:1400,sh:'12 ga',farmType:'ground'},
-      '300': {d:38,l:62,  wt:'300',  price:2200,sh:'12 ga',farmType:'ground'},
-      '500': {d:50,l:60,  wt:'500',  price:2800,sh:'10 ga',farmType:'overhead'},
-      '1000':{d:50,l:122, wt:'1,000',price:3800,sh:'10 ga',farmType:'ground'},
+      '150': {d:38,l:32,  wt:'150',  sh:'12 ga',farmType:'ground'},
+      '300': {d:38,l:62,  wt:'300',  sh:'12 ga',farmType:'ground'},
+      '500': {d:50,l:60,  wt:'500',  sh:'10 ga',farmType:'overhead'},
+      '1000':{d:50,l:122, wt:'1,000',sh:'10 ga',farmType:'ground'},
     }}}
   },
   permatank:{label:'Permatank®',cert:'ACT-100',badge:'STI ACT-100',lead:'6-8 wks',warranty:'30 yr',
@@ -533,22 +556,22 @@ const TD={
     // 120IN HEAD MONITOR PIPE W 4IN COUPLING
     // Multi-compartment: double wall always, orange always
     sizes:{horiz:{double:{
-      '4000': {di:64, do_:66, li:288,lo:292,wt:'3,966', price:9500,  straps:4, deadman:2},
-      '6000': {di:96, do_:98, li:192,lo:196,wt:'5,994', price:13000, straps:5, deadman:2},
-      '8000': {di:96, do_:98, li:256,lo:260,wt:'7,720', price:16500, straps:6, deadman:2},
-      '10000':{di:96, do_:98, li:324,lo:328,wt:'9,324', price:20000, straps:7, deadman:3},
-      '12000':{di:96, do_:98, li:384,lo:388,wt:'10,850',price:24000, straps:8, deadman:3},
-      '15000':{di:120,do_:122,li:312,lo:316,wt:'12,500',price:28000, straps:8, deadman:3},
-      '20000':{di:120,do_:122,li:408,lo:412,wt:'17,400',price:36000, straps:10,deadman:3},
-      '27000':{di:126,do_:128,li:465,lo:469,wt:'23,000',price:46000, straps:11,deadman:3},
+      '4000': {di:64, do_:66, li:288,lo:292,wt:'3,966', straps:4, deadman:2},
+      '6000': {di:96, do_:98, li:192,lo:196,wt:'5,994', straps:5, deadman:2},
+      '8000': {di:96, do_:98, li:256,lo:260,wt:'7,720', straps:6, deadman:2},
+      '10000':{di:96, do_:98, li:324,lo:328,wt:'9,324', straps:7, deadman:3},
+      '12000':{di:96, do_:98, li:384,lo:388,wt:'10,850',straps:8, deadman:3},
+      '15000':{di:120,do_:122,li:312,lo:316,wt:'12,500',straps:8, deadman:3},
+      '20000':{di:120,do_:122,li:408,lo:412,wt:'17,400',straps:10,deadman:3},
+      '27000':{di:126,do_:128,li:465,lo:469,wt:'23,000',straps:11,deadman:3},
     }}}
   },
   act100u:{label:'ACT-100-U',cert:'ACT-100-U',badge:'STI ACT-100-U',lead:'6-8 wks',warranty:'30 yr',
     fixedColor:'#1A1A1A',fixedColorName:'Black',
     // Ethanol-compatible - all seals ethanol-rated
     sizes:{horiz:{double:{
-      '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',price:52000,straps:8, deadman:3},
-      '25000':{di:124,do_:126, li:482,lo:494,wt:'38,000',price:72000,straps:10,deadman:3},
+      '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',straps:8, deadman:3},
+      '25000':{di:124,do_:126, li:482,lo:494,wt:'38,000',straps:10,deadman:3},
     }}}
   }
 };
@@ -570,30 +593,30 @@ const COLORS=[
 
 const ACCESSORIES=[
   // MONITORING & SAFETY (from real HTC builds)
-  {id:'hlalarm',  ico:'alrm',name:'High-Level Alarm',         sub:'Audible + visual, 120V AC — auto shutoff at 95% capacity',   price:320,  noUST:false, group:'mon'},
-  {id:'overfill', ico:'stop',name:'Overfill Prevention Valve', sub:'Morrison gravity float shutoff at 95% capacity',              price:265,  noUST:false, group:'mon'},
-  {id:'gauge',    ico:'gauge',name:'Mechanical Level Gauge',    sub:'Morrison clock gauge, 2" NPT sidewinder float',               price:145,  noUST:false, group:'mon'},
-  {id:'atg',      ico:'atg',name:'ATG Probe Port',            sub:'Veeder-Root / OPW compatible interstitial port',              price:185,  noUST:false, group:'mon'},
-  {id:'sensor',   ico:'sens',name:'Interstitial Leak Sensor',  sub:'Electronic leak detection probe for double-wall annular space',price:310,  noUST:false, group:'mon'},
-  {id:'cond_elim',ico:'cond',name:'Condensation Eliminators',  sub:'Standard on all DW tanks — PVC fitting assembly (x2)',       price:85,   noUST:false, group:'mon'},
+  {id:'hlalarm',  ico:'alrm',name:'High-Level Alarm',         sub:'Audible + visual, 120V AC — auto shutoff at 95% capacity',   noUST:false, group:'mon'},
+  {id:'overfill', ico:'stop',name:'Overfill Prevention Valve', sub:'Morrison gravity float shutoff at 95% capacity',              noUST:false, group:'mon'},
+  {id:'gauge',    ico:'gauge',name:'Mechanical Level Gauge',    sub:'Morrison clock gauge, 2" NPT sidewinder float',               noUST:false, group:'mon'},
+  {id:'atg',      ico:'atg',name:'ATG Probe Port',            sub:'Veeder-Root / OPW compatible interstitial port',              noUST:false, group:'mon'},
+  {id:'sensor',   ico:'sens',name:'Interstitial Leak Sensor',  sub:'Electronic leak detection probe for double-wall annular space',noUST:false, group:'mon'},
+  {id:'cond_elim',ico:'cond',name:'Condensation Eliminators',  sub:'Standard on all DW tanks — PVC fitting assembly (x2)',       noUST:false, group:'mon'},
   // FUELING EQUIPMENT
-  {id:'meter',    ico:'meter',name:'Flow Meter',                sub:'Oval gear ±0.5% accuracy, in-line — required for billing', price:280,  noUST:false, group:'fuel'},
-  {id:'spill',    ico:'spill',name:'Spill Box w/ Bracket Kit',  sub:'2" fill point spill box + welded bracket, 5-gal capacity',   price:245,  noUST:false, group:'fuel'},
-  {id:'antisiphon',ico:'valv',name:'Anti-Siphon Valve',        sub:'Morrison 1-1/2" anti-siphon — required for elevated pumps',  price:185,  noUST:false, group:'fuel'},
-  {id:'hose',     ico:'hose',name:'Hose Reel',                 sub:'20 ft static hose with spring rewind',                       price:390,  noUST:false, group:'fuel'},
-  {id:'cabinet',  ico:'cab',name:'Pump Cabinet',              sub:'Lockable steel enclosure, HUGHES TANK branded',              price:480,  noUST:false, group:'fuel'},
-  {id:'dispenser',ico:'disp',name:'Single Dispenser',          sub:'Commercial fuel dispenser, UL listed',                       price:1200, noUST:true,  group:'fuel'},
-  {id:'dual_disp',ico:'disp',name:'Dual Dispenser',            sub:'Two-product simultaneous dispensing',                        price:2100, noUST:true,  group:'fuel'},
+  {id:'meter',    ico:'meter',name:'Flow Meter',                sub:'Oval gear ±0.5% accuracy, in-line — required for billing', noUST:false, group:'fuel'},
+  {id:'spill',    ico:'spill',name:'Spill Box w/ Bracket Kit',  sub:'2" fill point spill box + welded bracket, 5-gal capacity',   noUST:false, group:'fuel'},
+  {id:'antisiphon',ico:'valv',name:'Anti-Siphon Valve',        sub:'Morrison 1-1/2" anti-siphon — required for elevated pumps',  noUST:false, group:'fuel'},
+  {id:'hose',     ico:'hose',name:'Hose Reel',                 sub:'20 ft static hose with spring rewind',                       noUST:false, group:'fuel'},
+  {id:'cabinet',  ico:'cab',name:'Pump Cabinet',              sub:'Lockable steel enclosure, HUGHES TANK branded',              noUST:false, group:'fuel'},
+  {id:'dispenser',ico:'disp',name:'Single Dispenser',          sub:'Commercial fuel dispenser, UL listed',                       noUST:true,  group:'fuel'},
+  {id:'dual_disp',ico:'disp',name:'Dual Dispenser',            sub:'Two-product simultaneous dispensing',                        noUST:true,  group:'fuel'},
   // STRUCTURE & ACCESS
-  {id:'forklift', ico:'fork',name:'Forklift Pockets',         sub:'Welded tube pockets both ends, through skid — 3.5" pipe',   price:220,  noUST:false, group:'struct'},
-  {id:'pump_plat',ico:'plat',name:'Pump Platform (69x30)',     sub:'Welded steel platform both ends — ag/fleet standard',        price:380,  noUST:false, group:'struct'},
-  {id:'lean2',    ico:'lean',name:'Lean 2 Bracket Kit',        sub:'Pipe support bracket for suction/return plumbing',           price:145,  noUST:false, group:'struct'},
-  {id:'pan',      ico:'pan',name:'Containment Pan / Box',     sub:'110% capacity — SPCC compliant, drain port, 6" I-beam',     price:550,  noUST:false, group:'struct'},
-  {id:'ladder',   ico:'ladr',name:'Ladder & Platform',         sub:'175" steel ladder, 20" wide, 3/4" round rungs, galvanized',  price:680,  noUST:true,  group:'struct'},
-  {id:'catwalk',  ico:'walk',name:'Full Catwalk',              sub:'42" wide grated walkway, hot-dip galvanized',                price:2200, noUST:true,  group:'struct'},
-  {id:'tieoff',   ico:'tie',name:'Tie-Off Points',            sub:'Fireguard K-fittings for transport/installation rigging',     price:125,  noUST:false, group:'struct'},
-  {id:'grounding',ico:'gnd',name:'Grounding Lug',             sub:'Static/bonding lug — code required for gasoline storage',   price:85,   noUST:false, group:'struct'},
-  {id:'rainshield',ico:'rain',name:'Rain Shield',              sub:'Steel curved overhang, 442 lbs, 12,585 sq in coverage',      price:580,  noUST:true,  group:'struct'},
+  {id:'forklift', ico:'fork',name:'Forklift Pockets',         sub:'Welded tube pockets both ends, through skid — 3.5" pipe',   noUST:false, group:'struct'},
+  {id:'pump_plat',ico:'plat',name:'Pump Platform (69x30)',     sub:'Welded steel platform both ends — ag/fleet standard',        noUST:false, group:'struct'},
+  {id:'lean2',    ico:'lean',name:'Lean 2 Bracket Kit',        sub:'Pipe support bracket for suction/return plumbing',           noUST:false, group:'struct'},
+  {id:'pan',      ico:'pan',name:'Containment Pan / Box',     sub:'110% capacity — SPCC compliant, drain port, 6" I-beam',     noUST:false, group:'struct'},
+  {id:'ladder',   ico:'ladr',name:'Ladder & Platform',         sub:'175" steel ladder, 20" wide, 3/4" round rungs, galvanized',  noUST:true,  group:'struct'},
+  {id:'catwalk',  ico:'walk',name:'Full Catwalk',              sub:'42" wide grated walkway, hot-dip galvanized',                noUST:true,  group:'struct'},
+  {id:'tieoff',   ico:'tie',name:'Tie-Off Points',            sub:'Fireguard K-fittings for transport/installation rigging',     noUST:false, group:'struct'},
+  {id:'grounding',ico:'gnd',name:'Grounding Lug',             sub:'Static/bonding lug — code required for gasoline storage',   noUST:false, group:'struct'},
+  {id:'rainshield',ico:'rain',name:'Rain Shield',              sub:'Steel curved overhang, 442 lbs, 12,585 sq in coverage',      noUST:true,  group:'struct'},
 ];
 
 // Product stored in tank - affects compartment options + labeling
@@ -647,7 +670,7 @@ const STEPS=[
    type:'tiles',c:2,
     opts:[
       {v:'single',i:'sw',l:'Single Wall',  s:'Most economical — standard'},
-      {v:'double',i:'dw',l:'Double Wall',  s:'Secondary containment built-in', p:'+~35%'},
+      {v:'double',i:'dw',l:'Double Wall',  s:'Secondary containment built-in'},
     ]},
   // STEP 5 - Capacity
   {id:'cap',lbl:'Capacity',q:'Choose your tank capacity',
@@ -664,8 +687,8 @@ const STEPS=[
     opts:[
       {v:'16', i:'mh',l:'16" Manhole',  s:'Small tanks up to 1,000 gal'},
       {v:'18', i:'mh',l:'18" Manhole',  s:'Standard',               t:'Standard'},
-      {v:'24', i:'mh',l:'24" Manhole',  s:'Wide access',            p:'+$165'},
-      {v:'30', i:'mh',l:'30" Manhole',  s:'Full interior access',   p:'+$280'},
+      {v:'24', i:'mh',l:'24" Manhole',  s:'Wide access'},
+      {v:'30', i:'mh',l:'30" Manhole',  s:'Full interior access'},
     ]},
   // STEP 8 - Fill connection
   {id:'fill',lbl:'Fittings',q:'Choose fill connection size',
@@ -674,8 +697,8 @@ const STEPS=[
     opts:[
       {v:'1.5',i:'fit',l:'1-1/2" Fill',  s:'Low-flow / small tanks'},
       {v:'2',  i:'fit',l:'2" Fill',   s:'Standard',               t:'Standard'},
-      {v:'3',  i:'fit',l:'3" Fill',   s:'High-flow filling',      p:'+$95'},
-      {v:'4',  i:'fit',l:'4" Fill',   s:'Bulk / terminal',        p:'+$165'},
+      {v:'3',  i:'fit',l:'3" Fill',   s:'High-flow filling'},
+      {v:'4',  i:'fit',l:'4" Fill',   s:'Bulk / terminal'},
     ]},
   // STEP 9 - Venting
   {id:'vent',lbl:'Venting',q:'Choose vent configuration',
@@ -684,9 +707,9 @@ const STEPS=[
     opts:[
       {v:'std',i:'vent',l:'2" NV + 2" EV',  s:'Standard — up to 3,000 gal', t:'Standard'},
       {v:'med',i:'vent',l:'2" NV + 4" EV',  s:'3,000–10,000 gal',             t:'Standard'},
-      {v:'lrg',i:'vent',l:'3" NV + 6" EV',  s:'10,000+ gal',                  p:'+$165'},
-      {v:'xl', i:'vent',l:'4" NV + 8" EV',  s:'Large / Fireguard standard',   p:'+$285'},
-      {v:'pvv',i:'pwr', l:'P/V Valve',       s:'Pressure-vacuum relief system', p:'+$125'},
+      {v:'lrg',i:'vent',l:'3" NV + 6" EV',  s:'10,000+ gal'},
+      {v:'xl', i:'vent',l:'4" NV + 8" EV',  s:'Large / Fireguard standard'},
+      {v:'pvv',i:'pwr', l:'P/V Valve',       s:'Pressure-vacuum relief system'},
     ]},
   // STEP 10 - Pump
   {id:'pump',lbl:'Pump',q:'Choose your pump package',
@@ -694,11 +717,11 @@ const STEPS=[
    type:'tiles',c:2,
     opts:[
       {v:'none', i:'x', l:'No Pump',      s:'Tank only — customer supplies'},
-      {v:'15dc', i:'pwr',l:'15 GPM DC',    s:'12V battery / remote',    p:'+$620'},
-      {v:'15ac', i:'pwr',l:'15 GPM AC',    s:'120V electric',           p:'+$720'},
-      {v:'30ac', i:'pwr',l:'30 GPM AC',    s:'High-flow electric',      p:'+$950'},
-      {v:'50ac', i:'pwr',l:'50 GPM AC',    s:'Commercial fleet',        p:'+$1,350'},
-      {v:'gas',  i:'fuel',l:'Gas Engine',   s:'Off-grid / no power',     p:'+$890'},
+      {v:'15dc', i:'pwr',l:'15 GPM DC',    s:'12V battery / remote'},
+      {v:'15ac', i:'pwr',l:'15 GPM AC',    s:'120V electric'},
+      {v:'30ac', i:'pwr',l:'30 GPM AC',    s:'High-flow electric'},
+      {v:'50ac', i:'pwr',l:'50 GPM AC',    s:'Commercial fleet'},
+      {v:'gas',  i:'fuel',l:'Gas Engine',   s:'Off-grid / no power'},
     ]},
   // STEP 11 - Color
   {id:'color',lbl:'Color',q:'Choose your color & finish',type:'color'},
@@ -708,7 +731,6 @@ const STEPS=[
    type:'acc'},
 ];
 
-const PC={none:0,'15dc':620,'15ac':720,'30ac':950,'50ac':1350,gas:890};
 const isUST=()=>C.type==='permatank'||C.type==='act100u';
 
 const C={
@@ -717,13 +739,11 @@ const C={
   compart:1,comp2gal:0,comp1product:'diesel',comp2product:'gasoline',
   manhole:'18',fill:'2',vent:'med',pump:'none',
   colorHex:'#E0E2E8',colorName:'White',
-  acc:new Set(),accCost:0
+  acc:new Set()
 };
 // Human-readable label for an option code (used in the build sheet, email and PDF)
 function optLabel(stepId,v){const s=STEPS.find(x=>x.id===stepId);return s?.opts?.find(o=>o.v===v)?.l||v;}
 const SHAPE_NAMES={horiz:'Horizontal',vert:'Vertical',rect:'Rectangular'};
-// Accessory total is always recomputed from the selection (items that don't apply to underground tanks are skipped)
-function accCostNow(){return[...C.acc].reduce((t,id)=>{const a=ACCESSORIES.find(x=>x.id===id);return t+(a&&!(isUST()&&a.noUST)?a.price:0);},0);}
 function capNum(){return parseInt(getSpec()?.key||C.cap)||0;}
 function splitMin(cap){return Math.round(cap*0.1/500)*500||500;}
 function splitVols(){
@@ -1498,7 +1518,7 @@ let lastStep=-1;
 function renderStep(){
   const s=STEPS[step];
   if(step!==lastStep){const lp=document.querySelector('.left-panel');if(lp&&lp.scrollHeight>lp.clientHeight)lp.scrollTop=0;lastStep=step;}
-  document.getElementById('stepCtr').textContent=`Step ${step+1} of ${STEPS.length}`;
+  document.getElementById('stepCtr').textContent=step===STEPS.length-1?'Last step':`Step ${step+1} of ${STEPS.length}`;
   buildPgBar();
   let html=`<div class="step-q">${s.q}</div>`;
   if(s.hint)html+=`<div class="step-hint">${s.hint}</div>`;
@@ -1512,7 +1532,6 @@ function renderStep(){
         <div class="ti">${o.i}</div><div class="tl">${o.l}</div>
         ${o.s?`<div class="ts">${o.s}</div>`:''}
         ${o.t?`<div class="tt">${o.t}</div>`:''}
-        ${o.p?`<div class="tp">${o.p}</div>`:''}
       </div>`;
     });
     html+='</div>';
@@ -1641,11 +1660,10 @@ function renderStep(){
       html+=`<div class="acc-section-hdr">${g.lbl}</div>`;
       items.forEach(a=>{
         const ust=isUST()&&a.noUST;
-        html+=`<div class="arow${C.acc.has(a.id)?' sel':''}${ust?' disabled':''}" onclick="toggleAcc('${a.id}',${a.price},this)">
+        html+=`<div class="arow${C.acc.has(a.id)?' sel':''}${ust?' disabled':''}" onclick="toggleAcc('${a.id}',this)">
           <div class="achk"></div>
           <div class="aico">${a.ico}</div>
           <div class="ainf"><div class="aname">${a.name}</div><div class="asub">${a.sub}${ust?' · N/A underground':''}</div></div>
-          <div class="aprc">+$${a.price.toLocaleString()}</div>
         </div>`;
       });
     });
@@ -1654,7 +1672,7 @@ function renderStep(){
 
   document.getElementById('stepContent').innerHTML=html;
   const nb=document.querySelector('.nav-btn.next');
-  if(nb)nb.innerHTML=step===STEPS.length-1?'Finish &#8594;':'Next &#8594;';
+  if(nb)nb.innerHTML=step===STEPS.length-1?'Get Quote &#8594;':'Next &#8594;';
   updateFooter();
   updateStdList();
   updateRecommendation();
@@ -1662,11 +1680,7 @@ function renderStep(){
 
 // --- STANDARD EQUIPMENT LIST -----------------------------------------
 // What ships on EVERY tank - per OIL EQUIPMENT CO drawing + HTC specs
-function updateStdList(){
-  const stdEl=document.getElementById('stdList');
-  const itemEl=document.getElementById('stdItems');
-  if(!stdEl||!itemEl)return;
-
+function stdItems(){
   const base=[
     'UL-listed normal & emergency vents',
     'Fill connection w/ dust cap',
@@ -1741,8 +1755,12 @@ function updateStdList(){
   };
 
   const dwOnly=/double-wall|\(double-wall\)/i;
-  const items=[...base,...(extras[C.type]||[]).filter(i=>C.wall==='double'||!dwOnly.test(i))];
-  itemEl.innerHTML=items.map(i=>`<div class="std-item"><span class="std-check">&#10003;</span>${i}</div>`).join('');
+  return[...base,...(extras[C.type]||[]).filter(i=>C.wall==='double'||!dwOnly.test(i))];
+}
+function updateStdList(){
+  const stdEl=document.getElementById('stdList'),itemEl=document.getElementById('stdItems');
+  if(!stdEl||!itemEl)return;
+  itemEl.innerHTML=stdItems().map(i=>`<div class="std-item"><span class="std-check">&#10003;</span>${i}</div>`).join('');
   stdEl.style.display='block';
 }
 
@@ -1864,13 +1882,12 @@ function pick(f,v,el){
     C.compart=1;C.comp2gal=0;
   }
   if(f==='shape'||f==='wall'){C.compart=1;C.comp2gal=0;}
-  if(f==='cap'){C.capPref=v;C.compart=1;C.comp2gal=0;}
+  if(f==='cap'){C.capPref=v;C.compart=1;C.comp2gal=0;C.customQuote=null;}
   C[f]=v;
   normalizeConfig();   // keeps shape / wall / capacity valid and restores the visitor's picks where allowed
   if(f==='type'||f==='cap')applyFittingDefaults();
   const box=el&&el.closest('.opts');
   if(box){box.querySelectorAll('.tile').forEach(t=>t.classList.remove('sel'));el.classList.add('sel');}
-  C.accCost=accCostNow();
   updateFooter();buildTank();updateRecommendation();
   // Auto-advance (not on colour, so people can browse swatches); one pending advance at a time
   clearTimeout(advTimer);
@@ -1887,11 +1904,10 @@ function pickColor(hex,name,el){
   buildTank();updateFooter();updateRecommendation();
 }
 
-function toggleAcc(id,price,el){
+function toggleAcc(id,el){
   if(el.classList.contains('disabled'))return;
   if(C.acc.has(id))C.acc.delete(id);else C.acc.add(id);
   el.classList.toggle('sel',C.acc.has(id));
-  C.accCost=accCostNow();
   buildTank();updateFooter();updateRecommendation();
 }
 
@@ -1919,7 +1935,7 @@ function startOver(){
   C.compart=1;C.comp2gal=0;C.comp1product='diesel';C.comp2product='gasoline';
   C.manhole='18';C.fill='2';C.vent='med';C.pump='none';
   C.colorHex='#E0E2E8';C.colorName='White';
-  C.acc=new Set();C.accCost=0;
+  C.acc=new Set();
   C.customDia=0;C.customLen=0;C.customGal=0;C.customQuote=null;
   step=0;
   renderStep();
@@ -1971,41 +1987,9 @@ function quoteCustomDims(){
   const len=parseInt(document.getElementById('custLen')?.value)||0;
   if(dia<24||len<24){alert('Please enter both a diameter and a length (24" or more).');return;}
   const{gals,wtLbs}=customCalc(dia,len);
-  const td=getSpec()?.td||TD[C.type]||{label:'Custom'};
   C.customQuote={diameter_in:dia,length_in:len,est_gallons:gals,est_weight_lbs:wtLbs};
-  document.getElementById('msum').innerHTML=
-    `<strong>Custom Fabrication Request</strong><br>
-    Tank Type: ${td.label} · ${C.wall==='double'?'Double Wall':'Single Wall'}<br>
-    Custom Dimensions: ${dia}"Ø × ${len}"L<br>
-    Estimated Capacity: ~${gals.toLocaleString()} gallons<br>
-    Estimated Weight: ~${wtLbs.toLocaleString()} lbs<br>
-    <strong>Non-standard size — custom quote required</strong>`;
+  renderSummary();
   showModal();
-}
-
-function calcP(){
-  const res=getSpec();if(!res||!res.spec?.price)return 0;
-  let p=res.spec.price;
-  // Venting upcharges
-  if(C.vent==='lrg')p+=165;
-  if(C.vent==='xl')p+=285;
-  if(C.vent==='pvv')p+=125;
-  // Fill upcharges
-  if(C.fill==='3')p+=95;
-  if(C.fill==='4')p+=165;
-  // Manhole upcharges (18" standard, 24" and 30" add cost)
-  if(C.manhole==='24')p+=165;
-  if(C.manhole==='30')p+=280;
-  // Compartment add -- from real BOMs:
-  // Permatank 20K single=$32,610 vs split=$39,300 = +20.5%
-  // UL142/Fireguard split adds 2 extra heads, baffle, labor = ~12%
-  if(C.compart===2){
-    const splitPct=isUST()?0.205:0.12;
-    p+=Math.round(p*splitPct);
-  }
-  // Pump + accessories
-  p+=(PC[C.pump]||0)+accCostNow();
-  return Math.round(p);
 }
 
 function getDim(){
@@ -2024,7 +2008,7 @@ function weightDisplay(){
 
 function updateFooter(){
   const res=getSpec();if(!res?.spec)return;
-  const{td}=res;const p=calcP();
+  const{td}=res;
   const capN=capNum(),wtDisplay=weightDisplay();
   const[c1,c2]=splitVols();
   const compartStr=C.compart===2?` · split ${c1.toLocaleString()}/${c2.toLocaleString()}`:'';
@@ -2036,57 +2020,90 @@ function updateFooter(){
   document.getElementById('fWarranty').textContent=(td.warranty||'1 yr')+' warranty';
   document.getElementById('fCert').textContent=td.cert;
   document.getElementById('fBadge').textContent=td.badge;
-  document.getElementById('fP').textContent=p>0?'$'+p.toLocaleString():'Call for Quote';
   const prodLabel=C.compart===2?prodName(C.comp1product)+' + '+prodName(C.comp2product):prodName(C.product);
   document.getElementById('lt1').textContent=td.label+' · '+(SHAPE_NAMES[C.shape]||'Horizontal');
   document.getElementById('lt2').textContent=(C.wall==='double'?'Double Wall':'Single Wall')+' · '+capN.toLocaleString()+' gal'+(C.compart===2?' (2-comp)':'');
   document.getElementById('lt3').textContent=getDim()+' · '+wtDisplay+' lbs'+(prodLabel?' · '+prodLabel:'');
 }
 
-// --- BUILD SHEET (shared by the quote form, the email and the PDF) ---
+// --- BUILD SHEET (one source for the quote request, the email and the PDF) ---
 function buildSheet(){
   const res=getSpec(),spec=res?.spec||{},td=res?.td||{label:'—',cert:'—',badge:'—'};
+  const cq=C.customQuote;
   const[c1,c2]=splitVols();
-  const acc=[...C.acc].map(id=>ACCESSORIES.find(a=>a.id===id)).filter(a=>a&&!(isUST()&&a.noUST)).map(a=>a.name);
+  const addOns=[...C.acc].map(id=>ACCESSORIES.find(a=>a.id===id)).filter(a=>a&&!(isUST()&&a.noUST)).map(a=>a.name);
+  const product=C.compart!==2?prodName(C.product)
+    :cq?`${prodName(C.comp1product)} + ${prodName(C.comp2product)}`
+    :`${c1.toLocaleString()} gal ${prodName(C.comp1product)} / ${c2.toLocaleString()} gal ${prodName(C.comp2product)}`;
   return{
-    type:td.label,certification:td.badge,capacity_gal:capNum(),
-    shape:SHAPE_NAMES[C.shape]||C.shape,wall:C.wall==='double'?'Double Wall':'Single Wall',
-    dimensions:getDim(),est_weight:weightDisplay()+' lbs',shell:spec.sh||'',
-    product:C.compart===2?`${c1.toLocaleString()} gal ${prodName(C.comp1product)} / ${c2.toLocaleString()} gal ${prodName(C.comp2product)}`:prodName(C.product),
+    custom:!!cq,
+    type:td.label,certification:td.badge,
+    capacity:cq?`Custom size, ~${cq.est_gallons.toLocaleString()} gal`:capNum().toLocaleString()+' gal',
     compartments:C.compart===2?2:1,
+    shape:SHAPE_NAMES[C.shape]||C.shape,wall:C.wall==='double'?'Double Wall':'Single Wall',
+    dimensions:cq?`${cq.diameter_in}"Ø × ${cq.length_in}"L (custom)`:getDim(),
+    est_weight:(cq?'~'+cq.est_weight_lbs.toLocaleString():weightDisplay())+' lbs',
+    shell:cq?'':(spec.sh||''),
+    product,
     manhole:C.manhole+'"',fill:C.fill+'"',venting:optLabel('vent',C.vent),
     pump:C.pump==='none'?'None — tank only':optLabel('pump',C.pump),
-    color:C.colorName,accessories:acc,lead_time:td.lead||'TBD',warranty:td.warranty||'1 yr',
-    est_starting_price:calcP()
+    color:C.colorName,finish:C.type==='permatank'?'FRP jacket (pigmented resin)':'Polyurethane topcoat',
+    add_ons:addOns,standard:stdItems(),
+    lead_time:td.lead||'TBD',warranty:td.warranty||'1 yr'
   };
 }
+// Plain-text version for the sales email (withStd = include the standard-equipment list)
+function buildSheetText(b,withStd){
+  const L=[],kv=(k,v)=>L.push('  '+k+': '+v);
+  L.push(b.custom?'TANK (CUSTOM SIZE)':'TANK');
+  kv('Type',b.type+' — '+b.certification);
+  kv('Capacity',b.capacity+(b.compartments===2?' · 2 compartments':''));
+  kv('Shape / wall',b.shape+' · '+b.wall);
+  kv('Dimensions',b.dimensions);
+  kv('Est. weight',b.est_weight);
+  if(b.shell)kv('Shell',b.shell);
+  kv('Product',b.product);
+  L.push('','FITTINGS & EQUIPMENT');
+  kv('Manhole',b.manhole);kv('Fill',b.fill);kv('Venting',b.venting);kv('Pump',b.pump);
+  L.push('','FINISH');
+  kv('Color',b.color+' — '+b.finish);
+  L.push('','ADD-ONS ('+b.add_ons.length+')');
+  if(b.add_ons.length)b.add_ons.forEach(a=>L.push('  • '+a));else L.push('  None selected');
+  if(withStd){L.push('','INCLUDED STANDARD');b.standard.forEach(a=>L.push('  • '+a));}
+  L.push('','Lead time: '+b.lead_time+' · Warranty: '+b.warranty);
+  return L.join('\n');
+}
 
-// --- MODAL -----------------------------------------------------------
-let sending=false;   // a build sheet is on its way — don't allow a second send
+// --- QUOTE REQUEST MODAL ----------------------------------------------
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function renderSummary(){
+  const b=buildSheet();
+  const row=(k,v)=>`<dt>${k}</dt><dd>${esc(v)}</dd>`;
+  const list=a=>'<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+  document.getElementById('msum').innerHTML=
+    `<div class="msum-h">${b.custom?'Your build — custom size':'Your build'}</div><dl>`+
+    row('Tank',b.type+' · '+b.certification)+
+    row('Capacity',b.capacity+(b.compartments===2?' · 2 compartments':''))+
+    row('Shape / wall',b.shape+' · '+b.wall)+
+    row('Dimensions',b.dimensions+' · est. '+b.est_weight)+
+    row('Product',b.product)+
+    row('Manhole',b.manhole)+row('Fill',b.fill)+row('Venting',b.venting)+row('Pump',b.pump)+
+    row('Color',b.color+' — '+b.finish)+
+    `<dt>Add-ons</dt><dd>${b.add_ons.length?list(b.add_ons):'None selected'}</dd>`+
+    row('Lead time',b.lead_time+' · '+b.warranty+' warranty')+
+    `</dl><details><summary>Included standard (${b.standard.length} items)</summary>${list(b.standard)}</details>`;
+}
+let sending=false;   // a quote request is on its way — don't allow a second send
 function showModal(){
   document.getElementById('mForm').style.display='';
   document.getElementById('mSent').style.display='none';
   document.getElementById('qErr').style.display='none';
   const btn=document.getElementById('qSend');
   if(sending){btn.disabled=true;btn.textContent='Sending…';}
-  else{btn.disabled=false;btn.innerHTML='Send Build Sheet &rarr;';}
+  else{btn.disabled=false;btn.innerHTML='Send Quote Request &rarr;';}
   document.getElementById('qModal').classList.add('on');
 }
-function openM(){
-  C.customQuote=null;
-  const b=buildSheet(),p=b.est_starting_price;
-  document.getElementById('msum').innerHTML=
-    `<strong>Configuration Summary</strong><br>
-    ${b.type} · ${b.capacity_gal.toLocaleString()} gal · ${b.wall} · ${b.shape}<br>
-    Dimensions: ${b.dimensions} · Est. weight: ${b.est_weight}<br>
-    Product: ${b.product}<br>
-    Manhole: ${b.manhole} · Fill: ${b.fill} · Venting: ${b.venting}<br>
-    Pump: ${b.pump} · Color: ${b.color}<br>
-    Accessories: ${b.accessories.join(', ')||'None'}<br>
-    Lead time: ${b.lead_time} · Warranty: ${b.warranty}<br>
-    <strong>Est. Starting Price: ${p>0?'$'+p.toLocaleString():'Custom — contact us'}</strong>`;
-  showModal();
-}
+function openM(){C.customQuote=null;renderSummary();showModal();}
 function closeM(){document.getElementById('qModal').classList.remove('on');}
 function showSent(title,msg,html){
   document.getElementById('mSentTitle').textContent=title;
@@ -2099,17 +2116,19 @@ async function sendQ(){
   if(sending)return;
   const val=id=>document.getElementById(id).value.trim();
   const n=val('qn'),e=val('qe'),p=val('qp'),co=val('qc'),dl=val('qdl'),pt=document.getElementById('qpt').value,notes=val('qnotes');
+  const qty=Math.min(999,Math.max(1,parseInt(val('qqty'))||1)),role=document.getElementById('qrole').value;
   const err=document.getElementById('qErr');
   const fail=m=>{err.textContent=m;err.style.display='block';};
   err.style.display='none';
   if(!n||!e)return fail('Please enter your name and email.');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return fail('Please enter a valid email address.');
+  if(!dl)return fail('Please enter the delivery city, state or ZIP so we can route your quote to the right distributor.');
   if(!pt)return fail('Please let us know when you are ready to purchase.');
   const ptLabels={'immediately':'Immediately','1-3 months':'1–3 months','3-6 months':'3–6 months','6-12 months':'6–12 months','researching':'Just researching'};
-  const summary=document.getElementById('msum')?.innerText||'';
-  const sheet=buildSheet();
-  if(C.customQuote)sheet.custom_fabrication=C.customQuote;
-  const message='BUILD SHEET REQUEST\n'+summary+(notes?'\n\nAdditional notes:\n'+notes:'')+'\n\nSubmitted from the Hughes Tank 3D Configurator (hughestank.com/build-a-tank/)';
+  const b=buildSheet();
+  const head='QUOTE REQUEST — Hughes Tank 3D Configurator\nQuantity: '+qty+(role?'  ·  Requester: '+role:'');
+  const tail='\n\nCUSTOMER NOTES\n'+(notes||'None')+'\n\nSubmitted from hughestank.com/build-a-tank/';
+  const message=head+'\n\n'+buildSheetText(b,true)+tail;
   const btn=document.getElementById('qSend');btn.disabled=true;btn.textContent='Sending…';
   sending=true;
   let sent=false;
@@ -2117,74 +2136,90 @@ async function sendQ(){
     // Same endpoint as the contact page (emails sales@hughestank.com)
     const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       name:n,email:e,phone:p,company:co,delivery_location:dl,purchase_timeline:ptLabels[pt]||pt,
-      message,source:'quote-request',quote_data:sheet,honeypot:document.getElementById('qhp').value})});
+      message,source:'quote-request',honeypot:document.getElementById('qhp').value})});
     sent=r.ok;
   }catch(_){sent=false;}
   sending=false;
   if(sent){
-    showSent('Build Sheet Sent!','Thanks, '+n.split(' ')[0]+'! Your build sheet is on its way to our sales team — we\'ll follow up within one business day.');
+    showSent('Quote Request Sent!','Thanks, '+n.split(' ')[0]+'! Your build sheet is with our sales team — we\'ll reply within one business day with pricing through an authorized distributor.');
     return;
   }
-  // Fallback: open the visitor's email app with the build sheet filled in
-  const subject=encodeURIComponent('Tank Build Sheet - '+sheet.type+' '+sheet.capacity_gal.toLocaleString()+' gal - Hughes Tank');
-  const body=encodeURIComponent(message+'\n\nCONTACT INFORMATION\nName: '+n+'\nEmail: '+e+'\nPhone: '+(p||'—')+'\nCompany: '+(co||'—')+'\nDelivery Location: '+(dl||'—')+'\nPurchase Timeline: '+(ptLabels[pt]||pt));
+  // Fallback: open the visitor's email app with the request filled in (standard list left out to keep the link short)
+  const subject=encodeURIComponent('Quote Request - '+b.type+' '+b.capacity+(qty>1?' (x'+qty+')':'')+' - Hughes Tank');
+  const body=encodeURIComponent(head+'\n\n'+buildSheetText(b,false)+tail+'\n\nCONTACT\nName: '+n+'\nEmail: '+e+'\nPhone: '+(p||'—')+'\nCompany: '+(co||'—')+'\nDelivery: '+dl+'\nTimeline: '+(ptLabels[pt]||pt));
   window.location.href='mailto:sales@hughestank.com?subject='+subject+'&body='+body;
-  showSent('Almost Done!','Your email app should open with your build sheet filled in — hit send to <strong>sales@hughestank.com</strong> and we\'ll respond within one business day.',true);
+  showSent('Almost Done!','Your email app should open with your quote request filled in — hit send to <strong>sales@hughestank.com</strong> and we\'ll reply within one business day.',true);
 }
 
-// --- PDF -------------------------------------------------------------
+// --- PDF BUILD SHEET -------------------------------------------------
 function xPDF(){
   if(typeof window.jspdf==='undefined'){alert('The PDF tool is still loading — please try again in a moment.');return;}
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'letter'});
-  const b=buildSheet(),p=b.est_starting_price;
+  const b=buildSheet();
   const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   doc.setFillColor(13,27,62);doc.rect(0,0,216,42,'F');
   doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('HUGHES TANK COMPANY',14,15);
   doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(168,184,208);
   doc.text('2900 N FM 157  ·  Venus, TX 76084  ·  972-366-8684  ·  sales@hughestank.com',14,23);
-  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text('TANK CONFIGURATION SPEC SHEET',14,33);
-  doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Generated: '+now,202,33,{align:'right'});
+  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);doc.text('TANK BUILD SHEET',14,33);
+  doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Created: '+now,202,33,{align:'right'});
   doc.setFillColor(26,58,140);doc.rect(0,42,216,2.5,'F');
   doc.setFillColor(242,244,248);doc.rect(0,44.5,216,20,'F');
-  doc.setTextColor(13,27,62);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(b.type,14,57);
+  doc.setTextColor(13,27,62);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(b.type+'  ·  '+b.capacity,14,57);
   doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(90,106,136);
-  doc.text(b.certification+'  ·  '+b.wall+'  ·  '+b.shape+'  ·  Venus, TX',14,63);
+  doc.text(b.certification+'  ·  '+b.wall+'  ·  '+b.shape+'  ·  Built in Venus, TX',14,63);
   const rows=[['Tank Type',b.type],['Certification',b.certification],
-    ['Capacity',b.capacity_gal.toLocaleString()+' gallons'+(b.compartments===2?' (2 compartments)':'')],
+    ['Capacity',b.capacity+(b.compartments===2?' (2 compartments)':'')],
     ['Product Stored',b.product],
     ['Dimensions',b.dimensions],['Estimated Weight',b.est_weight],
     ['Wall Construction',C.wall==='double'?'Double-Wall (Secondary Containment)':'Single-Wall'],
-    ['Shell Thickness',b.shell||'Per UL specification'],
+    ['Shell Thickness',b.shell||(b.custom?'Per engineering review':'Per UL specification')],
     ['Shape / Orientation',b.shape],
-    ['Manhole Size',C.manhole+'" diameter flanged collar'],
+    ['Manhole',C.manhole+'" diameter flanged collar'],
     ['Fill Connection',C.fill+'" NPT flat-face coupling'],
-    ['Vent Sizing',b.venting],
+    ['Venting',b.venting],
     ['Pump Package',b.pump],
-    ['Color / Finish',b.color+' — '+(C.type==='permatank'?'FRP jacket (pigmented resin)':'Polyurethane Top Coat')],
-    ['Accessories',b.accessories.join(', ')||'None'],
+    ['Color / Finish',b.color+' — '+b.finish],
+    ['Add-ons',b.add_ons.join(', ')||'None selected'],
     ['Est. Lead Time',b.lead_time+' from confirmed order'],
     ['Warranty',b.warranty]];
   let y=75;
-  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(13,27,62);doc.text('FULL SPECIFICATIONS',14,y);y+=5;
+  const FOOT=257;   // content stays above the footer band
+  const room=h=>{if(y+h>FOOT){doc.addPage();y=20;}};
+  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(13,27,62);doc.text('BUILD SPECIFICATIONS',14,y);y+=5;
   doc.setFillColor(26,58,140);doc.rect(14,y,188,.5,'F');y+=5;
   rows.forEach((row,i)=>{
-    doc.setFontSize(10);
+    doc.setFont('helvetica','normal');doc.setFontSize(9.5);
     const lines=doc.splitTextToSize(String(row[1]||'—'),118);
-    const h=Math.max(7,lines.length*4.6+2.4);
-    if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4.2,188,h,'F');}
-    doc.setFont('helvetica','bold');doc.setTextColor(90,106,136);doc.setFontSize(8);doc.text(row[0].toUpperCase(),16,y);
-    doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(10);doc.text(lines,82,y);
+    const h=Math.max(6.2,lines.length*4.3+1.9);
+    room(h);
+    if(i%2===0){doc.setFillColor(248,250,252);doc.rect(14,y-4,188,h,'F');}
+    doc.setFont('helvetica','bold');doc.setTextColor(90,106,136);doc.setFontSize(7.5);doc.text(row[0].toUpperCase(),16,y);
+    doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(9.5);doc.text(lines,82,y);
     y+=h;
   });
-  if(y>208){doc.addPage();y=20;}
-  const coat=C.type==='permatank'?'FRP jacket (orange pigment in resin)':C.type==='act100u'?'Black polyurethane coating':'SSPC-SP6 blast + polyurethane topcoat';
-  y+=4;doc.setFillColor(230,240,255);doc.rect(14,y-3,188,20,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(26,58,140);doc.text('STANDARD EQUIPMENT ON ALL TANKS:',16,y+3);doc.setFont('helvetica','normal');doc.setTextColor(13,27,62);doc.setFontSize(8);
-  doc.text('Fill w/ dust cap  ·  UL-listed normal & emergency vents  ·  Suction & return connections  ·  Manhole cover',16,y+9);
-  doc.text(coat+'  ·  Air tested 3-5 PSI before shipment  ·  '+b.warranty+' warranty',16,y+15);y+=25;
-  doc.setFillColor(13,27,62);doc.rect(14,y,188,22,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('ESTIMATED STARTING PRICE',16,y+8);doc.setFontSize(17);doc.setTextColor(255,255,255);doc.text(p>0?'$'+p.toLocaleString():'Custom — Contact Us',16,y+18);doc.setFontSize(9);doc.setTextColor(168,184,208);doc.text('Through authorized distributors  ·  Exact quote within 24 hours',199,y+14,{align:'right'});
-  doc.setFillColor(242,244,248);doc.rect(0,260,216,32,'F');doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(13,27,62);doc.text('HUGHES TANK COMPANY',14,270);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(90,106,136);doc.text('2900 N FM 157  ·  Venus, TX 76084  ·  Phone: 972-366-8684  ·  Fax: 972-366-3130  ·  sales@hughestank.com',14,277);doc.text('Office: Mon-Fri 8am-4:30pm  ·  Loading: Mon-Fri 7am-2:30pm',14,283);doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(168,184,208);doc.text('Estimates for reference only. Specifications and pricing subject to change. Contact Hughes Tank for confirmed quote.',14,294);
-  doc.save('Hughes-Tank-'+C.type+'-'+(getSpec()?.key||C.cap)+'gal.pdf');
+  // Included standard equipment, two columns
+  const std=b.standard,half=Math.ceil(std.length/2),lh=3.8,stdH=9+half*lh;
+  y+=3;room(stdH);
+  doc.setFillColor(230,240,255);doc.rect(14,y-3,188,stdH,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(26,58,140);doc.text('INCLUDED STANDARD ON THIS TANK',16,y+2.2);
+  doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(13,27,62);
+  std.forEach((t,i)=>{const col=i<half?0:1,r=i<half?i:i-half;doc.text('·  '+doc.splitTextToSize(t,88)[0],16+col*94,y+7+r*lh);});
+  // Footer band with the next step, on every page
+  const pages=doc.getNumberOfPages();
+  for(let pg=1;pg<=pages;pg++){
+    doc.setPage(pg);
+    doc.setFillColor(13,27,62);doc.rect(0,259,216,21,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(255,255,255);
+    doc.text('READY FOR PRICING?  Request a quote at hughestank.com/build-a-tank',14,265.5);
+    doc.setFont('helvetica','normal');doc.setFontSize(8.5);doc.setTextColor(168,184,208);
+    doc.text('Or send this sheet to sales@hughestank.com  ·  972-366-8684  ·  Hughes Tank Company  ·  2900 N FM 157, Venus, TX 76084',14,270.8);
+    doc.setFont('helvetica','italic');doc.setFontSize(7.5);
+    doc.text('Pricing through authorized distributors, with a 24-hour response. Specifications subject to change; final pricing and lead time come with your quote.',14,275.8);
+    if(pages>1){doc.setFont('helvetica','normal');doc.text('Page '+pg+' of '+pages,202,265.5,{align:'right'});}
+  }
+  doc.save('Hughes-Tank-Build-Sheet-'+C.type+'-'+(getSpec()?.key||C.cap)+'gal.pdf');
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
