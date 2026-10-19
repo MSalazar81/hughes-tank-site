@@ -406,47 +406,54 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif}
 </div>
 
 <script>
-// --- TANK DATABASE (real HTC dimensions) ----------------------------
-// --- REAL HTC TANK DATA (from engineering drawings + Fusion 360 models) --
+// --- TANK DATABASE ---------------------------------------------------
+// Horizontal UL 142 / UL 2085 sizes are taken from HTC's Fusion models (Oct 2026):
+// d/l = single-wall diameter / overall length incl. heads; di/li inner and do_/lo outer for double wall.
+// tag = short label for a second build of the same capacity (e.g. the long 64" 4,000 gal).
+// Weights are estimates; variants carry the weight of their base capacity.
 const TD={
   ul142:{label:'UL 142',cert:'UL 142',badge:'UL Listed',lead:'2-4 wks',warranty:'1 yr',
     // Shell: A36 mild steel - SSPC-SP6 blast - High-Solids Polyurethane topcoat
     // Test: inner 5 PSI hydrostatic - pressure test 3-5 PSI - Tol +/-3"
-    // Saddles: 2 saddles at 30" from each end - R60 - 112" wide - 36" tall
-    // 12K+ gets 3 saddles (per Fireguard Kroger drawing)
-    // Standard fittings: A=4" threaded female (x6), B=8" EV primary, C=8" EV secondary
-    //   D=2" interstitial, E=18" manhole, F=medium lifting lug (x2)
     sizes:{
       horiz:{single:{
-        '300': {d:38, l:62,  wt:'300',  sh:'12 ga', saddles:2},
-        '500': {d:48, l:72,  wt:'500',  sh:'12 ga', saddles:2},
-        '1000':{d:64, l:74,  wt:'1,000',sh:'10 ga', saddles:2},
-        '2000':{d:64, l:146, wt:'2,000',sh:'7 ga',  saddles:2},
-        '3000':{d:64, l:216, wt:'3,000',sh:'7 ga',  saddles:2},
-        '4000':{d:64, l:288, wt:'4,000',sh:'7 ga',  saddles:2},
-        '5000':{d:96, l:164, wt:'5,000',sh:'5 ga',  saddles:2},
-        '6000':{d:96, l:194, wt:'6,000',sh:'5 ga',  saddles:2},
-        '8000':{d:96, l:278, wt:'8,000',sh:'5 ga',  saddles:2},
-        '10000':{d:96,l:324, wt:'10,000',sh:'3/16"',saddles:2},
-        '12000':{d:96,l:386, wt:'12,000',sh:'3/16"',saddles:3},
-        '15000':{d:96,l:482, wt:'16,000',sh:'1/4"', saddles:3},
-        '20000':{d:118,l:434,wt:'25,000',sh:'1/4"', saddles:3},
-        '25000':{d:120,l:516,wt:'30,000',sh:'1/4"', saddles:3},
+        '150': {d:38, l:32,  wt:'250',  sh:'12 ga'},
+        '300': {d:38, l:62,  wt:'300',  sh:'12 ga'},
+        '500': {d:48, l:74,  wt:'500',  sh:'12 ga'},
+        '1000':{d:64, l:74,  wt:'1,000',sh:'10 ga'},
+        '1000S':{d:50,l:122, wt:'1,000',sh:'10 ga', tag:'Slim'},
+        '2000':{d:64, l:146, wt:'2,000',sh:'7 ga'},
+        '3000':{d:64, l:216, wt:'3,000',sh:'7 ga'},
+        '4000':{d:96, l:134, wt:'4,000',sh:'5 ga'},
+        '4000L':{d:64,l:288, wt:'4,000',sh:'7 ga',  tag:'Long'},
+        '5000':{d:96, l:164, wt:'5,000',sh:'5 ga'},
+        '6000':{d:96, l:194, wt:'6,000',sh:'5 ga'},
+        '8000':{d:96, l:264, wt:'8,000',sh:'5 ga'},
+        '10000':{d:96,l:324, wt:'10,000',sh:'3/16"'},
+        '12000':{d:96,l:386, wt:'12,000',sh:'3/16"'},
+        '15000':{d:96,l:482, wt:'16,000',sh:'1/4"'},
+        '15000B':{d:118,l:324,wt:'16,000',sh:'1/4"', tag:'Large Ø'},
+        '20000':{d:118,l:432,wt:'25,000',sh:'1/4"'},
+        '25000':{d:120,l:512,wt:'30,000',sh:'1/4"'},
       },double:{
-        '300': {di:36.5,do_:38, li:58, lo:62, wt:'600',  sh:'10 ga', saddles:2},
-        '500': {di:47.75,do_:48,li:67, lo:74, wt:'1,000',sh:'10 ga', saddles:2},
-        '1000':{di:64,  do_:65.5,li:74, lo:86, wt:'2,000',sh:'10 ga', saddles:2},
-        '2000':{di:64,  do_:64,  li:146,lo:158,wt:'3,500',sh:'7 ga',  saddles:2},
-        '3000':{di:64,  do_:65.5,li:216,lo:228,wt:'6,000',sh:'7 ga',  saddles:2},
-        '4000':{di:96,  do_:98,  li:134,lo:146,wt:'8,000',sh:'5 ga',  saddles:2},
-        '5000':{di:96,  do_:98,  li:164,lo:176,wt:'10,000',sh:'5 ga', saddles:2},
-        '6000':{di:96,  do_:98,  li:194,lo:206,wt:'12,000',sh:'5 ga', saddles:2},
-        '8000':{di:96,  do_:98,  li:278,lo:290,wt:'16,000',sh:'5 ga', saddles:2},
-        '10000':{di:96, do_:98,  li:324,lo:386,wt:'18,000',sh:'3/16"',saddles:2},
-        '12000':{di:96, do_:98,  li:386,lo:398,wt:'22,000',sh:'3/16"',saddles:3},
-        '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',sh:'1/4"', saddles:3},
-        '20000':{di:118,do_:120, li:432,lo:446,wt:'32,000',sh:'1/4"', saddles:3},
-        '25000':{di:120,do_:126, li:516,lo:420,wt:'32,000',sh:'1/4"', saddles:3},
+        '150': {di:36.5,do_:38, li:28.5,lo:32, wt:'400',  sh:'12 ga'},
+        '300': {di:36.5,do_:38, li:58, lo:62, wt:'600',  sh:'10 ga'},
+        '500': {di:47.75,do_:48,li:67, lo:74, wt:'1,000',sh:'10 ga'},
+        '1000':{di:64,  do_:65.5,li:74, lo:86, wt:'2,000',sh:'10 ga'},
+        '1000S':{di:48.5,do_:50, li:117,lo:122,wt:'2,000',sh:'10 ga', tag:'Slim'},
+        '2000':{di:64,  do_:65.5,li:146,lo:158,wt:'3,500',sh:'7 ga'},
+        '3000':{di:64,  do_:65.5,li:216,lo:228,wt:'6,000',sh:'7 ga'},
+        '4000':{di:96,  do_:98,  li:134,lo:146,wt:'8,000',sh:'5 ga'},
+        '4000L':{di:64, do_:65.5,li:288,lo:294,wt:'8,000',sh:'7 ga', tag:'Long'},
+        '5000':{di:96,  do_:98,  li:164,lo:176,wt:'10,000',sh:'5 ga'},
+        '6000':{di:96,  do_:98,  li:194,lo:206,wt:'12,000',sh:'5 ga'},
+        '8000':{di:96,  do_:98,  li:264,lo:276,wt:'16,000',sh:'5 ga'},
+        '10000':{di:96, do_:98,  li:324,lo:338,wt:'18,000',sh:'3/16"'},
+        '12000':{di:96, do_:98,  li:386,lo:398,wt:'22,000',sh:'3/16"'},
+        '15000':{di:96, do_:98,  li:482,lo:494,wt:'28,000',sh:'1/4"'},
+        '15000B':{di:118,do_:120,li:324,lo:336,wt:'28,000',sh:'1/4"', tag:'Large Ø'},
+        '20000':{di:118,do_:120, li:432,lo:444,wt:'32,000',sh:'1/4"'},
+        '25000':{di:124,do_:126, li:482,lo:494,wt:'32,000',sh:'1/4"'},
       }},
       vert:{single:{
         '1000':{d:64,l:74,  wt:'1,000',sh:'10 ga'},
@@ -463,9 +470,9 @@ const TD={
         '1000':{di:64,do_:65.5,li:74, lo:86, wt:'2,000',sh:'10 ga'},
         '2000':{di:64,do_:64,  li:146,lo:158,wt:'3,500',sh:'7 ga'},
         '5000':{di:96,do_:98,  li:164,lo:176,wt:'10,000',sh:'5 ga'},
-        '10000':{di:96,do_:98, li:324,lo:386,wt:'18,000',sh:'3/16"'},
+        '10000':{di:96,do_:98, li:324,lo:338,wt:'18,000',sh:'3/16"'},
         '15000':{di:96,do_:98, li:482,lo:494,wt:'28,000',sh:'1/4"'},
-        '20000':{di:118,do_:120,li:432,lo:446,wt:'32,000',sh:'1/4"'},
+        '20000':{di:118,do_:120,li:432,lo:444,wt:'32,000',sh:'1/4"'},
       }},
       rect:{double:{
         '300': {shape:'rect',w:53, dep:38,  h:36,wt:'600',  sh:'10 ga'},
@@ -479,34 +486,35 @@ const TD={
         '8000':{shape:'rect',w:278,dep:88,  h:76,wt:'16,000',sh:'1/4"'},
         '10000':{shape:'rect',w:346,dep:88, h:76,wt:'18,000',sh:'1/4"'},
         '12000':{shape:'rect',w:360,dep:88, h:88,wt:'22,000',sh:'1/4"'},
+      }},
+      // Obround tanks: w x h cross-section, l overall; welded leg frame at each head
+      oval:{single:{
+        '275':{shape:'oval',w:27.5,h:44,l:62,wt:'300',sh:'12 ga'},
+        '330':{shape:'oval',w:27.5,h:44,l:74,wt:'350',sh:'12 ga'},
       }}
     }
   },
   fireguard:{label:'Fireguard®',cert:'UL 2085',badge:'UL 2085',lead:'4-6 wks',warranty:'1 yr',
-    // Per SPATCO Kroger 12K drawing:
-    // Head: 102" diameter - Saddles: 102" saddle assembly - 3 saddles on 12K+
-    // Lug: LIFTING LUG 2085 (different from UL 142) + LUG PLATE 2085 backing plate
-    // Manhole: 18" integrated with 8" E-Vent as single assembly
-    // Couplings: 4" FIREGUARD COUPLING (fire-rated, special type - NOT same as UL 142)
-    //            2" COUPLING FLAT, 8" COUPLING
-    // Emergency vent: 8" standalone + integrated in manhole assembly
+    // Lugs: 2085 lifting lug + backing plate on 10,000 gal and up
+    // Couplings: 4" Fireguard (fire-rated) couplings; 2" flat interstitial ports; monitor pipe at one head
+    // Manhole: 18" with integrated emergency vent (24" on 20,000 gal and the 126" 15,000), plus a second emergency vent
     // Rain shield Body1: Steel, 442.5 lbs, 12,585 in2 area
     sizes:{
       horiz:{double:{
-        '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'5,800', saddles:2},
-        '2000':{di:64, do_:70,  li:146, lo:158, wt:'8,000', saddles:2},
-        '3000':{di:64, do_:70,  li:216, lo:228, wt:'11,000',saddles:2},
-        '4000':{di:96, do_:102, li:134, lo:146, wt:'16,000',saddles:2},
-        '4000L':{di:64,do_:70,  li:288, lo:300, wt:'16,000',saddles:2},
-        '5000':{di:96, do_:102, li:168, lo:180, wt:'18,000',saddles:2},
-        '6000':{di:96, do_:102, li:194, lo:180, wt:'20,000',saddles:2},
-        '8000':{di:96, do_:102, li:278, lo:290, wt:'24,000',saddles:2},
-        '10000':{di:96,do_:102, li:324, lo:338, wt:'30,000',saddles:2},
-        '12000':{di:96,do_:102, li:386, lo:398, wt:'34,000',saddles:3},
-        '15000':{di:96,do_:102, li:482, lo:494, wt:'37,000',saddles:3},
-        '15000B':{di:120,do_:126,li:314,lo:326, wt:'37,000',saddles:2},
-        '20000':{di:114,do_:120, li:462,lo:474, wt:'46,000',saddles:3},
-        '25000':{di:120,do_:126, li:516,lo:528, wt:'58,000',saddles:3},
+        '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'5,800'},
+        '2000':{di:64, do_:70,  li:146, lo:158, wt:'8,000'},
+        '3000':{di:64, do_:70,  li:216, lo:228, wt:'11,000'},
+        '4000':{di:96, do_:102, li:134, lo:146, wt:'16,000'},
+        '4000L':{di:64,do_:70,  li:288, lo:300, wt:'16,000', tag:'Long'},
+        '5000':{di:96, do_:102, li:168, lo:180, wt:'18,000'},
+        '6000':{di:96, do_:102, li:194, lo:206, wt:'20,000'},
+        '8000':{di:96, do_:102, li:264, lo:276, wt:'24,000'},
+        '10000':{di:96,do_:102, li:324, lo:336, wt:'30,000'},
+        '12000':{di:96,do_:102, li:386, lo:398, wt:'34,000'},
+        '15000':{di:96,do_:102, li:482, lo:494, wt:'37,000'},
+        '15000B':{di:120,do_:126,li:314,lo:326, wt:'37,000', tag:'Large Ø'},
+        '20000':{di:114,do_:120, li:462,lo:474, wt:'46,000'},
+        '25000':{di:120,do_:126, li:516,lo:528, wt:'58,000'},
       }},
       rect:{double:{
         '300': {shape:'rect',w:54, dep:38,h:36,wt:'2,800'},
@@ -525,15 +533,15 @@ const TD={
   },
   flameshield:{label:'Flameshield®',cert:'STI-P3',badge:'STI-P3',lead:'4-6 wks',warranty:'1 yr',
     sizes:{horiz:{double:{
-      '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'4,500', saddles:2},
-      '2000':{di:64, do_:70,  li:146, lo:158, wt:'6,500', saddles:2},
-      '3000':{di:64, do_:70,  li:216, lo:228, wt:'9,000', saddles:2},
-      '5000':{di:96, do_:102, li:164, lo:176, wt:'14,000',saddles:2},
-      '8000':{di:96, do_:102, li:278, lo:290, wt:'20,000',saddles:2},
-      '10000':{di:96,do_:102, li:324, lo:338, wt:'24,000',saddles:2},
-      '12000':{di:96,do_:102, li:386, lo:398, wt:'28,000',saddles:3},
-      '15000':{di:96,do_:102, li:482, lo:494, wt:'30,000',saddles:3},
-      '20000':{di:114,do_:120,li:462, lo:474, wt:'38,000',saddles:3},
+      '1000':{di:64, do_:70,  li:74,  lo:86,  wt:'4,500'},
+      '2000':{di:64, do_:70,  li:146, lo:158, wt:'6,500'},
+      '3000':{di:64, do_:70,  li:216, lo:228, wt:'9,000'},
+      '5000':{di:96, do_:102, li:164, lo:176, wt:'14,000'},
+      '8000':{di:96, do_:102, li:278, lo:290, wt:'20,000'},
+      '10000':{di:96,do_:102, li:324, lo:338, wt:'24,000'},
+      '12000':{di:96,do_:102, li:386, lo:398, wt:'28,000'},
+      '15000':{di:96,do_:102, li:482, lo:494, wt:'30,000'},
+      '20000':{di:114,do_:120,li:462, lo:474, wt:'38,000'},
     }}}
   },
   farm:{label:'Farm Tank',cert:'Non-UL',badge:'Agricultural',lead:'2-3 wks',warranty:'1 yr',
@@ -546,7 +554,7 @@ const TD={
   },
   permatank:{label:'Permatank®',cert:'ACT-100',badge:'STI ACT-100',lead:'6-8 wks',warranty:'30 yr',
     fixedColor:'#E07A10',fixedColorName:'Orange',
-    // From 7-Eleven 27K model tree:
+    // From the 27K model tree:
     // Strap: STRAP 120IN W 1X18" TURNBUCKLE - 1"x18" turnbuckle, 120" wide
     // 27K = 11 straps - 3 concrete deadman bodies
     // Manhole: 30IN MANHOLE PERMATANK + 10IN PLATE (right end)
@@ -657,12 +665,13 @@ const STEPS=[
     ]},
   // STEP 3 - Shape
   {id:'shape',lbl:'Shape',q:'Choose your tank shape',
-   hint:'Horizontal cylindrical is the most common. Rectangular is typical for Fireguard fire-rated.',
+   hint:'Horizontal cylindrical is the most common. Rectangular is typical for Fireguard fire-rated. Oval tanks come in 275 and 330 gal.',
    type:'tiles',c:2,
     opts:[
-      {v:'horiz',i:'horz',l:'Horizontal Cylinder',s:'Most common — skid mounted'},
+      {v:'horiz',i:'horz',l:'Horizontal Cylinder',s:'Most common — skid or saddle mounted'},
       {v:'vert', i:'vert',l:'Vertical Cylinder',  s:'Smaller footprint'},
       {v:'rect', i:'rect',l:'Rectangular',         s:'Fireguard / UL 142 double wall'},
+      {v:'oval', i:'oval',l:'Oval',                s:'275 & 330 gal — UL 142 single wall'},
     ]},
   // STEP 4 - Wall
   {id:'wall',lbl:'Wall',q:'Single wall or double wall?',
@@ -676,21 +685,26 @@ const STEPS=[
   {id:'cap',lbl:'Capacity',q:'Choose your tank capacity',
    hint:'3D model updates to exact engineering proportions from HTC spec sheets.',
    type:'cap'},
-  // STEP 6 - Compartments (new!)
+  // STEP 6 - Mounting (saddles, flush skid or pipe skid, from HTC's standard builds)
+  {id:'mount',lbl:'Mounting',q:'How should the tank be supported?',
+   hint:'Choose what the tank sits on. The options depend on the tank type and size.',
+   type:'mount'},
+  // STEP 7 - Compartments
   {id:'compart',lbl:'Compartments',q:'Single or multi-compartment?',
    hint:'Multi-compartment tanks can store two different products (e.g. diesel + gasoline) in one tank.',
    type:'compart'},
-  // STEP 7 - Manhole
+  // STEP 8 - Manhole
   {id:'manhole',lbl:'Manhole',q:'Choose your manhole size',
-   hint:'18" standard on most tanks. Larger = easier cleaning and internal equipment access.',
+   hint:'Smaller tanks usually ship without a manhole. Larger = easier cleaning and internal equipment access. The tag shows the standard for this tank.',
    type:'tiles',c:2,
     opts:[
+      {v:'none',i:'x', l:'No Manhole',   s:'Vents and couplings only'},
       {v:'16', i:'mh',l:'16" Manhole',  s:'Small tanks up to 1,000 gal'},
-      {v:'18', i:'mh',l:'18" Manhole',  s:'Standard',               t:'Standard'},
+      {v:'18', i:'mh',l:'18" Manhole',  s:'Typical 3,000 gal and up'},
       {v:'24', i:'mh',l:'24" Manhole',  s:'Wide access'},
       {v:'30', i:'mh',l:'30" Manhole',  s:'Full interior access'},
     ]},
-  // STEP 8 - Fill connection
+  // STEP 9 - Fill connection
   {id:'fill',lbl:'Fittings',q:'Choose fill connection size',
    hint:'Standard is 2" flat-face coupling. Every tank includes suction, return, and vent connections.',
    type:'tiles',c:2,
@@ -700,18 +714,19 @@ const STEPS=[
       {v:'3',  i:'fit',l:'3" Fill',   s:'High-flow filling'},
       {v:'4',  i:'fit',l:'4" Fill',   s:'Bulk / terminal'},
     ]},
-  // STEP 9 - Venting
+  // STEP 10 - Venting
   {id:'vent',lbl:'Venting',q:'Choose vent configuration',
-   hint:'Emergency vents are flat disc/cap style up to 8". Sized per NFPA 30 and tank capacity.',
+   hint:'Emergency vents are sized per NFPA 30 and tank capacity. The tag shows the standard for this tank.',
    type:'tiles',c:2,
     opts:[
-      {v:'std',i:'vent',l:'2" NV + 2" EV',  s:'Standard — up to 3,000 gal', t:'Standard'},
-      {v:'med',i:'vent',l:'2" NV + 4" EV',  s:'3,000–10,000 gal',             t:'Standard'},
-      {v:'lrg',i:'vent',l:'3" NV + 6" EV',  s:'10,000+ gal'},
-      {v:'xl', i:'vent',l:'4" NV + 8" EV',  s:'Large / Fireguard standard'},
+      {v:'std',i:'vent',l:'2" NV + 2" EV',  s:'Oval and small tanks'},
+      {v:'med',i:'vent',l:'2" NV + 4" EV',  s:'Up to 500 gal'},
+      {v:'lrg',i:'vent',l:'3" NV + 6" EV',  s:'1,000–3,000 gal'},
+      {v:'xl', i:'vent',l:'4" NV + 8" EV',  s:'4,000–15,000 gal'},
+      {v:'xxl',i:'vent',l:'4" NV + 10" EV', s:'20,000 gal and up'},
       {v:'pvv',i:'pwr', l:'P/V Valve',       s:'Pressure-vacuum relief system'},
     ]},
-  // STEP 10 - Pump
+  // STEP 11 - Pump
   {id:'pump',lbl:'Pump',q:'Choose your pump package',
    hint:'Pumps are sold as an optional add-on. When ordered with a tank, we can plumb, prime, and air-check the assembly on our yard for an additional cost.',
    type:'tiles',c:2,
@@ -723,9 +738,9 @@ const STEPS=[
       {v:'50ac', i:'pwr',l:'50 GPM AC',    s:'Commercial fleet'},
       {v:'gas',  i:'fuel',l:'Gas Engine',   s:'Off-grid / no power'},
     ]},
-  // STEP 11 - Color
+  // STEP 12 - Color
   {id:'color',lbl:'Color',q:'Choose your color & finish',type:'color'},
-  // STEP 12 - Accessories
+  // STEP 13 - Accessories
   {id:'acc',lbl:'Add-ons',q:'Select accessories & options',
    hint:'All accessories installed, tested, and documented before shipment.',
    type:'acc'},
@@ -735,15 +750,55 @@ const isUST=()=>C.type==='permatank'||C.type==='act100u';
 
 const C={
   type:'ul142',product:'diesel',shape:'horiz',wall:'single',cap:'5000',capPref:'5000',
-  shapePref:'horiz',wallPref:'single',manholePref:'18',ventPref:null,   // the visitor's own picks, restored when a tank type allows them
+  shapePref:'horiz',wallPref:'single',manholePref:null,ventPref:null,mountPref:null,   // the visitor's own picks, restored when a tank type allows them
   compart:1,comp2gal:0,comp1product:'diesel',comp2product:'gasoline',
-  manhole:'18',fill:'2',vent:'med',pump:'none',
+  mount:'saddle',manhole:'18',fill:'2',vent:'xl',pump:'none',
   colorHex:'#E0E2E8',colorName:'White',
   acc:new Set()
 };
 // Human-readable label for an option code (used in the build sheet, email and PDF)
 function optLabel(stepId,v){const s=STEPS.find(x=>x.id===stepId);return s?.opts?.find(o=>o.v===v)?.l||v;}
-const SHAPE_NAMES={horiz:'Horizontal',vert:'Vertical',rect:'Rectangular'};
+const SHAPE_NAMES={horiz:'Horizontal',vert:'Vertical',rect:'Rectangular',oval:'Oval'};
+
+// --- MOUNTING (HTC standard builds) ------------------------------------
+const MOUNTS={
+  saddle: {i:'sadl',l:'Saddles',        s:'Two welded steel saddles',                       sheet:'Steel saddles (x2)'},
+  skid:   {i:'skid',l:'Flush Skid',     s:'Two formed rails the length of the tank',        sheet:'Flush skid (two formed rails)'},
+  pipe:   {i:'pipe',l:'Pipe Skid',      s:'Rails run past both heads, pull pipe at each end',sheet:'Pipe skid with pull pipes at both ends'},
+  legs:   {i:'legs',l:'Leg Stand',      s:'Welded steel legs',                              sheet:'Welded leg stand'},
+  channel:{i:'skid',l:'Skid Channels',  s:'Welded channel base',                            sheet:'Welded skid channels'},
+  frames: {i:'legs',l:'Leg Frames',     s:'Welded leg frame at each head',                  sheet:'Welded leg frame at each head'},
+  deadman:{i:'ust', l:'Deadman Anchors',s:'Concrete deadmen with hold-down straps',         sheet:'Deadman anchors with hold-down straps'},
+  stand:  {i:'stnd',l:'Overhead Stand', s:'Steel stand for gravity feed',                   sheet:'Overhead gravity-feed stand'},
+};
+// Which supports this tank is built with (first = default)
+function mountOpts(){
+  if(isUST())return['deadman'];
+  if(C.shape==='vert')return['legs'];
+  if(C.shape==='rect')return['channel'];
+  if(C.shape==='oval')return['frames'];
+  const res=getSpec();
+  if(C.type==='farm'&&res?.spec?.farmType==='overhead')return['stand'];
+  if(C.type==='fireguard'||C.type==='flameshield')return['saddle'];
+  const cap=parseInt(res?.key||C.cap)||0;
+  if(cap<1000)return['skid'];
+  if(cap<=4000)return['saddle','skid'];
+  return['saddle','pipe'];
+}
+function curMount(){const o=mountOpts();return o.includes(C.mount)?C.mount:o[0];}
+// Why a horizontal-tank support is not offered for this tank
+function mountNote(v){
+  if(C.type==='fireguard'||C.type==='flameshield')return'Fire-rated tanks ship on saddles';
+  return{skid:'Up to 4,000 gal',pipe:'5,000 gal and up',saddle:'1,000 gal and up'}[v]||'';
+}
+// Saddle by outer diameter (inches): [max D, axial width, base width, horn half-width, tank-bottom clearance, centre-from-end]
+const SADDLE_BY_D=[[52,8,53,24.5,4.5,12.5],[66,8,65,32,6.5,16.5],[72,9,65,32,5,17.5],[97,16,94,45.5,7,24],
+  [99.5,12,95,45,4,24.5],[104,12,95,45,4.5,25.5],[119,12.5,120,57.5,7.5,29.5],[122,12,122,59,7.5,30],[999,16,122,59.5,9,31.5]];
+// Flush-skid rails: [max D, inner edge, outer edge (from centre), tank-bottom clearance]
+const SKID_BY_D=[[40,4.5,14,3.5],[52,9.5,18.5,3],[70,13,23.5,3],[97,20.5,35,3.5],[110,20.5,35,4.5],[999,27,43,3.5]];
+// Pipe skid: [max D, inner edge, outer edge, extension past each head, pull-pipe height, pull-pipe half-length, tank-bottom clearance]
+const PIPESKID_BY_D=[[110,20.5,35,33,14.5,41.5,3.5],[999,27,43,26.75,18,46,3.5]];
+const rowFor=(tbl,D)=>tbl.find(r=>D<=r[0])||tbl[tbl.length-1];
 function capNum(){return parseInt(getSpec()?.key||C.cap)||0;}
 function splitMin(cap){return Math.round(cap*0.1/500)*500||500;}
 function splitVols(){
@@ -892,7 +947,7 @@ function addRod(a,b,rad,mat,seg){
 
 // --- SIZE DATA HELPERS ------------------------------------------------
 function sizesFor(type,shape,wall){const s=TD[type]?.sizes?.[shape]?.[wall];return s&&Object.keys(s).length?s:null;}
-function availShapes(type){return['horiz','vert','rect'].filter(sh=>availWalls(type,sh).length);}
+function availShapes(type){return['horiz','vert','rect','oval'].filter(sh=>availWalls(type,sh).length);}
 function availWalls(type,shape){return['single','double'].filter(w=>sizesFor(type,shape,w));}
 // Exact key first (keeps variants like '4000L' / '15000B'), else nearest capacity
 function nearestCapKey(sizes,want){
@@ -919,6 +974,8 @@ function normalizeConfig(){
   }
   const sizes=sizesFor(C.type,C.shape,C.wall);
   if(sizes){const k=nearestCapKey(sizes,C.capPref||C.cap);if(k)C.cap=k;}
+  const mo=mountOpts();
+  C.mount=mo.includes(C.mountPref)?C.mountPref:mo.includes(C.mount)?C.mount:mo[0];
 }
 function getSpec(){
   const td=TD[C.type];if(!td)return null;
@@ -939,6 +996,7 @@ function buildTank(){
   const steelMat=new THREE.MeshStandardMaterial({color:0xA3AEBA,roughness:0.32,metalness:0.85});
   const darkSt=new THREE.MeshStandardMaterial({color:0x5C6670,roughness:0.42,metalness:0.8});
   if(spec.shape==='rect') buildRect(spec,col,tankMat,steelMat,darkSt);
+  else if(spec.shape==='oval') buildOval(spec,col,tankMat,steelMat,darkSt);
   else if(C.shape==='vert') buildVertCyl(spec,col,tankMat,steelMat,darkSt);
   else if(C.type==='farm'&&spec.farmType==='overhead') buildOverheadFarm(spec,col,tankMat,steelMat,darkSt);
   else buildHorizCyl(spec,col,tankMat,steelMat,darkSt);
@@ -1003,9 +1061,11 @@ function buildHorizCyl(spec,col,tankMat,steelMat,darkSt){
   // Secondary (outer) shell — never drawn smaller than the primary, even if the data says so
   const ro=dbl?Math.max(u(spec.do_||di+2)/2,r+u(0.75)):r;
   const Lo=dbl?Math.max(u(spec.lo||li+12),L+u(6)):L;
-  // Aboveground tanks sit up on their saddles; underground tanks rest on the deadman bed
-  const lift=ust?0:Math.max(u(4),ro*0.14);
-  const gY=ro+lift;
+  // Tank-bottom clearance from HTC's builds (saddles, flush skid or pipe skid); underground tanks rest on the deadman bed
+  const Din=ro*96,mount=ust?'deadman':curMount();
+  const bot=ust?0:mount==='saddle'?rowFor(SADDLE_BY_D,Din)[4]
+    :(mount==='pipe'?rowFor(PIPESKID_BY_D,Din)[6]:rowFor(SKID_BY_D,Din)[3])+(C.acc.has('forklift')?2:0);  // fork-pocket skids sit 2" higher
+  const gY=ro+u(bot);
 
   addM(new THREE.CylinderGeometry(r,r,L,72),tankMat,[0,gY,0],[0,0,Math.PI/2]);
   buildFlatHead(r,L/2,1,tankMat,gY);
@@ -1017,9 +1077,11 @@ function buildHorizCyl(spec,col,tankMat,steelMat,darkSt){
     buildFlatHead(ro,-Lo/2,-1,om,gY);
   }
   if(C.compart===2) buildCompartSplit(ro,L,gY,steelMat);
-  const o={kind:'horiz',rs:ro,L:Lo,cy:gY,top:gY+ro,ust,dbl};
+  const o={kind:'horiz',rs:ro,L:Lo,cy:gY,top:gY+ro,ust,dbl,ri:r,Li:L,Din,Lin:Lo*48,mount};
   if(ust){Object.assign(o,ustLayout(Lo,ro));buildDeadmanAnchors(ro,Lo,gY,o.straps);}
-  else buildSaddles(ro,Lo,col,gY);
+  else if(mount==='skid')buildFlushSkid(o,col);
+  else if(mount==='pipe')buildPipeSkid(o,col);
+  else buildSaddles(o,col);
   buildFittings(o,steelMat,darkSt);
   if(!ust&&C.pump!=='none') buildPump(o);
   buildAccessories(o,col);
@@ -1107,39 +1169,107 @@ function buildDeadmanAnchors(rs,L,gY,stations){
   });
 }
 
-// --- SADDLES — one continuous curved cradle + exactly two legs (one per side) ---
-function buildSaddles(rs,L,col,gY){
+// --- SADDLES — two per tank, sized from HTC's saddle drawings ---------
+// Each saddle: base plate, web plate (lifting hole near each horn), curved cradle band, stiffener gussets.
+function buildSaddles(o,col){
   const sM=new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.4,metalness:0.12});
-  const n=(getSpec()?.spec?.saddles)||2;
-  const xs=n===3?[-L*0.32,0,L*0.32]:[-L*0.3,L*0.3];
-  const half=THREE.MathUtils.degToRad(72);      // cradle wraps 144° of the shell
-  const bandW=Math.max(u(5),rs*0.12);           // cradle width along the tank axis
-  const bandT=Math.max(u(1.25),rs*0.035);       // cradle plate depth
-  const Ro=rs+bandT;
-  const legW=Math.max(u(6),rs*0.22);            // leg width across the tank
-  const zo=Ro*Math.sin(half),zi=zo-legW;
-  const yAt=z=>gY-Math.sqrt(Math.max(0,Ro*Ro-z*z));
-  xs.forEach(xp=>{
+  const R=o.rs,gY=o.cy;
+  const[,ax,base,horn,,endOff]=rowFor(SADDLE_BY_D,o.Din);
+  const t=u(0.75),bandW=u(ax),Ro=R+t,bw=u(base)/2;
+  const zh=Math.min(u(horn),Ro*0.985);
+  const half=Math.asin(zh/Ro);                         // cradle half-angle
+  const yAt=z=>gY-Math.sqrt(Math.max(0,Ro*Ro-z*z));    // underside of the cradle
+  const off=Math.min(u(endOff),o.L*0.3);               // saddle centre in from each head
+  [-1,1].forEach(sx=>{
+    const xp=sx*(o.L/2-off);
     const cr=new THREE.Shape();
     cr.absarc(0,0,Ro,-Math.PI/2-half,-Math.PI/2+half,false);
-    cr.absarc(0,0,rs,-Math.PI/2+half,-Math.PI/2-half,true);
+    cr.absarc(0,0,R,-Math.PI/2+half,-Math.PI/2-half,true);
     cr.closePath();
     const g=new THREE.ExtrudeGeometry(cr,{depth:bandW,bevelEnabled:false,curveSegments:48});
     g.translate(0,0,-bandW/2);
     addM(g,sM,[xp,gY,0],[0,-Math.PI/2,0]);
+    // web plate: from the base plate up to the cradle
+    const wz=Math.min(zh-u(1),bw-u(1)),N=28,web=new THREE.Shape();
+    web.moveTo(-wz,u(1));web.lineTo(wz,u(1));
+    for(let k=0;k<=N;k++){const z=wz-2*wz*k/N;web.lineTo(z,yAt(z));}
+    web.closePath();
     [-1,1].forEach(s=>{
-      // leg plate whose top follows the cradle
-      const sh=new THREE.Shape();
-      sh.moveTo(s*zi,0);sh.lineTo(s*zo,0);sh.lineTo(s*zo,yAt(zo));
-      for(let k=1;k<=12;k++){const z=zo-(zo-zi)*k/12;sh.lineTo(s*z,yAt(z));}
-      sh.closePath();
-      const lg=new THREE.ExtrudeGeometry(sh,{depth:bandW*0.55,bevelEnabled:false});
-      lg.translate(0,0,-bandW*0.275);
-      addM(lg,sM,[xp,0,0],[0,-Math.PI/2,0]);
-      addM(new THREE.BoxGeometry(bandW*1.5,u(0.75),legW*1.3),sM,[xp,u(0.375),s*(zo-legW/2)]);
+      const hz=s*(wz-u(5)),hr=u(Math.min(2,ax*0.2)),hy=yAt(hz)-hr-u(2.5);
+      if(hy-hr>u(3)){const h=new THREE.Path();h.absarc(hz,hy,hr,0,Math.PI*2,true);web.holes.push(h);}
     });
-    addM(new THREE.BoxGeometry(bandW*0.35,u(3),zo*2-legW),sM,[xp,u(7),0]);   // low tie between the legs
+    const wg=new THREE.ExtrudeGeometry(web,{depth:u(0.75),bevelEnabled:false,curveSegments:16});
+    wg.translate(0,0,-u(0.375));
+    addM(wg,sM,[xp,0,0],[0,-Math.PI/2,0]);
+    addM(new THREE.BoxGeometry(bandW+u(1),u(1),bw*2),sM,[xp,u(0.5),0]);     // base plate
+    [-0.72,-0.36,0.36,0.72].forEach(f=>{                                    // gussets either side of the web
+      const z=f*wz,h=Math.min(yAt(z)-u(1.5),u(10));
+      if(h>u(1.5))addM(new THREE.BoxGeometry(bandW,h,u(0.5)),sM,[xp,u(1)+h/2,z]);
+    });
   });
+}
+
+// --- FLUSH SKID / PIPE SKID — two formed rails under the tank -----------
+// Rail section: flat on the ground, outer face up to the shell, top following the shell curve (scene units)
+function railShape(R,gY,zi,zo){
+  const yS=z=>gY-Math.sqrt(Math.max(0,R*R-z*z)),sh=new THREE.Shape();
+  sh.moveTo(zi,0);sh.lineTo(zo,0);sh.lineTo(zo,yS(zo));
+  for(let k=1;k<=10;k++){const z=zo+(zi-zo)*k/10;sh.lineTo(z,yS(z));}
+  sh.closePath();
+  return sh;
+}
+function addRails(o,mat,zi,zo,len){
+  [-1,1].forEach(s=>{
+    const g=new THREE.ExtrudeGeometry(railShape(o.rs,o.cy,s*zi,s*zo),{depth:len,bevelEnabled:false,curveSegments:6});
+    g.translate(0,0,-len/2);
+    addM(g,mat,[0,0,0],[0,-Math.PI/2,0]);
+  });
+}
+function skidMat(col){return new THREE.MeshStandardMaterial({color:new THREE.Color(col),roughness:0.4,metalness:0.12});}
+function buildFlushSkid(o,col){
+  const[,zi,zo]=rowFor(SKID_BY_D,o.Din);
+  addRails(o,skidMat(col),u(zi),u(zo),o.L-u(1));
+}
+// Rails run past both heads; a pull pipe crosses each end
+function buildPipeSkid(o,col){
+  const sM=skidMat(col);
+  const[,zi,zo,ext,pY,pH]=rowFor(PIPESKID_BY_D,o.Din);
+  const len=o.L+u(ext)*2,pr=u(2.25);
+  addRails(o,sM,u(zi),u(zo),len);
+  [-1,1].forEach(sx=>{
+    const x=sx*(len/2-u(2.5));
+    addM(new THREE.CylinderGeometry(pr,pr,u(pH)*2,16),sM,[x,u(pY),0],[Math.PI/2,0,0]);
+    [-1,1].forEach(sz=>addM(new THREE.CylinderGeometry(pr*1.35,pr*1.35,u(0.75),16),sM,[x,u(pY),sz*u(pH)],[Math.PI/2,0,0]));
+  });
+}
+
+// --- OVAL (OBROUND) TANK — UL 142 275 / 330 gal on a welded leg frame at each head ---
+function buildOval(spec,col,tankMat,steelMat,darkSt){
+  const W=u(spec.w),H=u(spec.h),L=u(spec.l),r=W/2,hs=(H-W)/2,bot=u(2.5),cy=bot+H/2;
+  const sh=new THREE.Shape();
+  sh.moveTo(r,-hs);sh.lineTo(r,hs);sh.absarc(0,hs,r,0,Math.PI,false);
+  sh.lineTo(-r,-hs);sh.absarc(0,-hs,r,Math.PI,Math.PI*2,false);
+  const g=new THREE.ExtrudeGeometry(sh,{depth:L,bevelEnabled:false,curveSegments:40});
+  g.translate(0,0,-L/2);
+  addM(g,tankMat,[0,cy,0],[0,Math.PI/2,0]);
+  const lM=skidMat(col),yb=cy-hs;   // yb = centre of the lower curve
+  [-1,1].forEach(sx=>{
+    const x=sx*(L/2-u(1.5));
+    const band=new THREE.Shape(),ro=r+u(0.3);
+    band.absarc(0,0,ro,Math.PI,Math.PI*2,false);band.absarc(0,0,r,Math.PI*2,Math.PI,true);band.closePath();
+    const bg=new THREE.ExtrudeGeometry(band,{depth:u(2),bevelEnabled:false,curveSegments:24});
+    bg.translate(0,0,-u(1));
+    addM(bg,lM,[x,yb,0],[0,Math.PI/2,0]);                                   // cradle under the head
+    [-1,1].forEach(sz=>{
+      addM(new THREE.BoxGeometry(u(2),u(21),u(2)),lM,[x,u(10.5),sz*(r-u(1))]);   // angle legs, 21" tall
+      addM(new THREE.BoxGeometry(u(3.5),u(0.4),u(3.5)),lM,[x,u(0.2),sz*(r-u(1))]);
+    });
+    addM(new THREE.BoxGeometry(u(2),u(1.5),2*r-u(2)),lM,[x,u(0.75),0]);    // bottom tie
+  });
+  const o={kind:'horiz',rs:r,L,cy:cy+hs,top:cy+hs+r,ust:false,dbl:false,oval:true,ri:r,Li:L,Din:spec.w,Lin:spec.l,mount:'frames',botY:bot};
+  buildFittings(o,steelMat,darkSt);
+  if(C.pump!=='none') buildPump(o);
+  buildAccessories(o,col);
 }
 
 // --- FITTINGS ---------------------------------------------------------
@@ -1160,6 +1290,7 @@ function topLayout(o){
     pump:[o.kind==='vert'?a*0.5:Math.min(Math.max(o.L*0.28,a+0.3),o.L/2-0.15),-depth*0.45]};
 }
 function buildFittings(o,steelMat,darkSt){
+  if(o.kind==='horiz'&&!o.ust)return buildHorizFittings(o,steelMat,darkSt);
   const top=o.top,lay=topLayout(o);
   const nozzle=(x,z,rad,h,seg)=>{
     const drop=shellDrop(o,z,rad)+0.012,len=h+drop;
@@ -1242,6 +1373,155 @@ function buildFittings(o,steelMat,darkSt){
   if(o.kind==='vert'){buildLiftingLug(0,top,o.rs*0.8,steelMat,s);buildLiftingLug(0,top,-o.rs*0.8,steelMat,s);}
   else if(o.ust&&o.lugs){o.lugs.forEach(g=>buildLiftingLug(g.x,top,0,steelMat,g.s));}
   else{buildLiftingLug(lay.lugX,top,0,steelMat,s);buildLiftingLug(-lay.lugX,top,0,steelMat,s);}
+}
+
+// --- HORIZONTAL TANK FITTINGS — HTC standard layout (from the Fusion models) ---
+// Centre: manhole with the emergency vent on its cover (smaller tanks: the emergency vent alone).
+// Lifting lugs on the top centreline; a coupling cluster near each head; double-wall and Fireguard
+// tanks add a second emergency vent and 2" interstitial ports at both ends (Fireguard: monitor pipe
+// at one head); tanks 64" and larger get an end ladder and a grab bar.
+function buildHorizFittings(o,steelMat,darkSt){
+  const top=o.top,R=o.rs;
+  const Din=o.Din||R*96,Lin=o.Lin||o.L*48,e=Lin/2;            // inches
+  const fire=C.type==='fireguard'||C.type==='flameshield',dw=!!o.dbl||fire;
+  const X=v=>u(v);
+  // occupied stretches of the top centreline, in inches
+  const used=[];
+  const isFree=(x,h)=>Math.abs(x)+h<=e-1&&!used.some(([a,b])=>x+h>a-1&&x-h<b+1);
+  const claim=(x,h)=>used.push([x-h,x+h]);
+  // nearest free spot from x0, stepping 2" in dir, without crossing the centre
+  const place=(x0,h,dir)=>{for(let k=0;k<80;k++){const x=x0+dir*k*2;if(Math.abs(x)+h>e-1||(x0&&Math.sign(x)!==Math.sign(x0)))break;if(isFree(x,h))return x;}return null;};
+  // riser welded to the shell (drop follows the curvature off the centreline)
+  const riser=(x,z,rad,h,seg)=>{const drop=shellDrop(o,z,rad)+0.012,len=h+drop;addM(new THREE.CylinderGeometry(rad,rad,len,seg||16),steelMat,[x,top+h-len/2,z]);};
+  const cplR=d=>d*0.575+0.35;                                  // coupling body radius, inches
+  const coupling=(xIn,dIn,zIn)=>{                              // plugged threaded coupling (Fireguard couplings stand taller)
+    const rad=u(cplR(dIn)),h=u(fire?7:dIn>=6?5.5:dIn>=4?3.5:2.5),x=X(xIn),z=X(zIn||0);
+    riser(x,z,rad,h,20);
+    addM(new THREE.CylinderGeometry(rad*0.72,rad*0.72,u(0.9),6),darkSt,[x,top+h+u(0.45),z]);
+  };
+  const flat=(xIn,dIn,zIn)=>{                                  // low flat-face coupling boss
+    const rad=u(dIn*0.5+0.75),x=X(xIn),z=X(zIn||0);
+    riser(x,z,rad,u(1),20);
+    addM(new THREE.CylinderGeometry(rad*0.6,rad*0.6,u(0.5),6),darkSt,[x,top+u(1.25),z]);
+  };
+  const evIn={std:2,med:3.25,lrg:4.25,xl:5,xxl:8,pvv:3.25}[C.vent]||3.25,evR=u(evIn);
+  const ventCap=(x,y,z)=>{
+    addM(new THREE.CylinderGeometry(evR*1.5,evR*1.5,0.022,24),steelMat,[x,y+0.011,z]);
+    addM(new THREE.CylinderGeometry(evR*1.15,evR*1.15,0.018,24),steelMat,[x,y+0.03,z]);
+  };
+  const evH=u(Math.max(2.5,evIn*1.1));
+  const ev=xIn=>{const x=X(xIn);riser(x,0,evR,evH,24);ventCap(x,top+evH,0);claim(xIn,evIn*1.5);};
+
+  // MANHOLE with the emergency vent on its cover — or the emergency vent alone
+  const mhIn=C.manhole==='none'?0:parseInt(C.manhole)||18;
+  const midLug=Din<60&&!o.oval&&Lin>=45&&Lin<100;     // 300-500 gal: single lug at the centre
+  if(mhIn){
+    const r0=Math.min(u(mhIn)/2,R*0.42),h=u(3.5);
+    riser(0,0,r0,h,40);
+    addM(new THREE.CylinderGeometry(r0*1.35,r0*1.35,u(1),40),steelMat,[0,top+h+u(0.5),0]);
+    for(let i=0;i<16;i++){const a=i/16*Math.PI*2;
+      addM(new THREE.CylinderGeometry(u(0.55),u(0.55),u(1.6),6),darkSt,[Math.cos(a)*r0*1.18,top+h+u(1),Math.sin(a)*r0*1.18]);}
+    const ch=u(5);
+    addM(new THREE.CylinderGeometry(evR,evR,ch,24),steelMat,[0,top+h+u(1)+ch/2,0]);
+    ventCap(0,top+h+u(1)+ch,0);
+    claim(0,r0*48*1.35+1);
+  } else ev(o.oval?Math.round(Lin*0.2):midLug?-Math.round(Lin*0.15):0);
+
+  // LIFTING LUGS — short tanks: one on each head; 300-500 gal: one at the centre; larger: two on the top
+  const cap=capNum();
+  const lugKind=fire&&cap>=10000?'2085':cap>=15000?'2085S':(Din>=90||cap>=4000)?'M':'S';
+  const lugHalf={S:2.5,M:2.75,'2085':12,'2085S':12}[lugKind]+0.5;
+  if(Din<60&&!o.oval&&Lin<45)[-1,1].forEach(s=>buildLug(o,s*(e+1.75),lugKind,steelMat,o.top-u(5.5),true));
+  else if(o.oval||midLug){const x=isFree(0,lugHalf)?0:place(lugHalf+2,lugHalf,1);if(x!=null){buildLug(o,x,lugKind,steelMat);claim(x,lugHalf);}}
+  else{
+    const lx=Lin<100?Math.round(Lin*0.2):Lin<180?24:Lin<300?30:(Din>=110||Lin>=480)?42:30;
+    [-1,1].forEach(s=>{const x=place(s*lx,lugHalf,s);if(x!=null){buildLug(o,x,lugKind,steelMat);claim(x,lugHalf);}});
+  }
+
+  // FILL (capped coupling) and NORMAL VENT (riser with mushroom cap)
+  const fIn={'1.5':1.6,'2':2,'3':2.6,'4':3.2}[C.fill]||2,nvIn={lrg:1.75,xl:2.4,xxl:2.4,pvv:1.75}[C.vent]||1.2;
+  const a=mhIn?Math.min(mhIn/2*1.35+7,e*0.45):evIn*1.5+6;
+  const xf=place(o.oval?-Math.round(Lin*0.2):a,fIn*1.3,o.oval?-1:1);
+  if(xf!=null){const x=X(xf),h=u(3.5),fR=u(fIn);riser(x,0,fR,h,16);addM(new THREE.CylinderGeometry(fR*1.3,fR*1.3,u(1.2),16),darkSt,[x,top+h+u(0.6),0]);claim(xf,fIn*1.3);}
+  const xn=place(o.oval?Math.round(Lin*0.39):-a,nvIn*1.5,o.oval?-1:-1);
+  if(xn!=null){const x=X(xn),nvR=u(nvIn),h=u(6);riser(x,0,nvR,h,12);
+    addM(new THREE.CylinderGeometry(nvR*1.5,nvR*1.5,0.02,16),steelMat,[x,top+h+0.01,0]);
+    addM(new THREE.SphereGeometry(nvR*1.5,16,6,0,Math.PI*2,0,Math.PI/2),steelMat,[x,top+h+0.02,0]);claim(xn,nvIn*1.5);}
+
+  // SECOND EMERGENCY VENT for the interstitial space (double wall / Fireguard)
+  if(dw&&!o.oval){
+    const x=place(-Math.round(Lin*0.22),evIn*1.5,-1)??place(Math.round(Lin*0.22),evIn*1.5,1);
+    if(x!=null){const xx=X(x);riser(xx,0,evR,evH,24);ventCap(xx,top+evH,0);claim(x,evIn*1.5);}
+  }
+  // END LADDER + GRAB BAR on the +X head (64" and larger); the Ladder & Platform add-on replaces them
+  const ladder=Din>=60&&!o.oval&&!C.acc.has('ladder');
+  if(ladder)claim(e-7.5,1);
+  // INTERSTITIAL PORTS at both ends; Fireguard monitor pipe in the head space at -X
+  const mon=fire&&o.ri&&o.Li&&o.L>o.Li;
+  if(dw&&!o.oval){
+    flat(-(e-3),2,mon?-6:0);claim(-(e-3),2.25);
+    flat(e-3,2);claim(e-3,2.25);
+  }
+  if(mon){
+    const xm=-(o.Li/2+o.L/2)/2;
+    addRod(new THREE.Vector3(xm,o.cy-R+u(2.5),0),new THREE.Vector3(xm,top+u(0.5),0),u(1.25),steelMat,12);
+    coupling(xm*48,2);
+  }
+  // COUPLING CLUSTERS near each head (6" / 4" / 2"; small tanks get 2" couplings)
+  const cl=[];
+  if(o.oval)cl.push([-Math.round(Lin*0.39),2]);
+  else if(Din<60)(Lin<45?[0.19,0.375]:[0.3,0.42]).forEach(k=>{cl.push([Math.round(k*Lin),2],[-Math.round(k*Lin),2]);});
+  else{
+    const A=Lin<100?[[e-7,6],[e-16,4],[e-23,4]]:[[e-10,6],[e-22,4],[e-34,4],[e-46,4]];
+    const B=Lin<100?[[e-4,2],[e-11,4],[e-18,4]]:[[e-11,2],[e-23,4],[e-35,4]];
+    A.forEach(([x,d])=>cl.push([-x,d]));B.forEach(c=>cl.push(c));
+  }
+  cl.forEach(([x0,d])=>{const h=cplR(d)+0.5,x=place(x0,h,x0>0?-1:1);if(x!=null){coupling(x,d);claim(x,h);}});
+  // DRAIN low on the -X head (single wall)
+  if(!dw){
+    const hx=-(o.L/2+(o.oval?0:0.02+R*0.018)+u(0.6)),yb=o.oval?(o.botY||0)+u(2.5):o.cy-R*0.8,dr=u(o.oval?0.75:1.75);
+    addM(new THREE.CylinderGeometry(dr,dr,u(1.2),16),steelMat,[hx,yb,0],[0,0,Math.PI/2]);
+    addM(new THREE.CylinderGeometry(dr*0.6,dr*0.6,u(0.5),6),darkSt,[hx-u(0.8),yb,0],[0,0,Math.PI/2]);
+  }
+  if(ladder){
+    const lM=new THREE.MeshStandardMaterial({color:0xC8CCD0,roughness:0.4,metalness:0.7});
+    // with pump platforms the ladder starts at the platform deck
+    buildEndLadder(o,lM,C.acc.has('pump_plat')?Math.max(0.25,o.cy-o.rs*0.35)*48+2:0);
+    buildGrabBar(o,e-7.5,lM);
+  }
+}
+
+// LIFTING LUG on the top centreline, parallel to the tank axis (small / medium / 2085 with backing plate)
+function buildLug(o,xIn,kind,mat,yBase,onHead){
+  const d={S:[5,3.5,0.5],M:[5.5,5,0.5],'2085':[16,11,1],'2085S':[16,7.5,1]}[kind]||[5.5,5,0.5];
+  if(onHead)d[0]=3.5;                               // head lugs on short tanks: 3.5" plate off the head
+  const w=u(d[0]),h=u(d[1]),t=u(d[2]),x=u(xIn),rr=Math.min(w/2,h)*0.7;
+  const s=new THREE.Shape();
+  s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,h-rr);s.quadraticCurveTo(w/2,h,w/2-rr,h);
+  s.lineTo(-w/2+rr,h);s.quadraticCurveTo(-w/2,h,-w/2,h-rr);s.closePath();
+  const hole=new THREE.Path();hole.absarc(0,h-rr*0.9,Math.min(rr*0.45,u(1.6)),0,Math.PI*2,true);s.holes.push(hole);
+  const g=new THREE.ExtrudeGeometry(s,{depth:t,bevelEnabled:false,curveSegments:12});
+  g.translate(0,0,-t/2);
+  addM(g,mat,[x,yBase!=null?yBase:o.top-u(0.3),0]);
+  if(!onHead&&(kind==='2085'||kind==='2085S'))addM(new THREE.BoxGeometry(u(24),u(0.5),u(8)),mat,[x,o.top+u(0.1),0]);
+}
+// END LADDER on the +X head: rails 19" apart, 5.5" off the head, top 11" below the top of the tank
+function buildEndLadder(o,mat,deckIn){
+  const H=o.Din<=72?42.5:o.Din<=106?70.5:98.5;
+  const yTop=o.top*48-11,yBot=Math.max(8,yTop-H,deckIn||0);
+  const xh=o.L/2+0.02,xr=xh+u(5.5),rz=u(9.5);
+  [-1,1].forEach(s=>{
+    addRod(new THREE.Vector3(xr,u(yBot),s*rz),new THREE.Vector3(xr,u(yTop),s*rz),u(0.75),mat,8);
+    [yBot+4,yTop-3].forEach(y=>addRod(new THREE.Vector3(xh-u(1),u(y),s*rz),new THREE.Vector3(xr,u(y),s*rz),u(0.6),mat,6));
+  });
+  for(let y=yBot+8;y<yTop-1;y+=12)addRod(new THREE.Vector3(xr,u(y),-rz),new THREE.Vector3(xr,u(y),rz),u(0.45),mat,6);
+}
+// GRAB BAR across the top near the ladder end (18.5" wide, 5.5" tall)
+function buildGrabBar(o,xIn,mat){
+  const x=u(xIn),hz=u(9.25),R=o.rs,yTop=o.top+u(5.5),rr=u(0.5);
+  const ys=o.cy+Math.sqrt(Math.max(0,R*R-hz*hz));
+  [-1,1].forEach(s=>addRod(new THREE.Vector3(x,ys-u(0.3),s*hz),new THREE.Vector3(x,yTop,s*hz),rr,mat,8));
+  addRod(new THREE.Vector3(x,yTop,-hz-rr),new THREE.Vector3(x,yTop,hz+rr),rr,mat,8);
 }
 
 // LIFTING LUG — flat plate with hole, parallel to the tank axis
@@ -1396,7 +1676,8 @@ function buildAccessories(o,col){
 
   if(C.acc.has('pan')){
     const pM=tint({transparent:true,opacity:0.6});
-    const pW=hx*2+0.5,pD=hz*2+0.7;
+    const ext=o.mount==='pipe'?u(rowFor(PIPESKID_BY_D,o.Din||96)[3]):0;
+    const pW=hx*2+ext*2+0.5,pD=hz*2+0.7;
     addM(new THREE.BoxGeometry(pW,0.055,pD),pM,[0,-0.02,0]);
     [[0,0.1,pD/2],[0,0.1,-pD/2]].forEach(p=>addM(new THREE.BoxGeometry(pW,0.24,0.05),pM,p));
     [[pW/2,0.1,0],[-pW/2,0.1,0]].forEach(p=>addM(new THREE.BoxGeometry(0.05,0.24,pD),pM,p));
@@ -1440,14 +1721,25 @@ function buildAccessories(o,col){
     addM(new THREE.BoxGeometry(0.04,0.08,0.04),rsM,[x,top+0.03,-R*0.6]);
   }
 
-  // FORK POCKETS (Agriland 6K drawing: 3.5" pipe, 42" centre-to-centre)
+  // FORK POCKETS (6K ag-tank drawing: 3.5" pipe, 42" centre-to-centre)
   if(C.acc.has('forklift')){
     const fM=tint({roughness:0.2,metalness:0.12});
-    const pr=u(3.5)/2,len=hx*2+0.12;
-    [-u(42)/2,u(42)/2].forEach(z=>{
-      addM(new THREE.CylinderGeometry(pr,pr,len,12),fM,[0,pr+0.003,z],[0,0,Math.PI/2]);
-      [len/2,-len/2].forEach(xp=>addM(new THREE.CylinderGeometry(pr*1.15,pr*1.15,0.03,12),fM,[xp,pr+0.003,z],[0,0,Math.PI/2]));
-    });
+    if(o.mount==='frames'){/* oval tanks sit too low for fork pockets */}
+    else if(o.mount==='skid'||o.mount==='pipe'){
+      // rectangular tubes across both skid rails, 36"-42" centre to centre (HTC fork-pocket skids)
+      const zw=u(rowFor(o.mount==='pipe'?PIPESKID_BY_D:SKID_BY_D,o.Din||96)[2])+u(1.5);
+      const xc=u(o.L*48<200?18:21);
+      [-xc,xc].forEach(x=>{
+        addM(new THREE.BoxGeometry(u(8),u(4),zw*2),fM,[x,u(3),0]);
+        [-1,1].forEach(s=>addM(new THREE.BoxGeometry(u(6.5),u(2.6),0.006),new THREE.MeshStandardMaterial({color:0x22262C,roughness:0.9}),[x,u(3),s*(zw+0.004)]));
+      });
+    } else {
+      const pr=u(3.5)/2,len=hx*2+0.12;
+      [-u(42)/2,u(42)/2].forEach(z=>{
+        addM(new THREE.CylinderGeometry(pr,pr,len,12),fM,[0,pr+0.003,z],[0,0,Math.PI/2]);
+        [len/2,-len/2].forEach(xp=>addM(new THREE.CylinderGeometry(pr*1.15,pr*1.15,0.03,12),fM,[xp,pr+0.003,z],[0,0,Math.PI/2]));
+      });
+    }
   }
 
   if(C.acc.has('cabinet')){
@@ -1528,10 +1820,12 @@ function renderStep(){
     s.opts.forEach(o=>{
       // Determine if option is disabled for this tank type
       const dis=isDis(s.id,o.v);
+      // "Standard" follows the tank: HTC's standard manhole / vent for this type and size
+      const tag=o.t||((s.id==='manhole'&&o.v===stdManhole())||(s.id==='vent'&&o.v===stdVent())?'Standard':'');
       html+=`<div class="tile${C[s.id]===o.v?' sel':''}${dis?' disabled':''}" onclick="pick('${s.id}','${o.v}',this)">
         <div class="ti">${o.i}</div><div class="tl">${o.l}</div>
         ${o.s?`<div class="ts">${o.s}</div>`:''}
-        ${o.t?`<div class="tt">${o.t}</div>`:''}
+        ${tag?`<div class="tt">${tag}</div>`:''}
       </div>`;
     });
     html+='</div>';
@@ -1550,6 +1844,7 @@ function renderStep(){
       const sp=sizes[cap];
       const dimStr=sp.shape==='rect'
         ?`${sp.w}"L × ${sp.dep}"W × ${sp.h}"H`
+        :sp.shape==='oval'?`${sp.w}"W × ${sp.h}"H × ${sp.l}"L`
         :`${sp.d||sp.di}"Ø × ${sp.l||sp.li}"L`;
       const shellStr=sp.sh?` · ${sp.sh} shell`:'';
       const isSel=C.cap===cap;
@@ -1558,6 +1853,7 @@ function renderStep(){
         <div class="tl">${parseInt(cap).toLocaleString()} gal</div>
         <div class="ts">${dimStr}</div>
         <div class="cap-dims">${sp.wt} lbs${shellStr}</div>
+        ${sp.tag?`<div class="tt">${sp.tag}</div>`:''}
       </div>`;
     });
     html+='</div>';
@@ -1587,6 +1883,25 @@ function renderStep(){
         Request Quote for These Dimensions &rarr;
       </button>
     </div>`;
+  }
+
+  if(s.type==='mount'){
+    const avail=mountOpts(),cur=curMount();
+    // Horizontal cylinders: saddles / flush skid / pipe skid (unavailable ones greyed out); other shapes have one support
+    const list=avail.some(v=>['saddle','skid','pipe'].includes(v))?['saddle','skid','pipe']:avail;
+    html+=`<div class="opts c2">`;
+    list.forEach(v=>{
+      const m=MOUNTS[v],ok=avail.includes(v);
+      html+=`<div class="tile${cur===v?' sel':''}${ok?'':' disabled'}" onclick="pick('mount','${v}',this)">
+        <div class="ti">${m.i}</div><div class="tl">${m.l}</div>
+        <div class="ts">${ok?m.s:mountNote(v)}</div>
+      </div>`;
+    });
+    html+='</div>';
+    const only={saddle:mountNote('skid')+'.',skid:'Tanks under 1,000 gal ship on a flush skid.',legs:'Vertical tanks stand on welded legs.',
+      channel:'Rectangular tanks sit on welded skid channels.',frames:'Oval tanks have a welded leg frame at each head.',
+      deadman:'Underground tanks are anchored to concrete deadmen.',stand:'Overhead farm tanks ship on a gravity-feed stand.'};
+    if(avail.length===1)html+=`<div class="step-hint" style="border-top:none;padding-top:0">${only[avail[0]]||''}</div>`;
   }
 
   if(s.type==='color'){
@@ -1679,14 +1994,30 @@ function renderStep(){
 }
 
 // --- STANDARD EQUIPMENT LIST -----------------------------------------
-// What ships on EVERY tank - per OIL EQUIPMENT CO drawing + HTC specs
+// What ships on EVERY tank - per HTC drawings + specs
+// Horizontal tanks: lug type, end ladder and Fireguard vents follow HTC's standard builds (Fusion models)
+function lugItem(){
+  if(C.shape==='oval')return'Small lifting lug';
+  if(C.shape!=='horiz'||isUST())return'Medium lifting lugs (x2)';
+  const cap=capNum(),sp=getSpec()?.spec||{},D=sp.do_||sp.d||sp.di||96;
+  if(cap>=15000||(C.type==='fireguard'&&cap>=10000))return'2085 lifting lugs + backing plates (x2)';
+  return(D>=90||cap>=4000?'Medium':'Small')+' lifting lugs (x2)';
+}
+function hasEndLadder(){
+  if(C.shape!=='horiz'||isUST()||C.acc.has('ladder'))return false;
+  const sp=getSpec()?.spec||{};
+  return(C.wall==='double'&&sp.do_?sp.do_:(sp.d||sp.di||0))>=60;
+}
 function stdItems(){
+  const cap=capNum();
+  const evSize=cap<=3000?6:cap<20000?8:10;
   const base=[
     'UL-listed normal & emergency vents',
     'Fill connection w/ dust cap',
     'Suction & return connections',
-    'Steel saddle/skid support',
-    'Medium lifting lugs (x2)',
+    MOUNTS[curMount()]?.sheet||'Steel saddle/skid support',
+    lugItem(),
+    ...(hasEndLadder()?['End ladder & grab bar']:[]),
     'SSPC-SP6 commercial blast prep',
     'High-Solids Polyurethane topcoat',
     'Air tested 3-5 PSI before shipment',
@@ -1697,15 +2028,14 @@ function stdItems(){
     ul142:[
       'UL 142 data plate & serial number',
       'Condensation eliminators (x2) on double-wall',
-      'Interstitial port 2" (double-wall)',
-      '3.5" pipe skid rails',
+      'Interstitial ports 2" at both ends (double-wall)',
     ],
     fireguard:[
       'UL 2085 & STI certification',
       '4" Fireguard-rated couplings (fire-rated pass-through)',
-      '24" manhole — standard on all Fireguard',
-      '8" emergency vent (up to 20K) or 10" EV (25K)',
-      '2085 lifting lug + backing plate',
+      ...(C.shape!=='horiz'?['24" manhole']:cap>=3000?['Manhole with integrated emergency vent']:[]),
+      evSize+'" primary & secondary emergency vents',
+      'Interstitial ports 2" + monitor pipe at one head',
       'Fireguard placard & decals',
       'Enviroastic 940 LV polyurethane coating',
       'Premix concrete interstitial fill',
@@ -1777,8 +2107,8 @@ const RECS=[
   {check:()=>parseInt(C.cap)>=10000&&(C.vent==='std'||C.vent==='med')&&C.type!=='fireguard'&&C.type!=='flameshield',
    msg:'Tanks of 10,000+ gal typically require 3" NV + 6" EV or larger per NFPA 30.',
    warn:true,icon:'⚠️'},
-  {check:()=>C.type==='fireguard'&&C.vent!=='xl',
-   msg:'Fireguard tanks use a 8" emergency vent (4" NV + 8" EV). 25K Fireguard uses 10" EV.',
+  {check:()=>C.type==='fireguard'&&C.vent!==stdVent()&&C.vent!=='pvv',
+   msg:'Fireguard emergency vents are sized to capacity: 6" up to 3,000 gal, 8" up to 15,000 gal and 10" from 20,000 gal.',
    warn:false,icon:'💡'},
   // Compartment suggestions
   {check:()=>C.product==='mixed'&&C.compart===1,
@@ -1800,7 +2130,7 @@ const RECS=[
   {check:()=>C.type==='farm'&&C.pump!=='none'&&!C.acc.has('pump_plat'),
    msg:'Agricultural pump setups typically include a 69x30 pump platform on each end — add it in accessories.',
    warn:false,icon:'💡'},
-  // Spill box for pump installs (standard on Agriland builds)
+  // Spill box for pump installs (standard on ag builds)
   {check:()=>C.pump!=='none'&&!C.acc.has('spill'),
    msg:'A spill box at the fill point is standard on most pump installs and required in many jurisdictions.',
    warn:false,icon:'💡'},
@@ -1809,8 +2139,8 @@ const RECS=[
    msg:'Ladder & platform is not available for underground tanks — it has been removed from your build.',
    warn:true,icon:'⚠️'},
   // Large tank access
-  {check:()=>parseInt(C.cap)>=15000&&C.shape==='horiz'&&!isUST()&&!C.acc.has('catwalk')&&!C.acc.has('ladder'),
-   msg:'Tanks of 15,000+ gal typically require a catwalk or ladder for safe inspection access.',
+  {check:()=>parseInt(C.cap)>=15000&&C.shape==='horiz'&&!isUST()&&!C.acc.has('catwalk'),
+   msg:'Tanks of 15,000+ gal often add a full catwalk for safe access along the top. The end ladder and grab bar are standard.',
    warn:false,icon:'💡'},
   // Anti-siphon for elevated/overhead pumps
   {check:()=>C.type==='farm'&&C.pump!=='none'&&!C.acc.has('antisiphon'),
@@ -1838,8 +2168,12 @@ function isDis(field,val){
   // Only offer shapes / wall types that this tank type is actually built in
   if(field==='shape')return !availWalls(C.type,val).length;
   if(field==='wall')return !sizesFor(C.type,C.shape,val);
-  // Fire-rated tanks always ship with a 24" (or larger) manhole
-  if(field==='manhole'&&(C.type==='fireguard'||C.type==='flameshield'))return val==='16'||val==='18';
+  if(field==='mount')return !mountOpts().includes(val);
+  if(field==='manhole'){
+    if(C.shape==='oval')return val!=='none';                  // oval tanks have no manhole
+    if(isUST())return val==='none';                           // underground tanks always have a manway
+    if(C.type==='flameshield'||(C.type==='fireguard'&&C.shape!=='horiz'))return val==='16'||val==='18'||val==='none';   // 24" or larger
+  }
   return false;
 }
 
@@ -1854,16 +2188,37 @@ function buildPgBar(){
 }
 
 let advTimer=null;
-// Manhole / vent follow the visitor's own picks unless the tank type or size needs something larger
-// (fire-rated: 24"+ manhole and 8" EV standard per Fireguard BOMs; 10,000+ gal: at least 3" NV + 6" EV)
+// HTC's standard manhole for this tank (from the Fusion models): none on smaller tanks,
+// 18" from 3,000 gal double wall / 4,000 gal, 24" on 20,000 gal and the 126" Fireguard
+function stdManhole(){
+  if(C.shape==='oval')return'none';
+  if(C.type==='flameshield'||(C.type==='fireguard'&&C.shape!=='horiz'))return'24';
+  if(isUST()||C.shape!=='horiz')return'18';
+  const res=getSpec(),cap=parseInt(res?.key||C.cap)||0,dw=C.wall==='double'||C.type==='fireguard';
+  if(cap<3000||(cap===3000&&!dw))return'none';
+  if(cap===20000||(res?.spec?.do_||0)>=126&&cap<25000)return'24';
+  return'18';
+}
+// Standard emergency vent by capacity: 4" up to 500 gal, 6" to 3,000, 8" to 15,000, 10" from 20,000
+function stdVent(){
+  const cap=capNum();
+  if(C.shape==='oval'||C.type==='farm')return'std';
+  if(isUST())return cap>=10000?'lrg':'med';
+  if(C.type==='flameshield')return'xl';
+  return cap<1000?'med':cap<=3000?'lrg':cap<20000?'xl':'xxl';
+}
+// Manhole / vent follow the visitor's own picks unless the tank type or size needs something else
 function applyFittingDefaults(){
-  const fire=C.type==='fireguard'||C.type==='flameshield';
-  const mh=C.manholePref||'18';
-  C.manhole=fire?(mh==='24'||mh==='30'?mh:'24'):mh;
-  const small=v=>v==='std'||v==='med';
-  let vent=C.ventPref||(fire?'xl':C.type==='farm'?'std':'med');
-  if(fire&&small(vent))vent='xl';
-  else if(!fire&&capNum()>=10000&&small(vent))vent='lrg';
+  let mh=C.manholePref||stdManhole();
+  if(isDis('manhole',mh))mh=stdManhole();
+  C.manhole=mh;
+  const order=['std','med','lrg','xl','xxl'],sv=stdVent();
+  let vent=C.ventPref||sv;
+  // Fireguard: never below the size's standard vent; others 10,000+ gal: at least 3" NV + 6" EV
+  if(vent!=='pvv'){
+    const min=C.type==='fireguard'||C.type==='flameshield'?sv:capNum()>=10000?'lrg':'std';
+    if(order.indexOf(vent)<order.indexOf(min))vent=min;
+  }
   C.vent=vent;
 }
 function pick(f,v,el){
@@ -1872,6 +2227,7 @@ function pick(f,v,el){
   if(f==='wall')C.wallPref=v;
   if(f==='manhole')C.manholePref=v;
   if(f==='vent')C.ventPref=v;
+  if(f==='mount')C.mountPref=v;
   if(f==='type'){
     // Underground tanks have a fixed colour; going back to an aboveground type resets to white
     const fixCol=TD[v]?.fixedColor;
@@ -1885,7 +2241,7 @@ function pick(f,v,el){
   if(f==='cap'){C.capPref=v;C.compart=1;C.comp2gal=0;C.customQuote=null;}
   C[f]=v;
   normalizeConfig();   // keeps shape / wall / capacity valid and restores the visitor's picks where allowed
-  if(f==='type'||f==='cap')applyFittingDefaults();
+  if(f==='type'||f==='cap'||f==='shape'||f==='wall')applyFittingDefaults();
   const box=el&&el.closest('.opts');
   if(box){box.querySelectorAll('.tile').forEach(t=>t.classList.remove('sel'));el.classList.add('sel');}
   updateFooter();buildTank();updateRecommendation();
@@ -1931,9 +2287,9 @@ function startOver(){
   if(!confirm('Start over? This will clear all your current selections.'))return;
   clearTimeout(advTimer);
   C.type='ul142';C.product='diesel';C.shape='horiz';C.wall='single';C.cap='5000';C.capPref='5000';
-  C.shapePref='horiz';C.wallPref='single';C.manholePref='18';C.ventPref=null;
+  C.shapePref='horiz';C.wallPref='single';C.manholePref=null;C.ventPref=null;C.mountPref=null;
   C.compart=1;C.comp2gal=0;C.comp1product='diesel';C.comp2product='gasoline';
-  C.manhole='18';C.fill='2';C.vent='med';C.pump='none';
+  C.mount='saddle';C.manhole='18';C.fill='2';C.vent='xl';C.pump='none';
   C.colorHex='#E0E2E8';C.colorName='White';
   C.acc=new Set();
   C.customDia=0;C.customLen=0;C.customGal=0;C.customQuote=null;
@@ -1992,12 +2348,20 @@ function quoteCustomDims(){
   showModal();
 }
 
+// Inner and overall size for the build sheet (double wall: primary tank inside, secondary outside)
+function getDimFull(){
+  const s=getSpec()?.spec;if(!s)return'—';
+  if(s.shape==='rect'||s.shape==='oval'||!(C.wall==='double'&&s.do_))return getDim();
+  return`${s.di}"Ø × ${s.li}" inner · ${s.do_}"Ø × ${s.lo}" overall`;
+}
 function getDim(){
   const res=getSpec();if(!res?.spec)return'—';
   const s=res.spec;
-  return s.shape==='rect'?`${s.w}" × ${s.dep}" × ${s.h}"`:`${s.d||s.di}"Ø × ${s.l||s.li}"`;
+  return s.shape==='rect'?`${s.w}" × ${s.dep}" × ${s.h}"`
+    :s.shape==='oval'?`${s.w}"W × ${s.h}"H × ${s.l}"L`
+    :`${s.d||s.di}"Ø × ${s.l||s.li}"`;
 }
-// Weight incl. split-tank adder (7-Eleven BOMs: 20K single=20,000, split=22,000 = +2,000 lbs)
+// Weight incl. split-tank adder (split-tank BOMs: 20K single=20,000, split=22,000 = +2,000 lbs)
 function weightDisplay(){
   const spec=getSpec()?.spec;if(!spec)return'—';
   if(C.compart!==2)return spec.wt;
@@ -2038,14 +2402,15 @@ function buildSheet(){
   return{
     custom:!!cq,
     type:td.label,certification:td.badge,
-    capacity:cq?`Custom size, ~${cq.est_gallons.toLocaleString()} gal`:capNum().toLocaleString()+' gal',
+    capacity:cq?`Custom size, ~${cq.est_gallons.toLocaleString()} gal`:capNum().toLocaleString()+' gal'+(spec.tag?' ('+spec.tag+')':''),
     compartments:C.compart===2?2:1,
     shape:SHAPE_NAMES[C.shape]||C.shape,wall:C.wall==='double'?'Double Wall':'Single Wall',
-    dimensions:cq?`${cq.diameter_in}"Ø × ${cq.length_in}"L (custom)`:getDim(),
+    mounting:MOUNTS[curMount()]?.sheet||'',
+    dimensions:cq?`${cq.diameter_in}"Ø × ${cq.length_in}"L (custom)`:getDimFull(),
     est_weight:(cq?'~'+cq.est_weight_lbs.toLocaleString():weightDisplay())+' lbs',
     shell:cq?'':(spec.sh||''),
     product,
-    manhole:C.manhole+'"',fill:C.fill+'"',venting:optLabel('vent',C.vent),
+    manhole:C.manhole==='none'?'None':C.manhole+'"',fill:C.fill+'"',venting:optLabel('vent',C.vent),
     pump:C.pump==='none'?'None — tank only':optLabel('pump',C.pump),
     color:C.colorName,finish:C.type==='permatank'?'FRP jacket (pigmented resin)':'Polyurethane topcoat',
     add_ons:addOns,standard:stdItems(),
@@ -2059,6 +2424,7 @@ function buildSheetText(b,withStd){
   kv('Type',b.type+' — '+b.certification);
   kv('Capacity',b.capacity+(b.compartments===2?' · 2 compartments':''));
   kv('Shape / wall',b.shape+' · '+b.wall);
+  if(b.mounting)kv('Mounting',b.mounting);
   kv('Dimensions',b.dimensions);
   kv('Est. weight',b.est_weight);
   if(b.shell)kv('Shell',b.shell);
@@ -2085,6 +2451,7 @@ function renderSummary(){
     row('Tank',b.type+' · '+b.certification)+
     row('Capacity',b.capacity+(b.compartments===2?' · 2 compartments':''))+
     row('Shape / wall',b.shape+' · '+b.wall)+
+    (b.mounting?row('Mounting',b.mounting):'')+
     row('Dimensions',b.dimensions+' · est. '+b.est_weight)+
     row('Product',b.product)+
     row('Manhole',b.manhole)+row('Fill',b.fill)+row('Venting',b.venting)+row('Pump',b.pump)+
@@ -2176,7 +2543,8 @@ function xPDF(){
     ['Wall Construction',C.wall==='double'?'Double-Wall (Secondary Containment)':'Single-Wall'],
     ['Shell Thickness',b.shell||(b.custom?'Per engineering review':'Per UL specification')],
     ['Shape / Orientation',b.shape],
-    ['Manhole',C.manhole+'" diameter flanged collar'],
+    ['Mounting',b.mounting||'—'],
+    ['Manhole',C.manhole==='none'?'None':C.manhole+'" diameter flanged collar'],
     ['Fill Connection',C.fill+'" NPT flat-face coupling'],
     ['Venting',b.venting],
     ['Pump Package',b.pump],
@@ -2223,7 +2591,7 @@ function xPDF(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  normalizeConfig();
+  normalizeConfig();applyFittingDefaults();
   try{initThree();}
   catch(e){
     console.error('3D preview could not start',e);scene=null;camera=null;
